@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Mr CrowSensei Admin</title>
 
 <style>
@@ -12,15 +13,18 @@ body{
   color:white;
   font-family:Arial,sans-serif;
 }
+
 header{
   padding:20px;
   border-bottom:1px solid #222;
 }
+
 main{
   padding:20px;
   max-width:900px;
   margin:auto;
 }
+
 .card{
   background:#111;
   border:1px solid #292929;
@@ -28,11 +32,53 @@ main{
   padding:20px;
   margin-bottom:18px;
 }
+
+input{
+  width:100%;
+  box-sizing:border-box;
+  padding:13px;
+  margin:8px 0;
+  border-radius:10px;
+  border:1px solid #333;
+  background:#181818;
+  color:white;
+}
+
 button{
   padding:12px 18px;
+  margin-top:10px;
   border:0;
   border-radius:10px;
   font-weight:bold;
+  cursor:pointer;
+}
+
+.add{
+  background:white;
+  color:black;
+}
+
+.delete{
+  background:#ff4444;
+  color:white;
+}
+
+.item{
+  border-top:1px solid #292929;
+  padding:15px 0;
+  margin-top:15px;
+}
+
+.item img{
+  width:100%;
+  max-width:300px;
+  border-radius:10px;
+  display:block;
+  margin-bottom:10px;
+}
+
+#message{
+  margin-top:15px;
 }
 </style>
 </head>
@@ -47,33 +93,179 @@ button{
 
 <div class="card">
   <h3>📊 Dashboard</h3>
-  <p>Welcome to your portfolio admin panel.</p>
+  <p>Total Portfolio Thumbnails: <b id="count">0</b></p>
 </div>
 
 <div class="card">
-  <h3>🖼 Portfolio</h3>
-  <p>Thumbnail management will be added here.</p>
+  <h3>🖼️ Add Portfolio Thumbnail</h3>
+
+  <input
+    id="title"
+    type="text"
+    placeholder="Thumbnail title"
+  >
+
+  <input
+    id="image_url"
+    type="url"
+    placeholder="Image URL"
+  >
+
+  <button class="add" onclick="addPortfolio()">
+    Add Thumbnail
+  </button>
+
+  <p id="message"></p>
 </div>
 
 <div class="card">
-  <h3>👤 Trusted Creators</h3>
-  <p>Creator management will be added here.</p>
-</div>
+  <h3>🖼️ Portfolio</h3>
 
-<div class="card">
-  <h3>⚙️ Website Settings</h3>
-  <p>Website settings will be added here.</p>
+  <div id="portfolioList">
+    Loading...
+  </div>
 </div>
 
 <button onclick="logout()">Logout</button>
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-function logout(){
-  localStorage.removeItem("admin_session");
-  window.location.href="admin.html";
+
+const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+async function loadPortfolio(){
+
+  const { data, error } = await supabaseClient
+    .from("portfolio")
+    .select("*")
+    .order("id", { ascending:false });
+
+  const list = document.getElementById("portfolioList");
+  const count = document.getElementById("count");
+
+  if(error){
+    list.textContent = error.message;
+    return;
+  }
+
+  count.textContent = data.length;
+
+  if(data.length === 0){
+    list.textContent = "No thumbnails added yet.";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  data.forEach(item => {
+
+    const div = document.createElement("div");
+
+    div.className = "item";
+
+    div.innerHTML = `
+      <h4>${escapeHtml(item.title || "Untitled")}</h4>
+
+      <img
+        src="${escapeHtml(item.image_url)}"
+        alt="${escapeHtml(item.title || "Thumbnail")}"
+      >
+
+      <button
+        class="delete"
+        onclick="deletePortfolio(${item.id})"
+      >
+        Delete
+      </button>
+    `;
+
+    list.appendChild(div);
+  });
 }
+
+
+async function addPortfolio(){
+
+  const title = document.getElementById("title").value.trim();
+  const image_url = document.getElementById("image_url").value.trim();
+  const message = document.getElementById("message");
+
+  if(!title || !image_url){
+    message.textContent = "Please enter title and image URL.";
+    return;
+  }
+
+  message.textContent = "Adding thumbnail...";
+
+  const { error } = await supabaseClient
+    .from("portfolio")
+    .insert({
+      title: title,
+      image_url: image_url
+    });
+
+  if(error){
+    message.textContent = error.message;
+    return;
+  }
+
+  message.textContent = "Thumbnail added successfully!";
+
+  document.getElementById("title").value = "";
+  document.getElementById("image_url").value = "";
+
+  loadPortfolio();
+}
+
+
+async function deletePortfolio(id){
+
+  if(!confirm("Delete this thumbnail?")){
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("portfolio")
+    .delete()
+    .eq("id", id);
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  loadPortfolio();
+}
+
+
+function escapeHtml(text){
+
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+
+function logout(){
+
+  localStorage.removeItem("admin_session");
+
+  window.location.href = "admin.html";
+}
+
+
+loadPortfolio();
+
 </script>
 
 </body>
