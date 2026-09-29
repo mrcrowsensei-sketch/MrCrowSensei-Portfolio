@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Mr CrowSensei Admin</title>
 
 <style>
@@ -45,8 +44,8 @@ input{
 }
 
 button{
-  padding:12px 18px;
-  margin-top:10px;
+  padding:11px 16px;
+  margin:5px 4px 0 0;
   border:0;
   border-radius:10px;
   font-weight:bold;
@@ -58,14 +57,24 @@ button{
   color:black;
 }
 
+.move{
+  background:#292929;
+  color:white;
+}
+
 .delete{
   background:#ff4444;
   color:white;
 }
 
+.logout{
+  background:#333;
+  color:white;
+}
+
 .item{
   border-top:1px solid #292929;
-  padding:15px 0;
+  padding:18px 0;
   margin-top:15px;
 }
 
@@ -75,6 +84,10 @@ button{
   border-radius:10px;
   display:block;
   margin-bottom:10px;
+}
+
+.item-title{
+  margin:0 0 8px;
 }
 
 #message{
@@ -120,13 +133,12 @@ button{
 
 <div class="card">
   <h3>🖼️ Portfolio</h3>
-
-  <div id="portfolioList">
-    Loading...
-  </div>
+  <div id="portfolioList">Loading...</div>
 </div>
 
-<button onclick="logout()">Logout</button>
+<button class="logout" onclick="logout()">
+  Logout
+</button>
 
 </main>
 
@@ -135,6 +147,7 @@ button{
 <script>
 
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
+
 const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
 const supabaseClient = supabase.createClient(
@@ -143,126 +156,355 @@ const supabaseClient = supabase.createClient(
 );
 
 
-async function loadPortfolio(){
+/* LOAD PORTFOLIO */
 
-  const { data, error } = await supabaseClient
-    .from("portfolio")
-    .select("*")
-    .order("id", { ascending:false });
+async function loadPortfolio(){
 
   const list = document.getElementById("portfolioList");
   const count = document.getElementById("count");
 
+  list.textContent = "Loading...";
+
+  const { data, error } = await supabaseClient
+    .from("portfolio")
+    .select("*")
+    .order("display_order", { ascending:true })
+    .order("id", { ascending:true });
+
   if(error){
+
     list.textContent = error.message;
+
     return;
   }
 
   count.textContent = data.length;
 
   if(data.length === 0){
+
     list.textContent = "No thumbnails added yet.";
+
     return;
   }
 
   list.innerHTML = "";
 
-  data.forEach(item => {
+
+  data.forEach((item,index)=>{
 
     const div = document.createElement("div");
 
     div.className = "item";
 
-    div.innerHTML = `
-      <h4>${escapeHtml(item.title || "Untitled")}</h4>
 
-      <img
-        src="${escapeHtml(item.image_url)}"
-        alt="${escapeHtml(item.title || "Thumbnail")}"
-      >
+    /* TITLE */
 
-      <button
-        class="delete"
-        onclick="deletePortfolio(${item.id})"
-      >
-        Delete
-      </button>
-    `;
+    const title = document.createElement("h4");
+
+    title.className = "item-title";
+
+    title.textContent =
+      (index + 1) + ". " +
+      (item.title || "Untitled");
+
+
+    /* IMAGE */
+
+    const img = document.createElement("img");
+
+    img.src = item.image_url;
+
+    img.alt =
+      item.title || "Minecraft Thumbnail";
+
+
+    div.appendChild(title);
+
+    div.appendChild(img);
+
+
+    /* UP BUTTON */
+
+    if(index > 0){
+
+      const upButton =
+        document.createElement("button");
+
+      upButton.className = "move";
+
+      upButton.textContent = "⬆️ Up";
+
+      upButton.onclick = function(){
+
+        moveThumbnail(
+          item,
+          data[index - 1]
+        );
+
+      };
+
+      div.appendChild(upButton);
+    }
+
+
+    /* DOWN BUTTON */
+
+    if(index < data.length - 1){
+
+      const downButton =
+        document.createElement("button");
+
+      downButton.className = "move";
+
+      downButton.textContent = "⬇️ Down";
+
+      downButton.onclick = function(){
+
+        moveThumbnail(
+          item,
+          data[index + 1]
+        );
+
+      };
+
+      div.appendChild(downButton);
+    }
+
+
+    /* DELETE BUTTON */
+
+    const deleteButton =
+      document.createElement("button");
+
+    deleteButton.className = "delete";
+
+    deleteButton.textContent = "🗑️ Delete";
+
+    deleteButton.onclick = function(){
+
+      deletePortfolio(item.id);
+
+    };
+
+    div.appendChild(deleteButton);
+
 
     list.appendChild(div);
+
   });
+
 }
 
+
+/* ADD PORTFOLIO */
 
 async function addPortfolio(){
 
-  const title = document.getElementById("title").value.trim();
-  const image_url = document.getElementById("image_url").value.trim();
-  const message = document.getElementById("message");
+  const title =
+    document.getElementById("title")
+      .value.trim();
+
+  const image_url =
+    document.getElementById("image_url")
+      .value.trim();
+
+  const message =
+    document.getElementById("message");
+
 
   if(!title || !image_url){
-    message.textContent = "Please enter title and image URL.";
+
+    message.textContent =
+      "Please enter title and image URL.";
+
     return;
   }
 
-  message.textContent = "Adding thumbnail...";
 
-  const { error } = await supabaseClient
-    .from("portfolio")
-    .insert({
-      title: title,
-      image_url: image_url
-    });
+  message.textContent =
+    "Adding thumbnail...";
+
+
+  /* FIND LAST ORDER */
+
+  const { data: existing, error: orderError } =
+    await supabaseClient
+      .from("portfolio")
+      .select("display_order")
+      .order("display_order", {
+        ascending:false
+      })
+      .limit(1);
+
+
+  if(orderError){
+
+    message.textContent =
+      orderError.message;
+
+    return;
+  }
+
+
+  let nextOrder = 0;
+
+
+  if(existing && existing.length > 0){
+
+    nextOrder =
+      Number(
+        existing[0].display_order || 0
+      ) + 1;
+
+  }
+
+
+  /* INSERT */
+
+  const { error } =
+    await supabaseClient
+      .from("portfolio")
+      .insert({
+
+        title:title,
+
+        image_url:image_url,
+
+        display_order:nextOrder
+
+      });
+
 
   if(error){
-    message.textContent = error.message;
+
+    message.textContent =
+      error.message;
+
     return;
   }
 
-  message.textContent = "Thumbnail added successfully!";
+
+  message.textContent =
+    "Thumbnail added successfully!";
+
 
   document.getElementById("title").value = "";
+
   document.getElementById("image_url").value = "";
 
+
   loadPortfolio();
+
 }
 
+
+/* MOVE THUMBNAIL */
+
+async function moveThumbnail(current,other){
+
+  const currentOrder =
+    current.display_order;
+
+  const otherOrder =
+    other.display_order;
+
+
+  /* CURRENT → OTHER POSITION */
+
+  const { error:error1 } =
+    await supabaseClient
+      .from("portfolio")
+      .update({
+
+        display_order:otherOrder
+
+      })
+      .eq("id",current.id);
+
+
+  if(error1){
+
+    alert(error1.message);
+
+    return;
+  }
+
+
+  /* OTHER → CURRENT POSITION */
+
+  const { error:error2 } =
+    await supabaseClient
+      .from("portfolio")
+      .update({
+
+        display_order:currentOrder
+
+      })
+      .eq("id",other.id);
+
+
+  if(error2){
+
+    alert(error2.message);
+
+    return;
+  }
+
+
+  loadPortfolio();
+
+}
+
+
+/* DELETE */
 
 async function deletePortfolio(id){
 
-  if(!confirm("Delete this thumbnail?")){
+  if(!confirm(
+    "Delete this thumbnail?"
+  )){
+
     return;
   }
 
-  const { error } = await supabaseClient
-    .from("portfolio")
-    .delete()
-    .eq("id", id);
+
+  const { error } =
+    await supabaseClient
+      .from("portfolio")
+      .delete()
+      .eq("id",id);
+
 
   if(error){
+
     alert(error.message);
+
     return;
   }
 
+
   loadPortfolio();
+
 }
 
 
-function escapeHtml(text){
+/* LOGOUT */
 
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  localStorage.removeItem(
+    "admin_session"
+  );
+
+  window.location.href =
+    "admin.html";
+
 }
 
 
-function logout(){
-
-  localStorage.removeItem("admin_session");
-
-  window.location.href = "admin.html";
-}
-
+/* START */
 
 loadPortfolio();
 
