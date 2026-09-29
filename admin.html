@@ -77,10 +77,17 @@ button{
   <div id="message"></div>
 </div>
 
+<<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co/rest/v1/";
 const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 async function login(){
 
@@ -90,32 +97,22 @@ async function login(){
 
   message.textContent = "Logging in...";
 
-  const response = await fetch(
-    SUPABASE_URL + "/auth/v1/token?grant_type=password",
-    {
-      method:"POST",
-      headers:{
-        "apikey":SUPABASE_KEY,
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        email:email,
-        password:password
-      })
-    }
-  );
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
 
-  const data = await response.json();
-
-  if(response.ok){
-    localStorage.setItem("admin_session", JSON.stringify(data));
-    message.textContent = "Login successful!";
-    window.location.href = "admin-dashboard.html";
-  }else{
-    message.textContent = data.error_description || "Login failed";
+  if(error){
+    message.textContent = error.message;
+    return;
   }
-}
 
+  localStorage.setItem("admin_session", JSON.stringify(data));
+
+  message.textContent = "Login successful!";
+
+  window.location.href = "admin-dashboard.html";
+}
 
 async function resetPassword(){
 
@@ -129,30 +126,22 @@ async function resetPassword(){
 
   message.textContent = "Sending reset email...";
 
-  const response = await fetch(
-    SUPABASE_URL + "/auth/v1/recover",
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(
+    email,
     {
-      method:"POST",
-      headers:{
-        "apikey":SUPABASE_KEY,
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        email:email,
-        redirect_to:"https://mrcrowsensei.vercel.app/update-password.html"
-      })
+      redirectTo:
+        "https://mrcrowsensei.vercel.app/update-password.html"
     }
   );
 
-  if(response.ok){
-    message.textContent = "Password reset email sent!";
-  }else{
-    const data = await response.json();
-    message.textContent = data.msg || data.error_description || "Reset failed";
+  if(error){
+    message.textContent = error.message;
+    return;
   }
+
+  message.textContent = "Password reset email sent!";
 }
 
 </script>
-
 </body>
 </html>
