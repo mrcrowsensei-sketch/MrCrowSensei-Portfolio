@@ -72,11 +72,13 @@ button{
   <input id="password" type="password" placeholder="Password">
 
   <button onclick="login()">Login</button>
+  <button onclick="resetPassword()">Forgot Password?</button>
 
   <div id="message"></div>
 </div>
 
 <script>
+
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co/rest/v1/";
 const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
@@ -113,6 +115,43 @@ async function login(){
     message.textContent = data.error_description || "Login failed";
   }
 }
+
+
+async function resetPassword(){
+
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message");
+
+  if(!email){
+    message.textContent = "Please enter your admin email first.";
+    return;
+  }
+
+  message.textContent = "Sending reset email...";
+
+  const response = await fetch(
+    SUPABASE_URL + "/auth/v1/recover",
+    {
+      method:"POST",
+      headers:{
+        "apikey":SUPABASE_KEY,
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        email:email,
+        redirect_to:"https://mrcrowsensei.vercel.app/update-password.html"
+      })
+    }
+  );
+
+  if(response.ok){
+    message.textContent = "Password reset email sent!";
+  }else{
+    const data = await response.json();
+    message.textContent = data.msg || data.error_description || "Reset failed";
+  }
+}
+
 </script>
 
 </body>
