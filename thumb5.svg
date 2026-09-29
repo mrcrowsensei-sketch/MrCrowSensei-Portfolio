@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#151a36"/><stop offset="1" stop-color="#34206b"/></linearGradient></defs>
+    <rect width="1280" height="720" fill="url(#g)"/>
+    <text x="640" y="330" text-anchor="middle" fill="#9b82ff" font-family="Arial" font-size="62" font-weight="800">YOUR THUMBNAIL 5</text>
+    <text x="640" y="400" text-anchor="middle" fill="#8b93aa" font-family="Arial" font-size="24">Replace this image</text>
+    </svg>
