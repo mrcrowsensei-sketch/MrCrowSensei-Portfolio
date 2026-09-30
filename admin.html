@@ -80,68 +80,131 @@ button{
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
-const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+const SUPABASE_ANON_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_KEY
+  SUPABASE_ANON_KEY
 );
+
+
+/* CHECK EXISTING LOGIN */
+
+async function checkExistingSession(){
+
+  const { data } = await supabaseClient.auth.getSession();
+
+  if(data.session){
+
+    window.location.href = "admin-dashboard.html";
+
+  }
+
+}
+
+
+/* LOGIN */
 
 async function login(){
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const message = document.getElementById("message");
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("message");
+
+  if(!email || !password){
+
+    message.textContent =
+      "Please enter email and password.";
+
+    return;
+
+  }
 
   message.textContent = "Logging in...";
 
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
+  const { error } =
+    await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
 
   if(error){
-    message.textContent = error.message;
+
+    message.textContent =
+      error.message;
+
     return;
+
   }
 
-  localStorage.setItem("admin_session", JSON.stringify(data));
+  message.textContent =
+    "✓ Login successful!";
 
-  message.textContent = "Login successful!";
+  setTimeout(() => {
 
-  window.location.href = "admin-dashboard.html";
+    window.location.href =
+      "admin-dashboard.html";
+
+  }, 500);
+
 }
+
+
+/* FORGOT PASSWORD */
 
 async function resetPassword(){
 
-  const email = document.getElementById("email").value;
-  const message = document.getElementById("message");
+  const email =
+    document.getElementById("email").value.trim();
+
+  const message =
+    document.getElementById("message");
 
   if(!email){
-    message.textContent = "Please enter your admin email first.";
+
+    message.textContent =
+      "Please enter your admin email first.";
+
     return;
+
   }
 
-  message.textContent = "Sending reset email...";
+  message.textContent =
+    "Sending reset email...";
 
-  const { error } = await supabaseClient.auth.resetPasswordForEmail(
-    email,
-    {
-      redirectTo:
-        "https://mrcrowsensei.vercel.app/update-password.html"
-    }
-  );
+  const { error } =
+    await supabaseClient.auth.resetPasswordForEmail(
+      email,
+      {
+        redirectTo:
+          "https://mrcrowsensei.vercel.app/update-password.html"
+      }
+    );
 
   if(error){
-    message.textContent = error.message;
+
+    message.textContent =
+      error.message;
+
     return;
+
   }
 
-  message.textContent = "Password reset email sent!";
+  message.textContent =
+    "✓ Password reset email sent successfully!";
+
 }
 
+
+/* CHECK WHEN PAGE OPENS */
+
+checkExistingSession();
 </script>
 </body>
 </html>
