@@ -2,77 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mr CrowSensei — Portfolio Admin</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
+:root{
+  --bg:#080808;
+  --card:#111;
+  --line:#292929;
+  --text:#fff;
+  --muted:#999;
+  --blue:#3b82f6;
+  --green:#22c55e;
+  --red:#ef4444;
 }
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
-  background:#080808;
-  color:#fff;
+  background:var(--bg);
+  color:var(--text);
   font-family:Arial,sans-serif;
 }
 
 header{
-  padding:18px 20px;
-  border-bottom:1px solid #222;
   position:sticky;
   top:0;
-  background:#080808;
-  z-index:10;
+  z-index:50;
+  background:rgba(8,8,8,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #222;
+  padding:15px 18px;
 }
 
-header h2{
-  margin:0;
-  font-size:20px;
+.top{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand{
+  font-size:18px;
+  font-weight:800;
+}
+
+.session{
+  color:#777;
+  font-size:12px;
 }
 
 main{
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
-  padding:20px;
+  padding:18px;
 }
 
 .card{
-  background:#111;
-  border:1px solid #292929;
+  background:var(--card);
+  border:1px solid var(--line);
   border-radius:16px;
-  padding:20px;
-  margin-bottom:18px;
+  padding:18px;
+  margin-bottom:16px;
 }
 
 h3{
-  margin-top:0;
+  margin:0 0 15px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
 }
 
 label{
   display:block;
-  font-size:13px;
   color:#aaa;
+  font-size:12px;
   margin-bottom:6px;
 }
 
 input,
-textarea{
+textarea,
+select{
   width:100%;
-  padding:12px;
+  padding:11px 12px;
   background:#181818;
   color:#fff;
   border:1px solid #333;
   border-radius:9px;
   outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#777;
 }
 
 textarea{
@@ -83,10 +114,10 @@ textarea{
 button{
   border:0;
   border-radius:9px;
-  padding:10px 14px;
+  padding:10px 13px;
+  margin:4px 3px;
   cursor:pointer;
-  font-weight:bold;
-  margin:4px;
+  font-weight:700;
 }
 
 .save{
@@ -95,12 +126,12 @@ button{
 }
 
 .add{
-  background:#22c55e;
+  background:var(--green);
   color:#000;
 }
 
 .delete{
-  background:#ef4444;
+  background:var(--red);
   color:#fff;
 }
 
@@ -110,138 +141,207 @@ button{
 }
 
 .edit{
-  background:#3b82f6;
+  background:var(--blue);
+  color:#fff;
+}
+
+.dark{
+  background:#222;
   color:#fff;
 }
 
 .logout{
-  background:#ef4444;
-  color:#fff;
   width:100%;
-  margin:10px 0 30px;
+  background:var(--red);
+  color:#fff;
+  margin-top:15px;
+}
+
+.msg{
+  color:#8cffaa;
+  min-height:20px;
+  margin-top:8px;
+}
+
+.error{
+  color:#ff7777;
+  min-height:20px;
+  margin-top:8px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.stat{
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:11px;
+  padding:16px;
+  text-align:center;
+}
+
+.stat b{
+  display:block;
+  font-size:25px;
+  margin-bottom:5px;
 }
 
 .item{
   background:#181818;
   border:1px solid #292929;
-  border-radius:10px;
-  padding:14px;
+  border-radius:11px;
+  padding:12px;
   margin-top:10px;
 }
 
-.item img{
-  width:80px;
-  height:55px;
+.row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.grow{
+  flex:1;
+  min-width:180px;
+}
+
+.thumb{
+  width:86px;
+  height:58px;
   object-fit:cover;
-  border-radius:7px;
-  vertical-align:middle;
-  margin-right:10px;
+  border-radius:8px;
+  background:#222;
+}
+
+.muted{
+  color:#999;
+  font-size:12px;
+  margin-top:5px;
 }
 
 .actions{
   margin-top:8px;
 }
 
-.msg{
-  color:#8cffaa;
-  margin-top:10px;
-}
-
-.error{
-  color:#ff7777;
-  margin-top:10px;
-}
-
-.stat{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.statbox{
-  background:#181818;
-  border:1px solid #292929;
-  padding:18px;
+.upload{
+  border:1px dashed #444;
   border-radius:10px;
-  text-align:center;
+  padding:10px;
+  background:#151515;
 }
 
-.statbox b{
-  font-size:24px;
-  display:block;
+.preview{
+  display:none;
+  max-width:240px;
+  max-height:130px;
+  object-fit:contain;
+  border-radius:10px;
+  border:1px solid #333;
+  margin-top:8px;
 }
 
-.colorbox{
+.color{
   display:flex;
   gap:8px;
-  align-items:center;
 }
 
-.colorbox input[type="color"]{
+.color input[type="color"]{
   width:55px;
-  height:45px;
+  height:43px;
   padding:3px;
+}
+
+.big-save{
+  width:100%;
+  font-size:16px;
+  padding:15px;
+}
+
+.note{
+  color:#777;
+  font-size:12px;
+  line-height:1.5;
 }
 
 @media(max-width:700px){
 
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .stat{
-    grid-template-columns:1fr;
-  }
-
   main{
-    padding:12px;
+    padding:10px;
   }
 
-}
+  .grid,
+  .stats{
+    grid-template-columns:1fr;
+  }
 
+  .card{
+    padding:14px;
+  }
+
+  .session{
+    display:none;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>Mr CrowSensei — Admin Panel</h2>
+
+<div class="top">
+
+<div class="brand">
+Mr CrowSensei — Portfolio Admin
+</div>
+
+<div class="session" id="sessionText">
+Checking session...
+</div>
+
+</div>
+
 </header>
+
 
 <main>
 
 
 <!-- DASHBOARD -->
 
-<div class="card">
+<section class="card">
 
 <h3>📊 Dashboard</h3>
 
-<div class="stat">
+<div class="stats">
 
-<div class="statbox">
+<div class="stat">
 <b id="portfolioCount">0</b>
 Portfolio
 </div>
 
-<div class="statbox">
+<div class="stat">
 <b id="creatorCount">0</b>
 Creators
 </div>
 
-<div class="statbox">
+<div class="stat">
 <b id="faqCount">0</b>
 FAQ
 </div>
 
 </div>
 
-</div>
+</section>
 
 
-<!-- WEBSITE SETTINGS -->
+<!-- WEBSITE -->
 
-<div class="card">
+<section class="card" id="website">
 
 <h3>⚙️ Website Settings</h3>
 
@@ -250,11 +350,6 @@ FAQ
 <div>
 <label>Header Name</label>
 <input id="header_name">
-</div>
-
-<div>
-<label>Logo URL</label>
-<input id="logo_url">
 </div>
 
 <div>
@@ -309,7 +404,8 @@ FAQ
 
 </div>
 
-<div style="margin-top:14px">
+
+<div style="margin-top:12px">
 
 <label>About Me</label>
 
@@ -317,7 +413,8 @@ FAQ
 
 </div>
 
-<div style="margin-top:14px">
+
+<div style="margin-top:12px">
 
 <label>Contact Text</label>
 
@@ -325,172 +422,136 @@ FAQ
 
 </div>
 
-<button class="save" onclick="saveSettings()">
+
+<div class="grid" style="margin-top:12px">
+
+
+<div class="upload">
+
+<label>
+Logo / Hero Image — Gallery
+</label>
+
+<input
+type="file"
+id="logo_file"
+accept="image/*"
+>
+
+<img
+id="logo_preview"
+class="preview"
+>
+
+</div>
+
+
+<div class="upload">
+
+<label>
+About Image — Gallery
+</label>
+
+<input
+type="file"
+id="about_file"
+accept="image/*"
+>
+
+<img
+id="about_preview"
+class="preview"
+>
+
+</div>
+
+
+</div>
+
+
+<button
+class="save"
+onclick="saveSettings()"
+>
 💾 Save Website Settings
 </button>
 
 <div id="settingsMsg"></div>
 
-</div>
+</section>
+
 
 
 <!-- THEME -->
 
-<div class="card">
+<section class="card" id="theme">
 
 <h3>🎨 Theme & Colors</h3>
 
-<div class="grid">
+<div
+class="grid"
+id="colorGrid"
+></div>
 
 
-<div>
-<label>Background Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="bg_color">
-
-<input id="bg_color_text">
-
-</div>
-
-</div>
-
+<div
+class="grid"
+style="margin-top:12px"
+>
 
 <div>
-<label>Gradient Color 1</label>
 
-<div class="colorbox">
+<label>
+Gradient Direction
+</label>
 
-<input type="color" id="bg_gradient_1">
+<select id="bg_gradient_direction">
 
-<input id="bg_gradient_1_text">
+<option value="135deg">
+135°
+</option>
 
-</div>
+<option value="90deg">
+90°
+</option>
 
-</div>
+<option value="180deg">
+180°
+</option>
 
+<option value="45deg">
+45°
+</option>
 
-<div>
-<label>Gradient Color 2</label>
+<option value="to right">
+To Right
+</option>
 
-<div class="colorbox">
+<option value="to bottom">
+To Bottom
+</option>
 
-<input type="color" id="bg_gradient_2">
-
-<input id="bg_gradient_2_text">
-
-</div>
-
-</div>
-
-
-<div>
-<label>Primary Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="primary_color">
-
-<input id="primary_color_text">
-
-</div>
+</select>
 
 </div>
 
 
 <div>
-<label>Text Color</label>
 
-<div class="colorbox">
+<label>
+Heading Color
+</label>
 
-<input type="color" id="text_color">
+<div class="color">
 
-<input id="text_color_text">
+<input
+type="color"
+id="heading_color"
+>
 
-</div>
-
-</div>
-
-
-<div>
-<label>Muted Text Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="muted_color">
-
-<input id="muted_color_text">
-
-</div>
-
-</div>
-
-
-<div>
-<label>Card Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="card_color">
-
-<input id="card_color_text">
-
-</div>
-
-</div>
-
-
-<div>
-<label>Border Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="border_color">
-
-<input id="border_color_text">
-
-</div>
-
-</div>
-
-
-<div>
-<label>Button Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="button_color">
-
-<input id="button_color_text">
-
-</div>
-
-</div>
-
-
-<div>
-<label>Button Text Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="button_text_color">
-
-<input id="button_text_color_text">
-
-</div>
-
-</div>
-
-
-<div>
-<label>Accent Color</label>
-
-<div class="colorbox">
-
-<input type="color" id="accent_color">
-
-<input id="accent_color_text">
+<input
+id="heading_color_text"
+>
 
 </div>
 
@@ -498,54 +559,122 @@ FAQ
 
 </div>
 
-<button class="save" onclick="saveTheme()">
+
+<button
+class="save"
+onclick="saveTheme()"
+>
 🎨 Save Theme
 </button>
 
 <div id="themeMsg"></div>
 
-</div>
+</section>
+
 
 
 <!-- CREATORS -->
 
-<div class="card">
+<section class="card" id="creators">
 
 <h3>👥 Trusted Creators</h3>
 
-<input type="hidden" id="creator_id">
+<input
+type="hidden"
+id="creator_id"
+>
+
 
 <div class="grid">
 
-<div>
-<label>Name</label>
-<input id="creator_name">
-</div>
 
 <div>
-<label>Subscribers</label>
-<input id="creator_subscribers">
+
+<label>
+YouTube Channel URL
+</label>
+
+<input
+id="creator_youtube_url"
+placeholder="https://www.youtube.com/@channel"
+>
+
 </div>
+
 
 <div>
-<label>Image URL</label>
-<input id="creator_image_url">
+
+<label>
+Creator Name
+</label>
+
+<input
+id="creator_name"
+>
+
 </div>
+
 
 <div>
-<label>YouTube URL</label>
-<input id="creator_youtube_url">
-</div>
+
+<label>
+Subscribers
+</label>
+
+<input
+id="creator_subscribers"
+placeholder="125K"
+>
 
 </div>
 
-<button class="add" onclick="saveCreator()">
+
+<div class="upload">
+
+<label>
+Creator Logo — Gallery
+</label>
+
+<input
+type="file"
+id="creator_file"
+accept="image/*"
+>
+
+<img
+id="creator_preview"
+class="preview"
+>
+
+</div>
+
+
+</div>
+
+
+<button
+class="dark"
+onclick="autoCreator()"
+>
+✨ Get Creator Name + Logo
+</button>
+
+
+<button
+class="add"
+onclick="saveCreator()"
+>
 ➕ Save Creator
 </button>
 
-<button class="move" onclick="clearCreator()">
+
+<button
+class="move"
+onclick="clearCreator()"
+>
 Clear
 </button>
+
 
 <div id="creatorMsg"></div>
 
@@ -553,38 +682,76 @@ Clear
 Loading...
 </div>
 
-</div>
+</section>
+
 
 
 <!-- PORTFOLIO -->
 
-<div class="card">
+<section class="card" id="portfolio">
 
 <h3>🖼️ Portfolio</h3>
 
-<input type="hidden" id="portfolio_id">
+<input
+type="hidden"
+id="portfolio_id"
+>
+
 
 <div class="grid">
 
-<div>
-<label>Title</label>
-<input id="portfolio_title">
-</div>
 
 <div>
-<label>Image URL</label>
-<input id="portfolio_image_url">
-</div>
+
+<label>
+Thumbnail Title
+</label>
+
+<input
+id="portfolio_title"
+>
 
 </div>
 
-<button class="add" onclick="savePortfolio()">
+
+<div class="upload">
+
+<label>
+Thumbnail Image — Gallery
+</label>
+
+<input
+type="file"
+id="portfolio_file"
+accept="image/*"
+>
+
+<img
+id="portfolio_preview"
+class="preview"
+>
+
+</div>
+
+
+</div>
+
+
+<button
+class="add"
+onclick="savePortfolio()"
+>
 ➕ Save Thumbnail
 </button>
 
-<button class="move" onclick="clearPortfolio()">
+
+<button
+class="move"
+onclick="clearPortfolio()"
+>
 Clear
 </button>
+
 
 <div id="portfolioMsg"></div>
 
@@ -592,40 +759,59 @@ Clear
 Loading...
 </div>
 
-</div>
+</section>
+
 
 
 <!-- FAQ -->
 
-<div class="card">
+<section class="card" id="faq">
 
 <h3>❓ FAQ</h3>
 
-<input type="hidden" id="faq_id">
+<input
+type="hidden"
+id="faq_id"
+>
 
-<div>
 
-<label>Question</label>
+<label>
+Question
+</label>
 
-<input id="faq_question">
+<input
+id="faq_question"
+>
+
+
+<div style="margin-top:10px">
+
+<label>
+Answer
+</label>
+
+<textarea
+id="faq_answer"
+></textarea>
 
 </div>
 
-<div style="margin-top:12px">
 
-<label>Answer</label>
-
-<textarea id="faq_answer"></textarea>
-
-</div>
-
-<button class="add" onclick="saveFAQ()">
+<button
+class="add"
+onclick="saveFAQ()"
+>
 ➕ Save FAQ
 </button>
 
-<button class="move" onclick="clearFAQ()">
+
+<button
+class="move"
+onclick="clearFAQ()"
+>
 Clear
 </button>
+
 
 <div id="faqMsg"></div>
 
@@ -633,140 +819,246 @@ Clear
 Loading...
 </div>
 
+</section>
+
+
+
+<!-- PASSWORD -->
+
+<section class="card">
+
+<h3>🔐 Change Password</h3>
+
+<div class="grid">
+
+
+<div>
+
+<label>
+New Password
+</label>
+
+<input
+type="password"
+id="new_password"
+>
+
 </div>
 
 
-<button class="logout" onclick="logout()">
+<div>
+
+<label>
+Confirm Password
+</label>
+
+<input
+type="password"
+id="confirm_password"
+>
+
+</div>
+
+
+</div>
+
+
+<button
+class="save"
+onclick="changePassword()"
+>
+🔐 Change Password
+</button>
+
+
+<div id="passwordMsg"></div>
+
+</section>
+
+
+
+<!-- DISCORD -->
+
+<section class="card">
+
+<h3>
+💬 Discord Preview — LAST
+</h3>
+
+
+<div class="grid">
+
+
+<div>
+
+<label>
+Discord Preview Title
+</label>
+
+<input
+id="og_title"
+>
+
+</div>
+
+
+<div>
+
+<label>
+Discord Preview Description
+</label>
+
+<input
+id="og_description"
+>
+
+</div>
+
+
+</div>
+
+
+<div
+class="upload"
+style="margin-top:12px"
+>
+
+<label>
+Discord Preview Image — Gallery
+</label>
+
+<input
+type="file"
+id="og_file"
+accept="image/*"
+>
+
+<img
+id="og_preview"
+class="preview"
+>
+
+</div>
+
+
+<button
+class="save"
+onclick="saveOG()"
+>
+💾 Save Discord Preview
+</button>
+
+
+<div id="ogMsg"></div>
+
+
+<p class="note">
+Discord old preview ko cache kar sakta hai. Isliye Save ke baad Discord me preview update hone me time lag sakta hai.
+</p>
+
+</section>
+
+
+
+<!-- SAVE ALL -->
+
+<section class="card">
+
+<button
+class="save big-save"
+onclick="saveAll()"
+>
+💾 Save All Changes
+</button>
+
+
+<div id="allMsg"></div>
+
+
+<button
+class="logout"
+onclick="logout()"
+>
 🚪 Logout
 </button>
+
+</section>
+
 
 </main>
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
 
-/* =========================================================
+/* =====================================================
    SUPABASE
-   ========================================================= */
+   ===================================================== */
 
-/*
-   YAHAN APNE OLD CODE KI SAME 2 VALUES PASTE KARO.
-*/
-
-const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+const SUPABASE_URL =
+"https://ozjugaedukcztmywtexk.supabase.co";
 
 
-const supabaseClient = supabase.createClient(
+const SUPABASE_KEY =
+"sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+
+
+const supabaseClient =
+supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
 
-/* =========================================================
-   HELPERS
-   ========================================================= */
 
-function setValue(id,value){
+/* =====================================================
+   DEFAULT SETTINGS
+   ===================================================== */
 
-  const el=document.getElementById(id);
-
-  if(el){
-    el.value=value ?? "";
-  }
-
-}
-
-
-function getValue(id){
-
-  const el=document.getElementById(id);
-
-  return el ? el.value.trim() : "";
-
-}
-
-
-function message(id,text,error=false){
-
-  const el=document.getElementById(id);
-
-  if(!el) return;
-
-  el.textContent=text;
-
-  el.className=
-    error
-    ? "error"
-    : "msg";
-
-}
-
-
-/* =========================================================
-   SESSION
-   ========================================================= */
-
-async function checkSession(){
-
-  const {data,error}=
-    await supabaseClient.auth.getSession();
-
-
-  if(error || !data.session){
-
-    window.location.href="admin.html";
-
-    return false;
-
-  }
-
-
-  return true;
-
-}
-
-
-/* =========================================================
-   SITE SETTINGS
-   ========================================================= */
-
-let settingsId=null;
-
-
-const defaultSettings={
+const SETTINGS_DEFAULT = {
 
   id:1,
 
-  header_name:"Mr CrowSensei",
+  header_name:
+  "Mr CrowSensei",
 
   logo_url:"",
 
-  new_design_text:"New Design Available",
+  new_design_text:
+  "New Designs Available",
 
-  hero_title:"Professional Minecraft Thumbnails",
+  hero_title:
+  "Professional Minecraft Thumbnails",
 
-  hero_subtitle:"Professional Crafted for Creators",
+  hero_subtitle:
+  "Professional Minecraft Thumbnail Designer",
 
-  crafted_text:"Crafted for Creators",
+  crafted_text:
+  "Crafted for Creators",
 
-  stats_thumbnails:"100+",
+  stats_thumbnails:
+  "100+",
 
-  stats_creators:"50+",
+  stats_creators:
+  "50+",
 
-  stats_years:"2+",
+  stats_years:
+  "2+",
 
   about_text:"",
+
+  about_image_url:"",
 
   discord_url:"",
 
   twitter_url:"",
 
-  contact_title:"Let's Work Together",
+  contact_title:
+  "Let's Work Together",
 
   contact_text:"",
 
@@ -776,7 +1068,12 @@ const defaultSettings={
 
   bg_gradient_2:"#151515",
 
+  bg_gradient_direction:
+  "135deg",
+
   primary_color:"#ffffff",
+
+  heading_color:"#ffffff",
 
   text_color:"#ffffff",
 
@@ -790,25 +1087,431 @@ const defaultSettings={
 
   button_text_color:"#000000",
 
-  accent_color:"#ff0000"
+  accent_color:"#ff0000",
+
+  og_title:
+  "Mr CrowSensei — Thumbnail Designer",
+
+  og_description:
+  "Mr CrowSensei — Professional Minecraft Thumbnail Designer",
+
+  og_image_url:""
 
 };
 
 
+let settingsId = null;
+
+
+
+/* =====================================================
+   HELPERS
+   ===================================================== */
+
+function $(id){
+
+  return document.getElementById(id);
+
+}
+
+
+function val(id){
+
+  const el = $(id);
+
+  return el
+    ? el.value.trim()
+    : "";
+
+}
+
+
+function set(id,value){
+
+  const el = $(id);
+
+  if(el){
+
+    el.value =
+      value ?? "";
+
+  }
+
+}
+
+
+function msg(
+  id,
+  text,
+  error=false
+){
+
+  const el=$(id);
+
+  if(!el)
+    return;
+
+  el.textContent=text;
+
+  el.className =
+    error
+    ? "error"
+    : "msg";
+
+}
+
+
+function esc(value){
+
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    function(m){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+
+      }[m];
+
+    }
+  );
+
+}
+
+
+
+/* =====================================================
+   IMAGE PREVIEW
+   ===================================================== */
+
+function previewFile(
+  inputId,
+  imageId
+){
+
+  const input=$(inputId);
+
+  const image=$(imageId);
+
+  if(
+    !input ||
+    !image ||
+    !input.files ||
+    !input.files[0]
+  )
+    return;
+
+
+  image.src =
+    URL.createObjectURL(
+      input.files[0]
+    );
+
+  image.style.display =
+    "block";
+
+}
+
+
+[
+  ["logo_file","logo_preview"],
+  ["about_file","about_preview"],
+  ["creator_file","creator_preview"],
+  ["portfolio_file","portfolio_preview"],
+  ["og_file","og_preview"]
+
+].forEach(pair=>{
+
+  const input=$(pair[0]);
+
+  if(input){
+
+    input.addEventListener(
+      "change",
+      ()=>previewFile(
+        pair[0],
+        pair[1]
+      )
+    );
+
+  }
+
+});
+
+
+
+/* =====================================================
+   COLOR UI
+   ===================================================== */
+
+const colorFields=[
+
+  "bg_color",
+  "bg_gradient_1",
+  "bg_gradient_2",
+  "primary_color",
+  "heading_color",
+  "text_color",
+  "muted_color",
+  "card_color",
+  "border_color",
+  "button_color",
+  "button_text_color",
+  "accent_color"
+
+];
+
+
+function buildColorUI(){
+
+  const grid=$("colorGrid");
+
+  if(!grid)
+    return;
+
+  grid.innerHTML="";
+
+
+  colorFields
+    .filter(
+      name =>
+      name !== "heading_color"
+    )
+    .forEach(name=>{
+
+      const wrapper =
+        document.createElement(
+          "div"
+        );
+
+
+      const label =
+        name
+        .replaceAll(
+          "_",
+          " "
+        );
+
+
+      wrapper.innerHTML = `
+
+        <label>
+          ${label}
+        </label>
+
+        <div class="color">
+
+          <input
+            type="color"
+            id="${name}"
+          >
+
+          <input
+            id="${name}_text"
+          >
+
+        </div>
+
+      `;
+
+
+      grid.appendChild(
+        wrapper
+      );
+
+
+      const picker =
+        $(name);
+
+      const text =
+        $(name+"_text");
+
+
+      picker.oninput=()=>{
+
+        text.value =
+          picker.value;
+
+      };
+
+
+      text.oninput=()=>{
+
+        if(
+          /^#[0-9a-f]{6}$/i
+          .test(
+            text.value
+          )
+        ){
+
+          picker.value =
+            text.value;
+
+        }
+
+      };
+
+    });
+
+}
+
+
+buildColorUI();
+
+
+
+/* =====================================================
+   SESSION
+   ===================================================== */
+
+async function sessionOK(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if(
+    error ||
+    !data.session
+  ){
+
+    window.location.href =
+      "admin.html";
+
+    return false;
+
+  }
+
+
+  $("sessionText")
+    .textContent =
+    "✓ Admin session active";
+
+
+  return true;
+
+}
+
+
+
+/* =====================================================
+   UPLOAD IMAGE
+   ===================================================== */
+
+async function uploadImage(
+  file
+){
+
+  if(!file)
+    return null;
+
+
+  const extension =
+    (
+      file.name
+      .split(".")
+      .pop() ||
+      "jpg"
+    )
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9]/g,
+      ""
+    );
+
+
+  const path =
+    "admin/" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .slice(2) +
+    "." +
+    extension;
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .storage
+      .from(
+        "portfolio-images"
+      )
+      .upload(
+        path,
+        file,
+        {
+          upsert:false,
+          contentType:
+            file.type
+        }
+      );
+
+
+  if(error)
+    throw error;
+
+
+  const {
+    data
+  } =
+    supabaseClient
+      .storage
+      .from(
+        "portfolio-images"
+      )
+      .getPublicUrl(
+        path
+      );
+
+
+  return data.publicUrl;
+
+}
+
+
+
+/* =====================================================
+   LOAD SETTINGS
+   ===================================================== */
+
 async function loadSettings(){
 
-  const {data,error}=
+  const {
+    data,
+    error
+  } =
     await supabaseClient
-      .from("site_settings")
+      .from(
+        "site_settings"
+      )
       .select("*")
-      .order("id",{ascending:true})
+      .order(
+        "id",
+        {
+          ascending:true
+        }
+      )
       .limit(1)
       .maybeSingle();
 
 
   if(error){
 
-    message(
+    msg(
       "settingsMsg",
       error.message,
       true
@@ -821,61 +1524,70 @@ async function loadSettings(){
 
   if(data){
 
-    settingsId=data.id;
+    settingsId =
+      data.id;
 
 
-    Object.keys(defaultSettings)
-      .forEach(key=>{
+    Object.keys(
+      SETTINGS_DEFAULT
+    ).forEach(key=>{
 
-        if(key!=="id"){
+      if(key !== "id"){
 
-          setValue(
-            key,
-            data[key]
-          );
+        set(
+          key,
+          data[key] ??
+          SETTINGS_DEFAULT[key]
+        );
 
-        }
+      }
 
-      });
-
-
-    setupColorInputs();
-
-    return;
+    });
 
   }
 
 
-  const {data:newData,error:insertError}=
-    await supabaseClient
-      .from("site_settings")
-      .insert(defaultSettings)
-      .select()
-      .single();
+  else{
+
+    const {
+      data:newData,
+      error:insertError
+    } =
+      await supabaseClient
+        .from(
+          "site_settings"
+        )
+        .insert(
+          SETTINGS_DEFAULT
+        )
+        .select()
+        .single();
 
 
-  if(insertError){
+    if(insertError){
 
-    message(
-      "settingsMsg",
-      insertError.message,
-      true
-    );
+      msg(
+        "settingsMsg",
+        insertError.message,
+        true
+      );
 
-    return;
+      return;
 
-  }
-
-
-  settingsId=newData.id;
+    }
 
 
-  Object.keys(defaultSettings)
-    .forEach(key=>{
+    settingsId =
+      newData.id;
 
-      if(key!=="id"){
 
-        setValue(
+    Object.keys(
+      SETTINGS_DEFAULT
+    ).forEach(key=>{
+
+      if(key !== "id"){
+
+        set(
           key,
           newData[key]
         );
@@ -884,17 +1596,98 @@ async function loadSettings(){
 
     });
 
+  }
 
-  setupColorInputs();
+
+  colorFields.forEach(name=>{
+
+    if($(name)){
+
+      const value =
+        val(name) ||
+        SETTINGS_DEFAULT[name];
+
+
+      $(name).value =
+        value;
+
+      $(name+"_text").value =
+        value;
+
+    }
+
+  });
+
+
+  setupSavedImages();
 
 }
 
+
+
+/* =====================================================
+   SAVED IMAGE PREVIEWS
+   ===================================================== */
+
+function setupSavedImages(){
+
+  const images=[
+
+    [
+      "logo_url",
+      "logo_preview"
+    ],
+
+    [
+      "about_image_url",
+      "about_preview"
+    ],
+
+    [
+      "og_image_url",
+      "og_preview"
+    ]
+
+  ];
+
+
+  images.forEach(pair=>{
+
+    const url =
+      val(pair[0]);
+
+    const image =
+      $(pair[1]);
+
+
+    if(
+      url &&
+      image
+    ){
+
+      image.src =
+        url;
+
+      image.style.display =
+        "block";
+
+    }
+
+  });
+
+}
+
+
+
+/* =====================================================
+   WEBSITE SETTINGS SAVE
+   ===================================================== */
 
 async function saveSettings(){
 
   if(!settingsId){
 
-    message(
+    msg(
       "settingsMsg",
       "Settings row not found.",
       true
@@ -905,494 +1698,288 @@ async function saveSettings(){
   }
 
 
-  const payload={
+  try{
 
-    header_name:
-      getValue("header_name"),
-
-    logo_url:
-      getValue("logo_url"),
-
-    new_design_text:
-      getValue("new_design_text"),
-
-    hero_title:
-      getValue("hero_title"),
-
-    hero_subtitle:
-      getValue("hero_subtitle"),
-
-    crafted_text:
-      getValue("crafted_text"),
-
-    stats_thumbnails:
-      getValue("stats_thumbnails"),
-
-    stats_creators:
-      getValue("stats_creators"),
-
-    stats_years:
-      getValue("stats_years"),
-
-    about_text:
-      getValue("about_text"),
-
-    discord_url:
-      getValue("discord_url"),
-
-    twitter_url:
-      getValue("twitter_url"),
-
-    contact_title:
-      getValue("contact_title"),
-
-    contact_text:
-      getValue("contact_text")
-
-  };
+    const payload={};
 
 
-  const {error}=
-    await supabaseClient
-      .from("site_settings")
-      .update(payload)
-      .eq("id",settingsId);
+    const fields=[
+
+      "header_name",
+      "new_design_text",
+      "hero_title",
+      "hero_subtitle",
+      "crafted_text",
+      "stats_thumbnails",
+      "stats_creators",
+      "stats_years",
+      "about_text",
+      "discord_url",
+      "twitter_url",
+      "contact_title",
+      "contact_text"
+
+    ];
 
 
-  if(error){
+    fields.forEach(
+      key=>{
+        payload[key]=
+          val(key);
+      }
+    );
 
-    message(
+
+    const logoFile =
+      $("logo_file")
+      .files[0];
+
+
+    const aboutFile =
+      $("about_file")
+      .files[0];
+
+
+    if(logoFile){
+
+      payload.logo_url =
+        await uploadImage(
+          logoFile
+        );
+
+    }
+
+
+    if(aboutFile){
+
+      payload.about_image_url =
+        await uploadImage(
+          aboutFile
+        );
+
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from(
+          "site_settings"
+        )
+        .update(payload)
+        .eq(
+          "id",
+          settingsId
+        );
+
+
+    if(error)
+      throw error;
+
+
+    if(payload.logo_url)
+      set(
+        "logo_url",
+        payload.logo_url
+      );
+
+
+    if(payload.about_image_url)
+      set(
+        "about_image_url",
+        payload.about_image_url
+      );
+
+
+    setupSavedImages();
+
+
+    msg(
+      "settingsMsg",
+      "✓ Website settings saved successfully!"
+    );
+
+  }
+  catch(error){
+
+    msg(
       "settingsMsg",
       error.message,
       true
     );
 
-    return;
-
   }
 
-
-  message(
-    "settingsMsg",
-    "✅ Website settings saved!"
-  );
-
 }
 
 
-/* =========================================================
-   COLORS
-   ========================================================= */
 
-const colorFields=[
-
-  "bg_color",
-
-  "bg_gradient_1",
-
-  "bg_gradient_2",
-
-  "primary_color",
-
-  "text_color",
-
-  "muted_color",
-
-  "card_color",
-
-  "border_color",
-
-  "button_color",
-
-  "button_text_color",
-
-  "accent_color"
-
-];
-
-
-function setupColorInputs(){
-
-  colorFields.forEach(name=>{
-
-    const picker=
-      document.getElementById(name);
-
-    const text=
-      document.getElementById(
-        name+"_text"
-      );
-
-
-    if(!picker || !text)
-      return;
-
-
-    let value=
-      getValue(name);
-
-
-    if(
-      !/^#[0-9A-Fa-f]{6}$/.test(value)
-    ){
-
-      value="#000000";
-
-      setValue(
-        name,
-        value
-      );
-
-    }
-
-
-    picker.value=value;
-
-    text.value=value;
-
-
-    picker.oninput=()=>{
-
-      text.value=
-        picker.value;
-
-    };
-
-
-    text.oninput=()=>{
-
-      if(
-        /^#[0-9A-Fa-f]{6}$/.test(
-          text.value
-        )
-      ){
-
-        picker.value=
-          text.value;
-
-      }
-
-    };
-
-  });
-
-}
-
+/* =====================================================
+   THEME SAVE
+   ===================================================== */
 
 async function saveTheme(){
 
   if(!settingsId){
 
-    message(
-      "themeMsg",
-      "Settings not loaded.",
-      true
-    );
-
+    msg("themeMsg","Settings not loaded.",true);
     return;
 
   }
 
+  try{
 
-  const payload={};
+    const payload={};
 
+    colorFields.forEach(name=>{
 
-  colorFields.forEach(name=>{
+      const text=$(name+"_text");
 
-    payload[name]=
-      getValue(name+"_text") ||
-      getValue(name);
+      if(text){
+        payload[name]=text.value.trim();
+      }
 
-  });
+    });
 
+    payload.bg_gradient_direction =
+      val("bg_gradient_direction");
 
-  const {error}=
-    await supabaseClient
+    payload.heading_color =
+      val("heading_color_text");
+
+    const {error} =
+      await supabaseClient
       .from("site_settings")
       .update(payload)
       .eq("id",settingsId);
 
+    if(error) throw error;
 
-  if(error){
+    msg(
+      "themeMsg",
+      "✓ Theme saved successfully!"
+    );
 
-    message(
+  }
+  catch(error){
+
+    msg(
       "themeMsg",
       error.message,
       true
     );
 
-    return;
-
-  }
-
-
-  message(
-    "themeMsg",
-    "✅ Theme saved!"
-  );
-
-}
-
-
-/* =========================================================
-   ORDER FIX
-   ========================================================= */
-
-async function normalizeOrders(
-  table,
-  rows
-){
-
-  for(
-    let i=0;
-    i<rows.length;
-    i++
-  ){
-
-    if(
-      Number(
-        rows[i].display_order ?? 0
-      ) !== i
-    ){
-
-      await supabaseClient
-        .from(table)
-        .update({
-          display_order:i
-        })
-        .eq(
-          "id",
-          rows[i].id
-        );
-
-    }
-
   }
 
 }
 
 
-/* =========================================================
-   CREATORS
-   ========================================================= */
+/* =====================================================
+   CREATOR LIST
+   ===================================================== */
 
 async function loadCreators(){
 
-  const {data,error}=
+  const {data,error} =
     await supabaseClient
-      .from("creators")
-      .select("*")
-      .order(
-        "display_order",
-        {ascending:true}
-      )
-      .order(
-        "id",
-        {ascending:true}
-      );
-
+    .from("creators")
+    .select("*")
+    .order("display_order",{ascending:true})
+    .order("id",{ascending:true});
 
   if(error){
 
-    document.getElementById(
-      "creatorList"
-    ).textContent=
+    $("creatorList").textContent =
       error.message;
 
     return;
 
   }
 
-
-  await normalizeOrders(
-    "creators",
-    data || []
-  );
-
-
-  document.getElementById(
-    "creatorCount"
-  ).textContent=
+  $("creatorCount").textContent =
     (data || []).length;
 
+  const list=$("creatorList");
 
-  if(
-    !data ||
-    data.length===0
-  ){
+  list.innerHTML="";
 
-    document.getElementById(
-      "creatorList"
-    ).innerHTML=
+  if(!data || !data.length){
+
+    list.innerHTML =
       "<p>No creators yet.</p>";
 
     return;
 
   }
 
-
-  const list=
-    document.getElementById(
-      "creatorList"
-    );
-
-
-  list.innerHTML="";
-
-
   data.forEach((c,i)=>{
 
-    const div=
-      document.createElement(
-        "div"
-      );
+    const div =
+      document.createElement("div");
 
     div.className="item";
 
+    div.innerHTML = `
+      <div class="row">
 
-    if(c.image_url){
+        ${
+          c.image_url
+          ?
+          `<img class="thumb"
+           src="${esc(c.image_url)}">`
+          :
+          ""
+        }
 
-      const img=
-        document.createElement(
-          "img"
-        );
+        <div class="grow">
 
-      img.src=
-        c.image_url;
+          <b>${esc(c.name)}</b>
 
-      img.onerror=()=>{
-        img.style.display="none";
-      };
+          <div class="muted">
+            ${esc(c.subscribers || "")}
+          </div>
 
-      div.appendChild(img);
+        </div>
 
-    }
+      </div>
 
+      <div class="actions">
 
-    const name=
-      document.createElement(
-        "b"
-      );
+        ${
+          i>0
+          ?
+          `<button class="move"
+             onclick="moveCreator(${i},${i-1})">
+             ⬆ Up
+           </button>`
+          :
+          ""
+        }
 
-    name.textContent=
-      c.name || "";
+        ${
+          i<data.length-1
+          ?
+          `<button class="move"
+             onclick="moveCreator(${i},${i+1})">
+             ⬇ Down
+           </button>`
+          :
+          ""
+        }
 
-    div.appendChild(name);
+        <button class="edit"
+          onclick='editCreator(${JSON.stringify(c)})'>
+          ✏️ Edit
+        </button>
 
+        <button class="delete"
+          onclick="deleteCreator(${c.id})">
+          🗑 Delete
+        </button>
 
-    const subs=
-      document.createElement(
-        "div"
-      );
-
-    subs.style.color="#aaa";
-
-    subs.style.marginTop="5px";
-
-    subs.textContent=
-      c.subscribers || "";
-
-    div.appendChild(subs);
-
-
-    const actions=
-      document.createElement(
-        "div"
-      );
-
-    actions.className="actions";
-
-
-    if(i>0){
-
-      const up=
-        document.createElement(
-          "button"
-        );
-
-      up.className="move";
-
-      up.textContent="⬆ Up";
-
-      up.onclick=()=>{
-
-        moveCreator(
-          i,
-          i-1
-        );
-
-      };
-
-      actions.appendChild(up);
-
-    }
-
-
-    if(
-      i <
-      data.length-1
-    ){
-
-      const down=
-        document.createElement(
-          "button"
-        );
-
-      down.className="move";
-
-      down.textContent="⬇ Down";
-
-      down.onclick=()=>{
-
-        moveCreator(
-          i,
-          i+1
-        );
-
-      };
-
-      actions.appendChild(down);
-
-    }
-
-
-    const edit=
-      document.createElement(
-        "button"
-      );
-
-    edit.className="edit";
-
-    edit.textContent="✏️ Edit";
-
-    edit.onclick=()=>{
-
-      editCreator(c);
-
-    };
-
-    actions.appendChild(edit);
-
-
-    const del=
-      document.createElement(
-        "button"
-      );
-
-    del.className="delete";
-
-    del.textContent="🗑 Delete";
-
-    del.onclick=()=>{
-
-      deleteCreator(c.id);
-
-    };
-
-    actions.appendChild(del);
-
-
-    div.appendChild(actions);
+      </div>
+    `;
 
     list.appendChild(div);
 
@@ -1401,242 +1988,189 @@ async function loadCreators(){
 }
 
 
+/* =====================================================
+   SAVE CREATOR
+   ===================================================== */
+
 async function saveCreator(){
 
-  const id=
-    getValue("creator_id");
+  try{
 
+    const id=val("creator_id");
 
-  const payload={
+    const payload={
 
-    name:
-      getValue(
-        "creator_name"
-      ),
+      name:val("creator_name"),
 
-    subscribers:
-      getValue(
-        "creator_subscribers"
-      ),
+      subscribers:
+        val("creator_subscribers"),
 
-    image_url:
-      getValue(
-        "creator_image_url"
-      ),
+      youtube_url:
+        val("creator_youtube_url")
 
-    youtube_url:
-      getValue(
-        "creator_youtube_url"
-      )
+    };
 
-  };
+    if(!payload.name){
 
+      msg(
+        "creatorMsg",
+        "Enter creator name.",
+        true
+      );
 
-  if(!payload.name){
+      return;
 
-    message(
-      "creatorMsg",
-      "Enter creator name.",
-      true
-    );
+    }
 
-    return;
+    const file =
+      $("creator_file").files[0];
 
-  }
+    if(file){
 
+      payload.image_url =
+        await uploadImage(file);
 
-  if(id){
+    }
 
-    const {error}=
-      await supabaseClient
+    if(id){
+
+      const {error} =
+        await supabaseClient
         .from("creators")
         .update(payload)
         .eq("id",id);
 
+      if(error) throw error;
 
-    if(error){
-
-      message(
+      msg(
         "creatorMsg",
-        error.message,
-        true
+        "✓ Creator updated successfully!"
       );
 
-      return;
-
     }
+    else{
 
-
-    message(
-      "creatorMsg",
-      "✅ Creator updated!"
-    );
-
-  }
-
-  else{
-
-    const {data:existing}=
-      await supabaseClient
+      const {data:last} =
+        await supabaseClient
         .from("creators")
-        .select(
-          "display_order"
-        )
-        .order(
-          "display_order",
-          {ascending:false}
-        )
+        .select("display_order")
+        .order("display_order",{ascending:false})
         .limit(1);
 
+      payload.display_order =
+        last && last.length
+        ? Number(last[0].display_order || 0)+1
+        : 0;
 
-    const nextOrder=
-      existing &&
-      existing.length
-      ?
-      Number(
-        existing[0].display_order || 0
-      )+1
-      :
-      0;
-
-
-    payload.display_order=
-      nextOrder;
-
-
-    const {error}=
-      await supabaseClient
+      const {error} =
+        await supabaseClient
         .from("creators")
         .insert(payload);
 
+      if(error) throw error;
 
-    if(error){
-
-      message(
+      msg(
         "creatorMsg",
-        error.message,
-        true
+        "✓ Creator added successfully!"
       );
-
-      return;
 
     }
 
+    clearCreator();
 
-    message(
+    await loadCreators();
+
+  }
+  catch(error){
+
+    msg(
       "creatorMsg",
-      "✅ Creator added!"
+      error.message,
+      true
     );
 
   }
-
-
-  clearCreator();
-
-  loadCreators();
 
 }
 
 
+/* =====================================================
+   EDIT CREATOR
+   ===================================================== */
+
 function editCreator(c){
 
-  setValue(
-    "creator_id",
-    c.id
-  );
+  set("creator_id",c.id);
 
-  setValue(
-    "creator_name",
-    c.name
-  );
+  set("creator_name",c.name);
 
-  setValue(
+  set(
     "creator_subscribers",
     c.subscribers
   );
 
-  setValue(
-    "creator_image_url",
-    c.image_url
-  );
-
-  setValue(
+  set(
     "creator_youtube_url",
     c.youtube_url
   );
 
+  if(c.image_url){
+
+    $("creator_preview").src =
+      c.image_url;
+
+    $("creator_preview").style.display =
+      "block";
+
+  }
 
   window.scrollTo({
-
-    top:
-      document
-        .getElementById(
-          "creator_name"
-        )
-        .getBoundingClientRect()
-        .top
-      +
-      window.scrollY
-      -
-      100,
-
+    top:$("creators").offsetTop-70,
     behavior:"smooth"
-
   });
 
 }
 
 
+/* =====================================================
+   CLEAR CREATOR
+   ===================================================== */
+
 function clearCreator(){
 
-  setValue(
-    "creator_id",
-    ""
-  );
+  set("creator_id","");
 
-  setValue(
-    "creator_name",
-    ""
-  );
+  set("creator_name","");
 
-  setValue(
-    "creator_subscribers",
-    ""
-  );
+  set("creator_subscribers","");
 
-  setValue(
-    "creator_image_url",
-    ""
-  );
+  set("creator_youtube_url","");
 
-  setValue(
-    "creator_youtube_url",
-    ""
-  );
+  $("creator_file").value="";
+
+  $("creator_preview").style.display="none";
 
 }
 
 
+/* =====================================================
+   DELETE CREATOR
+   ===================================================== */
+
 async function deleteCreator(id){
 
-  if(
-    !confirm(
-      "Delete this creator?"
-    )
-  )
+  if(!confirm("Delete this creator?"))
     return;
 
-
-  const {error}=
+  const {error} =
     await supabaseClient
-      .from("creators")
-      .delete()
-      .eq("id",id);
-
+    .from("creators")
+    .delete()
+    .eq("id",id);
 
   if(error){
 
-    message(
+    msg(
       "creatorMsg",
       error.message,
       true
@@ -1646,23 +2180,1221 @@ async function deleteCreator(id){
 
   }
 
-
-  message(
+  msg(
     "creatorMsg",
-    "✅ Creator deleted!"
+    "✓ Creator deleted successfully!"
   );
-
 
   loadCreators();
 
+              }
+
+
+  /* =====================================================
+   PORTFOLIO
+   ===================================================== */
+
+async function loadPortfolio(){
+
+  const {data,error} =
+    await supabaseClient
+    .from("portfolio")
+    .select("*")
+    .order("display_order",{ascending:true})
+    .order("id",{ascending:true});
+
+  if(error){
+
+    $("portfolioList").textContent =
+      error.message;
+
+    return;
+
+  }
+
+  $("portfolioCount").textContent =
+    (data || []).length;
+
+  const list=$("portfolioList");
+
+  list.innerHTML="";
+
+  if(!data || !data.length){
+
+    list.innerHTML =
+      "<p>No thumbnails yet.</p>";
+
+    return;
+
+  }
+
+  data.forEach((p,i)=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className="item";
+
+    div.innerHTML=`
+
+      <div class="row">
+
+        ${
+          p.image_url
+          ?
+          `<img class="thumb"
+           src="${esc(p.image_url)}">`
+          :
+          ""
+        }
+
+        <div class="grow">
+
+          <b>${esc(p.title || "Untitled")}</b>
+
+        </div>
+
+      </div>
+
+      <div class="actions">
+
+        ${
+          i>0
+          ?
+          `<button class="move"
+             onclick="movePortfolio(${i},${i-1})">
+             ⬆ Up
+           </button>`
+          :
+          ""
+        }
+
+        ${
+          i<data.length-1
+          ?
+          `<button class="move"
+             onclick="movePortfolio(${i},${i+1})">
+             ⬇ Down
+           </button>`
+          :
+          ""
+        }
+
+        <button class="edit"
+          onclick='editPortfolio(${JSON.stringify(p)})'>
+          ✏️ Edit
+        </button>
+
+        <button class="delete"
+          onclick="deletePortfolio(${p.id})">
+          🗑 Delete
+        </button>
+
+      </div>
+
+    `;
+
+    list.appendChild(div);
+
+  });
+
 }
 
+
+/* =====================================================
+   SAVE PORTFOLIO
+   ===================================================== */
+
+async function savePortfolio(){
+
+  try{
+
+    const id=val("portfolio_id");
+
+    const payload={
+      title:val("portfolio_title")
+    };
+
+    if(!payload.title){
+
+      msg(
+        "portfolioMsg",
+        "Enter thumbnail title.",
+        true
+      );
+
+      return;
+
+    }
+
+    const file =
+      $("portfolio_file").files[0];
+
+    if(file){
+
+      payload.image_url =
+        await uploadImage(file);
+
+    }
+
+    if(id){
+
+      const {error} =
+        await supabaseClient
+        .from("portfolio")
+        .update(payload)
+        .eq("id",id);
+
+      if(error) throw error;
+
+      msg(
+        "portfolioMsg",
+        "✓ Thumbnail updated successfully!"
+      );
+
+    }
+    else{
+
+      const {data:last} =
+        await supabaseClient
+        .from("portfolio")
+        .select("display_order")
+        .order("display_order",{ascending:false})
+        .limit(1);
+
+      payload.display_order =
+        last && last.length
+        ? Number(last[0].display_order || 0)+1
+        : 0;
+
+      const {error} =
+        await supabaseClient
+        .from("portfolio")
+        .insert(payload);
+
+      if(error) throw error;
+
+      msg(
+        "portfolioMsg",
+        "✓ Thumbnail added successfully!"
+      );
+
+    }
+
+    clearPortfolio();
+
+    await loadPortfolio();
+
+  }
+  catch(error){
+
+    msg(
+      "portfolioMsg",
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   EDIT PORTFOLIO
+   ===================================================== */
+
+function editPortfolio(p){
+
+  set("portfolio_id",p.id);
+
+  set(
+    "portfolio_title",
+    p.title
+  );
+
+  if(p.image_url){
+
+    $("portfolio_preview").src =
+      p.image_url;
+
+    $("portfolio_preview").style.display =
+      "block";
+
+  }
+
+  window.scrollTo({
+    top:$("portfolio").offsetTop-70,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =====================================================
+   CLEAR PORTFOLIO
+   ===================================================== */
+
+function clearPortfolio(){
+
+  set("portfolio_id","");
+
+  set("portfolio_title","");
+
+  $("portfolio_file").value="";
+
+  $("portfolio_preview").style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   DELETE PORTFOLIO
+   ===================================================== */
+
+async function deletePortfolio(id){
+
+  if(!confirm("Delete this thumbnail?"))
+    return;
+
+  const {error} =
+    await supabaseClient
+    .from("portfolio")
+    .delete()
+    .eq("id",id);
+
+  if(error){
+
+    msg(
+      "portfolioMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+  msg(
+    "portfolioMsg",
+    "✓ Thumbnail deleted successfully!"
+  );
+
+  loadPortfolio();
+
+}
+
+
+/* =====================================================
+   MOVE PORTFOLIO
+   ===================================================== */
+
+async function movePortfolio(
+  index,
+  targetIndex
+){
+
+  const {data,error} =
+    await supabaseClient
+    .from("portfolio")
+    .select("id,display_order")
+    .order("display_order",{ascending:true})
+    .order("id",{ascending:true});
+
+  if(error){
+
+    msg(
+      "portfolioMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+  if(
+    !data ||
+    !data[index] ||
+    !data[targetIndex]
+  )
+    return;
+
+  const current=data[index];
+
+  const target=data[targetIndex];
+
+  const temp =
+    current.display_order;
+
+  const {error:e1} =
+    await supabaseClient
+    .from("portfolio")
+    .update({
+      display_order:
+        target.display_order
+    })
+    .eq("id",current.id);
+
+  if(e1){
+
+    msg(
+      "portfolioMsg",
+      e1.message,
+      true
+    );
+
+    return;
+
+  }
+
+  const {error:e2} =
+    await supabaseClient
+    .from("portfolio")
+    .update({
+      display_order:temp
+    })
+    .eq("id",target.id);
+
+  if(e2){
+
+    msg(
+      "portfolioMsg",
+      e2.message,
+      true
+    );
+
+    return;
+
+  }
+
+  loadPortfolio();
+
+}
+
+
+/* =====================================================
+   MOVE CREATOR
+   ===================================================== */
 
 async function moveCreator(
   index,
   targetIndex
 ){
 
-  const {data,error}=
+  const {data,error} =
     await supabaseClient
-  
+    .from("creators")
+    .select("id,display_order")
+    .order("display_order",{ascending:true})
+    .order("id",{ascending:true});
+
+  if(error){
+
+    msg(
+      "creatorMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+  if(
+    !data ||
+    !data[index] ||
+    !data[targetIndex]
+  )
+    return;
+
+  const current=data[index];
+
+  const target=data[targetIndex];
+
+  const temp =
+    current.display_order;
+
+  const {error:e1} =
+    await supabaseClient
+    .from("creators")
+    .update({
+      display_order:
+        target.display_order
+    })
+    .eq("id",current.id);
+
+  if(e1){
+
+    msg(
+      "creatorMsg",
+      e1.message,
+      true
+    );
+
+    return;
+
+  }
+
+  const {error:e2} =
+    await supabaseClient
+    .from("creators")
+    .update({
+      display_order:temp
+    })
+    .eq("id",target.id);
+
+  if(e2){
+
+    msg(
+      "creatorMsg",
+      e2.message,
+      true
+    );
+
+    return;
+
+  }
+
+  loadCreators();
+
+}
+
+
+  /* =====================================================
+   FAQ LIST
+   ===================================================== */
+
+async function loadFAQ(){
+
+  const {data,error} =
+    await supabaseClient
+    .from("faq")
+    .select("*")
+    .order("display_order",{ascending:true})
+    .order("id",{ascending:true});
+
+  if(error){
+
+    $("faqList").textContent =
+      error.message;
+
+    return;
+
+  }
+
+  $("faqCount").textContent =
+    (data || []).length;
+
+  const list=$("faqList");
+
+  list.innerHTML="";
+
+  if(!data || !data.length){
+
+    list.innerHTML =
+      "<p>No FAQ yet.</p>";
+
+    return;
+
+  }
+
+  data.forEach((f,i)=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className="item";
+
+    div.innerHTML=`
+
+      <div class="grow">
+
+        <b>${esc(f.question)}</b>
+
+        <div class="muted">
+          ${esc(f.answer)}
+        </div>
+
+      </div>
+
+      <div class="actions">
+
+        ${
+          i>0
+          ?
+          `<button class="move"
+             onclick="moveFAQ(${i},${i-1})">
+             ⬆ Up
+           </button>`
+          :
+          ""
+        }
+
+        ${
+          i<data.length-1
+          ?
+          `<button class="move"
+             onclick="moveFAQ(${i},${i+1})">
+             ⬇ Down
+           </button>`
+          :
+          ""
+        }
+
+        <button class="edit"
+          onclick='editFAQ(${JSON.stringify(f)})'>
+          ✏️ Edit
+        </button>
+
+        <button class="delete"
+          onclick="deleteFAQ(${f.id})">
+          🗑 Delete
+        </button>
+
+      </div>
+
+    `;
+
+    list.appendChild(div);
+
+  });
+
+}
+
+
+/* =====================================================
+   SAVE FAQ
+   ===================================================== */
+
+async function saveFAQ(){
+
+  try{
+
+    const id=val("faq_id");
+
+    const payload={
+
+      question:
+        val("faq_question"),
+
+      answer:
+        val("faq_answer")
+
+    };
+
+    if(!payload.question ||
+       !payload.answer){
+
+      msg(
+        "faqMsg",
+        "Enter both question and answer.",
+        true
+      );
+
+      return;
+
+    }
+
+    if(id){
+
+      const {error} =
+        await supabaseClient
+        .from("faq")
+        .update(payload)
+        .eq("id",id);
+
+      if(error) throw error;
+
+      msg(
+        "faqMsg",
+        "✓ FAQ updated successfully!"
+      );
+
+    }
+    else{
+
+      const {data:last} =
+        await supabaseClient
+        .from("faq")
+        .select("display_order")
+        .order("display_order",{ascending:false})
+        .limit(1);
+
+      payload.display_order =
+        last && last.length
+        ? Number(last[0].display_order || 0)+1
+        : 0;
+
+      const {error} =
+        await supabaseClient
+        .from("faq")
+        .insert(payload);
+
+      if(error) throw error;
+
+      msg(
+        "faqMsg",
+        "✓ FAQ added successfully!"
+      );
+
+    }
+
+    clearFAQ();
+
+    await loadFAQ();
+
+  }
+  catch(error){
+
+    msg(
+      "faqMsg",
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   EDIT FAQ
+   ===================================================== */
+
+function editFAQ(f){
+
+  set("faq_id",f.id);
+
+  set(
+    "faq_question",
+    f.question
+  );
+
+  set(
+    "faq_answer",
+    f.answer
+  );
+
+  window.scrollTo({
+    top:$("faq").offsetTop-70,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =====================================================
+   CLEAR FAQ
+   ===================================================== */
+
+function clearFAQ(){
+
+  set("faq_id","");
+
+  set("faq_question","");
+
+  set("faq_answer","");
+
+}
+
+
+/* =====================================================
+   DELETE FAQ
+   ===================================================== */
+
+async function deleteFAQ(id){
+
+  if(!confirm("Delete this FAQ?"))
+    return;
+
+  const {error} =
+    await supabaseClient
+    .from("faq")
+    .delete()
+    .eq("id",id);
+
+  if(error){
+
+    msg(
+      "faqMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+  msg(
+    "faqMsg",
+    "✓ FAQ deleted successfully!"
+  );
+
+  loadFAQ();
+
+}
+
+
+/* =====================================================
+   MOVE FAQ
+   ===================================================== */
+
+async function moveFAQ(
+  index,
+  targetIndex
+){
+
+  const {data,error} =
+    await supabaseClient
+    .from("faq")
+    .select("id,display_order")
+    .order("display_order",{ascending:true})
+    .order("id",{ascending:true});
+
+  if(error){
+
+    msg(
+      "faqMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+  if(
+    !data ||
+    !data[index] ||
+    !data[targetIndex]
+  )
+    return;
+
+  const current=data[index];
+
+  const target=data[targetIndex];
+
+  const temp=current.display_order;
+
+  const {error:e1} =
+    await supabaseClient
+    .from("faq")
+    .update({
+      display_order:
+        target.display_order
+    })
+    .eq("id",current.id);
+
+  if(e1){
+
+    msg(
+      "faqMsg",
+      e1.message,
+      true
+    );
+
+    return;
+
+  }
+
+  const {error:e2} =
+    await supabaseClient
+    .from("faq")
+    .update({
+      display_order:temp
+    })
+    .eq("id",target.id);
+
+  if(e2){
+
+    msg(
+      "faqMsg",
+      e2.message,
+      true
+    );
+
+    return;
+
+  }
+
+  loadFAQ();
+
+          }
+
+
+  /* =====================================================
+   IMAGE UPLOAD
+   ===================================================== */
+
+async function uploadImage(file){
+
+  if(!file)
+    throw new Error("Please select an image.");
+
+  const ext =
+    file.name.split(".").pop().toLowerCase();
+
+  const fileName =
+    Date.now() + "-" +
+    Math.random().toString(36).slice(2) +
+    "." + ext;
+
+  const path =
+    "portfolio/" + fileName;
+
+  const {error} =
+    await supabaseClient
+    .storage
+    .from("portfolio-images")
+    .upload(path,file,{
+      cacheControl:"3600",
+      upsert:false
+    });
+
+  if(error)
+    throw error;
+
+  const {data} =
+    supabaseClient
+    .storage
+    .from("portfolio-images")
+    .getPublicUrl(path);
+
+  return data.publicUrl;
+
+}
+
+
+/* =====================================================
+   CREATOR YOUTUBE URL
+   ===================================================== */
+
+function openCreatorURL(url){
+
+  if(!url)
+    return;
+
+  window.open(
+    url,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+/* =====================================================
+   CREATOR IMAGE PREVIEW
+   ===================================================== */
+
+function previewCreatorImage(){
+
+  const file =
+    $("creator_file").files[0];
+
+  if(!file)
+    return;
+
+  const url =
+    URL.createObjectURL(file);
+
+  $("creator_preview").src=url;
+
+  $("creator_preview").style.display="block";
+
+}
+
+
+/* =====================================================
+   PORTFOLIO IMAGE PREVIEW
+   ===================================================== */
+
+function previewPortfolioImage(){
+
+  const file =
+    $("portfolio_file").files[0];
+
+  if(!file)
+    return;
+
+  const url =
+    URL.createObjectURL(file);
+
+  $("portfolio_preview").src=url;
+
+  $("portfolio_preview").style.display="block";
+
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+async function logout(){
+
+  const {error} =
+    await supabaseClient.auth.signOut();
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  window.location.href="admin.html";
+
+}
+
+
+/* =====================================================
+   LOAD EVERYTHING
+   ===================================================== */
+
+async function loadEverything(){
+
+  try{
+
+    await checkAdminSession();
+
+    await loadSettings();
+
+    await loadCreators();
+
+    await loadPortfolio();
+
+    await loadFAQ();
+
+  }
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================================
+   CHECK ADMIN SESSION
+   ===================================================== */
+
+async function checkAdminSession(){
+
+  const {data,error} =
+    await supabaseClient.auth.getSession();
+
+  if(error){
+
+    window.location.href="admin.html";
+
+    return;
+
+  }
+
+  if(!data.session){
+
+    window.location.href="admin.html";
+
+    return;
+
+  }
+
+}
+
+
+/* =====================================================
+   FILE INPUT PREVIEWS
+   ===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    const creatorFile =
+      $("creator_file");
+
+    if(creatorFile){
+
+      creatorFile.addEventListener(
+        "change",
+        previewCreatorImage
+      );
+
+    }
+
+    const portfolioFile =
+      $("portfolio_file");
+
+    if(portfolioFile){
+
+      portfolioFile.addEventListener(
+        "change",
+        previewPortfolioImage
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+loadEverything();
+
+
+  /* =====================================================
+   CHANGE PASSWORD
+   ===================================================== */
+
+async function changePassword(){
+
+  const password =
+    val("new_password");
+
+  const confirm =
+    val("confirm_password");
+
+  if(!password || !confirm){
+
+    msg(
+      "passwordMsg",
+      "Please enter both passwords.",
+      true
+    );
+
+    return;
+
+  }
+
+  if(password !== confirm){
+
+    msg(
+      "passwordMsg",
+      "Passwords do not match.",
+      true
+    );
+
+    return;
+
+  }
+
+  if(password.length < 6){
+
+    msg(
+      "passwordMsg",
+      "Password must be at least 6 characters.",
+      true
+    );
+
+    return;
+
+  }
+
+  const {error} =
+    await supabaseClient.auth.updateUser({
+      password:password
+    });
+
+  if(error){
+
+    msg(
+      "passwordMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+  msg(
+    "passwordMsg",
+    "✓ Password changed successfully!"
+  );
+
+  set("new_password","");
+  set("confirm_password","");
+
+}
+
+
+/* =====================================================
+   SAVE ALL CHANGES
+   ===================================================== */
+
+async function saveAllChanges(){
+
+  const message =
+    $("saveAllMsg");
+
+  if(message){
+
+    message.textContent =
+      "Saving all changes...";
+
+  }
+
+  try{
+
+    if(typeof saveSettings === "function"){
+
+      await saveSettings();
+
+    }
+
+    if(typeof saveTheme === "function"){
+
+      await saveTheme();
+
+    }
+
+    if(message){
+
+      message.textContent =
+        "✓ All changes saved successfully!";
+
+    }
+
+  }
+  catch(error){
+
+    if(message){
+
+      message.textContent =
+        error.message;
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+   ===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+  (event,session)=>{
+
+    if(event === "SIGNED_OUT"){
+
+      window.location.href="admin.html";
+
+    }
+
+  }
+);
+
+
+  </script>
+
+</body>
+</html>
