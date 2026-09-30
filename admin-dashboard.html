@@ -3,25 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mr CrowSensei Admin</title>
+
+<title>Mr CrowSensei — Admin Panel</title>
 
 <style>
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   background:#080808;
-  color:white;
+  color:#fff;
   font-family:Arial,sans-serif;
 }
 
 header{
-  padding:20px;
+  padding:18px 20px;
   border-bottom:1px solid #222;
+  position:sticky;
+  top:0;
+  background:#080808;
+  z-index:10;
+}
+
+header h2{
+  margin:0;
+  font-size:20px;
 }
 
 main{
-  padding:20px;
-  max-width:900px;
+  max-width:1100px;
   margin:auto;
+  padding:20px;
 }
 
 .card{
@@ -32,123 +47,619 @@ main{
   margin-bottom:18px;
 }
 
-input{
+h3{
+  margin-top:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:6px;
+}
+
+input,
+textarea{
   width:100%;
-  box-sizing:border-box;
-  padding:13px;
-  margin:8px 0;
-  border-radius:10px;
-  border:1px solid #333;
+  padding:12px;
   background:#181818;
-  color:white;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:9px;
+  outline:none;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
 }
 
 button{
-  padding:11px 16px;
-  margin:5px 4px 0 0;
   border:0;
-  border-radius:10px;
-  font-weight:bold;
+  border-radius:9px;
+  padding:10px 14px;
   cursor:pointer;
+  font-weight:bold;
+  margin:4px;
+}
+
+.save{
+  background:#fff;
+  color:#000;
 }
 
 .add{
-  background:white;
-  color:black;
+  background:#22c55e;
+  color:#000;
+}
+
+.delete{
+  background:#ef4444;
+  color:#fff;
 }
 
 .move{
   background:#292929;
-  color:white;
+  color:#fff;
 }
 
-.delete{
-  background:#ff4444;
-  color:white;
+.edit{
+  background:#3b82f6;
+  color:#fff;
 }
 
 .logout{
-  background:#333;
-  color:white;
+  background:#ef4444;
+  color:#fff;
+  width:100%;
+  margin:10px 0 30px;
 }
 
 .item{
-  border-top:1px solid #292929;
-  padding:18px 0;
-  margin-top:15px;
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:14px;
+  margin-top:10px;
 }
 
 .item img{
-  width:100%;
-  max-width:300px;
+  width:80px;
+  height:55px;
+  object-fit:cover;
+  border-radius:7px;
+  vertical-align:middle;
+  margin-right:10px;
+}
+
+.actions{
+  margin-top:8px;
+}
+
+.msg{
+  color:#8cffaa;
+  margin-top:10px;
+}
+
+.error{
+  color:#ff7777;
+  margin-top:10px;
+}
+
+.stat{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.statbox{
+  background:#181818;
+  border:1px solid #292929;
+  padding:18px;
   border-radius:10px;
+  text-align:center;
+}
+
+.statbox b{
+  font-size:24px;
   display:block;
-  margin-bottom:10px;
 }
 
-.item-title{
-  margin:0 0 8px;
+.colorbox{
+  display:flex;
+  gap:8px;
+  align-items:center;
 }
 
-#message{
-  margin-top:15px;
+.colorbox input[type="color"]{
+  width:55px;
+  height:45px;
+  padding:3px;
 }
+
+@media(max-width:700px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .stat{
+    grid-template-columns:1fr;
+  }
+
+  main{
+    padding:12px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <h2>Mr CrowSensei — Admin Panel</h2>
+<h2>Mr CrowSensei — Admin Panel</h2>
 </header>
 
 <main>
 
-<div class="card">
-  <h3>📊 Dashboard</h3>
-  <p>Total Portfolio Thumbnails: <b id="count">0</b></p>
-</div>
+
+<!-- DASHBOARD -->
 
 <div class="card">
-  <h3>🖼️ Add Portfolio Thumbnail</h3>
 
-  <input
-    id="title"
-    type="text"
-    placeholder="Thumbnail title"
-  >
+<h3>📊 Dashboard</h3>
 
-  <input
-    id="image_url"
-    type="url"
-    placeholder="Image URL"
-  >
+<div class="stat">
 
-  <button class="add" onclick="addPortfolio()">
-    Add Thumbnail
-  </button>
-
-  <p id="message"></p>
+<div class="statbox">
+<b id="portfolioCount">0</b>
+Portfolio
 </div>
+
+<div class="statbox">
+<b id="creatorCount">0</b>
+Creators
+</div>
+
+<div class="statbox">
+<b id="faqCount">0</b>
+FAQ
+</div>
+
+</div>
+
+</div>
+
+
+<!-- WEBSITE SETTINGS -->
 
 <div class="card">
-  <h3>🖼️ Portfolio</h3>
-  <div id="portfolioList">Loading...</div>
+
+<h3>⚙️ Website Settings</h3>
+
+<div class="grid">
+
+<div>
+<label>Header Name</label>
+<input id="header_name">
 </div>
+
+<div>
+<label>Logo URL</label>
+<input id="logo_url">
+</div>
+
+<div>
+<label>New Design Text</label>
+<input id="new_design_text">
+</div>
+
+<div>
+<label>Hero Title</label>
+<input id="hero_title">
+</div>
+
+<div>
+<label>Hero Subtitle</label>
+<input id="hero_subtitle">
+</div>
+
+<div>
+<label>Crafted Text</label>
+<input id="crafted_text">
+</div>
+
+<div>
+<label>Stats — Thumbnails</label>
+<input id="stats_thumbnails">
+</div>
+
+<div>
+<label>Stats — Creators</label>
+<input id="stats_creators">
+</div>
+
+<div>
+<label>Stats — Years</label>
+<input id="stats_years">
+</div>
+
+<div>
+<label>Discord URL</label>
+<input id="discord_url">
+</div>
+
+<div>
+<label>Twitter / X URL</label>
+<input id="twitter_url">
+</div>
+
+<div>
+<label>Contact Title</label>
+<input id="contact_title">
+</div>
+
+</div>
+
+<div style="margin-top:14px">
+
+<label>About Me</label>
+
+<textarea id="about_text"></textarea>
+
+</div>
+
+<div style="margin-top:14px">
+
+<label>Contact Text</label>
+
+<textarea id="contact_text"></textarea>
+
+</div>
+
+<button class="save" onclick="saveSettings()">
+💾 Save Website Settings
+</button>
+
+<div id="settingsMsg"></div>
+
+</div>
+
+
+<!-- THEME -->
+
+<div class="card">
+
+<h3>🎨 Theme & Colors</h3>
+
+<div class="grid">
+
+
+<div>
+<label>Background Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="bg_color">
+
+<input id="bg_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Gradient Color 1</label>
+
+<div class="colorbox">
+
+<input type="color" id="bg_gradient_1">
+
+<input id="bg_gradient_1_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Gradient Color 2</label>
+
+<div class="colorbox">
+
+<input type="color" id="bg_gradient_2">
+
+<input id="bg_gradient_2_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Primary Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="primary_color">
+
+<input id="primary_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Text Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="text_color">
+
+<input id="text_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Muted Text Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="muted_color">
+
+<input id="muted_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Card Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="card_color">
+
+<input id="card_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Border Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="border_color">
+
+<input id="border_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Button Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="button_color">
+
+<input id="button_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Button Text Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="button_text_color">
+
+<input id="button_text_color_text">
+
+</div>
+
+</div>
+
+
+<div>
+<label>Accent Color</label>
+
+<div class="colorbox">
+
+<input type="color" id="accent_color">
+
+<input id="accent_color_text">
+
+</div>
+
+</div>
+
+</div>
+
+<button class="save" onclick="saveTheme()">
+🎨 Save Theme
+</button>
+
+<div id="themeMsg"></div>
+
+</div>
+
+
+<!-- CREATORS -->
+
+<div class="card">
+
+<h3>👥 Trusted Creators</h3>
+
+<input type="hidden" id="creator_id">
+
+<div class="grid">
+
+<div>
+<label>Name</label>
+<input id="creator_name">
+</div>
+
+<div>
+<label>Subscribers</label>
+<input id="creator_subscribers">
+</div>
+
+<div>
+<label>Image URL</label>
+<input id="creator_image_url">
+</div>
+
+<div>
+<label>YouTube URL</label>
+<input id="creator_youtube_url">
+</div>
+
+</div>
+
+<button class="add" onclick="saveCreator()">
+➕ Save Creator
+</button>
+
+<button class="move" onclick="clearCreator()">
+Clear
+</button>
+
+<div id="creatorMsg"></div>
+
+<div id="creatorList">
+Loading...
+</div>
+
+</div>
+
+
+<!-- PORTFOLIO -->
+
+<div class="card">
+
+<h3>🖼️ Portfolio</h3>
+
+<input type="hidden" id="portfolio_id">
+
+<div class="grid">
+
+<div>
+<label>Title</label>
+<input id="portfolio_title">
+</div>
+
+<div>
+<label>Image URL</label>
+<input id="portfolio_image_url">
+</div>
+
+</div>
+
+<button class="add" onclick="savePortfolio()">
+➕ Save Thumbnail
+</button>
+
+<button class="move" onclick="clearPortfolio()">
+Clear
+</button>
+
+<div id="portfolioMsg"></div>
+
+<div id="portfolioList">
+Loading...
+</div>
+
+</div>
+
+
+<!-- FAQ -->
+
+<div class="card">
+
+<h3>❓ FAQ</h3>
+
+<input type="hidden" id="faq_id">
+
+<div>
+
+<label>Question</label>
+
+<input id="faq_question">
+
+</div>
+
+<div style="margin-top:12px">
+
+<label>Answer</label>
+
+<textarea id="faq_answer"></textarea>
+
+</div>
+
+<button class="add" onclick="saveFAQ()">
+➕ Save FAQ
+</button>
+
+<button class="move" onclick="clearFAQ()">
+Clear
+</button>
+
+<div id="faqMsg"></div>
+
+<div id="faqList">
+Loading...
+</div>
+
+</div>
+
 
 <button class="logout" onclick="logout()">
-  Logout
+🚪 Logout
 </button>
 
 </main>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
+
+/* =========================================================
+   SUPABASE
+   ========================================================= */
+
+/*
+   YAHAN APNE OLD CODE KI SAME 2 VALUES PASTE KARO.
+*/
+
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
@@ -156,138 +667,732 @@ const supabaseClient = supabase.createClient(
 );
 
 
-/* LOAD PORTFOLIO */
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
-async function loadPortfolio(){
+function setValue(id,value){
 
-  const list = document.getElementById("portfolioList");
-  const count = document.getElementById("count");
+  const el=document.getElementById(id);
 
-  list.textContent = "Loading...";
+  if(el){
+    el.value=value ?? "";
+  }
 
-  const { data, error } = await supabaseClient
-    .from("portfolio")
-    .select("*")
-    .order("display_order", { ascending:true })
-    .order("id", { ascending:true });
+}
+
+
+function getValue(id){
+
+  const el=document.getElementById(id);
+
+  return el ? el.value.trim() : "";
+
+}
+
+
+function message(id,text,error=false){
+
+  const el=document.getElementById(id);
+
+  if(!el) return;
+
+  el.textContent=text;
+
+  el.className=
+    error
+    ? "error"
+    : "msg";
+
+}
+
+
+/* =========================================================
+   SESSION
+   ========================================================= */
+
+async function checkSession(){
+
+  const {data,error}=
+    await supabaseClient.auth.getSession();
+
+
+  if(error || !data.session){
+
+    window.location.href="admin.html";
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   SITE SETTINGS
+   ========================================================= */
+
+let settingsId=null;
+
+
+const defaultSettings={
+
+  id:1,
+
+  header_name:"Mr CrowSensei",
+
+  logo_url:"",
+
+  new_design_text:"New Design Available",
+
+  hero_title:"Professional Minecraft Thumbnails",
+
+  hero_subtitle:"Professional Crafted for Creators",
+
+  crafted_text:"Crafted for Creators",
+
+  stats_thumbnails:"100+",
+
+  stats_creators:"50+",
+
+  stats_years:"2+",
+
+  about_text:"",
+
+  discord_url:"",
+
+  twitter_url:"",
+
+  contact_title:"Let's Work Together",
+
+  contact_text:"",
+
+  bg_color:"#080808",
+
+  bg_gradient_1:"#080808",
+
+  bg_gradient_2:"#151515",
+
+  primary_color:"#ffffff",
+
+  text_color:"#ffffff",
+
+  muted_color:"#999999",
+
+  card_color:"#111111",
+
+  border_color:"#292929",
+
+  button_color:"#ffffff",
+
+  button_text_color:"#000000",
+
+  accent_color:"#ff0000"
+
+};
+
+
+async function loadSettings(){
+
+  const {data,error}=
+    await supabaseClient
+      .from("site_settings")
+      .select("*")
+      .order("id",{ascending:true})
+      .limit(1)
+      .maybeSingle();
+
 
   if(error){
 
-    list.textContent = error.message;
+    message(
+      "settingsMsg",
+      error.message,
+      true
+    );
 
     return;
+
   }
 
-  count.textContent = data.length;
 
-  if(data.length === 0){
+  if(data){
 
-    list.textContent = "No thumbnails added yet.";
+    settingsId=data.id;
+
+
+    Object.keys(defaultSettings)
+      .forEach(key=>{
+
+        if(key!=="id"){
+
+          setValue(
+            key,
+            data[key]
+          );
+
+        }
+
+      });
+
+
+    setupColorInputs();
 
     return;
+
   }
 
-  list.innerHTML = "";
+
+  const {data:newData,error:insertError}=
+    await supabaseClient
+      .from("site_settings")
+      .insert(defaultSettings)
+      .select()
+      .single();
 
 
-  data.forEach((item,index)=>{
+  if(insertError){
 
-    const div = document.createElement("div");
+    message(
+      "settingsMsg",
+      insertError.message,
+      true
+    );
 
-    div.className = "item";
+    return;
 
-
-    /* TITLE */
-
-    const title = document.createElement("h4");
-
-    title.className = "item-title";
-
-    title.textContent =
-      (index + 1) + ". " +
-      (item.title || "Untitled");
+  }
 
 
-    /* IMAGE */
-
-    const img = document.createElement("img");
-
-    img.src = item.image_url;
-
-    img.alt =
-      item.title || "Minecraft Thumbnail";
+  settingsId=newData.id;
 
 
-    div.appendChild(title);
+  Object.keys(defaultSettings)
+    .forEach(key=>{
 
-    div.appendChild(img);
+      if(key!=="id"){
 
-
-    /* UP BUTTON */
-
-    if(index > 0){
-
-      const upButton =
-        document.createElement("button");
-
-      upButton.className = "move";
-
-      upButton.textContent = "⬆️ Up";
-
-      upButton.onclick = function(){
-
-        moveThumbnail(
-          item,
-          data[index - 1]
+        setValue(
+          key,
+          newData[key]
         );
 
-      };
+      }
 
-      div.appendChild(upButton);
+    });
+
+
+  setupColorInputs();
+
+}
+
+
+async function saveSettings(){
+
+  if(!settingsId){
+
+    message(
+      "settingsMsg",
+      "Settings row not found.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const payload={
+
+    header_name:
+      getValue("header_name"),
+
+    logo_url:
+      getValue("logo_url"),
+
+    new_design_text:
+      getValue("new_design_text"),
+
+    hero_title:
+      getValue("hero_title"),
+
+    hero_subtitle:
+      getValue("hero_subtitle"),
+
+    crafted_text:
+      getValue("crafted_text"),
+
+    stats_thumbnails:
+      getValue("stats_thumbnails"),
+
+    stats_creators:
+      getValue("stats_creators"),
+
+    stats_years:
+      getValue("stats_years"),
+
+    about_text:
+      getValue("about_text"),
+
+    discord_url:
+      getValue("discord_url"),
+
+    twitter_url:
+      getValue("twitter_url"),
+
+    contact_title:
+      getValue("contact_title"),
+
+    contact_text:
+      getValue("contact_text")
+
+  };
+
+
+  const {error}=
+    await supabaseClient
+      .from("site_settings")
+      .update(payload)
+      .eq("id",settingsId);
+
+
+  if(error){
+
+    message(
+      "settingsMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+
+  message(
+    "settingsMsg",
+    "✅ Website settings saved!"
+  );
+
+}
+
+
+/* =========================================================
+   COLORS
+   ========================================================= */
+
+const colorFields=[
+
+  "bg_color",
+
+  "bg_gradient_1",
+
+  "bg_gradient_2",
+
+  "primary_color",
+
+  "text_color",
+
+  "muted_color",
+
+  "card_color",
+
+  "border_color",
+
+  "button_color",
+
+  "button_text_color",
+
+  "accent_color"
+
+];
+
+
+function setupColorInputs(){
+
+  colorFields.forEach(name=>{
+
+    const picker=
+      document.getElementById(name);
+
+    const text=
+      document.getElementById(
+        name+"_text"
+      );
+
+
+    if(!picker || !text)
+      return;
+
+
+    let value=
+      getValue(name);
+
+
+    if(
+      !/^#[0-9A-Fa-f]{6}$/.test(value)
+    ){
+
+      value="#000000";
+
+      setValue(
+        name,
+        value
+      );
+
     }
 
 
-    /* DOWN BUTTON */
+    picker.value=value;
 
-    if(index < data.length - 1){
-
-      const downButton =
-        document.createElement("button");
-
-      downButton.className = "move";
-
-      downButton.textContent = "⬇️ Down";
-
-      downButton.onclick = function(){
-
-        moveThumbnail(
-          item,
-          data[index + 1]
-        );
-
-      };
-
-      div.appendChild(downButton);
-    }
+    text.value=value;
 
 
-    /* DELETE BUTTON */
+    picker.oninput=()=>{
 
-    const deleteButton =
-      document.createElement("button");
-
-    deleteButton.className = "delete";
-
-    deleteButton.textContent = "🗑️ Delete";
-
-    deleteButton.onclick = function(){
-
-      deletePortfolio(item.id);
+      text.value=
+        picker.value;
 
     };
 
-    div.appendChild(deleteButton);
 
+    text.oninput=()=>{
+
+      if(
+        /^#[0-9A-Fa-f]{6}$/.test(
+          text.value
+        )
+      ){
+
+        picker.value=
+          text.value;
+
+      }
+
+    };
+
+  });
+
+}
+
+
+async function saveTheme(){
+
+  if(!settingsId){
+
+    message(
+      "themeMsg",
+      "Settings not loaded.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const payload={};
+
+
+  colorFields.forEach(name=>{
+
+    payload[name]=
+      getValue(name+"_text") ||
+      getValue(name);
+
+  });
+
+
+  const {error}=
+    await supabaseClient
+      .from("site_settings")
+      .update(payload)
+      .eq("id",settingsId);
+
+
+  if(error){
+
+    message(
+      "themeMsg",
+      error.message,
+      true
+    );
+
+    return;
+
+  }
+
+
+  message(
+    "themeMsg",
+    "✅ Theme saved!"
+  );
+
+}
+
+
+/* =========================================================
+   ORDER FIX
+   ========================================================= */
+
+async function normalizeOrders(
+  table,
+  rows
+){
+
+  for(
+    let i=0;
+    i<rows.length;
+    i++
+  ){
+
+    if(
+      Number(
+        rows[i].display_order ?? 0
+      ) !== i
+    ){
+
+      await supabaseClient
+        .from(table)
+        .update({
+          display_order:i
+        })
+        .eq(
+          "id",
+          rows[i].id
+        );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATORS
+   ========================================================= */
+
+async function loadCreators(){
+
+  const {data,error}=
+    await supabaseClient
+      .from("creators")
+      .select("*")
+      .order(
+        "display_order",
+        {ascending:true}
+      )
+      .order(
+        "id",
+        {ascending:true}
+      );
+
+
+  if(error){
+
+    document.getElementById(
+      "creatorList"
+    ).textContent=
+      error.message;
+
+    return;
+
+  }
+
+
+  await normalizeOrders(
+    "creators",
+    data || []
+  );
+
+
+  document.getElementById(
+    "creatorCount"
+  ).textContent=
+    (data || []).length;
+
+
+  if(
+    !data ||
+    data.length===0
+  ){
+
+    document.getElementById(
+      "creatorList"
+    ).innerHTML=
+      "<p>No creators yet.</p>";
+
+    return;
+
+  }
+
+
+  const list=
+    document.getElementById(
+      "creatorList"
+    );
+
+
+  list.innerHTML="";
+
+
+  data.forEach((c,i)=>{
+
+    const div=
+      document.createElement(
+        "div"
+      );
+
+    div.className="item";
+
+
+    if(c.image_url){
+
+      const img=
+        document.createElement(
+          "img"
+        );
+
+      img.src=
+        c.image_url;
+
+      img.onerror=()=>{
+        img.style.display="none";
+      };
+
+      div.appendChild(img);
+
+    }
+
+
+    const name=
+      document.createElement(
+        "b"
+      );
+
+    name.textContent=
+      c.name || "";
+
+    div.appendChild(name);
+
+
+    const subs=
+      document.createElement(
+        "div"
+      );
+
+    subs.style.color="#aaa";
+
+    subs.style.marginTop="5px";
+
+    subs.textContent=
+      c.subscribers || "";
+
+    div.appendChild(subs);
+
+
+    const actions=
+      document.createElement(
+        "div"
+      );
+
+    actions.className="actions";
+
+
+    if(i>0){
+
+      const up=
+        document.createElement(
+          "button"
+        );
+
+      up.className="move";
+
+      up.textContent="⬆ Up";
+
+      up.onclick=()=>{
+
+        moveCreator(
+          i,
+          i-1
+        );
+
+      };
+
+      actions.appendChild(up);
+
+    }
+
+
+    if(
+      i <
+      data.length-1
+    ){
+
+      const down=
+        document.createElement(
+          "button"
+        );
+
+      down.className="move";
+
+      down.textContent="⬇ Down";
+
+      down.onclick=()=>{
+
+        moveCreator(
+          i,
+          i+1
+        );
+
+      };
+
+      actions.appendChild(down);
+
+    }
+
+
+    const edit=
+      document.createElement(
+        "button"
+      );
+
+    edit.className="edit";
+
+    edit.textContent="✏️ Edit";
+
+    edit.onclick=()=>{
+
+      editCreator(c);
+
+    };
+
+    actions.appendChild(edit);
+
+
+    const del=
+      document.createElement(
+        "button"
+      );
+
+    del.className="delete";
+
+    del.textContent="🗑 Delete";
+
+    del.onclick=()=>{
+
+      deleteCreator(c.id);
+
+    };
+
+    actions.appendChild(del);
+
+
+    div.appendChild(actions);
 
     list.appendChild(div);
 
@@ -296,219 +1401,268 @@ async function loadPortfolio(){
 }
 
 
-/* ADD PORTFOLIO */
+async function saveCreator(){
 
-async function addPortfolio(){
-
-  const title =
-    document.getElementById("title")
-      .value.trim();
-
-  const image_url =
-    document.getElementById("image_url")
-      .value.trim();
-
-  const message =
-    document.getElementById("message");
+  const id=
+    getValue("creator_id");
 
 
-  if(!title || !image_url){
+  const payload={
 
-    message.textContent =
-      "Please enter title and image URL.";
+    name:
+      getValue(
+        "creator_name"
+      ),
+
+    subscribers:
+      getValue(
+        "creator_subscribers"
+      ),
+
+    image_url:
+      getValue(
+        "creator_image_url"
+      ),
+
+    youtube_url:
+      getValue(
+        "creator_youtube_url"
+      )
+
+  };
+
+
+  if(!payload.name){
+
+    message(
+      "creatorMsg",
+      "Enter creator name.",
+      true
+    );
 
     return;
+
   }
 
 
-  message.textContent =
-    "Adding thumbnail...";
+  if(id){
+
+    const {error}=
+      await supabaseClient
+        .from("creators")
+        .update(payload)
+        .eq("id",id);
 
 
-  /* FIND LAST ORDER */
+    if(error){
 
-  const { data: existing, error: orderError } =
-    await supabaseClient
-      .from("portfolio")
-      .select("display_order")
-      .order("display_order", {
-        ascending:false
-      })
-      .limit(1);
+      message(
+        "creatorMsg",
+        error.message,
+        true
+      );
+
+      return;
+
+    }
 
 
-  if(orderError){
+    message(
+      "creatorMsg",
+      "✅ Creator updated!"
+    );
 
-    message.textContent =
-      orderError.message;
-
-    return;
   }
 
+  else{
 
-  let nextOrder = 0;
+    const {data:existing}=
+      await supabaseClient
+        .from("creators")
+        .select(
+          "display_order"
+        )
+        .order(
+          "display_order",
+          {ascending:false}
+        )
+        .limit(1);
 
 
-  if(existing && existing.length > 0){
-
-    nextOrder =
+    const nextOrder=
+      existing &&
+      existing.length
+      ?
       Number(
         existing[0].display_order || 0
-      ) + 1;
+      )+1
+      :
+      0;
+
+
+    payload.display_order=
+      nextOrder;
+
+
+    const {error}=
+      await supabaseClient
+        .from("creators")
+        .insert(payload);
+
+
+    if(error){
+
+      message(
+        "creatorMsg",
+        error.message,
+        true
+      );
+
+      return;
+
+    }
+
+
+    message(
+      "creatorMsg",
+      "✅ Creator added!"
+    );
 
   }
 
 
-  /* INSERT */
+  clearCreator();
 
-  const { error } =
-    await supabaseClient
-      .from("portfolio")
-      .insert({
-
-        title:title,
-
-        image_url:image_url,
-
-        display_order:nextOrder
-
-      });
-
-
-  if(error){
-
-    message.textContent =
-      error.message;
-
-    return;
-  }
-
-
-  message.textContent =
-    "Thumbnail added successfully!";
-
-
-  document.getElementById("title").value = "";
-
-  document.getElementById("image_url").value = "";
-
-
-  loadPortfolio();
+  loadCreators();
 
 }
 
 
-/* MOVE THUMBNAIL */
+function editCreator(c){
 
-async function moveThumbnail(current,other){
+  setValue(
+    "creator_id",
+    c.id
+  );
 
-  const currentOrder =
-    current.display_order;
+  setValue(
+    "creator_name",
+    c.name
+  );
 
-  const otherOrder =
-    other.display_order;
+  setValue(
+    "creator_subscribers",
+    c.subscribers
+  );
 
+  setValue(
+    "creator_image_url",
+    c.image_url
+  );
 
-  /* CURRENT → OTHER POSITION */
-
-  const { error:error1 } =
-    await supabaseClient
-      .from("portfolio")
-      .update({
-
-        display_order:otherOrder
-
-      })
-      .eq("id",current.id);
-
-
-  if(error1){
-
-    alert(error1.message);
-
-    return;
-  }
+  setValue(
+    "creator_youtube_url",
+    c.youtube_url
+  );
 
 
-  /* OTHER → CURRENT POSITION */
+  window.scrollTo({
 
-  const { error:error2 } =
-    await supabaseClient
-      .from("portfolio")
-      .update({
+    top:
+      document
+        .getElementById(
+          "creator_name"
+        )
+        .getBoundingClientRect()
+        .top
+      +
+      window.scrollY
+      -
+      100,
 
-        display_order:currentOrder
+    behavior:"smooth"
 
-      })
-      .eq("id",other.id);
-
-
-  if(error2){
-
-    alert(error2.message);
-
-    return;
-  }
-
-
-  loadPortfolio();
+  });
 
 }
 
 
-/* DELETE */
+function clearCreator(){
 
-async function deletePortfolio(id){
+  setValue(
+    "creator_id",
+    ""
+  );
 
-  if(!confirm(
-    "Delete this thumbnail?"
-  )){
+  setValue(
+    "creator_name",
+    ""
+  );
 
+  setValue(
+    "creator_subscribers",
+    ""
+  );
+
+  setValue(
+    "creator_image_url",
+    ""
+  );
+
+  setValue(
+    "creator_youtube_url",
+    ""
+  );
+
+}
+
+
+async function deleteCreator(id){
+
+  if(
+    !confirm(
+      "Delete this creator?"
+    )
+  )
     return;
-  }
 
 
-  const { error } =
+  const {error}=
     await supabaseClient
-      .from("portfolio")
+      .from("creators")
       .delete()
       .eq("id",id);
 
 
   if(error){
 
-    alert(error.message);
+    message(
+      "creatorMsg",
+      error.message,
+      true
+    );
 
     return;
+
   }
 
 
-  loadPortfolio();
-
-}
-
-
-/* LOGOUT */
-
-async function logout(){
-
-  await supabaseClient.auth.signOut();
-
-  localStorage.removeItem(
-    "admin_session"
+  message(
+    "creatorMsg",
+    "✅ Creator deleted!"
   );
 
-  window.location.href =
-    "admin.html";
+
+  loadCreators();
 
 }
 
 
-/* START */
+async function moveCreator(
+  index,
+  targetIndex
+){
 
-loadPortfolio();
-
-</script>
-
-</body>
-</html>
+  const {data,error}=
+    await supabaseClient
+  
