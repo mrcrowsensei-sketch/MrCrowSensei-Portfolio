@@ -1,53 +1,4414 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mr CrowSensei — Admin Portfolio</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,Arial;background:#080808;color:#fff;overflow-x:hidden}a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}button{cursor:pointer}:root{--card:#111;--border:#292929;--muted:#888;--accent:#35e36b;--btn:#fff;--bt:#080808}.nav{position:sticky;top:8px;z-index:20;width:92%;max-width:1180px;margin:8px auto;padding:11px 14px;border:1px solid #292929;border-radius:18px;background:#0d0d0de8;backdrop-filter:blur(15px);display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:9px;font-weight:900}.brand img{width:35px;height:35px;border-radius:50%;object-fit:cover}.navright{display:flex;gap:8px;align-items:center}.btn,.edit,.mini{border:1px solid #333;background:#151515;color:#fff;border-radius:9px;padding:9px 12px;font-size:11px;font-weight:800}.primary{background:var(--btn);color:var(--bt)}.danger{color:#ff7777}.section{width:92%;max-width:1120px;margin:auto;padding:95px 0;position:relative}.edit{position:absolute;right:0;top:65px}.hero{text-align:center;min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center}.avail{border:1px solid #333;border-radius:999px;padding:9px 18px;font-size:12px;color:#ccc}.avail i{display:inline-block;width:7px;height:7px;background:var(--accent);border-radius:50%;margin-right:8px}.hero h1{font-size:clamp(58px,10vw,115px);line-height:.84;letter-spacing:-6px;margin:55px 0 45px}.hero h1 span{display:block}.hero-copy{font-size:21px;color:#aaa;line-height:1.55}.hero-copy strong{display:block;color:#fff}.hero-copy small{display:block;color:#777}.actions{display:flex;gap:10px;margin-top:38px}.stats{width:min(720px,95%);display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:75px}.stats strong{font-size:43px;display:block}.stats span{font-size:10px;color:#777;letter-spacing:1.4px}.head{display:flex;justify-content:space-between;align-items:end;margin-bottom:32px}.head h2{font-size:clamp(35px,5vw,58px);letter-spacing:-2px;margin-top:10px}.head em{font-style:normal}.head p{color:#666;font-size:12px}.eyebrow{font-size:10px;letter-spacing:2.3px;color:#999;font-weight:800}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--border);border-radius:17px;overflow:hidden}.card>img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;cursor:zoom-in}.info{padding:14px 16px}.tools{display:flex;gap:5px;padding:0 16px 15px}.about{border:1px solid var(--border);border-radius:24px;padding:48px;display:grid;grid-template-columns:320px 1fr;gap:50px;background:#111}.about img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:18px}.about h3{font-size:clamp(30px,5vw,54px);line-height:1.02;margin:14px 0}.about p{color:#888;line-height:1.7}.creators{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.creator{text-align:center}.avatar{width:140px;height:140px;border-radius:50%;overflow:hidden;border:2px solid #333;margin:auto;background:#171717}.avatar img{width:100%;height:100%;object-fit:cover}.creator h3{margin-top:13px;font-size:17px}.creator p{color:#777;font-size:11px;margin:6px 0}.creator b{font-size:12px}.faq{max-width:850px;margin:auto}.faqitem{width:100%;text-align:left;border:0;border-bottom:1px solid #292929;background:none;color:#fff;padding:21px 35px 21px 0;position:relative}.faqitem b{position:absolute;right:4px;color:#777;font-size:22px}.faqitem p{display:none;color:#777;font-size:13px;line-height:1.7;padding-top:12px}.faqitem.open p{display:block}.contact{border:1px solid #333;border-radius:35px;padding:85px 20px;text-align:center;background:radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808)}.contact h2{font-size:clamp(45px,8vw,88px);line-height:.9;letter-spacing:-4px}.contact p{color:#999;line-height:1.7;margin:35px auto}.links{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.adminbox{border:1px solid #292929;background:#101010;border-radius:20px;padding:24px}.themegrid,.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label{display:block;color:#888;font-size:11px;font-weight:700;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;background:#151515;border:1px solid #333;color:#fff;border-radius:9px;padding:10px;outline:0}.field textarea{min-height:110px}.full{grid-column:1/-1}.savebar{width:92%;max-width:1120px;margin:0 auto 70px;border:1px solid #333;border-radius:16px;background:#101010;padding:16px;display:flex;justify-content:space-between;align-items:center}.success{color:#65e88a;font-size:12px}.modal{position:fixed;inset:0;z-index:1000;background:#000c;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.box{width:min(720px,100%);max-height:90vh;overflow:auto;background:#101010;border:1px solid #333;border-radius:18px;padding:20px}.mhead{display:flex;justify-content:space-between;margin-bottom:18px}.close{border:0;background:#191919;color:#fff;border-radius:8px;width:34px;height:34px;font-size:20px}.mfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.preview{margin-top:9px;border:1px solid #333;border-radius:10px;overflow:hidden}.preview img{width:100%;max-height:230px;object-fit:contain;display:block}.deleteimg{margin-top:7px;color:#ff7777;border:1px solid #4a2222;background:#180c0c;border-radius:7px;padding:7px;font-size:10px}.viewer{position:fixed;inset:0;z-index:2000;background:#000e;display:none;align-items:center;justify-content:center;padding:20px}.viewer.show{display:flex}.viewer img{max-width:94vw;max-height:90vh;object-fit:contain;border-radius:12px}.vclose{position:absolute;right:20px;top:20px;background:#111;color:#fff;border:1px solid #444;border-radius:9px;width:40px;height:40px;font-size:22px}.loader{position:fixed;inset:0;z-index:9999;background:#050505;display:grid;place-items:center;transition:.7s}.loader.hide{opacity:0;visibility:hidden}.loaderbox{text-align:center;width:min(380px,80vw)}.loaderlogo{width:115px;height:115px;border-radius:50%;overflow:hidden;border:1px solid #555;margin:auto;box-shadow:0 0 55px #fff2;animation:pop 1.2s cubic-bezier(.2,1.4,.3,1)}.loaderlogo img{width:100%;height:100%;object-fit:cover}.loadername{font-weight:900;margin:19px 0}.line{height:4px;background:#222;border-radius:99px;overflow:hidden}.line span{display:block;height:100%;background:linear-gradient(90deg,#fff,#777,#fff);width:0;animation:line 1.6s ease forwards}@keyframes pop{0%{transform:scale(.2);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1)}}@keyframes line{to{width:100%}}footer{width:92%;max-width:1120px;margin:auto;border-top:1px solid #222;padding:28px 0 40px;color:#555;font-size:11px;display:flex;justify-content:space-between}@media(max-width:700px){.navright .view{display:none}.section{padding:75px 0}.edit{top:48px}.head{display:block}.head p{margin-top:10px}.grid{grid-template-columns:1fr}.about{grid-template-columns:1fr;padding:25px}.creators{grid-template-columns:1fr 1fr}.avatar{width:120px;height:120px}.themegrid,.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.savebar{flex-direction:column;align-items:stretch}.actions{flex-direction:column;width:min(320px,90vw)}footer{flex-direction:column;gap:8px}}
-</style></head><body>
-<div class="loader" id="loader"><div class="loaderbox"><div class="loaderlogo"><img src="images/logo.png"></div><div class="loadername">Mr CrowSensei</div><div class="line"><span></span></div></div></div>
-<header class="nav"><a class="brand" href="#home"><img id="navLogo" src="images/logo.png"><span id="navName">Mr CrowSensei</span></a><div class="navright"><a class="btn view" href="/" target="_blank">View Portfolio</a><button class="btn danger" onclick="logout()">Logout</button></div></header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mr CrowSensei — Admin Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:#080808;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+
+:root{
+  --card:#111111;
+  --border:#292929;
+  --muted:#888;
+  --accent:#35e36b;
+  --btn:#fff;
+  --bt:#080808;
+  --heading:#fff;
+  --text:#f7f8ff;
+}
+
+.nav{
+  position:sticky;
+  top:8px;
+  z-index:20;
+  width:92%;
+  max-width:1180px;
+  margin:8px auto;
+  padding:11px 14px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#0d0d0de8;
+  backdrop-filter:blur(15px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:900;
+}
+
+.brand img{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.navright{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.btn,.edit,.mini{
+  border:1px solid #333;
+  background:#151515;
+  color:#fff;
+  border-radius:9px;
+  padding:9px 12px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.primary{
+  background:var(--btn);
+  color:var(--bt);
+}
+
+.danger{color:#ff7777}
+
+.section{
+  width:92%;
+  max-width:1120px;
+  margin:auto;
+  padding:95px 0;
+  position:relative;
+}
+
+.edit{
+  position:absolute;
+  right:0;
+  top:65px;
+}
+
+.hero{
+  text-align:center;
+  min-height:88vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.avail{
+  border:1px solid #333;
+  border-radius:999px;
+  padding:9px 18px;
+  font-size:12px;
+  color:#ccc;
+}
+
+.avail i{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  background:var(--accent);
+  border-radius:50%;
+  margin-right:8px;
+}
+
+.hero h1{
+  font-size:clamp(58px,10vw,115px);
+  line-height:.84;
+  letter-spacing:-6px;
+  margin:55px 0 45px;
+  color:var(--heading);
+}
+
+.hero h1 span{display:block}
+
+.hero-copy{
+  font-size:21px;
+  color:var(--text);
+  line-height:1.55;
+}
+
+.hero-copy strong{
+  display:block;
+  color:var(--heading);
+}
+
+.hero-copy small{
+  display:block;
+  color:var(--muted);
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:38px;
+}
+
+.stats{
+  width:min(720px,95%);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:75px;
+  position:relative;
+}
+
+.stat{
+  position:relative;
+  padding:18px 8px;
+  border:1px solid transparent;
+  border-radius:14px;
+}
+
+.stat:hover{
+  border-color:#292929;
+  background:#0d0d0d;
+}
+
+.stat-edit{
+  position:absolute;
+  top:-5px;
+  right:0;
+  opacity:0;
+  transition:.2s;
+}
+
+.stat:hover .stat-edit{
+  opacity:1;
+}
+
+.stats strong{
+  font-size:43px;
+  display:block;
+}
+
+.stats span{
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:1.4px;
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:32px;
+}
+
+.head h2{
+  font-size:clamp(35px,5vw,58px);
+  letter-spacing:-2px;
+  margin-top:10px;
+  color:var(--heading);
+}
+
+.head em{
+  font-style:normal;
+}
+
+.head p{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.eyebrow{
+  font-size:10px;
+  letter-spacing:2.3px;
+  color:var(--muted);
+  font-weight:800;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  overflow:hidden;
+}
+
+.card>img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  display:block;
+  cursor:zoom-in;
+}
+
+.info{
+  padding:14px 16px;
+}
+
+.tools{
+  display:flex;
+  gap:5px;
+  padding:0 16px 15px;
+}
+
+.about{
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:48px;
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:50px;
+  background:var(--card);
+}
+
+.about img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+.about h3{
+  font-size:clamp(30px,5vw,54px);
+  line-height:1.02;
+  margin:14px 0;
+  color:var(--heading);
+}
+
+.about p{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.creators{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.creator{
+  text-align:center;
+}
+
+.avatar{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #333;
+  margin:auto;
+  background:#171717;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.creator h3{
+  margin-top:13px;
+  font-size:17px;
+}
+
+.creator p{
+  color:var(--muted);
+  font-size:11px;
+  margin:6px 0;
+}
+
+.creator b{
+  font-size:12px;
+}
+
+.faq{
+  max-width:850px;
+  margin:auto;
+}
+
+.faqitem{
+  width:100%;
+  text-align:left;
+  border:0;
+  border-bottom:1px solid #292929;
+  background:none;
+  color:#fff;
+  padding:21px 35px 21px 0;
+  position:relative;
+}
+
+.faqitem b{
+  position:absolute;
+  right:4px;
+  color:#777;
+  font-size:22px;
+}
+
+.faqitem p{
+  display:none;
+  color:#777;
+  font-size:13px;
+  line-height:1.7;
+  padding-top:12px;
+}
+
+.faqitem.open p{
+  display:block;
+}
+
+.contact{
+  border:1px solid #333;
+  border-radius:35px;
+  padding:85px 20px;
+  text-align:center;
+  background:radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808);
+}
+
+.contact h2{
+  font-size:clamp(45px,8vw,88px);
+  line-height:.9;
+  letter-spacing:-4px;
+}
+
+.contact p{
+  color:#999;
+  line-height:1.7;
+  margin:35px auto;
+}
+
+.links{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.custom-buttons{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(160px,260px));
+  justify-content:center;
+  gap:10px;
+  margin-top:12px;
+}
+
+.custom-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:48px;
+  border-radius:11px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.custom-button img{
+  width:20px;
+  height:20px;
+  object-fit:contain;
+  border-radius:5px;
+}
+
+.adminbox{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:20px;
+  padding:24px;
+}
+
+.themegrid,.formgrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.field label{
+  display:block;
+  color:#888;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  background:#151515;
+  border:1px solid #333;
+  color:#fff;
+  border-radius:9px;
+  padding:10px;
+  outline:0;
+}
+
+.field textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.savebar{
+  width:92%;
+  max-width:1120px;
+  margin:0 auto 70px;
+  border:1px solid #333;
+  border-radius:16px;
+  background:#101010;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.success{
+  color:#65e88a;
+  font-size:12px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:#000c;
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.box{
+  width:min(760px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:18px;
+  padding:20px;
+}
+
+.mhead{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.close{
+  border:0;
+  background:#191919;
+  color:#fff;
+  border-radius:8px;
+  width:34px;
+  height:34px;
+  font-size:20px;
+}
+
+.mfoot{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:18px;
+}
+
+.preview{
+  margin-top:9px;
+  border:1px solid #333;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.preview img{
+  width:100%;
+  max-height:230px;
+  object-fit:contain;
+  display:block;
+}
+
+.deleteimg{
+  margin-top:7px;
+  color:#ff7777;
+  border:1px solid #4a2222;
+  background:#180c0c;
+  border-radius:7px;
+  padding:7px;
+  font-size:10px;
+}
+
+.viewer{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:#000e;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.viewer.show{
+  display:flex;
+}
+
+.viewer img{
+  max-width:94vw;
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:12px;
+}
+
+.vclose{
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:#111;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:9px;
+  width:40px;
+  height:40px;
+  font-size:22px;
+}
+
+/* LOADING SCREEN */
+
+.loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#050505;
+  display:grid;
+  place-items:center;
+  transition:.8s;
+}
+
+.loader.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loaderbox{
+  text-align:center;
+  width:min(420px,82vw);
+}
+
+.loaderlogo{
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  overflow:hidden;
+  border:1px solid #555;
+  margin:auto;
+  box-shadow:0 0 55px #fff2;
+  animation:loaderPop 1.15s cubic-bezier(.2,1.4,.3,1);
+}
+
+.loaderlogo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.loadername{
+  font-weight:900;
+  font-size:18px;
+  margin:19px 0 23px;
+}
+
+.line{
+  height:4px;
+  width:100%;
+  background:#222;
+  border-radius:99px;
+  overflow:hidden;
+  position:relative;
+}
+
+.line span{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #fff 18%,
+    #777 50%,
+    #fff 82%,
+    transparent
+  );
+  box-shadow:0 0 18px #fff;
+  animation:loaderLine 1.7s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes loaderPop{
+  0%{
+    transform:scale(.15);
+    opacity:0;
+  }
+  60%{
+    transform:scale(1.16);
+    opacity:1;
+  }
+  100%{
+    transform:scale(1);
+  }
+}
+
+@keyframes loaderLine{
+  0%{
+    width:0;
+    margin-left:50%;
+  }
+  100%{
+    width:100%;
+    margin-left:0;
+  }
+}
+
+.last-section{
+  border-top:1px solid #222;
+  margin-top:20px;
+  padding-top:20px;
+}
+
+@media(max-width:700px){
+
+  .navright .view{
+    display:none;
+  }
+
+  .section{
+    padding:75px 0;
+  }
+
+  .edit{
+    top:48px;
+  }
+
+  .head{
+    display:block;
+  }
+
+  .head p{
+    margin-top:10px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .about{
+    grid-template-columns:1fr;
+    padding:25px;
+  }
+
+  .creators{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .avatar{
+    width:120px;
+    height:120px;
+  }
+
+  .themegrid,
+  .formgrid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .savebar{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+
+  .actions{
+    flex-direction:column;
+    width:min(320px,90vw);
+  }
+
+  .custom-buttons{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .stats{
+    gap:4px;
+  }
+
+  .stats strong{
+    font-size:30px;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADING SCREEN -->
+<div class="loader" id="loader">
+  <div class="loaderbox">
+    <div class="loaderlogo">
+      <img id="loadingLogo" src="images/logo.png">
+    </div>
+
+    <div class="loadername" id="loadingName">
+      Mr CrowSensei
+    </div>
+
+    <div class="line">
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="nav">
+
+  <a class="brand" href="#home">
+    <img id="navLogo" src="images/logo.png">
+    <span id="navName">Mr CrowSensei</span>
+  </a>
+
+  <div class="navright">
+    <a class="btn view" href="/" target="_blank">
+      View Portfolio
+    </a>
+
+    <button class="btn danger" onclick="logout()">
+      Logout
+    </button>
+  </div>
+
+</header>
+
 <main>
-<section class="section hero" id="home"><button class="edit" onclick="openEditor('hero')">✏️ Edit</button><div class="avail"><i></i><span id="avail">New Designs Available</span></div><h1 id="heroName"><span>Mr</span><span>CrowSensei</span></h1><div class="hero-copy"><strong id="heroTitle">Professional Minecraft Thumbnails</strong><small id="heroSub"></small><small id="crafted">Crafted for Creators</small></div><div class="actions"><a class="btn primary" href="#work">Browse Portfolio →</a><a class="btn" href="#contact">Let's Work</a></div><div class="stats"><div><strong id="st1">100+</strong><span>THUMBNAILS</span></div><div><strong id="st2">50+</strong><span>CREATORS</span></div><div><strong id="st3">2+</strong><span>YEARS DESIGNING</span></div></div></section>
-<section class="section" id="work"><button class="edit" onclick="openEditor('portfolio')">✏️ Edit</button><div class="head"><div><div class="eyebrow">● SELECTED WORK</div><h2>My latest <em>thumbnails.</em></h2></div><p>Manage your portfolio gallery.</p></div><div class="grid" id="portfolioGrid"></div><div style="text-align:center;margin-top:25px"><button class="btn primary" onclick="openEditor('portfolio')">＋ Add Thumbnail</button></div></section>
-<section class="section"><button class="edit" onclick="openEditor('about')">✏️ Edit</button><div class="head"><div><div class="eyebrow">● ABOUT ME</div><h2>The designer behind<br>the <em>thumbnails.</em></h2></div></div><div class="about"><img id="aboutImg" src="images/logo.png"><div><div class="eyebrow">MR CROWSENSEI</div><h3>Turning Minecraft ideas into <em>clickable visuals.</em></h3><p id="aboutText"></p></div></div></section>
-<section class="section"><button class="edit" onclick="openEditor('creator')">✏️ Edit</button><div class="head"><div><div class="eyebrow">● CLIENTS</div><h2>Trusted by <em>creators.</em></h2></div></div><p style="color:#777;text-align:center;margin:-10px auto 40px;max-width:650px">Creators who trust Mr CrowSensei for their Minecraft thumbnails.</p><div class="creators" id="creatorGrid"></div><div style="text-align:center;margin-top:25px"><button class="btn primary" onclick="openEditor('creator')">＋ Add Creator</button></div></section>
-<section class="section"><button class="edit" onclick="openEditor('faq')">✏️ Edit</button><div class="head"><div><div class="eyebrow">● FAQ</div><h2>Got <em>questions?</em></h2></div></div><div class="faq" id="faqList"></div><div style="text-align:center;margin-top:25px"><button class="btn primary" onclick="openEditor('faq')">＋ Add FAQ</button></div></section>
-<section class="section"><button class="edit" onclick="openEditor('contact')">✏️ Edit</button><div class="contact"><div class="eyebrow">CONTACT ME</div><h2 id="contactTitle">Ready for<br>Thumbnails<br>That Get<br>Clicked?</h2><p id="contactText"></p><div class="links"><a id="discord" class="btn primary" target="_blank">Discord</a><a id="twitter" class="btn" target="_blank">𝕏 Twitter / X</a></div></div></section>
-<section class="section"><button class="edit" onclick="openEditor('theme')">✏️ Edit</button><div class="head"><div><div class="eyebrow">● ADMIN</div><h2>Theme & <em>colors.</em></h2></div></div><div class="adminbox"><div class="themegrid" id="themePreview"></div></div></section>
-<section class="section"><button class="edit" onclick="openEditor('link')">✏️ Edit</button><div class="head"><div><div class="eyebrow">● LINK PREVIEW</div><h2>Link <em>Preview.</em></h2></div><p>Social preview settings.</p></div><div class="adminbox"><div class="formgrid"><div class="field"><label>Title</label><input id="ogtv" readonly></div><div class="field"><label>Description</label><input id="ogdv" readonly></div></div><div id="ogiv" class="preview" style="margin-top:14px"></div></div></section>
+
+<!-- HERO -->
+<section class="section hero" id="home">
+
+  <button class="edit" onclick="openEditor('hero')">
+    ✏️ Edit
+  </button>
+
+  <div class="avail">
+    <i></i>
+    <span id="avail">New Designs Available</span>
+  </div>
+
+  <h1 id="heroName">
+    <span>Mr</span>
+    <span>CrowSensei</span>
+  </h1>
+
+  <div class="hero-copy">
+
+    <strong id="heroTitle">
+      Professional Minecraft Thumbnails
+    </strong>
+
+    <small id="heroSub"></small>
+
+    <small id="crafted">
+      Crafted for Creators
+    </small>
+
+  </div>
+
+  <div class="actions">
+
+    <a class="btn primary" href="#work">
+      Browse Portfolio →
+    </a>
+
+    <a class="btn" href="#contact">
+      Let's Work
+    </a>
+
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+
+    <div class="stat">
+
+      <button
+        class="mini stat-edit"
+        onclick="openEditor('stats')"
+      >
+        ✏️
+      </button>
+
+      <strong id="st1">100+</strong>
+      <span>THUMBNAILS</span>
+
+    </div>
+
+    <div class="stat">
+
+      <button
+        class="mini stat-edit"
+        onclick="openEditor('stats')"
+      >
+        ✏️
+      </button>
+
+      <strong id="st2">50+</strong>
+      <span>CREATORS</span>
+
+    </div>
+
+    <div class="stat">
+
+      <button
+        class="mini stat-edit"
+        onclick="openEditor('stats')"
+      >
+        ✏️
+      </button>
+
+      <strong id="st3">2+</strong>
+      <span>YEARS DESIGNING</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" id="work">
+
+  <button class="edit" onclick="openEditor('portfolio')">
+    ✏️ Edit
+  </button>
+
+  <div class="head">
+
+    <div>
+      <div class="eyebrow">
+        ● SELECTED WORK
+      </div>
+
+      <h2>
+        My latest <em>thumbnails.</em>
+      </h2>
+    </div>
+
+    <p>
+      Manage your portfolio gallery.
+    </p>
+
+  </div>
+
+  <div class="grid" id="portfolioGrid"></div>
+
+  <div style="text-align:center;margin-top:25px">
+
+    <button
+      class="btn primary"
+      onclick="openEditor('portfolio')"
+    >
+      ＋ Add Thumbnail
+    </button>
+
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+
+  <button class="edit" onclick="openEditor('about')">
+    ✏️ Edit
+  </button>
+
+  <div class="head">
+
+    <div>
+      <div class="eyebrow">
+        ● ABOUT ME
+      </div>
+
+      <h2>
+        <span id="aboutHeading">
+          The designer behind
+        </span>
+        <br>
+        the <em>thumbnails.</em>
+      </h2>
+    </div>
+
+  </div>
+
+  <div class="about">
+
+    <img id="aboutImg" src="images/logo.png">
+
+    <div>
+
+      <div class="eyebrow">
+        MR CROWSENSEI
+      </div>
+
+      <h3 id="aboutSubheading">
+        Turning Minecraft ideas into
+        <em>clickable visuals.</em>
+      </h3>
+
+      <p id="aboutText"></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CREATORS -->
+<section class="section">
+
+  <button class="edit" onclick="openEditor('creator')">
+    ✏️ Edit
+  </button>
+
+  <div class="head">
+
+    <div>
+      <div class="eyebrow">
+        ● CLIENTS
+      </div>
+
+      <h2>
+        Trusted by <em>creators.</em>
+      </h2>
+    </div>
+
+  </div>
+
+  <p
+    style="
+      color:#777;
+      text-align:center;
+      margin:-10px auto 40px;
+      max-width:650px
+    "
+  >
+    Creators who trust Mr CrowSensei for their Minecraft thumbnails.
+  </p>
+
+  <div class="creators" id="creatorGrid"></div>
+
+  <div style="text-align:center;margin-top:25px">
+
+    <button
+      class="btn primary"
+      onclick="openEditor('creator')"
+    >
+      ＋ Add Creator
+    </button>
+
+  </div>
+
+</section>
+
+<!-- FAQ -->
+<section class="section">
+
+  <button class="edit" onclick="openEditor('faq')">
+    ✏️ Edit
+  </button>
+
+  <div class="head">
+
+    <div>
+      <div class="eyebrow">
+        ● FAQ
+      </div>
+
+      <h2>
+        Got <em>questions?</em>
+      </h2>
+    </div>
+
+  </div>
+
+  <div class="faq" id="faqList"></div>
+
+  <div style="text-align:center;margin-top:25px">
+
+    <button
+      class="btn primary"
+      onclick="openEditor('faq')"
+    >
+      ＋ Add FAQ
+    </button>
+
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+
+  <button class="edit" onclick="openEditor('contact')">
+    ✏️ Edit
+  </button>
+
+  <div class="contact">
+
+    <div class="eyebrow">
+      CONTACT ME
+    </div>
+
+    <h2 id="contactTitle">
+      Ready for<br>
+      Thumbnails<br>
+      That Get<br>
+      Clicked?
+    </h2>
+
+    <p id="contactText"></p>
+
+    <div class="links">
+
+      <a
+        id="discord"
+        class="btn primary"
+        target="_blank"
+      >
+        Discord
+      </a>
+
+      <a
+        id="twitter"
+        class="btn"
+        target="_blank"
+      >
+        𝕏 Twitter / X
+      </a>
+
+    </div>
+
+    <div
+      id="customButtons"
+      class="custom-buttons"
+    ></div>
+
+  </div>
+
+</section>
+
+<!-- THEME -->
+<section class="section">
+
+  <button class="edit" onclick="openEditor('theme')">
+    ✏️ Edit
+  </button>
+
+  <div class="head">
+
+    <div>
+      <div class="eyebrow">
+        ● ADMIN
+      </div>
+
+      <h2>
+        Theme & <em>colors.</em>
+      </h2>
+    </div>
+
+  </div>
+
+  <div class="adminbox">
+
+    <div
+      class="themegrid"
+      id="themePreview"
+    ></div>
+
+  </div>
+
+</section>
+
+<!-- LINK PREVIEW -->
+<section class="section">
+
+  <button class="edit" onclick="openEditor('link')">
+    ✏️ Edit
+  </button>
+
+  <div class="head">
+
+    <div>
+      <div class="eyebrow">
+        ● LINK PREVIEW
+      </div>
+
+      <h2>
+        Link <em>Preview.</em>
+      </h2>
+    </div>
+
+    <p>
+      Social preview settings.
+    </p>
+
+  </div>
+
+  <div class="adminbox">
+
+    <div class="formgrid">
+
+      <div class="field">
+        <label>Title</label>
+        <input id="ogtv" readonly>
+      </div>
+
+      <div class="field">
+        <label>Description</label>
+        <input id="ogdv" readonly>
+      </div>
+
+    </div>
+
+    <div
+      id="ogiv"
+      class="preview"
+      style="margin-top:14px"
+    ></div>
+
+  </div>
+
+</section>
+
+<!-- LAST: HEADER + LOADING SCREEN -->
+<section class="section last-section">
+
+  <button
+    class="edit"
+    onclick="openEditor('branding')"
+  >
+    ✏️ Edit
+  </button>
+
+  <div class="head">
+
+    <div>
+      <div class="eyebrow">
+        ● BRANDING
+      </div>
+
+      <h2>
+        Logo & <em>Loading Screen.</em>
+      </h2>
+    </div>
+
+    <p>
+      Change your logo and loading text.
+    </p>
+
+  </div>
+
+  <div class="adminbox">
+
+    <div class="formgrid">
+
+      <div class="field">
+        <label>Header / Navbar Name</label>
+        <input id="brandPreviewName" readonly>
+      </div>
+
+      <div class="field">
+        <label>Loading Screen Name</label>
+        <input id="loadingPreviewName" readonly>
+      </div>
+
+      <div class="field full">
+
+        <label>
+          Current Logo
+        </label>
+
+        <div
+          class="preview"
+          id="brandPreviewImage"
+          style="max-width:220px"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
 </main>
-<div class="savebar"><span id="status" class="success"></span><button class="btn primary" onclick="saveAll()">💾 Save All Changes</button></div>
-<footer><span>© 2026 Mr CrowSensei</span><span>Admin Portfolio</span></footer>
-<div class="modal" id="modal"><div class="box"><div class="mhead"><h3 id="mtitle">Edit</h3><button class="close" onclick="closeEditor()">×</button></div><div id="mbody"></div><div class="mfoot"><button class="btn" onclick="closeEditor()">Cancel</button><button class="btn primary" onclick="saveModal()">Save</button></div></div></div>
-<div class="viewer" id="viewer" onclick="if(event.target===this)closeViewer()"><button class="vclose" onclick="closeViewer()">×</button><img id="vimg"></div>
+
+<!-- SAVE ALL -->
+<div class="savebar">
+
+  <span
+    id="status"
+    class="success"
+  ></span>
+
+  <button
+    class="btn primary"
+    onclick="saveAll()"
+  >
+    💾 Save All Changes
+  </button>
+
+</div>
+
+<footer>
+
+  <span>
+    © 2026 Mr CrowSensei
+  </span>
+
+  <span>
+    Admin Portfolio
+  </span>
+
+</footer>
+
+<!-- MODAL -->
+<div
+  class="modal"
+  id="modal"
+>
+
+  <div class="box">
+
+    <div class="mhead">
+
+      <h3 id="mtitle">
+        Edit
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeEditor()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div id="mbody"></div>
+
+    <div class="mfoot">
+
+      <button
+        class="btn"
+        onclick="closeEditor()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="saveModal()"
+      >
+        Save
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- IMAGE VIEWER -->
+<div
+  class="viewer"
+  id="viewer"
+  onclick="if(event.target===this)closeViewer()"
+>
+
+  <button
+    class="vclose"
+    onclick="closeViewer()"
+  >
+    ×
+  </button>
+
+  <img id="vimg">
+
+</div>
 
 <script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
 const SUPABASE_URL="https://ozjugaedukcztmywtexk.supabase.co";
 const SUPABASE_KEY="sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const YOUTUBE_META_ENDPOINT="";
-const D={id:1,header_name:"Mr CrowSensei",logo_url:"",new_design_text:"New Designs Available",hero_title:"Professional Minecraft Thumbnails",hero_subtitle:"",crafted_text:"Crafted for Creators",stats_thumbnails:"100+",stats_creators:"50+",stats_years:"2+",about_text:"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",about_image_url:"",discord_url:"https://discord.com/users/1492187397058855163",twitter_url:"https://x.com/MrCrowSensei",contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",contact_text:"Send your video idea and deadline.\nI'll reply with availability and the next steps.",bg_color:"#080808",bg_gradient_1:"#151515",bg_gradient_2:"#080808",bg_gradient_direction:"135deg",primary_color:"#ffffff",heading_color:"#ffffff",text_color:"#f7f8ff",muted_color:"#85858a",card_color:"#111111",border_color:"#292929",button_color:"#ffffff",button_text_color:"#080808",accent_color:"#35e36b",og_title:"Mr CrowSensei — Thumbnail Designer",og_description:"Mr CrowSensei — Professional Minecraft Thumbnail Designer",og_image_url:""};
-let S={...D},P=[],C=[],F=[],type="",mid=null,file=null,del=false,creatorMeta=null;
+
+const sb=supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =====================================================
+   DEFAULT SETTINGS
+===================================================== */
+
+const D={
+
+  id:1,
+
+  header_name:"Mr CrowSensei",
+
+  logo_url:"",
+
+  loading_name:"Mr CrowSensei",
+
+  loading_logo_url:"",
+
+  new_design_text:"New Designs Available",
+
+  hero_title:"Professional Minecraft Thumbnails",
+
+  hero_subtitle:"",
+
+  crafted_text:"Crafted for Creators",
+
+  stats_thumbnails:"100+",
+
+  stats_creators:"50+",
+
+  stats_years:"2+",
+
+  about_heading:"The designer behind",
+
+  about_subheading:
+    "Turning Minecraft ideas into clickable visuals.",
+
+  about_text:
+    "I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",
+
+  about_image_url:"",
+
+  discord_url:
+    "https://discord.com/users/1492187397058855163",
+
+  twitter_url:
+    "https://x.com/MrCrowSensei",
+
+  contact_title:
+    "Ready for\nThumbnails\nThat Get\nClicked?",
+
+  contact_text:
+    "Send your video idea and deadline.\nI'll reply with availability and the next steps.",
+
+  custom_buttons:[],
+
+  bg_color:"#080808",
+
+  bg_gradient_1:"#151515",
+
+  bg_gradient_2:"#080808",
+
+  bg_gradient_direction:"135deg",
+
+  primary_color:"#ffffff",
+
+  heading_color:"#ffffff",
+
+  text_color:"#f7f8ff",
+
+  muted_color:"#85858a",
+
+  card_color:"#111111",
+
+  border_color:"#292929",
+
+  button_color:"#ffffff",
+
+  button_text_color:"#080808",
+
+  accent_color:"#35e36b",
+
+  og_title:
+    "Mr CrowSensei — Thumbnail Designer",
+
+  og_description:
+    "Mr CrowSensei — Professional Minecraft Thumbnail Designer",
+
+  og_image_url:""
+
+};
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let S={...D};
+
+let P=[];
+
+let C=[];
+
+let F=[];
+
+let type="";
+
+let mid=null;
+
+let file=null;
+
+let del=false;
+
+let creatorMeta=null;
+
+
+/* =====================================================
+   SHORTCUT
+===================================================== */
+
 const $=x=>document.getElementById(x);
-function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function msg(t="✓ All changes saved successfully!",bad=false){$("status").textContent=t;$("status").style.color=bad?"#ff7777":"#65e88a";setTimeout(()=>{$("status").textContent=""},3500)}
-function render(){ $("navName").textContent=S.header_name;$("navLogo").src=S.logo_url||"images/logo.png";$("avail").textContent=S.new_design_text;let a=S.header_name.trim().split(/\s+/),x=a.shift()||"",y=a.join(" ");$("heroName").innerHTML=`<span>${esc(x)}</span><span>${esc(y)}</span>`;$("heroTitle").textContent=S.hero_title;$("heroSub").textContent=S.hero_subtitle;$("crafted").textContent=S.crafted_text;$("st1").textContent=S.stats_thumbnails;$("st2").textContent=S.stats_creators;$("st3").textContent=S.stats_years;$("aboutText").textContent=S.about_text;$("aboutImg").src=S.about_image_url||"images/logo.png";$("contactTitle").innerHTML=esc(S.contact_title).replace(/\n/g,"<br>");$("contactText").innerHTML=esc(S.contact_text).replace(/\n/g,"<br>");$("discord").href=S.discord_url||"#";$("twitter").href=S.twitter_url||"#";$("ogtv").value=S.og_title;$("ogdv").value=S.og_description;$("ogiv").innerHTML=S.og_image_url?`<img src="${esc(S.og_image_url)}">`:`<div style="padding:30px;text-align:center;color:#666">No preview image selected.</div>`;renderP();renderC();renderF();theme();apply()}
-function renderP(){let g=$("portfolioGrid");if(!P.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#666;padding:40px">No thumbnails yet.</div>';return}g.innerHTML=P.map((x,i)=>`<article class=card><img src="${esc(x.image_url)}" onclick="view('${esc(x.image_url)}')"><div class=info><b>${esc(x.title||"Minecraft Thumbnail")}</b></div><div class=tools><button class=mini onclick="openEditor('portfolio',${x.id})">✏️</button><button class=mini onclick="move('portfolio',${i},-1)">↑</button><button class=mini onclick="move('portfolio',${i},1)">↓</button><button class=mini onclick="delRow('portfolio',${x.id})">🗑</button></div></article>`).join("")}
-function renderC(){let g=$("creatorGrid");if(!C.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#666">No creators added yet.</div>';return}g.innerHTML=C.map((x,i)=>`<article class=creator><a href="${esc(x.youtube_url)}" target="_blank"><div class=avatar><img src="${esc(x.image_url||"images/logo.png")}"></div><h3>${esc(x.name||"Creator")}</h3><p>${esc(x.youtube_url)}</p><b>${esc(x.subscribers||"Subscribers unavailable")}</b></a><div style="margin-top:10px"><button class=mini onclick="openEditor('creator',${x.id})">✏️</button> <button class=mini onclick="move('creators',${i},-1)">↑</button> <button class=mini onclick="move('creators',${i},1)">↓</button> <button class=mini onclick="delRow('creators',${x.id})">🗑</button></div></article>`).join("")}
-function renderF(){let g=$("faqList");if(!F.length){g.innerHTML='<div style="text-align:center;color:#666;padding:30px">No FAQ items yet.</div>';return}g.innerHTML=F.map((x,i)=>`<button class=faqitem onclick="this.classList.toggle('open')"><span>${esc(x.question)}</span><b>+</b><p>${esc(x.answer)}</p><small onclick="event.stopPropagation()" style="display:block;margin-top:10px;color:#555"><button class=mini onclick="openEditor('faq',${x.id});event.stopPropagation()">✏️ Edit</button> <button class=mini onclick="move('faq',${i},-1);event.stopPropagation()">↑</button> <button class=mini onclick="move('faq',${i},1);event.stopPropagation()">↓</button> <button class=mini onclick="delRow('faq',${x.id});event.stopPropagation()">🗑</button></small></button>`).join("")}
-function theme(){let z=[["Background",S.bg_color],["Gradient 1",S.bg_gradient_1],["Gradient 2",S.bg_gradient_2],["Primary",S.primary_color],["Heading",S.heading_color],["Text",S.text_color],["Muted",S.muted_color],["Card",S.card_color],["Border",S.border_color],["Button",S.button_color],["Button Text",S.button_text_color],["Accent",S.accent_color]];$("themePreview").innerHTML=z.map(x=>`<div style="border:1px solid #292929;border-radius:9px;padding:9px;background:#111"><div style="height:23px;border-radius:5px;background:${esc(x[1])}"></div><small style="display:block;color:#777;margin-top:6px">${esc(x[0])}: ${esc(x[1])}</small></div>`).join("")}
-function apply(){document.documentElement.style.setProperty("--card",S.card_color);document.documentElement.style.setProperty("--border",S.border_color);document.documentElement.style.setProperty("--accent",S.accent_color);document.documentElement.style.setProperty("--btn",S.button_color);document.documentElement.style.setProperty("--bt",S.button_text_color);document.body.style.background=`linear-gradient(${S.bg_gradient_direction},${S.bg_gradient_1},${S.bg_gradient_2})`}
-async function load(){let s=await sb.from("site_settings").select("*").eq("id",1).maybeSingle();if(s.data)S={...D,...s.data};else{let r=await sb.from("site_settings").insert(D);if(r.error)msg(r.error.message,true)}let p=await sb.from("portfolio").select("*").order("display_order").order("id");P=p.data||[];let c=await sb.from("creators").select("*").order("display_order").order("id");C=c.data||[];let f=await sb.from("faq").select("*").order("display_order").order("id");F=f.data||[];render();setTimeout(()=>$("loader").classList.add("hide"),700)}
-async function patch(x){let r=await sb.from("site_settings").update(x).eq("id",1);if(r.error)throw r.error;S={...S,...x};render()}
-async function upload(f,folder){if(!f)return null;let ext=(f.name.split(".").pop()||"png").toLowerCase(),path=`admin/${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;let r=await sb.storage.from("portfolio-images").upload(path,f,{contentType:f.type||"image/png"});if(r.error)throw r.error;return sb.storage.from("portfolio-images").getPublicUrl(path).data.publicUrl}
-function imageInput(id,label,url,canDelete=false){return `<div class="field full"><label>${label}</label><input id="${id}" type=file accept="image/*" onchange="pick(this,'${id}p')"><div id="${id}p">${url?`<div class=preview><img src="${esc(url)}"></div>`:""}</div>${canDelete?`<button class=deleteimg onclick="del=true;document.getElementById('${id}p').innerHTML=''">🗑 Delete Image</button>`:""}</div>`}
-function pick(i,t){file=i.files[0]||null;if(file)$(t).innerHTML=`<div class=preview><img src="${URL.createObjectURL(file)}"></div>`}
-function openEditor(t,id=null){type=t;mid=id;file=null;del=false;creatorMeta=null;let h="",b="";if(t==="hero"){h="Edit Hero";b=`<div class=formgrid><div class=field><label>Availability</label><input id=availx value="${esc(S.new_design_text)}"></div><div class=field><label>Name</label><input id=namex value="${esc(S.header_name)}"></div><div class=field><label>Hero Title</label><input id=ht value="${esc(S.hero_title)}"></div><div class=field><label>Hero Subtitle</label><input id=hs value="${esc(S.hero_subtitle)}"></div><div class=field><label>Crafted Text</label><input id=hc value="${esc(S.crafted_text)}"></div>${imageInput("logo","Logo / Header Image",S.logo_url)}</div>`}else if(t==="about"){h="Edit About";b=`<div class=formgrid><div class="field full"><label>About Text</label><textarea id=at>${esc(S.about_text)}</textarea></div>${imageInput("about","About Image",S.about_image_url)}</div>`}else if(t==="contact"){h="Edit Contact";b=`<div class=formgrid><div class="field full"><label>Heading</label><textarea id=ct>${esc(S.contact_title)}</textarea></div><div class="field full"><label>Text</label><textarea id=cx>${esc(S.contact_text)}</textarea></div><div class=field><label>Discord</label><input id=dc value="${esc(S.discord_url)}"></div><div class=field><label>Twitter / X</label><input id=tw value="${esc(S.twitter_url)}"></div></div>`}else if(t==="theme"){h="Edit Theme & Colors";let z=[["bg","bg_color"],["g1","bg_gradient_1"],["g2","bg_gradient_2"],["pr","primary_color"],["hd","heading_color"],["tx","text_color"],["mu","muted_color"],["ca","card_color"],["bo","border_color"],["bu","button_color"],["bt","button_text_color"],["ac","accent_color"]];b=`<div class=themegrid>${z.map(x=>`<div class=field><label>${x[0]}</label><input id=${x[0]} type=color value="${S[x[1]]}"></div>`).join("")}</div><div class=field style="margin-top:12px"><label>Gradient Direction</label><select id=gd><option>135deg</option><option>90deg</option><option>180deg</option><option>45deg</option></select></div>`}else if(t==="link"){h="Link Preview";b=`<div class=formgrid><div class="field full"><label>Title</label><input id=ot value="${esc(S.og_title)}"></div><div class="field full"><label>Description</label><textarea id=od>${esc(S.og_description)}</textarea></div>${imageInput("og","Preview Image",S.og_image_url,true)}</div>`}else if(t==="portfolio"){let x=mid?P.find(a=>a.id===mid):null;h=x?"Edit Thumbnail":"Add Thumbnail";b=`<div class=formgrid><div class="field full"><label>Title</label><input id=pt value="${esc(x?.title||"")}"></div>${imageInput("pi","Thumbnail Image",x?.image_url||"")}</div>`}else if(t==="creator"){let x=mid?C.find(a=>a.id===mid):null;h=x?"Edit Creator":"Add Creator";b=`<div class="field"><label>YouTube Channel URL only</label><input id=yu value="${esc(x?.youtube_url||"")}" placeholder="https://youtube.com/@channel"><button class=btn style="margin-top:8px" onclick="fetchCreator()">Fetch Creator</button></div><div id=crmsg style="color:#777;font-size:12px;margin-top:13px">${x?`Current: ${esc(x.name)} — ${esc(x.subscribers||"Subscribers unavailable")}`:"Enter the channel URL and tap Fetch Creator."}</div>`}else if(t==="faq"){let x=mid?F.find(a=>a.id===mid):null;h=x?"Edit FAQ":"Add FAQ";b=`<div class=formgrid><div class="field full"><label>Question</label><input id=fq value="${esc(x?.question||"")}"></div><div class="field full"><label>Answer</label><textarea id=fa>${esc(x?.answer||"")}</textarea></div></div>`}$("mtitle").textContent=h;$("mbody").innerHTML=b;$("modal").classList.add("show")}
-function closeEditor(){$("modal").classList.remove("show")}
-async function saveModal(){try{if(type==="hero"){let logo=S.logo_url;if(file)logo=await upload(file,"logo");await patch({header_name:namex.value.trim(),logo_url:logo,new_design_text:availx.value.trim(),hero_title:ht.value.trim(),hero_subtitle:hs.value.trim(),crafted_text:hc.value.trim()})}else if(type==="about"){let im=S.about_image_url;if(file)im=await upload(file,"about");await patch({about_text:at.value.trim(),about_image_url:im})}else if(type==="contact")await patch({contact_title:ct.value,contact_text:cx.value,discord_url:dc.value.trim(),twitter_url:tw.value.trim()});else if(type==="theme"){await patch({bg_color:bg.value,bg_gradient_1:g1.value,bg_gradient_2:g2.value,primary_color:pr.value,heading_color:hd.value,text_color:tx.value,muted_color:mu.value,card_color:ca.value,border_color:bo.value,button_color:bu.value,button_text_color:bt.value,accent_color:ac.value,bg_gradient_direction:gd.value})}else if(type==="link"){let im=S.og_image_url;if(del)im="";if(file)im=await upload(file,"link-preview");await patch({og_title:ot.value.trim(),og_description:od.value.trim(),og_image_url:im})}else if(type==="portfolio"){let x=mid?P.find(a=>a.id===mid):null,im=x?.image_url||"";if(file)im=await upload(file,"portfolio");if(!im)throw Error("Please choose a thumbnail image.");let r=x?await sb.from("portfolio").update({title:pt.value.trim(),image_url:im}).eq("id",x.id):await sb.from("portfolio").insert({title:pt.value.trim()||"Minecraft Thumbnail",image_url:im,display_order:P.length});if(r.error)throw r.error;let q=await sb.from("portfolio").select("*").order("display_order").order("id");P=q.data||[];render()}else if(type==="creator"){let u=yu.value.trim();if(!/^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(u))throw Error("Enter a valid YouTube URL.");let m=creatorMeta||await creatorData(u);let payload={youtube_url:u,name:m.name||"Creator",image_url:m.image_url||"images/logo.png",subscribers:m.subscribers||"Subscribers unavailable"};let r=mid?await sb.from("creators").update(payload).eq("id",mid):await sb.from("creators").insert({...payload,display_order:C.length});if(r.error)throw r.error;let q=await sb.from("creators").select("*").order("display_order").order("id");C=q.data||[];render()}else if(type==="faq"){let payload={question:fq.value.trim(),answer:fa.value.trim()};if(!payload.question)throw Error("Question is required.");let r=mid?await sb.from("faq").update(payload).eq("id",mid):await sb.from("faq").insert({...payload,display_order:F.length});if(r.error)throw r.error;let q=await sb.from("faq").select("*").order("display_order").order("id");F=q.data||[];render()}closeEditor();msg("✓ Changes saved successfully!")}catch(e){msg(e.message,true)}}
-async function creatorData(u){let key="ytcache:"+u;try{let c=JSON.parse(localStorage.getItem(key)||"null");if(c&&Date.now()-c.time<86400000)return c.data}catch(e){}try{let r=await fetch("https://www.youtube.com/oembed?url="+encodeURIComponent(u)+"&format=json");if(r.ok){let j=await r.json(),d={name:j.author_name||"",image_url:j.thumbnail_url||"",subscribers:"Subscribers unavailable"};localStorage.setItem(key,JSON.stringify({time:Date.now(),data:d}));return d}}catch(e){}throw Error("Automatic channel subscribers need a YouTube backend/API. The HTML does not expose any secret key.")}
-async function fetchCreator(){try{creatorMeta=await creatorData(yu.value.trim());$("crmsg").innerHTML=`<b style="color:#fff">${esc(creatorMeta.name)}</b><br>${esc(creatorMeta.subscribers)}`}catch(e){$("crmsg").textContent=e.message}}
-async function move(kind,i,d){let a=kind==="portfolio"?P:kind==="creators"?C:F,n=i+d;if(n<0||n>=a.length)return;let b=[...a];[b[i],b[n]]=[b[n],b[i]];let table=kind==="portfolio"?"portfolio":kind;for(let j=0;j<b.length;j++){let r=await sb.from(table).update({display_order:j}).eq("id",b[j].id);if(r.error)return msg(r.error.message,true)}if(kind==="portfolio")P=b;else if(kind==="creators")C=b;else F=b;render();msg("✓ Order updated!")}
-async function delRow(kind,id){if(!confirm("Delete this item?"))return;let table=kind==="portfolio"?"portfolio":kind,r=await sb.from(table).delete().eq("id",id);if(r.error)return msg(r.error.message,true);if(kind==="portfolio")P=P.filter(x=>x.id!==id);else if(kind==="creators")C=C.filter(x=>x.id!==id);else F=F.filter(x=>x.id!==id);let a=kind==="portfolio"?P:kind==="creators"?C:F;for(let i=0;i<a.length;i++)await sb.from(table).update({display_order:i}).eq("id",a[i].id);render();msg("✓ Deleted successfully!")}
-function view(u){$("vimg").src=u;$("viewer").classList.add("show")}function closeViewer(){$("viewer").classList.remove("show")}
-async function saveAll(){let r=await sb.from("site_settings").update(S).eq("id",1);if(r.error)msg(r.error.message,true);else msg()}
-async function logout(){await sb.auth.signOut();location.href="admin.html"}
-async function start(){let r=await sb.auth.getSession();if(!r.data.session){location.href="admin.html";return}await load()}sb.auth.onAuthStateChange(e=>{if(e==="SIGNED_OUT")location.href="admin.html"});document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeEditor();closeViewer()}});start();
-</script></body></html>
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function esc(v){
+
+  return String(v??"").replace(
+    /[&<>"']/g,
+    m=>({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function msg(
+  t="✓ All changes saved successfully!",
+  bad=false
+){
+
+  $("status").textContent=t;
+
+  $("status").style.color=
+    bad ? "#ff7777" : "#65e88a";
+
+  setTimeout(()=>{
+    $("status").textContent="";
+  },3500);
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function render(){
+
+  $("navName").textContent=S.header_name;
+
+  $("navLogo").src=
+    S.logo_url || "images/logo.png";
+
+
+  $("loadingName").textContent=
+    S.loading_name || S.header_name;
+
+  $("loadingLogo").src=
+    S.loading_logo_url ||
+    S.logo_url ||
+    "images/logo.png";
+
+
+  $("brandPreviewName").value=
+    S.header_name;
+
+  $("loadingPreviewName").value=
+    S.loading_name ||
+    S.header_name;
+
+
+  $("brandPreviewImage").innerHTML=`
+    <img
+      src="${esc(
+        S.logo_url ||
+        S.loading_logo_url ||
+        "images/logo.png"
+      )}"
+    >
+  `;
+
+
+  $("avail").textContent=
+    S.new_design_text;
+
+
+  let a=
+    S.header_name
+      .trim()
+      .split(/\s+/);
+
+  let x=a.shift()||"";
+
+  let y=a.join(" ");
+
+
+  $("heroName").innerHTML=`
+    <span>${esc(x)}</span>
+    <span>${esc(y)}</span>
+  `;
+
+
+  $("heroTitle").textContent=
+    S.hero_title;
+
+  $("heroSub").textContent=
+    S.hero_subtitle;
+
+  $("crafted").textContent=
+    S.crafted_text;
+
+
+  $("st1").textContent=
+    S.stats_thumbnails;
+
+  $("st2").textContent=
+    S.stats_creators;
+
+  $("st3").textContent=
+    S.stats_years;
+
+
+  $("aboutHeading").textContent=
+    S.about_heading;
+
+  $("aboutSubheading").textContent=
+    S.about_subheading;
+
+  $("aboutText").textContent=
+    S.about_text;
+
+  $("aboutImg").src=
+    S.about_image_url ||
+    "images/logo.png";
+
+
+  $("contactTitle").innerHTML=
+    esc(S.contact_title)
+      .replace(/\n/g,"<br>");
+
+  $("contactText").innerHTML=
+    esc(S.contact_text)
+      .replace(/\n/g,"<br>");
+
+
+  $("discord").href=
+    S.discord_url || "#";
+
+  $("twitter").href=
+    S.twitter_url || "#";
+
+
+  renderCustomButtons();
+
+
+  $("ogtv").value=
+    S.og_title;
+
+  $("ogdv").value=
+    S.og_description;
+
+
+  $("ogiv").innerHTML=
+    S.og_image_url
+
+      ? `
+        <img src="${esc(S.og_image_url)}">
+        `
+
+      : `
+        <div
+          style="
+            padding:30px;
+            text-align:center;
+            color:#666
+          "
+        >
+          No preview image selected.
+        </div>
+        `;
+
+
+  renderP();
+
+  renderC();
+
+  renderF();
+
+  theme();
+
+  apply();
+
+}
+
+
+/* =====================================================
+   CUSTOM CONTACT BUTTONS
+===================================================== */
+
+function renderCustomButtons(){
+
+  let g=$("customButtons");
+
+  if(!S.custom_buttons ||
+     !S.custom_buttons.length){
+
+    g.innerHTML="";
+
+    return;
+  }
+
+
+  g.innerHTML=
+    S.custom_buttons.map(b=>`
+
+      <a
+        class="custom-button"
+        href="${esc(b.link||"#")}"
+        target="_blank"
+        style="
+          background:${esc(b.color||"#fff")};
+          color:${esc(b.textColor||"#080808")};
+        "
+      >
+
+        ${
+          b.logo
+          ? `
+            <img src="${esc(b.logo)}">
+            `
+          : ""
+        }
+
+        ${esc(b.name||"Button")}
+
+      </a>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   PORTFOLIO
+===================================================== */
+
+function renderP(){
+
+  let g=$("portfolioGrid");
+
+
+  if(!P.length){
+
+    g.innerHTML=`
+      <div
+        style="
+          grid-column:1/-1;
+          text-align:center;
+          color:#666;
+          padding:40px
+        "
+      >
+        No thumbnails yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  g.innerHTML=
+
+    P.map((x,i)=>`
+
+      <article class="card">
+
+        <img
+          src="${esc(x.image_url)}"
+          onclick="view('${esc(x.image_url)}')"
+        >
+
+        <div class="info">
+          <b>
+            ${esc(
+              x.title ||
+              "Minecraft Thumbnail"
+            )}
+          </b>
+        </div>
+
+        <div class="tools">
+
+          <button
+            class="mini"
+            onclick="openEditor('portfolio',${x.id})"
+          >
+            ✏️
+          </button>
+
+          <button
+            class="mini"
+            onclick="move('portfolio',${i},-1)"
+          >
+            ↑
+          </button>
+
+          <button
+            class="mini"
+            onclick="move('portfolio',${i},1)"
+          >
+            ↓
+          </button>
+
+          <button
+            class="mini"
+            onclick="delRow('portfolio',${x.id})"
+          >
+            🗑
+          </button>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   CREATORS
+===================================================== */
+
+function renderC(){
+
+  let g=$("creatorGrid");
+
+
+  if(!C.length){
+
+    g.innerHTML=`
+      <div
+        style="
+          grid-column:1/-1;
+          text-align:center;
+          color:#666
+        "
+      >
+        No creators added yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  g.innerHTML=
+
+    C.map((x,i)=>`
+
+      <article class="creator">
+
+        <a
+          href="${esc(x.youtube_url||"#")}"
+          target="_blank"
+        >
+
+          <div class="avatar">
+
+            <img
+              src="${esc(
+                x.image_url ||
+                "images/logo.png"
+              )}"
+            >
+
+          </div>
+
+          <h3>
+            ${esc(x.name||"Creator")}
+          </h3>
+
+          <p>
+            ${esc(x.youtube_url||"")}
+          </p>
+
+          <b>
+            ${esc(
+              x.subscribers ||
+              "Subscribers unavailable"
+            )}
+          </b>
+
+        </a>
+
+
+        <div style="margin-top:10px">
+
+          <button
+            class="mini"
+            onclick="openEditor('creator',${x.id})"
+          >
+            ✏️
+          </button>
+
+          <button
+            class="mini"
+            onclick="move('creators',${i},-1)"
+          >
+            ↑
+          </button>
+
+          <button
+            class="mini"
+            onclick="move('creators',${i},1)"
+          >
+            ↓
+          </button>
+
+          <button
+            class="mini"
+            onclick="delRow('creators',${x.id})"
+          >
+            🗑
+          </button>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+function renderF(){
+
+  let g=$("faqList");
+
+
+  if(!F.length){
+
+    g.innerHTML=`
+      <div
+        style="
+          text-align:center;
+          color:#666;
+          padding:30px
+        "
+      >
+        No FAQ items yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  g.innerHTML=
+
+    F.map((x,i)=>`
+
+      <div
+        class="faqitem"
+        onclick="this.classList.toggle('open')"
+      >
+
+        <span>
+          ${esc(x.question)}
+        </span>
+
+        <b>+</b>
+
+        <p>
+          ${esc(x.answer)}
+        </p>
+
+        <small
+          onclick="event.stopPropagation()"
+          style="
+            display:block;
+            margin-top:10px;
+            color:#555
+          "
+        >
+
+          <button
+            class="mini"
+            onclick="
+              openEditor('faq',${x.id});
+              event.stopPropagation()
+            "
+          >
+            ✏️ Edit
+          </button>
+
+          <button
+            class="mini"
+            onclick="
+              move('faq',${i},-1);
+              event.stopPropagation()
+            "
+          >
+            ↑
+          </button>
+
+          <button
+            class="mini"
+            onclick="
+              move('faq',${i},1);
+              event.stopPropagation()
+            "
+          >
+            ↓
+          </button>
+
+          <button
+            class="mini"
+            onclick="
+              delRow('faq',${x.id});
+              event.stopPropagation()
+            "
+          >
+            🗑
+          </button>
+
+        </small>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   THEME PREVIEW
+===================================================== */
+
+function theme(){
+
+  let z=[
+
+    ["Background",S.bg_color],
+
+    ["Gradient 1",S.bg_gradient_1],
+
+    ["Gradient 2",S.bg_gradient_2],
+
+    ["Primary",S.primary_color],
+
+    ["Heading",S.heading_color],
+
+    ["Text",S.text_color],
+
+    ["Muted",S.muted_color],
+
+    ["Card",S.card_color],
+
+    ["Border",S.border_color],
+
+    ["Button",S.button_color],
+
+    ["Button Text",S.button_text_color],
+
+    ["Accent",S.accent_color]
+
+  ];
+
+
+  $("themePreview").innerHTML=
+
+    z.map(x=>`
+
+      <div
+        style="
+          border:1px solid #292929;
+          border-radius:9px;
+          padding:9px;
+          background:#111
+        "
+      >
+
+        <div
+          style="
+            height:23px;
+            border-radius:5px;
+            background:${esc(x[1])}
+          "
+        ></div>
+
+        <small
+          style="
+            display:block;
+            color:#777;
+            margin-top:6px
+          "
+        >
+          ${esc(x[0])}: ${esc(x[1])}
+        </small>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   APPLY THEME
+===================================================== */
+
+function apply(){
+
+  document.documentElement.style
+    .setProperty(
+      "--card",
+      S.card_color
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--border",
+      S.border_color
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--accent",
+      S.accent_color
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--btn",
+      S.button_color
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--bt",
+      S.button_text_color
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--heading",
+      S.heading_color
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--text",
+      S.text_color
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--muted",
+      S.muted_color
+    );
+
+
+  document.body.style.background=
+    `
+    linear-gradient(
+      ${S.bg_gradient_direction},
+      ${S.bg_gradient_1},
+      ${S.bg_gradient_2}
+    )
+    `;
+
+}
+
+
+/* =====================================================
+   LOAD
+===================================================== */
+
+async function load(){
+
+  let s=
+    await sb
+      .from("site_settings")
+      .select("*")
+      .eq("id",1)
+      .maybeSingle();
+
+
+  if(s.data){
+
+    S={
+      ...D,
+      ...s.data
+    };
+
+    if(typeof S.custom_buttons==="string"){
+
+      try{
+        S.custom_buttons=
+          JSON.parse(S.custom_buttons);
+      }catch(e){
+        S.custom_buttons=[];
+      }
+
+    }
+
+  }else{
+
+    let r=
+      await sb
+        .from("site_settings")
+        .insert(D);
+
+    if(r.error){
+
+      msg(
+        r.error.message,
+        true
+      );
+
+    }
+
+  }
+
+
+  let p=
+    await sb
+      .from("portfolio")
+      .select("*")
+      .order("display_order")
+      .order("id");
+
+  P=p.data||[];
+
+
+  let c=
+    await sb
+      .from("creators")
+      .select("*")
+      .order("display_order")
+      .order("id");
+
+  C=c.data||[];
+
+
+  let f=
+    await sb
+      .from("faq")
+      .select("*")
+      .order("display_order")
+      .order("id");
+
+  F=f.data||[];
+
+
+  render();
+
+
+  setTimeout(()=>{
+
+    $("loader")
+      .classList
+      .add("hide");
+
+  },900);
+
+}
+
+
+/* =====================================================
+   SITE SETTINGS PATCH
+===================================================== */
+
+async function patch(x){
+
+  let r=
+    await sb
+      .from("site_settings")
+      .update(x)
+      .eq("id",1);
+
+
+  if(r.error)
+    throw r.error;
+
+
+  S={
+    ...S,
+    ...x
+  };
+
+
+  render();
+
+}
+
+
+/* =====================================================
+   IMAGE UPLOAD
+===================================================== */
+
+async function upload(f,folder){
+
+  if(!f)
+    return null;
+
+
+  let ext=
+    (
+      f.name
+      .split(".")
+      .pop() ||
+      "png"
+    ).toLowerCase();
+
+
+  let path=
+    `
+    admin/
+    ${folder}/
+    ${Date.now()}-
+    ${Math.random()
+      .toString(36)
+      .slice(2)}
+    .${ext}
+    `.replace(/\s/g,"");
+
+
+  let r=
+    await sb
+      .storage
+      .from("portfolio-images")
+      .upload(
+        path,
+        f,
+        {
+          contentType:
+            f.type ||
+            "image/png"
+        }
+      );
+
+
+  if(r.error)
+    throw r.error;
+
+
+  return sb
+    .storage
+    .from("portfolio-images")
+    .getPublicUrl(path)
+    .data
+    .publicUrl;
+
+}
+
+
+/* =====================================================
+   IMAGE INPUT
+===================================================== */
+
+function imageInput(
+  id,
+  label,
+  url,
+  canDelete=false
+){
+
+  return `
+
+    <div class="field full">
+
+      <label>
+        ${label}
+      </label>
+
+      <input
+        id="${id}"
+        type="file"
+        accept="image/*"
+        onchange="pick(this,'${id}p')"
+      >
+
+      <div id="${id}p">
+
+        ${
+          url
+          ? `
+            <div class="preview">
+              <img src="${esc(url)}">
+            </div>
+            `
+          : ""
+        }
+
+      </div>
+
+      ${
+        canDelete
+        ? `
+          <button
+            class="deleteimg"
+            onclick="
+              del=true;
+              document.getElementById('${id}p').innerHTML='';
+            "
+          >
+            🗑 Delete Image
+          </button>
+          `
+        : ""
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   PICK IMAGE
+===================================================== */
+
+function pick(i,t){
+
+  file=
+    i.files[0] ||
+    null;
+
+
+  if(file){
+
+    $(t).innerHTML=`
+
+      <div class="preview">
+
+        <img
+          src="${URL.createObjectURL(file)}"
+        >
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   OPEN EDITOR
+===================================================== */
+
+function openEditor(t,id=null){
+
+  type=t;
+
+  mid=id;
+
+  file=null;
+
+  del=false;
+
+  creatorMeta=null;
+
+
+  let h="";
+
+  let b="";
+
+
+  /* HERO */
+
+  if(t==="hero"){
+
+    h="Edit Hero";
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field">
+
+          <label>
+            Availability
+          </label>
+
+          <input
+            id="availx"
+            value="${esc(S.new_design_text)}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Name
+          </label>
+
+          <input
+            id="namex"
+            value="${esc(S.header_name)}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Hero Title
+          </label>
+
+          <input
+            id="ht"
+            value="${esc(S.hero_title)}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Hero Subtitle
+          </label>
+
+          <input
+            id="hs"
+            value="${esc(S.hero_subtitle)}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Crafted Text
+          </label>
+
+          <input
+            id="hc"
+            value="${esc(S.crafted_text)}"
+          >
+
+        </div>
+
+
+        ${imageInput(
+          "logo",
+          "Header Logo",
+          S.logo_url
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* STATS */
+
+  else if(t==="stats"){
+
+    h="Edit Stats";
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field">
+
+          <label>
+            Thumbnails
+          </label>
+
+          <input
+            id="s1"
+            value="${esc(S.stats_thumbnails)}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Creators
+          </label>
+
+          <input
+            id="s2"
+            value="${esc(S.stats_creators)}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Years Designing
+          </label>
+
+          <input
+            id="s3"
+            value="${esc(S.stats_years)}"
+          >
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* ABOUT */
+
+  else if(t==="about"){
+
+    h="Edit About";
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>
+            About Heading
+          </label>
+
+          <input
+            id="abh"
+            value="${esc(S.about_heading)}"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            About Subheading
+          </label>
+
+          <input
+            id="abs"
+            value="${esc(S.about_subheading)}"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            About Text
+          </label>
+
+          <textarea id="at">${esc(S.about_text)}</textarea>
+
+        </div>
+
+
+        ${imageInput(
+          "about",
+          "About Image",
+          S.about_image_url
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* CONTACT */
+
+  else if(t==="contact"){
+
+    h="Edit Contact";
+
+    let buttons=
+      Array.isArray(S.custom_buttons)
+      ? S.custom_buttons
+      : [];
+
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>
+            Contact Heading
+          </label>
+
+          <textarea id="ct">${esc(S.contact_title)}</textarea>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Contact Text
+          </label>
+
+          <textarea id="cx">${esc(S.contact_text)}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Discord
+          </label>
+
+          <input
+            id="dc"
+            value="${esc(S.discord_url)}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Twitter / X
+          </label>
+
+          <input
+            id="tw"
+            value="${esc(S.twitter_url)}"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div
+        style="
+          margin-top:20px;
+          border-top:1px solid #292929;
+          padding-top:20px
+        "
+      >
+
+        <h4>
+          Custom Contact Buttons
+        </h4>
+
+        <p
+          style="
+            color:#777;
+            font-size:11px;
+            margin:7px 0 15px
+          "
+        >
+          Add your own buttons with name, logo, link and color.
+        </p>
+
+
+        <div id="buttonEditor">
+
+          ${
+            buttons.map(
+              (x,i)=>buttonEditorRow(x,i)
+            ).join("")
+          }
+
+        </div>
+
+
+        <button
+          class="btn"
+          onclick="addButtonEditor()"
+          style="margin-top:10px"
+        >
+          ＋ Add Button
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* THEME */
+
+  else if(t==="theme"){
+
+    h="Edit Theme & Colors";
+
+
+    let z=[
+
+      ["bg","Background","bg_color"],
+
+      ["g1","Gradient 1","bg_gradient_1"],
+
+      ["g2","Gradient 2","bg_gradient_2"],
+
+      ["pr","Primary","primary_color"],
+
+      ["hd","Heading","heading_color"],
+
+      ["tx","Text","text_color"],
+
+      ["mu","Muted","muted_color"],
+
+      ["ca","Card","card_color"],
+
+      ["bo","Border","border_color"],
+
+      ["bu","Button","button_color"],
+
+      ["bt","Button Text","button_text_color"],
+
+      ["ac","Accent","accent_color"]
+
+    ];
+
+
+    b=`
+
+      <div class="themegrid">
+
+        ${
+          z.map(
+            x=>`
+
+              <div class="field">
+
+                <label>
+                  ${x[1]}
+                </label>
+
+                <input
+                  id="${x[0]}"
+                  type="color"
+                  value="${S[x[2]]}"
+                >
+
+              </div>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+
+      <div
+        class="field"
+        style="margin-top:12px"
+      >
+
+        <label>
+          Gradient Direction
+        </label>
+
+        <select id="gd">
+
+          <option>135deg</option>
+          <option>90deg</option>
+          <option>180deg</option>
+          <option>45deg</option>
+
+        </select>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* LINK PREVIEW */
+
+  else if(t==="link"){
+
+    h="Link Preview";
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>
+            Title
+          </label>
+
+          <input
+            id="ot"
+            value="${esc(S.og_title)}"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Description
+          </label>
+
+          <textarea id="od">${esc(S.og_description)}</textarea>
+
+        </div>
+
+
+        ${imageInput(
+          "og",
+          "Preview Image",
+          S.og_image_url,
+          true
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* PORTFOLIO */
+
+  else if(t==="portfolio"){
+
+    let x=
+      mid
+      ? P.find(a=>a.id===mid)
+      : null;
+
+
+    h=
+      x
+      ? "Edit Thumbnail"
+      : "Add Thumbnail";
+
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>
+            Title
+          </label>
+
+          <input
+            id="pt"
+            value="${esc(x?.title||"")}"
+          >
+
+        </div>
+
+
+        ${imageInput(
+          "pi",
+          "Thumbnail Image",
+          x?.image_url||""
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* CREATOR */
+
+  else if(t==="creator"){
+
+    let x=
+      mid
+      ? C.find(a=>a.id===mid)
+      : null;
+
+
+    h=
+      x
+      ? "Edit Creator"
+      : "Add Creator";
+
+
+    b=`
+
+      <div class="field">
+
+        <label>
+          YouTube Channel URL only
+        </label>
+
+        <input
+          id="yu"
+          value="${esc(x?.youtube_url||"")}"
+          placeholder="https://youtube.com/@channel"
+        >
+
+        <button
+          class="btn"
+          style="margin-top:8px"
+          onclick="fetchCreator()"
+        >
+          Fetch Creator
+        </button>
+
+      </div>
+
+
+      <div
+        id="crmsg"
+        style="
+          color:#777;
+          font-size:12px;
+          margin-top:13px
+        "
+      >
+        ${
+          x
+          ? `
+            Current:
+            ${esc(x.name)}
+            —
+            ${esc(
+              x.subscribers ||
+              "Subscribers unavailable"
+            )}
+            `
+          : `
+            Enter the channel URL and tap Fetch Creator.
+            `
+        }
+      </div>
+
+    `;
+
+  }
+
+
+  /* FAQ */
+
+  else if(t==="faq"){
+
+    let x=
+      mid
+      ? F.find(a=>a.id===mid)
+      : null;
+
+
+    h=
+      x
+      ? "Edit FAQ"
+      : "Add FAQ";
+
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>
+            Question
+          </label>
+
+          <input
+            id="fq"
+            value="${esc(x?.question||"")}"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Answer
+          </label>
+
+          <textarea id="fa">${esc(x?.answer||"")}</textarea>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* BRANDING */
+
+  else if(t==="branding"){
+
+    h="Edit Logo & Loading Screen";
+
+    b=`
+
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>
+            Header / Navbar Name
+          </label>
+
+          <input
+            id="bn"
+            value="${esc(S.header_name)}"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Loading Screen Name
+          </label>
+
+          <input
+            id="ln"
+            value="${esc(
+              S.loading_name ||
+              S.header_name
+            )}"
+          >
+
+        </div>
+
+
+        ${imageInput(
+          "brandlogo",
+          "Header / Navbar Logo",
+          S.logo_url
+        )}
+
+
+        ${imageInput(
+          "loadinglogo",
+          "Loading Screen Logo",
+          S.loading_logo_url
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
+  $("mtitle").textContent=h;
+
+  $("mbody").innerHTML=b;
+
+  $("modal").classList.add("show");
+
+}
+
+
+/* =====================================================
+   BUTTON EDITOR ROW
+===================================================== */
+
+function buttonEditorRow(x,i){
+
+  return `
+
+    <div
+      class="button-row"
+      data-index="${i}"
+      style="
+        border:1px solid #292929;
+        border-radius:12px;
+        padding:12px;
+        margin-bottom:10px
+      "
+    >
+
+      <div class="formgrid">
+
+        <div class="field">
+
+          <label>
+            Button Name
+          </label>
+
+          <input
+            class="cb-name"
+            value="${esc(x?.name||"")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Button Link
+          </label>
+
+          <input
+            class="cb-link"
+            value="${esc(x?.link||"")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Button Color
+          </label>
+
+          <input
+            class="cb-color"
+            type="color"
+            value="${x?.color||"#ffffff"}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Button Text Color
+          </label>
+
+          <input
+            class="cb-textcolor"
+            type="color"
+            value="${x?.textColor||"#080808"}"
+          >
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="deleteimg"
+        onclick="this.closest('.button-row').remove()"
+      >
+        🗑 Remove Button
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   ADD CONTACT BUTTON
+===================================================== */
+
+function addButtonEditor(){
+
+  let box=$("buttonEditor");
+
+  let i=
+    box.querySelectorAll(
+      ".button-row"
+    ).length;
+
+
+  box.insertAdjacentHTML(
+    "beforeend",
+    buttonEditorRow(
+      {
+        name:"New Button",
+        link:"",
+        color:"#ffffff",
+        textColor:"#080808"
+      },
+      i
+    )
+  );
+
+}
+
+
+/* =====================================================
+   READ CONTACT BUTTONS
+===================================================== */
+
+function readCustomButtons(){
+
+  let rows=
+    document.querySelectorAll(
+      "#buttonEditor .button-row"
+    );
+
+
+  return [...rows].map(row=>({
+
+    name:
+      row.querySelector(".cb-name")
+        ?.value.trim() || "Button",
+
+    link:
+      row.querySelector(".cb-link")
+        ?.value.trim() || "#",
+
+    color:
+      row.querySelector(".cb-color")
+        ?.value || "#ffffff",
+
+    textColor:
+      row.querySelector(".cb-textcolor")
+        ?.value || "#080808",
+
+    logo:""
+
+  }));
+
+}
+
+
+/* =====================================================
+   CLOSE EDITOR
+===================================================== */
+
+function closeEditor(){
+
+  $("modal")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =====================================================
+   SAVE MODAL
+===================================================== */
+
+async function saveModal(){
+
+  try{
+
+
+    /* HERO */
+
+    if(type==="hero"){
+
+      let logo=
+        S.logo_url;
+
+
+      if(file)
+        logo=
+          await upload(
+            file,
+            "logo"
+          );
+
+
+      await patch({
+
+        header_name:
+          $("namex")
+            .value
+            .trim(),
+
+        logo_url:
+          logo,
+
+        new_design_text:
+          $("availx")
+            .value
+            .trim(),
+
+        hero_title:
+          $("ht")
+            .value
+            .trim(),
+
+        hero_subtitle:
+          $("hs")
+            .value
+            .trim(),
+
+        crafted_text:
+          $("hc")
+            .value
+            .trim()
+
+      });
+
+    }
+
+
+    /* STATS */
+
+    else if(type==="stats"){
+
+      await patch({
+
+        stats_thumbnails:
+          $("s1").value.trim(),
+
+        stats_creators:
+          $("s2").value.trim(),
+
+        stats_years:
+          $("s3").value.trim()
+
+      });
+
+    }
+
+
+    /* ABOUT */
+
+    else if(type==="about"){
+
+      let im=
+        S.about_image_url;
+
+
+      if(file)
+        im=
+          await upload(
+            file,
+            "about"
+          );
+
+
+      await patch({
+
+        about_heading:
+          $("abh").value.trim(),
+
+        about_subheading:
+          $("abs").value.trim(),
+
+        about_text:
+          $("at").value.trim(),
+
+        about_image_url:
+          im
+
+      });
+
+    }
+
+
+    /* CONTACT */
+
+    else if(type==="contact"){
+
+      await patch({
+
+        contact_title:
+          $("ct").value,
+
+        contact_text:
+          $("cx").value,
+
+        discord_url:
+          $("dc").value.trim(),
+
+        twitter_url:
+          $("tw").value.trim(),
+
+        custom_buttons:
+          readCustomButtons()
+
+      });
+
+    }
+
+
+    /* THEME */
+
+    else if(type==="theme"){
+
+      await patch({
+
+        bg_color:
+          $("bg").value,
+
+        bg_gradient_1:
+          $("g1").value,
+
+        bg_gradient_2:
+          $("g2").value,
+
+        primary_color:
+          $("pr").value,
+
+        heading_color:
+          $("hd").value,
+
+        text_color:
+          $("tx").value,
+
+        muted_color:
+          $("mu").value,
+
+        card_color:
+          $("ca").value,
+
+        border_color:
+          $("bo").value,
+
+        button_color:
+          $("bu").value,
+
+        button_text_color:
+          $("bt").value,
+
+        accent_color:
+          $("ac").value,
+
+        bg_gradient_direction:
+          $("gd").value
+
+      });
+
+    }
+
+
+    /* LINK PREVIEW */
+
+    else if(type==="link"){
+
+      let im=
+        S.og_image_url;
+
+
+      if(del)
+        im="";
+
+
+      if(file)
+        im=
+          await upload(
+            file,
+            "link-preview"
+          );
+
+
+      await patch({
+
+        og_title:
+          $("ot")
+            .value
+            .trim(),
+
+        og_description:
+          $("od")
+            .value
+            .trim(),
+
+        og_image_url:
+          im
+
+      });
+
+    }
+
+
+    /* PORTFOLIO */
+
+    else if(type==="portfolio"){
+
+      let x=
+        mid
+        ? P.find(a=>a.id===mid)
+        : null;
+
+
+      let im=
+        x?.image_url ||
+        "";
+
+
+      if(file)
+        im=
+          await upload(
+            file,
+            "portfolio"
+          );
+
+
+      if(!im)
+        throw Error(
+          "Please choose a thumbnail image."
+        );
+
+
+      let r;
+
+
+      if(x){
+
+        r=
+          await sb
+            .from("portfolio")
+            .update({
+
+              title:
+                $("pt")
+                  .value
+                  .trim(),
+
+              image_url:
+                im
+
+            })
+            .eq(
+              "id",
+              x.id
+            );
+
+      }else{
+
+        r=
+          await sb
+            .from("portfolio")
+            .insert({
+
+              title:
+                $("pt")
+                  .value
+                  .trim() ||
+                "Minecraft Thumbnail",
+
+              image_url:
+                im,
+
+              display_order:
+                P.length
+
+            });
+
+      }
+
+
+      if(r.error)
+        throw r.error;
+
+
+      let q=
+        await sb
+          .from("portfolio")
+          .select("*")
+          .order("display_order")
+          .order("id");
+
+
+      P=
+        q.data||[];
+
+
+      render();
+
+    }
+
+
+    /* CREATOR */
+
+    else if(type==="creator"){
+
+      let u=
+        $("yu")
+          .value
+          .trim();
+
+
+      if(
+        !/^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i
+          .test(u)
+      ){
+
+        throw Error(
+          "Enter a valid YouTube URL."
+        );
+
+      }
+
+
+      let m=
+        creatorMeta ||
+        await creatorData(u);
+
+
+      let payload={
+
+        youtube_url:u,
+
+        name:
+          m.name ||
+          "Creator",
+
+        image_url:
+          m.image_url ||
+          "images/logo.png",
+
+        subscribers:
+          m.subscribers ||
+          "Subscribers unavailable"
+
+      };
+
+
+      let r;
+
+
+      if(mid){
+
+        r=
+          await sb
+            .from("creators")
+            .update(payload)
+            .eq(
+              "id",
+              mid
+            );
+
+      }else{
+
+        r=
+          await sb
+            .from("creators")
+            .insert({
+
+              ...payload,
+
+              display_order:
+                C.length
+
+            });
+
+      }
+
+
+      if(r.error)
+        throw r.error;
+
+
+      let q=
+        await sb
+          .from("creators")
+          .select("*")
+          .order("display_order")
+          .order("id");
+
+
+      C=
+        q.data||[];
+
+
+      render();
+
+    }
+
+
+    /* FAQ */
+
+    else if(type==="faq"){
+
+      let payload={
+
+        question:
+          $("fq")
+            .value
+            .trim(),
+
+        answer:
+          $("fa")
+            .value
+            .trim()
+
+      };
+
+
+      if(!payload.question)
+        throw Error(
+          "Question is required."
+        );
+
+
+      let r;
+
+
+      if(mid){
+
+        r=
+          await sb
+            .from("faq")
+            .update(payload)
+            .eq(
+              "id",
+              mid
+            );
+
+      }else{
+
+        r=
+          await sb
+            .from("faq")
+            .insert({
+
+              ...payload,
+
+              display_order:
+                F.length
+
+            });
+
+      }
+
+
+      if(r.error)
+        throw r.error;
+
+
+      let q=
+        await sb
+          .from("faq")
+          .select("*")
+          .order("display_order")
+          .order("id");
+
+
+      F=
+        q.data||[];
+
+
+      render();
+
+    }
+
+
+    /* BRANDING */
+
+    else if(type==="branding"){
+
+      let logo=
+        S.logo_url;
+
+
+      let loadingLogo=
+        S.loading_logo_url;
+
+
+      if(
+        document.getElementById(
+          "brandlogo"
+        )?.files?.[0]
+      ){
+
+        logo=
+          await upload(
+            document.getElementById(
+              "brandlogo"
+            ).files[0],
+            "logo"
+          );
+
+      }
+
+
+      if(
+        document.getElementById(
+          "loadinglogo"
+        )?.files?.[0]
+      ){
+
+        loadingLogo=
+          await upload(
+            document.getElementById(
+              "loadinglogo"
+            ).files[0],
+            "loading"
+          );
+
+      }
+
+
+      await patch({
+
+        header_name:
+          $("bn")
+            .value
+            .trim(),
+
+        loading_name:
+          $("ln")
+            .value
+            .trim(),
+
+        logo_url:
+          logo,
+
+        loading_logo_url:
+          loadingLogo
+
+      });
+
+    }
+
+
+    closeEditor();
+
+    msg(
+      "✓ Changes saved successfully!"
+    );
+
+
+  }catch(e){
+
+    console.error(e);
+
+    msg(
+      e.message ||
+      "Something went wrong.",
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   YOUTUBE CREATOR DATA
+===================================================== */
+
+async function creatorData(u){
+
+  let key=
+    "ytcache:"+u;
+
+
+  try{
+
+    let c=
+      JSON.parse(
+        localStorage.getItem(key)||"null"
+      );
+
+
+    if(
+      c &&
+      Date.now()-c.time<
+      86400000
+    ){
+
+      return c.data;
+
+    }
+
+  }catch(e){}
+
+
+  try{
+
+    let r=
+      await fetch(
+        "https://www.youtube.com/oembed?url="+
+        encodeURIComponent(u)+
+        "&format=json"
+      );
+
+
+    if(r.ok){
+
+      let j=
+        await r.json();
+
+
+      let d={
+
+        name:
+          j.author_name||"",
+
+        image_url:
+          j.thumbnail_url||"",
+
+        subscribers:
+          "Subscribers unavailable"
+
+      };
+
+
+      localStorage.setItem(
+
+        key,
+
+        JSON.stringify({
+
+          time:
+            Date.now(),
+
+          data:
+            d
+
+        })
+
+      );
+
+
+      return d;
+
+    }
+
+  }catch(e){}
+
+
+  throw Error(
+    "Automatic channel subscribers need a YouTube backend/API. No secret key is exposed in this HTML."
+  );
+
+}
+
+
+/* =====================================================
+   FETCH CREATOR
+===================================================== */
+
+async function fetchCreator(){
+
+  try{
+
+    creatorMeta=
+      await creatorData(
+        $("yu").value.trim()
+      );
+
+
+    $("crmsg").innerHTML=`
+
+      <b style="color:#fff">
+        ${esc(creatorMeta.name)}
+      </b>
+
+      <br>
+
+      ${esc(
+        creatorMeta.subscribers
+      )}
+
+    `;
+
+  }catch(e){
+
+    $("crmsg").textContent=
+      e.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   MOVE
+===================================================== */
+
+async function move(
+  kind,
+  i,
+  d
+){
+
+  let a=
+    kind==="portfolio"
+    ? P
+    : kind==="creators"
+    ? C
+    : F;
+
+
+  let n=i+d;
+
+
+  if(
+    n<0 ||
+    n>=a.length
+  )
+    return;
+
+
+  let b=[...a];
+
+
+  [
+    b[i],
+    b[n]
+  ]=[
+    b[n],
+    b[i]
+  ];
+
+
+  let table=
+    kind==="portfolio"
+    ? "portfolio"
+    : kind;
+
+
+  for(
+    let j=0;
+    j<b.length;
+    j++
+  ){
+
+    let r=
+      await sb
+        .from(table)
+        .update({
+          display_order:j
+        })
+        .eq(
+          "id",
+          b[j].id
+        );
+
+
+    if(r.error){
+
+      return msg(
+        r.error.message,
+        true
+      );
+
+    }
+
+  }
+
+
+  if(kind==="portfolio")
+    P=b;
+
+  else if(kind==="creators")
+    C=b;
+
+  else
+    F=b;
+
+
+  render();
+
+  msg(
+    "✓ Order updated!"
+  );
+
+}
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+async function delRow(
+  kind,
+  id
+){
+
+  if(
+    !confirm(
+      "Delete this item?"
+    )
+  )
+    return;
+
+
+  let table=
+    kind==="portfolio"
+    ? "portfolio"
+    : kind;
+
+
+  let r=
+    await sb
+      .from(table)
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if(r.error)
+    return msg(
+      r.error.message,
+      true
+    );
+
+
+  if(kind==="portfolio")
+    P=
+      P.filter(
+        x=>x.id!==id
+      );
+
+  else if(kind==="creators")
+    C=
+      C.filter(
+        x=>x.id!==id
+      );
+
+  else
+    F=
+      F.filter(
+        x=>x.id!==id
+      );
+
+
+  let a=
+    kind==="portfolio"
+    ? P
+    : kind==="creators"
+    ? C
+    : F;
+
+
+  for(
+    let i=0;
+    i<a.length;
+    i++
+  ){
+
+    await sb
+      .from(table)
+      .update({
+        display_order:i
+      })
+      .eq(
+        "id",
+        a[i].id
+      );
+
+  }
+
+
+  render();
+
+  msg(
+    "✓ Deleted successfully!"
+  );
+
+}
+
+
+/* =====================================================
+   VIEW IMAGE
+===================================================== */
+
+function view(u){
+
+  $("vimg").src=u;
+
+  $("viewer")
+    .classList
+    .add("show");
+
+}
+
+
+function closeViewer(){
+
+  $("viewer")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =====================================================
+   SAVE ALL
+===================================================== */
+
+async function saveAll(){
+
+  try{
+
+    let r=
+      await sb
+        .from("site_settings")
+        .update(S)
+        .eq("id",1);
+
+
+    if(r.error)
+      throw r.error;
+
+
+    msg(
+      "✓ All changes saved successfully!"
+    );
+
+  }catch(e){
+
+    msg(
+      e.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  location.href=
+    "admin.html";
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+async function start(){
+
+  let r=
+    await sb.auth.getSession();
+
+
+  if(!r.data.session){
+
+    location.href=
+      "admin.html";
+
+    return;
+
+  }
+
+
+  await load();
+
+}
+
+
+sb.auth.onAuthStateChange(
+  e=>{
+
+    if(e==="SIGNED_OUT"){
+
+      location.href=
+        "admin.html";
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="Escape"){
+
+      closeEditor();
+
+      closeViewer();
+
+    }
+
+  }
+);
+
+
+start();
+
+</script>
+
+</body>
+</html>
