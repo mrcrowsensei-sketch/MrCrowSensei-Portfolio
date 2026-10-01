@@ -9,9 +9,7 @@
       name="description"
       content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
 
-<title id="pageTitle">
-  Mr CrowSensei — Thumbnail Designer
-</title>
+<title id="pageTitle">Mr CrowSensei — Thumbnail Designer</title>
 
 <meta id="ogTitle"
       property="og:title"
@@ -46,22 +44,13 @@
       name="twitter:image"
       content="https://mrcrowsensei.vercel.app/og-banner.png">
 
-
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet">
 
-<link rel="stylesheet"
-      href="style.css">
-
-
-<!-- SUPABASE -->
+<link rel="stylesheet" href="style.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -86,14 +75,12 @@ const supabaseClient =
 ===================================================== */
 
 :root{
-
   --site-bg:#080808;
   --site-text:#f7f8ff;
   --site-muted:#85858a;
   --site-card:#111111;
   --site-border:#292929;
   --site-accent:#35e36b;
-
 }
 
 
@@ -102,240 +89,213 @@ const supabaseClient =
 ===================================================== */
 
 .loader-screen{
-
   position:fixed;
   inset:0;
-
   z-index:999999;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   background:#1e1e1e;
-
   opacity:1;
   visibility:visible;
-
-  transition:
-    opacity .55s ease,
-    visibility .55s ease;
-
+  transition:opacity .55s ease,visibility .55s ease;
 }
-
 
 .loader-screen.hide{
-
   opacity:0;
   visibility:hidden;
-
   pointer-events:none;
-
 }
-
 
 .loader-inner{
-
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
   justify-content:center;
-
 }
-
 
 .loader-logo-wrap{
-
   width:150px;
   height:150px;
-
   display:grid;
   place-items:center;
-
   margin-bottom:45px;
-
 }
-
 
 .loader-logo-img{
-
   width:150px;
   height:150px;
-
   object-fit:contain;
-
   border-radius:50%;
-
 }
-
 
 .loader-logo-wrap .logo-fallback{
-
   display:none;
-
   width:150px;
   height:150px;
-
   place-items:center;
-
   border-radius:50%;
-
   background:#e00000;
-
   color:white;
-
   font-size:42px;
-
   font-weight:900;
-
 }
-
-
-/* CENTER EXPANDING LINE */
 
 .loader-bar{
-
   position:relative;
-
   width:185px;
   height:4px;
-
   overflow:hidden;
-
   border-radius:10px;
-
 }
-
 
 .loader-bar span{
-
   position:absolute;
-
   left:50%;
   top:0;
-
   width:100%;
   height:4px;
-
   border-radius:10px;
-
   background:#fff;
-
-  transform:
-    translateX(-50%)
-    scaleX(0);
-
+  transform:translateX(-50%) scaleX(0);
   transform-origin:center;
-
-  animation:
-    loaderCenterExpand
-    1.6s
-    cubic-bezier(.22,.61,.36,1)
-    forwards;
-
+  animation:loaderCenterExpand 1.6s cubic-bezier(.22,.61,.36,1) forwards;
 }
-
 
 @keyframes loaderCenterExpand{
-
   0%{
-
-    transform:
-      translateX(-50%)
-      scaleX(0);
-
+    transform:translateX(-50%) scaleX(0);
   }
-
   100%{
-
-    transform:
-      translateX(-50%)
-      scaleX(1);
-
+    transform:translateX(-50%) scaleX(1);
   }
-
 }
 
 
 /* =====================================================
-   NEW DESIGNS PILL
-===================================================== */
-
-.availability{
-
-  display:inline-flex !important;
-
-  align-items:center !important;
-
-  justify-content:center !important;
-
-  width:max-content !important;
-
-  max-width:none !important;
-
-  white-space:nowrap !important;
-
-  flex-wrap:nowrap !important;
-
-}
-
-
-.availability > span:first-child{
-
-  display:inline-block !important;
-
-  width:8px !important;
-  height:8px !important;
-
-  min-width:8px !important;
-
-  border-radius:50% !important;
-
-  margin-right:9px !important;
-
-}
-
-
-.availability > span:nth-child(2){
-
-  display:inline !important;
-
-  width:auto !important;
-  height:auto !important;
-
-  margin:0 !important;
-
-  white-space:nowrap !important;
-
-}
-
-
-/* =====================================================
-   THUMBNAIL SCROLL ANIMATION
+   THUMBNAIL ONE-TIME FADE
 ===================================================== */
 
 .work-card{
-
   opacity:0;
-
   transform:translateY(45px);
-
   transition:
     opacity .7s ease,
     transform .7s cubic-bezier(.2,.8,.2,1);
+}
 
+.work-card.reveal{
+  opacity:1;
+  transform:translateY(0);
 }
 
 
-.work-card.reveal{
+/* =====================================================
+   ALL SECTION ONE-TIME FADE
+===================================================== */
 
+.scroll-reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:
+    opacity .75s ease,
+    transform .75s cubic-bezier(.2,.8,.2,1);
+}
+
+.scroll-reveal.revealed{
   opacity:1;
-
   transform:translateY(0);
+}
 
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.site-footer{
+  width:100%;
+  padding:100px 24px 45px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.footer-brand{
+  max-width:650px;
+  margin:0 auto;
+}
+
+.footer-logo-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
+
+.footer-logo{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  border-radius:50%;
+}
+
+.footer-logo-row span{
+  font-size:22px;
+  font-weight:800;
+  color:var(--site-text);
+}
+
+.footer-brand p{
+  max-width:600px;
+  margin:18px auto 0;
+  color:var(--site-muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.footer-explore{
+  margin-top:75px;
+  text-align:center;
+}
+
+.footer-explore h3{
+  margin:0 0 22px;
+  font-size:16px;
+  font-weight:700;
+  color:var(--site-text);
+}
+
+.footer-links{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+
+.footer-links a{
+  color:var(--site-muted);
+  text-decoration:none;
+  font-size:14px;
+  transition:.25s ease;
+}
+
+.footer-links a:hover{
+  color:var(--site-text);
+  transform:translateY(-1px);
+}
+
+.footer-divider{
+  width:min(900px,90%);
+  height:1px;
+  background:rgba(255,255,255,.14);
+  margin:65px auto 28px;
+}
+
+.footer-copyright{
+  margin:0;
+  color:var(--site-muted);
+  font-size:13px;
 }
 
 
@@ -344,69 +304,40 @@ const supabaseClient =
 ===================================================== */
 
 .fullscreen-viewer{
-
   position:fixed;
-
   inset:0;
-
   z-index:9999999;
-
   display:none;
-
   align-items:center;
   justify-content:center;
-
   padding:20px;
-
   background:rgba(0,0,0,.9);
-
   backdrop-filter:blur(15px);
-
 }
-
 
 .fullscreen-viewer.show{
-
   display:flex;
-
 }
-
 
 .fullscreen-viewer img{
-
   max-width:95vw;
-
   max-height:90vh;
-
   object-fit:contain;
-
   border-radius:14px;
-
 }
 
-
 .viewer-close{
-
   position:absolute;
-
   top:20px;
   right:20px;
-
   width:45px;
   height:45px;
-
   border:1px solid #444;
-
   border-radius:12px;
-
   background:#111;
-
   color:white;
-
   font-size:27px;
-
   cursor:pointer;
-
 }
 
 
@@ -415,49 +346,28 @@ const supabaseClient =
 ===================================================== */
 
 .twitter-button{
-
   display:inline-flex;
-
   align-items:center;
-
   justify-content:center;
-
   gap:12px;
-
   min-width:min(620px,90%);
-
   padding:18px 25px;
-
   margin-top:12px;
-
   border-radius:18px;
-
   border:1px solid rgba(255,255,255,.22);
-
   background:#111;
-
   color:#fff;
-
   font-size:16px;
-
   font-weight:800;
-
   transition:.25s;
-
 }
-
 
 .twitter-button:hover{
-
   transform:translateY(-3px);
-
 }
 
-
 .twitter-icon{
-
   font-size:22px;
-
 }
 
 
@@ -466,90 +376,66 @@ const supabaseClient =
 ===================================================== */
 
 .contact-buttons{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
-
   max-width:760px;
-
   margin:25px auto 0;
-
 }
-
 
 .custom-contact-button{
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   gap:10px;
-
   min-height:58px;
-
   border-radius:15px;
-
   font-size:14px;
-
   font-weight:800;
-
   transition:.25s;
-
   border:1px solid rgba(255,255,255,.15);
-
 }
-
 
 .custom-contact-button:hover{
-
   transform:translateY(-3px);
-
 }
 
-
 .custom-contact-button img{
-
   width:25px;
   height:25px;
-
   object-fit:contain;
-
   border-radius:6px;
-
 }
 
 
 /* =====================================================
-   CREATOR VIEW ALL BUTTON
+   CREATOR BUTTON
 ===================================================== */
 
 #creatorLoadMore{
-
   cursor:pointer;
-
 }
 
 
 /* =====================================================
-   FAQ OPEN/CLOSE
+   FAQ
 ===================================================== */
 
 .faq-item{
-
   cursor:pointer;
+}
 
+.faq-item p{
+  overflow:hidden;
 }
 
 
-.faq-item p{
+/* =====================================================
+   SMOOTH SCROLL
+===================================================== */
 
-  overflow:hidden;
-
+html{
+  scroll-behavior:smooth;
 }
 
 
@@ -560,51 +446,49 @@ const supabaseClient =
 @media(max-width:700px){
 
   .contact-buttons{
-
     grid-template-columns:1fr;
-
   }
-
 
   .twitter-button{
-
     min-width:100%;
-
     font-size:14px;
-
     padding:18px 12px;
-
   }
-
 
   .loader-logo-wrap{
-
     width:140px;
     height:140px;
-
   }
-
 
   .loader-logo-img{
-
     width:140px;
     height:140px;
-
   }
-
 
   .loader-logo-wrap .logo-fallback{
-
     width:140px;
     height:140px;
-
   }
 
-
   .loader-bar{
-
     width:185px;
+  }
 
+  .site-footer{
+    padding:80px 20px 35px;
+  }
+
+  .footer-logo{
+    width:42px;
+    height:42px;
+  }
+
+  .footer-logo-row span{
+    font-size:20px;
+  }
+
+  .footer-brand p{
+    font-size:13px;
   }
 
 }
@@ -621,8 +505,7 @@ const supabaseClient =
      LOADER
 ===================================================== -->
 
-<div id="loader"
-     class="loader-screen">
+<div id="loader" class="loader-screen">
 
   <div class="loader-inner">
 
@@ -645,11 +528,8 @@ const supabaseClient =
 
     </div>
 
-
     <div class="loader-bar">
-
       <span></span>
-
     </div>
 
   </div>
@@ -667,8 +547,7 @@ const supabaseClient =
 
 <header class="navbar">
 
-  <a class="brand"
-     href="#home">
+  <a class="brand" href="#home">
 
     <span class="brand-logo-wrap">
 
@@ -689,7 +568,6 @@ const supabaseClient =
 
     </span>
 
-
     <span id="navName">
       Mr CrowSensei
     </span>
@@ -699,34 +577,17 @@ const supabaseClient =
 
   <nav>
 
-    <a href="#work">
-      Work
-    </a>
-
-    <a href="#about">
-      About
-    </a>
-
-    <a href="#creators">
-      Creators
-    </a>
-
-    <a href="#faq">
-      FAQ
-    </a>
-
-    <a href="#contact">
-      Contact
-    </a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#creators">Creators</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
 
   </nav>
 
 
-  <a class="nav-cta"
-     href="#contact">
-
+  <a class="nav-cta" href="#contact">
     Let's Work
-
   </a>
 
 </header>
@@ -739,9 +600,7 @@ const supabaseClient =
      HERO
 ===================================================== -->
 
-<section class="hero section"
-         id="home">
-
+<section class="hero section" id="home">
 
   <div class="availability">
 
@@ -756,13 +615,9 @@ const supabaseClient =
 
   <h1 id="heroName">
 
-    <span>
-      Mr
-    </span>
+    <span>Mr</span>
 
-    <span>
-      CrowSensei
-    </span>
+    <span>CrowSensei</span>
 
   </h1>
 
@@ -773,17 +628,11 @@ const supabaseClient =
       Professional Minecraft Thumbnails
     </div>
 
-
-    <div class="hero-subline"
-         id="heroSubtitle">
-
+    <div class="hero-subline" id="heroSubtitle">
       Crafted for Creators
-
     </div>
 
-
-    <div class="curve-line"
-         aria-hidden="true">
+    <div class="curve-line" aria-hidden="true">
 
       <svg
         viewBox="0 0 390 48"
@@ -809,23 +658,13 @@ const supabaseClient =
 
   <div class="hero-actions">
 
-    <a class="button primary"
-       href="#work">
-
+    <a class="button primary" href="#work">
       Browse Portfolio
-
-      <span>
-        →
-      </span>
-
+      <span>→</span>
     </a>
 
-
-    <a class="button secondary"
-       href="#contact">
-
+    <a class="button secondary" href="#contact">
       Let's Work
-
     </a>
 
   </div>
@@ -880,9 +719,7 @@ const supabaseClient =
      PORTFOLIO
 ===================================================== -->
 
-<section class="section"
-         id="work">
-
+<section class="section" id="work">
 
   <div class="section-head">
 
@@ -896,19 +733,12 @@ const supabaseClient =
 
       </div>
 
-
       <h2>
-
         My latest
-
-        <em>
-          thumbnails.
-        </em>
-
+        <em>thumbnails.</em>
       </h2>
 
     </div>
-
 
     <p>
       My latest Minecraft thumbnail designs.
@@ -917,8 +747,7 @@ const supabaseClient =
   </div>
 
 
-  <div class="work-grid"
-       id="portfolioGrid">
+  <div class="work-grid" id="portfolioGrid">
 
     <div style="
       grid-column:1/-1;
@@ -941,9 +770,7 @@ const supabaseClient =
       type="button"
       style="display:none"
     >
-
       Load More
-
     </button>
 
   </div>
@@ -955,9 +782,7 @@ const supabaseClient =
      ABOUT
 ===================================================== -->
 
-<section class="section about"
-         id="about">
-
+<section class="section about" id="about">
 
   <div class="about-intro">
 
@@ -976,24 +801,19 @@ const supabaseClient =
 
       the
 
-      <em>
-        thumbnails.
-      </em>
+      <em>thumbnails.</em>
 
     </h2>
 
 
     <p>
-
       The person behind professional Minecraft thumbnails for creators.
-
     </p>
 
   </div>
 
 
   <div class="about-card">
-
 
     <div class="about-photo-wrap">
 
@@ -1026,9 +846,7 @@ const supabaseClient =
 
         Turning Minecraft ideas into
 
-        <em>
-          clickable visuals.
-        </em>
+        <em>clickable visuals.</em>
 
       </h3>
 
@@ -1050,9 +868,7 @@ const supabaseClient =
      CREATORS
 ===================================================== -->
 
-<section class="section creators"
-         id="creators">
-
+<section class="section creators" id="creators">
 
   <div class="section-head centered">
 
@@ -1071,9 +887,7 @@ const supabaseClient =
 
         Trusted by
 
-        <em>
-          creators.
-        </em>
+        <em>creators.</em>
 
       </h2>
 
@@ -1089,8 +903,7 @@ const supabaseClient =
   </p>
 
 
-  <div class="creator-row"
-       id="creatorGrid">
+  <div class="creator-row" id="creatorGrid">
 
     <div style="
       grid-column:1/-1;
@@ -1128,9 +941,7 @@ const supabaseClient =
      FAQ
 ===================================================== -->
 
-<section class="section faq"
-         id="faq">
-
+<section class="section faq" id="faq">
 
   <div class="section-head centered">
 
@@ -1149,9 +960,7 @@ const supabaseClient =
 
         Got
 
-        <em>
-          questions?
-        </em>
+        <em>questions?</em>
 
       </h2>
 
@@ -1160,8 +969,7 @@ const supabaseClient =
   </div>
 
 
-  <div class="faq-list"
-       id="faqList">
+  <div class="faq-list" id="faqList">
 
     <div style="
       text-align:center;
@@ -1182,17 +990,12 @@ const supabaseClient =
      CONTACT
 ===================================================== -->
 
-<section class="section contact-wrap"
-         id="contact">
-
+<section class="section contact-wrap" id="contact">
 
   <div class="contact-card">
 
-
     <div class="contact-small">
-
       CONTACT ME
-
     </div>
 
 
@@ -1254,7 +1057,6 @@ const supabaseClient =
       class="contact-buttons"
     ></div>
 
-
   </div>
 
 </section>
@@ -1263,18 +1065,75 @@ const supabaseClient =
 
 
 <!-- =====================================================
-     FOOTER
+     NEW FOOTER
 ===================================================== -->
 
-<footer>
+<footer class="site-footer scroll-reveal" id="siteFooter">
 
-  <span>
-    © 2026 Mr CrowSensei
-  </span>
+  <div class="footer-brand">
 
-  <span>
-    Made for Minecraft creators.
-  </span>
+    <div class="footer-logo-row">
+
+      <img
+        id="footerLogo"
+        src="images/logo.png"
+        alt="Mr CrowSensei"
+        class="footer-logo"
+      >
+
+      <span id="footerName">
+        Mr CrowSensei
+      </span>
+
+    </div>
+
+
+    <p id="footerDescription">
+
+      Minecraft thumbnail designer helping creators break through
+      the algorithm with high-CTR artwork.
+
+    </p>
+
+  </div>
+
+
+  <div class="footer-explore">
+
+    <h3 id="footerExploreTitle">
+      Explore
+    </h3>
+
+
+    <nav class="footer-links">
+
+      <a id="footerPortfolio" href="#work">
+        Portfolio
+      </a>
+
+      <a id="footerClients" href="#creators">
+        Clients
+      </a>
+
+      <a id="footerAbout" href="#about">
+        About
+      </a>
+
+      <a id="footerFAQ" href="#faq">
+        FAQ
+      </a>
+
+    </nav>
+
+  </div>
+
+
+  <div class="footer-divider"></div>
+
+
+  <p id="footerCopyright" class="footer-copyright">
+    © 2026 Mr CrowSensei.
+  </p>
 
 </footer>
 
@@ -1308,8 +1167,6 @@ const supabaseClient =
 
 </div>
 
-
-<!-- EXISTING SCRIPT -->
 
 <script src="script.js"></script>
 
@@ -1395,7 +1252,35 @@ let siteSettings = {
   og_description:
     "Mr CrowSensei — Professional Minecraft Thumbnail Designer",
 
-  og_image_url:""
+  og_image_url:"",
+
+
+  /* FOOTER DEFAULTS */
+
+  footer_logo_url:"",
+
+  footer_name:"Mr CrowSensei",
+
+  footer_description:
+    "Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.",
+
+  footer_explore_title:
+    "Explore",
+
+  footer_portfolio_text:
+    "Portfolio",
+
+  footer_clients_text:
+    "Clients",
+
+  footer_about_text:
+    "About",
+
+  footer_faq_text:
+    "FAQ",
+
+  footer_copyright:
+    "© 2026 Mr CrowSensei."
 
 };
 
@@ -1407,11 +1292,6 @@ let creators = [];
 let faqs = [];
 
 let portfolioVisible = 6;
-
-
-/* =====================================================
-   CREATOR SETTINGS
-===================================================== */
 
 let creatorVisible = 6;
 
@@ -1426,13 +1306,9 @@ async function loadSiteSettings(){
 
   const {data,error} =
     await supabaseClient
-
       .from("site_settings")
-
       .select("*")
-
       .eq("id",1)
-
       .maybeSingle();
 
 
@@ -1451,11 +1327,8 @@ async function loadSiteSettings(){
   if(data){
 
     siteSettings = {
-
       ...siteSettings,
-
       ...data
-
     };
 
   }
@@ -1635,6 +1508,84 @@ function applySiteSettings(){
     S.twitter_url || "#";
 
 
+  /* =====================================================
+     FOOTER
+  ===================================================== */
+
+  document.getElementById(
+    "footerName"
+  ).textContent =
+    S.footer_name ||
+    S.header_name ||
+    "Mr CrowSensei";
+
+
+  document.getElementById(
+    "footerDescription"
+  ).textContent =
+    S.footer_description ||
+    "Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.";
+
+
+  document.getElementById(
+    "footerExploreTitle"
+  ).textContent =
+    S.footer_explore_title ||
+    "Explore";
+
+
+  document.getElementById(
+    "footerPortfolio"
+  ).textContent =
+    S.footer_portfolio_text ||
+    "Portfolio";
+
+
+  document.getElementById(
+    "footerClients"
+  ).textContent =
+    S.footer_clients_text ||
+    "Clients";
+
+
+  document.getElementById(
+    "footerAbout"
+  ).textContent =
+    S.footer_about_text ||
+    "About";
+
+
+  document.getElementById(
+    "footerFAQ"
+  ).textContent =
+    S.footer_faq_text ||
+    "FAQ";
+
+
+  document.getElementById(
+    "footerCopyright"
+  ).textContent =
+    S.footer_copyright ||
+    "© 2026 Mr CrowSensei.";
+
+
+  if(S.footer_logo_url){
+
+    document.getElementById(
+      "footerLogo"
+    ).src =
+      S.footer_logo_url;
+
+  }else if(S.logo_url){
+
+    document.getElementById(
+      "footerLogo"
+    ).src =
+      S.logo_url;
+
+  }
+
+
   /* THEME */
 
   applyTheme();
@@ -1710,72 +1661,51 @@ function applyTheme(){
     siteSettings;
 
 
-  document.documentElement
-    .style
-    .setProperty(
-      "--site-bg",
-      S.bg_color ||
-      "#080808"
-    );
+  document.documentElement.style.setProperty(
+    "--site-bg",
+    S.bg_color || "#080808"
+  );
 
 
-  document.documentElement
-    .style
-    .setProperty(
-      "--site-text",
-      S.text_color ||
-      "#f7f8ff"
-    );
+  document.documentElement.style.setProperty(
+    "--site-text",
+    S.text_color || "#f7f8ff"
+  );
 
 
-  document.documentElement
-    .style
-    .setProperty(
-      "--site-muted",
-      S.muted_color ||
-      "#85858a"
-    );
+  document.documentElement.style.setProperty(
+    "--site-muted",
+    S.muted_color || "#85858a"
+  );
 
 
-  document.documentElement
-    .style
-    .setProperty(
-      "--site-card",
-      S.card_color ||
-      "#111111"
-    );
+  document.documentElement.style.setProperty(
+    "--site-card",
+    S.card_color || "#111111"
+  );
 
 
-  document.documentElement
-    .style
-    .setProperty(
-      "--site-border",
-      S.border_color ||
-      "#292929"
-    );
+  document.documentElement.style.setProperty(
+    "--site-border",
+    S.border_color || "#292929"
+  );
 
 
-  document.documentElement
-    .style
-    .setProperty(
-      "--site-accent",
-      S.accent_color ||
-      "#35e36b"
-    );
+  document.documentElement.style.setProperty(
+    "--site-accent",
+    S.accent_color || "#35e36b"
+  );
 
 
   document.body.style.backgroundColor =
-    S.bg_color ||
-    "#080808";
+    S.bg_color || "#080808";
 
 
   document.body.style.color =
-    S.text_color ||
-    "#f7f8ff";
+    S.text_color || "#f7f8ff";
 
 
   document.body.style.backgroundImage =
-
     `linear-gradient(
       ${S.bg_gradient_direction || "135deg"},
       ${S.bg_gradient_1 || "#151515"},
@@ -1799,23 +1729,15 @@ async function loadPortfolio(){
 
   const {data,error} =
     await supabaseClient
-
       .from("portfolio")
-
       .select("*")
-
       .order(
         "display_order",
-        {
-          ascending:true
-        }
+        {ascending:true}
       )
-
       .order(
         "id",
-        {
-          ascending:true
-        }
+        {ascending:true}
       );
 
 
@@ -1869,7 +1791,6 @@ async function loadPortfolio(){
 
   portfolio = data;
 
-
   renderPortfolio();
 
 }
@@ -1898,8 +1819,7 @@ function renderPortfolio(){
 
 
   visible.forEach(
-    (item,index)=>{
-
+    item => {
 
       const card =
         document.createElement(
@@ -1974,11 +1894,9 @@ function renderPortfolio(){
 
       info.appendChild(title);
 
-
       card.appendChild(img);
 
       card.appendChild(info);
-
 
       grid.appendChild(card);
 
@@ -2014,7 +1932,7 @@ function renderPortfolio(){
 
 
 /* =====================================================
-   THUMBNAIL SCROLL OBSERVER
+   PORTFOLIO ONE-TIME OBSERVER
 ===================================================== */
 
 function observePortfolioCards(){
@@ -2025,10 +1943,7 @@ function observePortfolioCards(){
     );
 
 
-  if(
-    !("IntersectionObserver"
-      in window)
-  ){
+  if(!("IntersectionObserver" in window)){
 
     cards.forEach(
       card =>
@@ -2044,7 +1959,6 @@ function observePortfolioCards(){
 
   const observer =
     new IntersectionObserver(
-
       entries => {
 
         entries.forEach(
@@ -2054,10 +1968,9 @@ function observePortfolioCards(){
               entry.isIntersecting
             ){
 
-              entry.target
-                .classList
-                .add("reveal");
-
+              entry.target.classList.add(
+                "reveal"
+              );
 
               observer.unobserve(
                 entry.target
@@ -2069,11 +1982,9 @@ function observePortfolioCards(){
         );
 
       },
-
       {
         threshold:.12
       }
-
     );
 
 
@@ -2119,23 +2030,15 @@ async function loadCreators(){
 
   const {data,error} =
     await supabaseClient
-
       .from("creators")
-
       .select("*")
-
       .order(
         "display_order",
-        {
-          ascending:true
-        }
+        {ascending:true}
       )
-
       .order(
         "id",
-        {
-          ascending:true
-        }
+        {ascending:true}
       );
 
 
@@ -2175,9 +2078,7 @@ async function loadCreators(){
   }
 
 
-  creators =
-    data;
-
+  creators = data;
 
   renderCreators();
 
@@ -2202,12 +2103,14 @@ function renderCreators(){
   const visibleCreators =
     creatorsExpanded
       ? creators
-      : creators.slice(0,6);
+      : creators.slice(
+          0,
+          creatorVisible
+        );
 
 
   visibleCreators.forEach(
-    (creator,index)=>{
-
+    (creator,index) => {
 
       const card =
         document.createElement(
@@ -2329,30 +2232,17 @@ function renderCreators(){
         "Subscribers unavailable";
 
 
-      link.appendChild(
-        avatar
-      );
+      link.appendChild(avatar);
 
-      link.appendChild(
-        name
-      );
+      link.appendChild(name);
 
-      link.appendChild(
-        channel
-      );
+      link.appendChild(channel);
 
-      link.appendChild(
-        subscribers
-      );
+      link.appendChild(subscribers);
 
+      card.appendChild(link);
 
-      card.appendChild(
-        link
-      );
-
-      grid.appendChild(
-        card
-      );
+      grid.appendChild(card);
 
     }
   );
@@ -2386,7 +2276,7 @@ function renderCreators(){
 
 
 /* =====================================================
-   CREATOR VIEW ALL / SHOW LESS
+   CREATOR VIEW ALL
 ===================================================== */
 
 document
@@ -2402,22 +2292,6 @@ document
 
 
       renderCreators();
-
-
-      if(creatorsExpanded){
-
-        setTimeout(() => {
-
-          document
-            .getElementById("creatorLoadMore")
-            .scrollIntoView({
-              behavior:"smooth",
-              block:"center"
-            });
-
-        },100);
-
-      }
 
     }
   );
@@ -2437,23 +2311,15 @@ async function loadFAQs(){
 
   const {data,error} =
     await supabaseClient
-
       .from("faq")
-
       .select("*")
-
       .order(
         "display_order",
-        {
-          ascending:true
-        }
+        {ascending:true}
       )
-
       .order(
         "id",
-        {
-          ascending:true
-        }
+        {ascending:true}
       );
 
 
@@ -2492,16 +2358,13 @@ async function loadFAQs(){
   }
 
 
-  faqs =
-    data;
-
+  faqs = data;
 
   list.innerHTML = "";
 
 
   faqs.forEach(
     item => {
-
 
       const button =
         document.createElement(
@@ -2553,19 +2416,11 @@ async function loadFAQs(){
         "";
 
 
-      button.appendChild(
-        question
-      );
+      button.appendChild(question);
 
+      button.appendChild(plus);
 
-      button.appendChild(
-        plus
-      );
-
-
-      button.appendChild(
-        answer
-      );
+      button.appendChild(answer);
 
 
       button.addEventListener(
@@ -2587,9 +2442,7 @@ async function loadFAQs(){
       );
 
 
-      list.appendChild(
-        button
-      );
+      list.appendChild(button);
 
     }
   );
@@ -2633,7 +2486,6 @@ function loadCustomContactButtons(){
 
   buttons.forEach(
     button => {
-
 
       if(
         !button.name ||
@@ -2707,14 +2559,9 @@ function loadCustomContactButtons(){
         button.name;
 
 
-      a.appendChild(
-        text
-      );
+      a.appendChild(text);
 
-
-      container.appendChild(
-        a
-      );
+      container.appendChild(a);
 
     }
   );
@@ -2729,23 +2576,18 @@ function loadCustomContactButtons(){
 function openImageViewer(url){
 
   if(!url){
-
     return;
-
   }
 
 
   document.getElementById(
     "viewerImage"
-  ).src =
-    url;
+  ).src = url;
 
 
   document.getElementById(
     "imageViewer"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 
   document.body.style.overflow =
@@ -2758,9 +2600,7 @@ function closeImageViewer(){
 
   document.getElementById(
     "imageViewer"
-  ).classList.remove(
-    "show"
-  );
+  ).classList.remove("show");
 
 
   document.body.style.overflow =
@@ -2784,7 +2624,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   PORTFOLIO VIEW COUNTER
+   VIEW COUNTER
 ===================================================== */
 
 async function registerPortfolioView(){
@@ -2848,15 +2688,13 @@ async function registerPortfolioView(){
 
 
 /* =====================================================
-   STAT ANIMATION
+   STAT COUNTING ANIMATION
 ===================================================== */
 
 function animateNumber(element){
 
   if(!element){
-
     return;
-
   }
 
 
@@ -2947,9 +2785,7 @@ function animateNumber(element){
     "0" + suffix;
 
 
-  requestAnimationFrame(
-    update
-  );
+  requestAnimationFrame(update);
 
 }
 
@@ -2980,6 +2816,85 @@ function animateStats(){
 
 
 /* =====================================================
+   ALL SECTION SCROLL FADE
+===================================================== */
+
+function initScrollReveal(){
+
+  const elements =
+    document.querySelectorAll(
+      "main > section, .section-head, .about-card, .contact-card, .site-footer"
+    );
+
+
+  if(
+    !("IntersectionObserver" in window)
+  ){
+
+    elements.forEach(
+      element => {
+
+        element.classList.add(
+          "revealed"
+        );
+
+      }
+    );
+
+    return;
+
+  }
+
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(
+          entry => {
+
+            if(
+              entry.isIntersecting
+            ){
+
+              entry.target.classList.add(
+                "revealed"
+              );
+
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          }
+        );
+
+      },
+      {
+        threshold:.12
+      }
+    );
+
+
+  elements.forEach(
+    element => {
+
+      element.classList.add(
+        "scroll-reveal"
+      );
+
+
+      observer.observe(element);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
    UTILITIES
 ===================================================== */
 
@@ -2988,31 +2903,11 @@ function escapeHTML(value){
   return String(
     value ?? ""
   )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
@@ -3055,7 +2950,7 @@ function getYouTubeHandle(url){
 
 
 /* =====================================================
-   LOADER HIDE + STATS ANIMATION
+   LOADER HIDE
 ===================================================== */
 
 function hideLoader(){
@@ -3077,11 +2972,6 @@ function hideLoader(){
 
       }
 
-
-      /*
-        Loader hide hone ke baad
-        stats counting start hogi.
-      */
 
       setTimeout(
         () => {
@@ -3122,12 +3012,7 @@ async function startWebsite(){
   loadCustomContactButtons();
 
 
-  /*
-    Stats animation yahan directly
-    nahi chalegi.
-    Loader ke baad hideLoader()
-    se chalegi.
-  */
+  initScrollReveal();
 
 
   hideLoader();
