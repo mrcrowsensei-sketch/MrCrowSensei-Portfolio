@@ -55,7 +55,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
 const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
@@ -64,9 +63,7 @@ const supabaseClient =
     SUPABASE_URL,
     SUPABASE_KEY
   );
-
 </script>
-
 
 <style>
 
@@ -120,51 +117,63 @@ const supabaseClient =
   display:grid;
   place-items:center;
   margin-bottom:45px;
+
+  background:transparent !important;
+  border-radius:0 !important;
 }
 
 .loader-logo-img{
   width:150px;
   height:150px;
-  object-fit:contain;
-  border-radius:50%;
 
-  transform:scale(.72);
-  opacity:.75;
+  object-fit:contain;
+
+  background:transparent !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+
+  transform:scale(.05);
+  opacity:1;
+
   transform-origin:center;
 
-  animation:loaderLogoNormal 1.2s ease-out forwards;
+  animation:loaderLogoNormal 1.2s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
 .loader-logo-wrap .logo-fallback{
   display:none;
+
   width:150px;
   height:150px;
+
   place-items:center;
-  border-radius:50%;
-  background:#e00000;
+
+  background:transparent !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+
   color:white;
   font-size:42px;
   font-weight:900;
 
-  transform:scale(.72);
-  opacity:.75;
+  transform:scale(.05);
+  opacity:1;
+
   transform-origin:center;
 
-  animation:loaderLogoNormal 1.2s ease-out forwards;
+  animation:loaderLogoNormal 1.2s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
 @keyframes loaderLogoNormal{
-
   0%{
-    transform:scale(.72);
-    opacity:.75;
+    transform:scale(.05);
+    opacity:1;
   }
 
   100%{
     transform:scale(1);
     opacity:1;
   }
-
 }
 
 .loader-bar{
@@ -195,7 +204,6 @@ const supabaseClient =
 }
 
 @keyframes loaderCenterExpand{
-
   0%{
     transform:translateX(-50%) scaleX(0);
   }
@@ -203,13 +211,13 @@ const supabaseClient =
   100%{
     transform:translateX(-50%) scaleX(1);
   }
-
 }
 
 
 /* =====================================================
    AVAILABILITY
-   ONE DOT ONLY
+   TEXT STATIC
+   ONLY GREEN DOT ANIMATES
 ===================================================== */
 
 .availability::before,
@@ -246,6 +254,10 @@ const supabaseClient =
   line-height:1 !important;
 
   white-space:nowrap !important;
+
+  animation:none !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
 }
 
 .availability > span:first-child{
@@ -266,9 +278,27 @@ const supabaseClient =
 
   background:#35e36b !important;
 
-  box-shadow:0 0 9px rgba(53,227,107,.65) !important;
+  box-shadow:0 0 0 rgba(53,227,107,0) !important;
 
-  animation:none !important;
+  animation:availabilityDotPulse 1.8s ease-in-out infinite !important;
+}
+
+@keyframes availabilityDotPulse{
+
+  0%{
+    box-shadow:0 0 0 rgba(53,227,107,0);
+  }
+
+  50%{
+    box-shadow:
+      0 0 9px rgba(53,227,107,.85),
+      0 0 16px rgba(53,227,107,.35);
+  }
+
+  100%{
+    box-shadow:0 0 0 rgba(53,227,107,0);
+  }
+
 }
 
 .availability > span:last-child{
@@ -282,12 +312,14 @@ const supabaseClient =
 
   line-height:1 !important;
   white-space:nowrap !important;
+
+  animation:none !important;
+  text-shadow:none !important;
 }
 
 
 /* =====================================================
    STATS
-   HIDDEN UNTIL SCROLL
 ===================================================== */
 
 .hero-stats{
@@ -661,16 +693,27 @@ html{
   .loader-logo-wrap{
     width:140px;
     height:140px;
+
+    background:transparent !important;
+    border-radius:0 !important;
   }
 
   .loader-logo-img{
     width:140px;
     height:140px;
+
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
   }
 
   .loader-logo-wrap .logo-fallback{
     width:140px;
     height:140px;
+
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
   }
 
   .loader-bar{
@@ -699,7 +742,6 @@ html{
 </style>
 
 </head>
-
 
 <body>
 
@@ -731,7 +773,6 @@ html{
       </div>
 
     </div>
-
 
     <div class="loader-bar">
       <span></span>
@@ -1488,9 +1529,6 @@ let siteSettings = {
 
   og_image_url:"",
 
-
-  /* FOOTER */
-
   footer_logo_url:"",
 
   footer_name:"Mr CrowSensei",
@@ -1520,15 +1558,11 @@ let siteSettings = {
 
 
 let portfolio = [];
-
 let creators = [];
-
 let faqs = [];
 
 let portfolioVisible = 6;
-
 let creatorVisible = 6;
-
 let creatorsExpanded = false;
 
 
@@ -1545,7 +1579,6 @@ async function loadSiteSettings(){
       .eq("id",1)
       .maybeSingle();
 
-
   if(error){
 
     console.error(
@@ -1557,7 +1590,6 @@ async function loadSiteSettings(){
 
   }
 
-
   if(data){
 
     siteSettings = {
@@ -1566,7 +1598,6 @@ async function loadSiteSettings(){
     };
 
   }
-
 
   applySiteSettings();
 
@@ -1579,18 +1610,14 @@ async function loadSiteSettings(){
 
 function applySiteSettings(){
 
-  const S =
-    siteSettings;
+  const S = siteSettings;
 
-
-  /* LOGO */
 
   if(S.logo_url){
 
     document.getElementById(
       "loaderLogo"
     ).src = S.logo_url;
-
 
     document.getElementById(
       "navLogo"
@@ -1599,8 +1626,6 @@ function applySiteSettings(){
   }
 
 
-  /* NAME */
-
   document.getElementById(
     "navName"
   ).textContent =
@@ -1608,16 +1633,12 @@ function applySiteSettings(){
     "Mr CrowSensei";
 
 
-  /* AVAILABILITY */
-
   document.getElementById(
     "availabilityText"
   ).textContent =
     S.new_design_text ||
     "New Designs Available";
 
-
-  /* HERO NAME */
 
   const parts =
     (
@@ -1630,7 +1651,6 @@ function applySiteSettings(){
 
   const first =
     parts.shift() || "";
-
 
   const second =
     parts.join(" ");
@@ -1651,8 +1671,6 @@ function applySiteSettings(){
   `;
 
 
-  /* HERO */
-
   document.getElementById(
     "heroTitle"
   ).textContent =
@@ -1666,8 +1684,6 @@ function applySiteSettings(){
     S.hero_subtitle ||
     "Crafted for Creators";
 
-
-  /* STATS */
 
   document.getElementById(
     "statThumbs"
@@ -1690,8 +1706,6 @@ function applySiteSettings(){
     "2+";
 
 
-  /* ABOUT */
-
   document.getElementById(
     "aboutText"
   ).textContent =
@@ -1707,8 +1721,6 @@ function applySiteSettings(){
 
   }
 
-
-  /* CONTACT */
 
   document.getElementById(
     "contactTitle"
@@ -1742,9 +1754,7 @@ function applySiteSettings(){
     S.twitter_url || "#";
 
 
-  /* =====================================================
-     FOOTER
-  ===================================================== */
+  /* FOOTER */
 
   document.getElementById(
     "footerName"
@@ -1820,12 +1830,8 @@ function applySiteSettings(){
   }
 
 
-  /* THEME */
-
   applyTheme();
 
-
-  /* SEO */
 
   document.title =
     S.og_title ||
@@ -1874,7 +1880,6 @@ function applySiteSettings(){
     ).content =
       S.og_image_url;
 
-
     document.getElementById(
       "twitterImage"
     ).content =
@@ -1891,8 +1896,7 @@ function applySiteSettings(){
 
 function applyTheme(){
 
-  const S =
-    siteSettings;
+  const S = siteSettings;
 
 
   document.documentElement.style.setProperty(
@@ -2166,7 +2170,7 @@ function renderPortfolio(){
 
 
 /* =====================================================
-   PORTFOLIO ONE-TIME OBSERVER
+   PORTFOLIO OBSERVER
 ===================================================== */
 
 function observePortfolioCards(){
@@ -2523,7 +2527,6 @@ document
 
       creatorsExpanded =
         !creatorsExpanded;
-
 
       renderCreators();
 
@@ -2963,10 +2966,10 @@ function animateNumber(element){
     );
 
 
-  /* SLOWER COUNTING */
+  /* ORIGINAL / FASTER SPEED */
 
   const duration =
-    2200;
+    1500;
 
 
   const start =
@@ -3102,8 +3105,6 @@ function initStatsAnimation(){
               animateStats();
 
 
-              /* RUN ONLY ONCE */
-
               observer.unobserve(
                 stats
               );
@@ -3171,8 +3172,6 @@ function initScrollReveal(){
                 "revealed"
               );
 
-
-              /* RUN ONLY ONCE */
 
               observer.unobserve(
                 entry.target
@@ -3267,7 +3266,6 @@ function getYouTubeHandle(url){
       return "@" +
         path[path.length-1]
           .replace("@","");
-
     }
 
   }catch(e){}
@@ -3331,17 +3329,11 @@ async function startWebsite(){
   loadCustomContactButtons();
 
 
-  /* NORMAL SECTIONS */
-
   initScrollReveal();
 
 
-  /* STATS SEPARATELY */
-
   initStatsAnimation();
 
-
-  /* LOADER */
 
   hideLoader();
 
@@ -3362,7 +3354,6 @@ registerPortfolioView();
 startWebsite();
 
 </script>
-
 
 </body>
 </html>
