@@ -1,667 +1,1938 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
-  <title>Mr CrowSensei — Thumbnail Designer</title>
+<meta name="description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
+<title>Mr CrowSensei — Thumbnail Designer</title>
 
-  <meta property="og:title" content="Mr CrowSensei — Thumbnail Designer">
-  <meta property="og:description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
-  <meta property="og:image" content="https://mrcrowsensei.vercel.app/og-banner.png">
-  <meta property="og:url" content="https://mrcrowsensei.vercel.app/">
-  <meta property="og:type" content="website">
+<meta id="metaDescription" name="description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mr CrowSensei — Thumbnail Designer">
-  <meta name="twitter:description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
-  <meta name="twitter:image" content="https://mrcrowsensei.vercel.app/og-banner.png">
+<meta id="ogTitle" property="og:title" content="Mr CrowSensei — Thumbnail Designer">
+<meta id="ogDescription" property="og:description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
+<meta id="ogImage" property="og:image" content="https://mrcrowsensei.vercel.app/og-banner.png">
+<meta property="og:url" content="https://mrcrowsensei.vercel.app/">
+<meta property="og:type" content="website">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="twitter:card" content="summary_large_image">
+<meta id="twitterTitle" name="twitter:title" content="Mr CrowSensei — Thumbnail Designer">
+<meta id="twitterDescription" name="twitter:description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
+<meta id="twitterImage" name="twitter:image" content="https://mrcrowsensei.vercel.app/og-banner.png">
 
-  <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="style.css">
 
-  <script>
-    const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    const supabaseClient = supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-  </script>
+<script>
+const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
+
+<style>
+/* Dynamic website additions */
+
+.twitter-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-width:min(620px,90%);
+  padding:18px 25px;
+  margin-top:12px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.22);
+  background:#111;
+  color:#fff;
+  font-size:16px;
+  font-weight:800;
+  transition:.25s;
+}
+
+.twitter-button:hover{
+  transform:translateY(-3px);
+  border-color:#666;
+}
+
+.twitter-icon{
+  font-size:22px;
+}
+
+.contact-buttons{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  max-width:760px;
+  margin:25px auto 0;
+}
+
+.custom-contact-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:58px;
+  border-radius:15px;
+  font-size:14px;
+  font-weight:800;
+  transition:.25s;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.custom-contact-button:hover{
+  transform:translateY(-3px);
+}
+
+.custom-contact-button img{
+  width:25px;
+  height:25px;
+  object-fit:contain;
+  border-radius:6px;
+}
+
+.fullscreen-viewer{
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(16px);
+}
+
+.fullscreen-viewer.show{
+  display:flex;
+}
+
+.fullscreen-viewer img{
+  max-width:95vw;
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:14px;
+  box-shadow:0 25px 100px rgba(0,0,0,.7);
+}
+
+.viewer-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:44px;
+  height:44px;
+  border:1px solid #444;
+  border-radius:12px;
+  background:#111;
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.creator-link{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+}
+
+.creator-card{
+  cursor:pointer;
+}
+
+.creator-card.hidden{
+  display:none;
+}
+
+.work-card{
+  cursor:zoom-in;
+}
+
+.work-card.hidden{
+  display:none;
+}
+
+@media(max-width:700px){
+  .contact-buttons{
+    grid-template-columns:1fr;
+  }
+
+  .twitter-button{
+    min-width:100%;
+    font-size:14px;
+    padding:18px 12px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- LOADER -->
-  <div id="loader" class="loader-screen">
-    <div class="loader-inner">
+<!-- LOADING SCREEN -->
+<div id="loader" class="loader-screen">
 
-      <div class="loader-logo-wrap">
-        <img
-          src="images/logo.png"
-          alt="CrowSensei logo"
-          class="loader-logo-img"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
-        >
-        <div class="logo-fallback">CS</div>
-      </div>
+  <div class="loader-inner">
 
-      <div class="loader-name">Mr CrowSensei</div>
+    <div class="loader-logo-wrap">
 
-      <div class="loader-bar">
-        <span></span>
-      </div>
+      <img
+        id="loaderLogo"
+        src="images/logo.png"
+        alt="CrowSensei logo"
+        class="loader-logo-img"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+      >
+
+      <div class="logo-fallback">CS</div>
 
     </div>
+
+    <div class="loader-name" id="loaderName">
+      Mr CrowSensei
+    </div>
+
+    <div class="loader-bar">
+      <span></span>
+    </div>
+
   </div>
 
-  <div class="bg-glow glow-one"></div>
-  <div class="bg-glow glow-two"></div>
+</div>
 
 
-  <!-- NAVBAR -->
-  <header class="navbar">
+<div class="bg-glow glow-one"></div>
+<div class="bg-glow glow-two"></div>
 
-    <a class="brand" href="#home">
 
-      <span class="brand-logo-wrap">
+<!-- NAVBAR -->
+<header class="navbar">
 
-        <img
-          src="images/logo.png"
-          alt=""
-          class="brand-logo"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
-        >
+  <a class="brand" href="#home">
 
-        <span class="brand-fallback">CS</span>
+    <span class="brand-logo-wrap">
 
-      </span>
+      <img
+        id="navLogo"
+        src="images/logo.png"
+        alt=""
+        class="brand-logo"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+      >
 
-      <span>Mr CrowSensei</span>
+      <span class="brand-fallback">CS</span>
 
+    </span>
+
+    <span id="navName">
+      Mr CrowSensei
+    </span>
+
+  </a>
+
+
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#creators">Creators</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+
+  <a class="nav-cta" href="#contact">
+    Let's Work
+  </a>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+<section class="hero section" id="home">
+
+  <div class="availability">
+
+    <span></span>
+
+    <span id="availabilityText">
+      New Designs Available
+    </span>
+
+  </div>
+
+
+  <h1 id="heroName">
+
+    <span>Mr</span>
+    <span>CrowSensei</span>
+
+  </h1>
+
+
+  <div class="hero-copy">
+
+    <div id="heroTitle">
+      Professional Minecraft Thumbnails
+    </div>
+
+    <div class="hero-subline" id="heroSubtitle">
+      Crafted for Creators
+    </div>
+
+    <div class="curve-line" aria-hidden="true">
+
+      <svg
+        viewBox="0 0 390 48"
+        preserveAspectRatio="none"
+      >
+        <path d="M4 25 C70 5, 118 39, 178 22 C236 6, 286 42, 386 19"/>
+      </svg>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-actions">
+
+    <a class="button primary" href="#work">
+      Browse Portfolio <span>→</span>
     </a>
 
-
-    <nav>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-
-    <a class="nav-cta" href="#contact">
+    <a class="button secondary" href="#contact">
       Let's Work
     </a>
 
-  </header>
+  </div>
 
 
-  <main>
+  <div class="hero-stats">
 
-    <!-- HERO -->
-    <section class="hero section" id="home">
+    <div>
+      <strong id="statThumbs">100+</strong>
+      <span>THUMBNAILS</span>
+    </div>
 
-      <div class="availability">
+    <div>
+      <strong id="statCreators">50+</strong>
+      <span>CREATORS</span>
+    </div>
+
+    <div>
+      <strong id="statYears">2+</strong>
+      <span>YEARS DESIGNING</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PORTFOLIO -->
+<section class="section" id="work">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="eyebrow">
         <span></span>
-        New Designs Available
+        SELECTED WORK
+      </div>
+
+      <h2>
+        My latest <em>thumbnails.</em>
+      </h2>
+
+    </div>
+
+    <p>
+      My latest Minecraft thumbnail designs.
+    </p>
+
+  </div>
+
+
+  <div class="work-grid" id="portfolioGrid">
+
+    <div style="
+      grid-column:1/-1;
+      text-align:center;
+      padding:40px;
+      color:#777;
+    ">
+      Loading thumbnails...
+    </div>
+
+  </div>
+
+
+  <div class="load-more-wrap">
+
+    <button
+      id="portfolioLoadMore"
+      class="load-more"
+      type="button"
+      style="display:none"
+    >
+      Load More
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+
+  <div class="about-intro">
+
+    <div class="eyebrow">
+
+      <span></span>
+
+      <span id="aboutLabel">
+        ABOUT ME
+      </span>
+
+    </div>
+
+
+    <h2 id="aboutSectionTitle">
+      The designer behind<br>
+      the <em>thumbnails.</em>
+    </h2>
+
+
+    <p id="aboutSectionSubtitle">
+      The person behind professional Minecraft thumbnails for creators.
+    </p>
+
+  </div>
+
+
+  <div class="about-card">
+
+    <div class="about-photo-wrap">
+
+      <img
+        id="aboutImage"
+        src="images/logo.png"
+        alt="CrowSensei"
+        class="about-photo"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+      >
+
+      <div class="about-fallback">
+        CS
+      </div>
+
+    </div>
+
+
+    <div class="about-copy">
+
+      <div class="about-label" id="aboutCardLabel">
+        MR CROWSENSEI
       </div>
 
 
-      <h1>
-        <span>Mr</span>
-        <span>CrowSensei</span>
-      </h1>
+      <h3 id="aboutHeading">
+        Turning Minecraft ideas into
+        <em>clickable visuals.</em>
+      </h3>
 
 
-      <div class="hero-copy">
-
-        <div>
-          Professional Minecraft Thumbnails
-        </div>
-
-        <div class="hero-subline">
-          Crafted for Creators
-        </div>
-
-        <div class="curve-line" aria-hidden="true">
-
-          <svg
-            viewBox="0 0 390 48"
-            preserveAspectRatio="none"
-          >
-            <path d="M4 25 C70 5, 118 39, 178 22 C236 6, 286 42, 386 19" />
-          </svg>
-
-        </div>
-
-      </div>
-
-
-      <div class="hero-actions">
-
-        <a class="button primary" href="#work">
-          Browse Portfolio <span>→</span>
-        </a>
-
-        <a class="button secondary" href="#contact">
-          Let's Work
-        </a>
-
-      </div>
-
-
-      <div class="hero-stats">
-
-        <div>
-          <strong>100+</strong>
-          <span>THUMBNAILS</span>
-        </div>
-
-        <div>
-          <strong>50+</strong>
-          <span>CREATORS</span>
-        </div>
-
-        <div>
-          <strong>2+</strong>
-          <span>YEARS DESIGNING</span>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- WORK / PORTFOLIO -->
-    <section class="section" id="work">
-
-      <div class="section-head">
-
-        <div>
-
-          <div class="eyebrow">
-            <span></span>
-            SELECTED WORK
-          </div>
-
-          <h2>
-            My latest <em>thumbnails.</em>
-          </h2>
-
-        </div>
-
-
-        <p>
-          My latest Minecraft thumbnail designs.
-        </p>
-
-      </div>
-
-
-      <!-- SUPABASE THUMBNAILS -->
-      <div class="work-grid" id="portfolioGrid">
-
-        <div
-          style="
-            grid-column:1/-1;
-            text-align:center;
-            padding:40px;
-          "
-        >
-          Loading thumbnails...
-        </div>
-
-      </div>
-
-
-      <div class="load-more-wrap">
-
-        <button
-          class="load-more"
-          type="button"
-        >
-          Load More
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- ABOUT -->
-    <section class="section about" id="about">
-
-      <div class="about-intro">
-
-        <div class="eyebrow">
-          <span></span>
-          ABOUT ME
-        </div>
-
-
-        <h2>
-          The designer behind<br>
-          the <em>thumbnails.</em>
-        </h2>
-
-
-        <p>
-          The person behind professional Minecraft thumbnails for creators.
-        </p>
-
-      </div>
-
-
-      <div class="about-card">
-
-        <div class="about-photo-wrap">
-
-          <img
-            src="images/logo.png"
-            alt="CrowSensei logo"
-            class="about-photo"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
-          >
-
-          <div class="about-fallback">
-            CS
-          </div>
-
-        </div>
-
-
-        <div class="about-copy">
-
-          <div class="about-label">
-            MR CROWSENSEI
-          </div>
-
-
-          <h3>
-            Turning Minecraft ideas into
-            <em>clickable visuals.</em>
-          </h3>
-
-
-          <p>
-            I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story.
-          </p>
-
-
-          <p>
-            Every thumbnail is built around one goal: making someone stop scrolling.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CREATORS -->
-    <section class="section creators" id="creators">
-
-      <div class="section-head centered">
-
-        <div>
-
-          <div class="eyebrow">
-            <span></span>
-            CLIENTS
-          </div>
-
-
-          <h2>
-            Trusted by <em>creators.</em>
-          </h2>
-
-        </div>
-
-      </div>
-
-
-      <p class="creators-intro">
-        Creators who trust Mr CrowSensei for their Minecraft thumbnails.
+      <p id="aboutText">
+        I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story.
       </p>
 
+    </div>
 
-      <div class="creator-row">
+  </div>
 
-        <article class="creator-card">
-
-          <div class="creator-avatar">
-            <span>01</span>
-          </div>
-
-          <h3>Creator Name</h3>
-          <p>@creator</p>
-          <b>Subscribers</b>
-
-        </article>
+</section>
 
 
-        <article class="creator-card">
+<!-- CREATORS -->
+<section class="section creators" id="creators">
 
-          <div class="creator-avatar">
-            <span>02</span>
-          </div>
+  <div class="section-head centered">
 
-          <h3>Creator Name</h3>
-          <p>@creator</p>
-          <b>Subscribers</b>
+    <div>
 
-        </article>
-
-
-        <article class="creator-card">
-
-          <div class="creator-avatar">
-            <span>03</span>
-          </div>
-
-          <h3>Creator Name</h3>
-          <p>@creator</p>
-          <b>Subscribers</b>
-
-        </article>
-
-
-        <article class="creator-card">
-
-          <div class="creator-avatar">
-            <span>04</span>
-          </div>
-
-          <h3>Creator Name</h3>
-          <p>@creator</p>
-          <b>Subscribers</b>
-
-        </article>
-
+      <div class="eyebrow">
+        <span></span>
+        CLIENTS
       </div>
 
-    </section>
+      <h2>
+        Trusted by <em>creators.</em>
+      </h2>
+
+    </div>
+
+  </div>
 
 
-    <!-- FAQ -->
-    <section class="section faq" id="faq">
-
-      <div class="section-head centered">
-
-        <div>
-
-          <div class="eyebrow">
-            <span></span>
-            FAQ
-          </div>
+  <p class="creators-intro">
+    Creators who trust Mr CrowSensei for their Minecraft thumbnails.
+  </p>
 
 
-          <h2>
-            Got <em>questions?</em>
-          </h2>
+  <div class="creator-row" id="creatorGrid">
 
-        </div>
+    <div style="
+      grid-column:1/-1;
+      text-align:center;
+      color:#777;
+      padding:40px;
+    ">
+      Loading creators...
+    </div>
 
+  </div>
+
+
+  <div class="load-more-wrap">
+
+    <button
+      id="creatorLoadMore"
+      class="load-more"
+      type="button"
+      style="display:none"
+    >
+      Load More
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+
+  <div class="section-head centered">
+
+    <div>
+
+      <div class="eyebrow">
+        <span></span>
+        FAQ
       </div>
 
+      <h2>
+        Got <em>questions?</em>
+      </h2>
 
-      <div class="faq-list">
+    </div>
 
-        <button class="faq-item">
-
-          <span>
-            How do I order a thumbnail?
-          </span>
-
-          <b>+</b>
-
-          <p>
-            Send me your video idea, references and deadline through Discord.
-          </p>
-
-        </button>
+  </div>
 
 
-        <button class="faq-item">
+  <div class="faq-list" id="faqList">
 
-          <span>
-            How long does a thumbnail take?
-          </span>
+    <div style="
+      text-align:center;
+      padding:40px;
+      color:#777;
+    ">
+      Loading FAQ...
+    </div>
 
-          <b>+</b>
+  </div>
 
-          <p>
-            Delivery time depends on the complexity and my current availability.
-          </p>
-
-        </button>
-
-
-        <button class="faq-item">
-
-          <span>
-            Can you make a custom style?
-          </span>
-
-          <b>+</b>
-
-          <p>
-            Yes. Send references and explain the feeling you want, and I'll build the design around it.
-          </p>
-
-        </button>
+</section>
 
 
-        <button class="faq-item">
+<!-- CONTACT -->
+<section class="section contact-wrap" id="contact">
 
-          <span>
-            Where can I contact you?
-          </span>
+  <div class="contact-card">
 
-          <b>+</b>
+    <div class="contact-small">
+      CONTACT ME
+    </div>
 
-          <p>
-            Discord is the fastest way to reach me.
-          </p>
 
-        </button>
+    <h2 id="contactTitle">
+      Ready for<br>
+      Thumbnails<br>
+      That Get<br>
+      Clicked?
+    </h2>
 
+
+    <p id="contactText">
+      Send your video idea and deadline.<br>
+      I'll reply with availability and the next<br>
+      steps — fastest on Discord.
+    </p>
+
+
+    <a
+      id="discordButton"
+      class="discord-button"
+      href="https://discord.com/users/1492187397058855163"
+      target="_blank"
+      rel="noopener"
+    >
+
+      <span class="discord-icon">
+        ◯
+      </span>
+
+      Message on Discord
+
+    </a>
+
+
+    <a
+      id="twitterButton"
+      class="twitter-button"
+      href="https://x.com/MrCrowSensei"
+      target="_blank"
+      rel="noopener"
+    >
+
+      <span class="twitter-icon">
+        𝕏
+      </span>
+
+      Follow on Twitter / X
+
+    </a>
+
+
+    <div
+      id="customContactButtons"
+      class="contact-buttons"
+    ></div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <span>
+    © 2026 Mr CrowSensei
+  </span>
+
+  <span>
+    Made for Minecraft creators.
+  </span>
+
+</footer>
+
+
+<!-- FULLSCREEN IMAGE VIEWER -->
+<div
+  id="imageViewer"
+  class="fullscreen-viewer"
+  onclick="if(event.target===this)closeImageViewer()"
+>
+
+  <button
+    class="viewer-close"
+    onclick="closeImageViewer()"
+  >
+    ×
+  </button>
+
+  <img
+    id="viewerImage"
+    src=""
+    alt="Thumbnail preview"
+  >
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+let siteSettings = {
+  header_name: "Mr CrowSensei",
+  logo_url: "",
+
+  new_design_text: "New Designs Available",
+
+  hero_title: "Professional Minecraft Thumbnails",
+  hero_subtitle: "Crafted for Creators",
+
+  stats_thumbnails: "100+",
+  stats_creators: "50+",
+  stats_years: "2+",
+
+  about_text:
+    "I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story.",
+
+  about_image_url: "",
+
+  discord_url:
+    "https://discord.com/users/1492187397058855163",
+
+  twitter_url:
+    "https://x.com/MrCrowSensei",
+
+  contact_title:
+    "Ready for\nThumbnails\nThat Get\nClicked?",
+
+  contact_text:
+    "Send your video idea and deadline.\nI'll reply with availability and the next steps — fastest on Discord.",
+
+  bg_color:"#080808",
+  bg_gradient_1:"#151515",
+  bg_gradient_2:"#080808",
+  bg_gradient_direction:"135deg",
+
+  primary_color:"#ffffff",
+  heading_color:"#ffffff",
+  text_color:"#f7f8ff",
+  muted_color:"#85858a",
+  card_color:"#111111",
+  border_color:"#292929",
+  button_color:"#ffffff",
+  button_text_color:"#080808",
+  accent_color:"#35e36b",
+
+  og_title:"Mr CrowSensei — Thumbnail Designer",
+
+  og_description:
+    "Mr CrowSensei — Professional Minecraft Thumbnail Designer",
+
+  og_image_url:""
+};
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let portfolio = [];
+let creators = [];
+let faqs = [];
+
+let portfolioVisible = 6;
+let creatorVisible = 8;
+
+
+/* =========================================================
+   LOAD SITE SETTINGS
+========================================================= */
+
+async function loadSiteSettings(){
+
+  const {data,error} = await supabaseClient
+    .from("site_settings")
+    .select("*")
+    .eq("id",1)
+    .maybeSingle();
+
+
+  if(error){
+
+    console.error("Site settings error:",error);
+
+    return;
+
+  }
+
+
+  if(data){
+
+    siteSettings = {
+      ...siteSettings,
+      ...data
+    };
+
+  }
+
+
+  applySiteSettings();
+
+}
+
+
+/* =========================================================
+   APPLY SETTINGS
+========================================================= */
+
+function applySiteSettings(){
+
+  const S = siteSettings;
+
+
+  /* Header */
+
+  document.getElementById("navName").textContent =
+    S.header_name || "Mr CrowSensei";
+
+
+  if(S.logo_url){
+
+    document.getElementById("navLogo").src =
+      S.logo_url;
+
+    document.getElementById("loaderLogo").src =
+      S.logo_url;
+
+  }
+
+
+  /* Loader */
+
+  document.getElementById("loaderName").textContent =
+    S.header_name || "Mr CrowSensei";
+
+
+  /* Hero */
+
+  document.getElementById("availabilityText").textContent =
+    S.new_design_text || "New Designs Available";
+
+
+  const nameParts =
+    (S.header_name || "Mr CrowSensei")
+      .trim()
+      .split(/\s+/);
+
+
+  const firstName =
+    nameParts.shift() || "";
+
+
+  const remainingName =
+    nameParts.join(" ");
+
+
+  document.getElementById("heroName").innerHTML =
+    `
+      <span>${escapeHTML(firstName)}</span>
+      <span>${escapeHTML(remainingName)}</span>
+    `;
+
+
+  document.getElementById("heroTitle").textContent =
+    S.hero_title || "Professional Minecraft Thumbnails";
+
+
+  document.getElementById("heroSubtitle").textContent =
+    S.hero_subtitle || "Crafted for Creators";
+
+
+  /* Stats */
+
+  document.getElementById("statThumbs").textContent =
+    S.stats_thumbnails || "100+";
+
+
+  document.getElementById("statCreators").textContent =
+    S.stats_creators || "50+";
+
+
+  document.getElementById("statYears").textContent =
+    S.stats_years || "2+";
+
+
+  /* About */
+
+  if(S.about_image_url){
+
+    document.getElementById("aboutImage").src =
+      S.about_image_url;
+
+  }
+
+
+  document.getElementById("aboutText").textContent =
+    S.about_text || "";
+
+
+  /* Contact */
+
+  document.getElementById("contactTitle").innerHTML =
+    escapeHTML(
+      S.contact_title ||
+      "Ready for\nThumbnails\nThat Get\nClicked?"
+    ).replace(/\n/g,"<br>");
+
+
+  document.getElementById("contactText").innerHTML =
+    escapeHTML(
+      S.contact_text ||
+      "Send your video idea and deadline."
+    ).replace(/\n/g,"<br>");
+
+
+  document.getElementById("discordButton").href =
+    S.discord_url || "#";
+
+
+  document.getElementById("twitterButton").href =
+    S.twitter_url || "#";
+
+
+  /* Theme */
+
+  applyTheme();
+
+
+  /* Social preview */
+
+  document.title =
+    S.og_title ||
+    "Mr CrowSensei — Thumbnail Designer";
+
+
+  document.getElementById("metaDescription").content =
+    S.og_description ||
+    "Mr CrowSensei — Professional Minecraft Thumbnail Designer";
+
+
+  document.getElementById("ogTitle").content =
+    S.og_title ||
+    "Mr CrowSensei — Thumbnail Designer";
+
+
+  document.getElementById("ogDescription").content =
+    S.og_description ||
+    "Mr CrowSensei — Professional Minecraft Thumbnail Designer";
+
+
+  document.getElementById("twitterTitle").content =
+    S.og_title ||
+    "Mr CrowSensei — Thumbnail Designer";
+
+
+  document.getElementById("twitterDescription").content =
+    S.og_description ||
+    "Mr CrowSensei — Professional Minecraft Thumbnail Designer";
+
+
+  if(S.og_image_url){
+
+    document.getElementById("ogImage").content =
+      S.og_image_url;
+
+    document.getElementById("twitterImage").content =
+      S.og_image_url;
+
+  }
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function applyTheme(){
+
+  const S = siteSettings;
+
+
+  document.documentElement.style.setProperty(
+    "--site-bg",
+    S.bg_color || "#080808"
+  );
+
+
+  document.documentElement.style.setProperty(
+    "--site-text",
+    S.text_color || "#f7f8ff"
+  );
+
+
+  document.documentElement.style.setProperty(
+    "--site-muted",
+    S.muted_color || "#85858a"
+  );
+
+
+  document.documentElement.style.setProperty(
+    "--site-card",
+    S.card_color || "#111111"
+  );
+
+
+  document.documentElement.style.setProperty(
+    "--site-border",
+    S.border_color || "#292929"
+  );
+
+
+  document.documentElement.style.setProperty(
+    "--site-accent",
+    S.accent_color || "#35e36b"
+  );
+
+
+  document.body.style.backgroundColor =
+    S.bg_color || "#080808";
+
+
+  document.body.style.color =
+    S.text_color || "#f7f8ff";
+
+
+  document.body.style.backgroundImage =
+    `linear-gradient(
+      ${S.bg_gradient_direction || "135deg"},
+      ${S.bg_gradient_1 || "#151515"},
+      ${S.bg_gradient_2 || "#080808"}
+    )`;
+
+}
+
+
+/* =========================================================
+   PORTFOLIO
+========================================================= */
+
+async function loadPortfolio(){
+
+  const grid =
+    document.getElementById("portfolioGrid");
+
+
+  const {data,error} =
+    await supabaseClient
+      .from("portfolio")
+      .select("*")
+      .order("display_order",{ascending:true})
+      .order("id",{ascending:true});
+
+
+  if(error){
+
+    console.error("Portfolio error:",error);
+
+    grid.innerHTML = `
+      <div style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:40px;
+        color:#777;
+      ">
+        Unable to load thumbnails.
       </div>
+    `;
 
-    </section>
+    return;
 
-
-    <!-- CONTACT -->
-    <section class="section contact-wrap" id="contact">
-
-      <div class="contact-card">
-
-        <div class="contact-small">
-          CONTACT ME
-        </div>
+  }
 
 
-        <h2>
-          Ready for<br>
-          Thumbnails<br>
-          That Get<br>
-          Clicked?
-        </h2>
+  if(!data || data.length === 0){
 
-
-        <p>
-          Send your video idea and deadline.<br>
-          I'll reply with availability and the next<br>
-          steps — fastest on Discord.
-        </p>
-
-
-        <a
-          class="discord-button"
-          href="https://discord.com/users/1492187397058855163"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="discord-icon">◯</span>
-          Message on Discord
-        </a>
-
-
-        <a
-          class="twitter-button"
-          href="https://x.com/MrCrowSensei"
-          target="_blank"
-          rel="noopener"
-        >
-          <span class="twitter-icon">𝕏</span>
-          Follow on Twitter / X
-        </a>
-
+    grid.innerHTML = `
+      <div style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:40px;
+        color:#777;
+      ">
+        No thumbnails available yet.
       </div>
+    `;
 
-    </section>
+    return;
 
-  </main>
-
-
-  <!-- FOOTER -->
-  <footer>
-
-    <span>
-      © 2026 Mr CrowSensei
-    </span>
-
-    <span>
-      Made for Minecraft creators.
-    </span>
-
-  </footer>
+  }
 
 
-  <!-- EXISTING SCRIPT -->
-  <script src="script.js"></script>
+  /*
+    IMPORTANT:
+    Admin order stays untouched in Supabase.
+    Only visitor presentation is shuffled.
+  */
+
+  portfolio = shuffle([...data]);
 
 
-  <!-- SUPABASE PORTFOLIO LOADER -->
-  <script>
+  renderPortfolio();
 
-    async function loadPortfolio() {
-
-      const grid = document.getElementById("portfolioGrid");
-
-      if (!grid) return;
+}
 
 
-      const { data, error } = await supabaseClient
-        .from("portfolio")
-        .select("*")
-        .order("id", { ascending: false });
+/* =========================================================
+   RENDER PORTFOLIO
+========================================================= */
+
+function renderPortfolio(){
+
+  const grid =
+    document.getElementById("portfolioGrid");
 
 
-      if (error) {
-
-        console.error("Portfolio error:", error);
-
-        grid.innerHTML = `
-          <div
-            style="
-              grid-column:1/-1;
-              text-align:center;
-              padding:40px;
-            "
-          >
-            Unable to load thumbnails.
-          </div>
-        `;
-
-        return;
-      }
+  grid.innerHTML = "";
 
 
-      if (!data || data.length === 0) {
-
-        grid.innerHTML = `
-          <div
-            style="
-              grid-column:1/-1;
-              text-align:center;
-              padding:40px;
-            "
-          >
-            No thumbnails available yet.
-          </div>
-        `;
-
-        return;
-      }
+  const visible =
+    portfolio.slice(0,portfolioVisible);
 
 
-      grid.innerHTML = "";
+  visible.forEach((item,index)=>{
+
+    const card =
+      document.createElement("article");
 
 
-      data.forEach((item, index) => {
-
-        const card = document.createElement("article");
-
-        card.className =
-          "work-card" +
-          (index === 0 ? " featured" : "");
+    card.className =
+      "work-card";
 
 
-        const img = document.createElement("img");
+    if(index === 0){
 
-        img.src = item.image_url;
-
-        img.alt =
-          item.title ||
-          "Minecraft thumbnail";
-
-
-        const info = document.createElement("div");
-
-        info.className = "work-info";
-
-
-        const category = document.createElement("span");
-
-        category.textContent = "Minecraft";
-
-
-        const title = document.createElement("b");
-
-        title.textContent =
-          item.title ||
-          "Minecraft Thumbnail";
-
-
-        info.appendChild(category);
-        info.appendChild(title);
-
-
-        card.appendChild(img);
-        card.appendChild(info);
-
-
-        grid.appendChild(card);
-
-      });
+      card.classList.add("featured");
 
     }
 
 
-    loadPortfolio();
+    card.onclick = () => {
 
-  </script>
+      openImageViewer(item.image_url);
+
+    };
+
+
+    const img =
+      document.createElement("img");
+
+
+    img.src =
+      item.image_url;
+
+
+    img.alt =
+      item.title ||
+      "Minecraft thumbnail";
+
+
+    img.loading =
+      "lazy";
+
+
+    const info =
+      document.createElement("div");
+
+
+    info.className =
+      "work-info";
+
+
+    const category =
+      document.createElement("span");
+
+
+    category.textContent =
+      "Minecraft";
+
+
+    const title =
+      document.createElement("b");
+
+
+    title.textContent =
+      item.title ||
+      "Minecraft Thumbnail";
+
+
+    info.appendChild(category);
+    info.appendChild(title);
+
+
+    card.appendChild(img);
+    card.appendChild(info);
+
+
+    grid.appendChild(card);
+
+  });
+
+
+  const button =
+    document.getElementById("portfolioLoadMore");
+
+
+  if(portfolioVisible < portfolio.length){
+
+    button.style.display =
+      "inline-block";
+
+  }else{
+
+    button.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   PORTFOLIO LOAD MORE
+========================================================= */
+
+document
+  .getElementById("portfolioLoadMore")
+  .addEventListener("click",()=>{
+
+    portfolioVisible += 6;
+
+    renderPortfolio();
+
+  });
+
+
+/* =========================================================
+   CREATORS
+========================================================= */
+
+async function loadCreators(){
+
+  const grid =
+    document.getElementById("creatorGrid");
+
+
+  const {data,error} =
+    await supabaseClient
+      .from("creators")
+      .select("*")
+      .order("display_order",{ascending:true})
+      .order("id",{ascending:true});
+
+
+  if(error){
+
+    console.error("Creators error:",error);
+
+    grid.innerHTML = `
+      <div style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:40px;
+        color:#777;
+      ">
+        Unable to load creators.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  if(!data || data.length === 0){
+
+    grid.innerHTML = `
+      <div style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:40px;
+        color:#777;
+      ">
+        Creators will appear here soon.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  creators = data;
+
+  renderCreators();
+
+}
+
+
+/* =========================================================
+   RENDER CREATORS
+========================================================= */
+
+function renderCreators(){
+
+  const grid =
+    document.getElementById("creatorGrid");
+
+
+  grid.innerHTML = "";
+
+
+  creators
+    .slice(0,creatorVisible)
+    .forEach((creator,index)=>{
+
+      const card =
+        document.createElement("article");
+
+
+      card.className =
+        "creator-card";
+
+
+      const link =
+        document.createElement("a");
+
+
+      link.className =
+        "creator-link";
+
+
+      link.href =
+        creator.youtube_url || "#";
+
+
+      link.target =
+        "_blank";
+
+
+      link.rel =
+        "noopener";
+
+
+      const avatar =
+        document.createElement("div");
+
+
+      avatar.className =
+        "creator-avatar";
+
+
+      if(creator.image_url){
+
+        const img =
+          document.createElement("img");
+
+
+        img.src =
+          creator.image_url;
+
+
+        img.alt =
+          creator.name || "Creator";
+
+
+        img.loading =
+          "lazy";
+
+
+        avatar.appendChild(img);
+
+      }else{
+
+        const number =
+          document.createElement("span");
+
+
+        number.textContent =
+          String(index + 1).padStart(2,"0");
+
+
+        avatar.appendChild(number);
+
+      }
+
+
+      const name =
+        document.createElement("h3");
+
+
+      name.textContent =
+        creator.name ||
+        "Creator";
+
+
+      const channel =
+        document.createElement("p");
+
+
+      channel.textContent =
+        getYouTubeHandle(
+          creator.youtube_url
+        );
+
+
+      const subscribers =
+        document.createElement("b");
+
+
+      subscribers.textContent =
+        creator.subscribers ||
+        "Subscribers unavailable";
+
+
+      link.appendChild(avatar);
+      link.appendChild(name);
+      link.appendChild(channel);
+      link.appendChild(subscribers);
+
+
+      card.appendChild(link);
+
+
+      grid.appendChild(card);
+
+    });
+
+
+  const button =
+    document.getElementById("creatorLoadMore");
+
+
+  if(creatorVisible < creators.length){
+
+    button.style.display =
+      "inline-block";
+
+  }else{
+
+    button.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATOR LOAD MORE
+========================================================= */
+
+document
+  .getElementById("creatorLoadMore")
+  .addEventListener("click",()=>{
+
+    creatorVisible += 8;
+
+    renderCreators();
+
+  });
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+async function loadFAQs(){
+
+  const list =
+    document.getElementById("faqList");
+
+
+  const {data,error} =
+    await supabaseClient
+      .from("faq")
+      .select("*")
+      .order("display_order",{ascending:true})
+      .order("id",{ascending:true});
+
+
+  if(error){
+
+    console.error("FAQ error:",error);
+
+    list.innerHTML = "";
+
+    return;
+
+  }
+
+
+  if(!data || data.length === 0){
+
+    list.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:40px;
+        color:#777;
+      ">
+        No FAQ available yet.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  faqs = data;
+
+
+  list.innerHTML = "";
+
+
+  faqs.forEach(item=>{
+
+    const button =
+      document.createElement("button");
+
+
+    button.className =
+      "faq-item";
+
+
+    const question =
+      document.createElement("span");
+
+
+    question.textContent =
+      item.question;
+
+
+    const plus =
+      document.createElement("b");
+
+
+    plus.textContent =
+      "+";
+
+
+    const answer =
+      document.createElement("p");
+
+
+    answer.textContent =
+      item.answer;
+
+
+    button.appendChild(question);
+    button.appendChild(plus);
+    button.appendChild(answer);
+
+
+    button.addEventListener("click",()=>{
+
+      button.classList.toggle("open");
+
+    });
+
+
+    list.appendChild(button);
+
+  });
+
+}
+
+
+/* =========================================================
+   CUSTOM CONTACT BUTTONS
+   Reads optional browser-side buttons created by admin.
+========================================================= */
+
+function loadCustomContactButtons(){
+
+  const container =
+    document.getElementById(
+      "customContactButtons"
+    );
+
+
+  container.innerHTML = "";
+
+
+  let buttons = [];
+
+
+  try{
+
+    buttons =
+      JSON.parse(
+        localStorage.getItem(
+          "mrcs_custom_contact_buttons"
+        ) || "[]"
+      );
+
+  }catch(e){
+
+    buttons = [];
+
+  }
+
+
+  buttons.forEach(button=>{
+
+    if(!button.name || !button.url){
+
+      return;
+
+    }
+
+
+    const a =
+      document.createElement("a");
+
+
+    a.className =
+      "custom-contact-button";
+
+
+    a.href =
+      button.url;
+
+
+    a.target =
+      "_blank";
+
+
+    a.rel =
+      "noopener";
+
+
+    a.style.background =
+      button.color || "#fff";
+
+
+    a.style.color =
+      button.text_color || "#080808";
+
+
+    if(button.logo_url){
+
+      const img =
+        document.createElement("img");
+
+
+      img.src =
+        button.logo_url;
+
+
+      img.alt = "";
+
+
+      a.appendChild(img);
+
+    }
+
+
+    const text =
+      document.createElement("span");
+
+
+    text.textContent =
+      button.name;
+
+
+    a.appendChild(text);
+
+
+    container.appendChild(a);
+
+  });
+
+}
+
+
+/* =========================================================
+   IMAGE VIEWER
+========================================================= */
+
+function openImageViewer(url){
+
+  if(!url) return;
+
+
+  document.getElementById(
+    "viewerImage"
+  ).src = url;
+
+
+  document.getElementById(
+    "imageViewer"
+  ).classList.add("show");
+
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+function closeImageViewer(){
+
+  document.getElementById(
+    "imageViewer"
+  ).classList.remove("show");
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(event.key === "Escape"){
+
+      closeImageViewer();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   STATS ANIMATION
+========================================================= */
+
+function animateNumber(element){
+
+  const finalText =
+    element.textContent.trim();
+
+
+  const number =
+    parseInt(
+      finalText.replace(/\D/g,""),
+      10
+    );
+
+
+  if(!number || number < 2){
+
+    return;
+
+  }
+
+
+  const suffix =
+    finalText.replace(/[0-9]/g,"");
+
+
+  const duration =
+    1200;
+
+
+  const start =
+    performance.now();
+
+
+  function update(now){
+
+    const progress =
+      Math.min(
+        (now-start)/duration,
+        1
+      );
+
+
+    const eased =
+      1-Math.pow(1-progress,3);
+
+
+    const value =
+      Math.floor(number*eased);
+
+
+    element.textContent =
+      value + suffix;
+
+
+    if(progress < 1){
+
+      requestAnimationFrame(update);
+
+    }else{
+
+      element.textContent =
+        finalText;
+
+    }
+
+  }
+
+
+  element.textContent =
+    "1";
+
+
+  requestAnimationFrame(update);
+
+}
+
+
+function animateStats(){
+
+  animateNumber(
+    document.getElementById("statThumbs")
+  );
+
+
+  animateNumber(
+    document.getElementById("statCreators")
+  );
+
+
+  animateNumber(
+    document.getElementById("statYears")
+  );
+
+}
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function shuffle(array){
+
+  for(
+    let i=array.length-1;
+    i>0;
+    i--
+  ){
+
+    const j =
+      Math.floor(
+        Math.random()*(i+1)
+      );
+
+
+    [
+      array[i],
+      array[j]
+    ] =
+    [
+      array[j],
+      array[i]
+    ];
+
+  }
+
+
+  return array;
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function getYouTubeHandle(url){
+
+  if(!url){
+
+    return "@creator";
+
+  }
+
+
+  try{
+
+    const parsed =
+      new URL(url);
+
+
+    const path =
+      parsed.pathname
+        .split("/")
+        .filter(Boolean);
+
+
+    if(path.length){
+
+      return "@" + path[path.length-1]
+        .replace("@","");
+    }
+
+  }catch(e){}
+
+
+  return "YouTube Channel";
+
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+function hideLoader(){
+
+  setTimeout(()=>{
+
+    const loader =
+      document.getElementById("loader");
+
+
+    if(loader){
+
+      loader.classList.add("hide");
+
+    }
+
+  },1800);
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+async function startWebsite(){
+
+  await loadSiteSettings();
+
+  await Promise.all([
+    loadPortfolio(),
+    loadCreators(),
+    loadFAQs()
+  ]);
+
+
+  loadCustomContactButtons();
+
+
+  animateStats();
+
+
+  hideLoader();
+
+}
+
+
+startWebsite();
+
+</script>
 
 </body>
 </html>
