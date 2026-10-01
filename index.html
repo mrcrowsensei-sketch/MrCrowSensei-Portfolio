@@ -57,7 +57,7 @@
 <script>
 
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
-const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
+const SUPABASE_KEY = "msb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
 const supabaseClient =
   supabase.createClient(
@@ -66,7 +66,6 @@ const supabaseClient =
   );
 
 </script>
-
 
 <style>
 
@@ -127,6 +126,11 @@ const supabaseClient =
   height:150px;
   object-fit:contain;
   border-radius:50%;
+
+  animation:loaderLogoNormal 1.2s ease-out forwards !important;
+  transform:scale(.72);
+  opacity:.75;
+  transform-origin:center;
 }
 
 .loader-logo-wrap .logo-fallback{
@@ -139,6 +143,25 @@ const supabaseClient =
   color:white;
   font-size:42px;
   font-weight:900;
+
+  animation:loaderLogoNormal 1.2s ease-out forwards !important;
+  transform:scale(.72);
+  opacity:.75;
+  transform-origin:center;
+}
+
+@keyframes loaderLogoNormal{
+
+  0%{
+    transform:scale(.72);
+    opacity:.75;
+  }
+
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+
 }
 
 .loader-bar{
@@ -163,12 +186,88 @@ const supabaseClient =
 }
 
 @keyframes loaderCenterExpand{
+
   0%{
     transform:translateX(-50%) scaleX(0);
   }
+
   100%{
     transform:translateX(-50%) scaleX(1);
   }
+
+}
+
+
+/* =====================================================
+   AVAILABILITY
+===================================================== */
+
+.availability::before,
+.availability::after{
+  content:none !important;
+  display:none !important;
+}
+
+.availability{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  gap:9px !important;
+  width:max-content !important;
+  padding:8px 14px !important;
+  margin:0 auto 25px !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.045) !important;
+  color:#f5f5f5 !important;
+  font-size:12px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+
+.availability > span:first-child{
+  display:block !important;
+  width:7px !important;
+  height:7px !important;
+  min-width:7px !important;
+  max-width:7px !important;
+  min-height:7px !important;
+  max-height:7px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border-radius:50% !important;
+  background:#35e36b !important;
+  box-shadow:0 0 9px rgba(53,227,107,.65) !important;
+  animation:none !important;
+}
+
+.availability > span:last-child{
+  display:inline !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+
+
+/* =====================================================
+   STATS SCROLL ANIMATION
+===================================================== */
+
+.hero-stats{
+  opacity:0 !important;
+  transform:translateY(22px) !important;
+  transition:
+    opacity .9s ease,
+    transform .9s cubic-bezier(.2,.8,.2,1) !important;
+}
+
+.hero-stats.stats-visible{
+  opacity:1 !important;
+  transform:translateY(0) !important;
 }
 
 
@@ -1253,7 +1352,6 @@ let siteSettings = {
     "Mr CrowSensei — Professional Minecraft Thumbnail Designer",
 
   og_image_url:"",
-
 
   /* FOOTER DEFAULTS */
 
@@ -2730,7 +2828,7 @@ function animateNumber(element){
 
 
   const duration =
-    1500;
+    2200;
 
 
   const start =
@@ -2811,6 +2909,76 @@ function animateStats(){
       "statYears"
     )
   );
+
+}
+
+
+/* =====================================================
+   STATS ONE-TIME SCROLL ANIMATION
+===================================================== */
+
+function initStatsAnimation(){
+
+  const stats =
+    document.querySelector(
+      ".hero-stats"
+    );
+
+
+  if(!stats){
+    return;
+  }
+
+
+  if(
+    !("IntersectionObserver" in window)
+  ){
+
+    stats.classList.add(
+      "stats-visible"
+    );
+
+    animateStats();
+
+    return;
+
+  }
+
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(
+          entry => {
+
+            if(
+              entry.isIntersecting
+            ){
+
+              stats.classList.add(
+                "stats-visible"
+              );
+
+              animateStats();
+
+              observer.unobserve(
+                stats
+              );
+
+            }
+
+          }
+        );
+
+      },
+      {
+        threshold:.35
+      }
+    );
+
+
+  observer.observe(stats);
 
 }
 
@@ -2972,16 +3140,6 @@ function hideLoader(){
 
       }
 
-
-      setTimeout(
-        () => {
-
-          animateStats();
-
-        },
-        100
-      );
-
     },
     1900
   );
@@ -3013,6 +3171,9 @@ async function startWebsite(){
 
 
   initScrollReveal();
+
+
+  initStatsAnimation();
 
 
   hideLoader();
