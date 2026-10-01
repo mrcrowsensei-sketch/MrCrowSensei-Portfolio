@@ -203,8 +203,8 @@ const supabaseClient =
 
 /* =====================================================
    AVAILABILITY
-   NO GREEN ELLIPSE
-   ONLY GREEN DOT ANIMATES
+   GREEN DOT STATIC
+   BACKGROUND/PILL RESTORED
 ===================================================== */
 
 .availability::before,
@@ -226,13 +226,13 @@ const supabaseClient =
   width:max-content !important;
   height:auto !important;
 
-  padding:0 !important;
+  padding:8px 14px !important;
   margin:0 auto 25px !important;
 
-  border:none !important;
-  border-radius:0 !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:999px !important;
 
-  background:transparent !important;
+  background:rgba(255,255,255,.045) !important;
   box-shadow:none !important;
 
   color:#f5f5f5 !important;
@@ -265,25 +265,11 @@ const supabaseClient =
 
   background:#35e36b !important;
 
-  box-shadow:0 0 0 rgba(53,227,107,0) !important;
+  box-shadow:none !important;
 
-  animation:availabilityDotPulse 1.8s ease-in-out infinite !important;
-}
+  animation:none !important;
 
-@keyframes availabilityDotPulse{
-
-  0%,100%{
-    box-shadow:0 0 0 rgba(53,227,107,0);
-    transform:scale(1);
-  }
-
-  50%{
-    box-shadow:
-      0 0 9px rgba(53,227,107,.85),
-      0 0 16px rgba(53,227,107,.35);
-    transform:scale(1.08);
-  }
-
+  transform:none !important;
 }
 
 .availability > span:last-child{
@@ -300,8 +286,30 @@ const supabaseClient =
 
   color:#f5f5f5 !important;
 
+  font-style:normal !important;
+
   animation:none !important;
   text-shadow:none !important;
+}
+
+
+/* =====================================================
+   ABOUT HEADING
+   THUMBNAILS = NORMAL TEXT
+===================================================== */
+
+.about-intro h2 em{
+  font-style:normal !important;
+}
+
+
+/* =====================================================
+   PORTFOLIO HEADING
+   THUMBNAILS = NORMAL TEXT
+===================================================== */
+
+.section-head h2 em{
+  font-style:normal !important;
 }
 
 
