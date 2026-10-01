@@ -117,7 +117,6 @@ const supabaseClient =
   display:grid;
   place-items:center;
   margin-bottom:45px;
-
   background:transparent !important;
   border-radius:50% !important;
   overflow:hidden !important;
@@ -126,40 +125,30 @@ const supabaseClient =
 .loader-logo-img{
   width:145px;
   height:145px;
-
   object-fit:contain;
-
   background:transparent !important;
   border-radius:50% !important;
   clip-path:circle(50% at 50% 50%);
   box-shadow:none !important;
-
   transform:none !important;
   opacity:1 !important;
-
   animation:none !important;
 }
 
 .loader-logo-wrap .logo-fallback{
   display:none;
-
   width:145px;
   height:145px;
-
   place-items:center;
-
   background:transparent !important;
   border-radius:50% !important;
   overflow:hidden !important;
   box-shadow:none !important;
-
   color:white;
   font-size:42px;
   font-weight:900;
-
   transform:none !important;
   opacity:1 !important;
-
   animation:none !important;
 }
 
@@ -179,7 +168,6 @@ const supabaseClient =
   height:4px;
   border-radius:10px;
   background:#fff;
-
   transform:translateX(-50%) scaleX(0);
   transform-origin:center;
 
@@ -203,15 +191,31 @@ const supabaseClient =
 
 /* =====================================================
    AVAILABILITY
-   GREEN DOT STATIC
-   BACKGROUND/PILL RESTORED
+   EXACT CLEAN PILL
+   GRAY PILL + GREEN STATIC DOT
+   NO GLOW / NO ANIMATION
 ===================================================== */
 
+.availability,
+.availability *,
 .availability::before,
-.availability::after{
+.availability::after,
+.availability span::before,
+.availability span::after{
+  animation:none !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+  filter:none !important;
+  transform:none !important;
+  mix-blend-mode:normal !important;
+}
+
+.availability::before,
+.availability::after,
+.availability span::before,
+.availability span::after{
   content:none !important;
   display:none !important;
-  animation:none !important;
 }
 
 .availability{
@@ -221,42 +225,40 @@ const supabaseClient =
   flex-direction:row !important;
   flex-wrap:nowrap !important;
 
-  gap:9px !important;
+  gap:12px !important;
 
   width:max-content !important;
   height:auto !important;
 
-  padding:8px 14px !important;
+  padding:13px 22px !important;
   margin:0 auto 25px !important;
 
-  border:1px solid rgba(255,255,255,.12) !important;
+  border:2px solid rgba(255,255,255,.22) !important;
   border-radius:999px !important;
 
-  background:rgba(255,255,255,.045) !important;
-  box-shadow:none !important;
+  background:rgba(255,255,255,.025) !important;
 
   color:#f5f5f5 !important;
 
-  font-size:12px !important;
-  font-weight:600 !important;
+  font-size:16px !important;
+  font-weight:500 !important;
   line-height:1 !important;
 
   white-space:nowrap !important;
 
-  animation:none !important;
-  text-shadow:none !important;
+  opacity:1 !important;
 }
 
 .availability > span:first-child{
   display:block !important;
 
-  width:7px !important;
-  min-width:7px !important;
-  max-width:7px !important;
+  width:12px !important;
+  min-width:12px !important;
+  max-width:12px !important;
 
-  height:7px !important;
-  min-height:7px !important;
-  max-height:7px !important;
+  height:12px !important;
+  min-height:12px !important;
+  max-height:12px !important;
 
   margin:0 !important;
   padding:0 !important;
@@ -265,11 +267,9 @@ const supabaseClient =
 
   background:#35e36b !important;
 
-  box-shadow:none !important;
+  border:none !important;
 
-  animation:none !important;
-
-  transform:none !important;
+  opacity:1 !important;
 }
 
 .availability > span:last-child{
@@ -286,16 +286,19 @@ const supabaseClient =
 
   color:#f5f5f5 !important;
 
+  font-size:inherit !important;
+  font-weight:inherit !important;
   font-style:normal !important;
 
-  animation:none !important;
-  text-shadow:none !important;
+  background:transparent !important;
+  border:none !important;
+
+  opacity:1 !important;
 }
 
 
 /* =====================================================
    ABOUT HEADING
-   THUMBNAILS = NORMAL TEXT
 ===================================================== */
 
 .about-intro h2 em{
@@ -305,7 +308,6 @@ const supabaseClient =
 
 /* =====================================================
    PORTFOLIO HEADING
-   THUMBNAILS = NORMAL TEXT
 ===================================================== */
 
 .section-head h2 em{
@@ -387,9 +389,7 @@ const supabaseClient =
 .site-footer{
   width:100%;
   padding:100px 24px 45px;
-
   text-align:center;
-
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -410,7 +410,6 @@ const supabaseClient =
 .footer-logo{
   width:48px;
   height:48px;
-
   object-fit:contain;
   border-radius:50% !important;
   clip-path:circle(50% at 50% 50%);
@@ -424,11 +423,8 @@ const supabaseClient =
 
 .footer-brand p{
   max-width:600px;
-
   margin:18px auto 0;
-
   color:var(--site-muted);
-
   font-size:14px;
   line-height:1.7;
 }
@@ -440,10 +436,8 @@ const supabaseClient =
 
 .footer-explore h3{
   margin:0 0 22px;
-
   font-size:16px;
   font-weight:700;
-
   color:var(--site-text);
 }
 
@@ -451,17 +445,13 @@ const supabaseClient =
   display:flex;
   flex-direction:column;
   align-items:center;
-
   gap:14px;
 }
 
 .footer-links a{
   color:var(--site-muted);
-
   text-decoration:none;
-
   font-size:14px;
-
   transition:.25s ease;
 }
 
@@ -473,17 +463,13 @@ const supabaseClient =
 .footer-divider{
   width:min(900px,90%);
   height:1px;
-
   background:rgba(255,255,255,.14);
-
   margin:65px auto 28px;
 }
 
 .footer-copyright{
   margin:0;
-
   color:var(--site-muted);
-
   font-size:13px;
 }
 
@@ -495,18 +481,12 @@ const supabaseClient =
 .fullscreen-viewer{
   position:fixed;
   inset:0;
-
   z-index:9999999;
-
   display:none;
-
   align-items:center;
   justify-content:center;
-
   padding:20px;
-
   background:rgba(0,0,0,.9);
-
   backdrop-filter:blur(15px);
 }
 
@@ -517,30 +497,21 @@ const supabaseClient =
 .fullscreen-viewer img{
   max-width:95vw;
   max-height:90vh;
-
   object-fit:contain;
-
   border-radius:14px;
 }
 
 .viewer-close{
   position:absolute;
-
   top:20px;
   right:20px;
-
   width:45px;
   height:45px;
-
   border:1px solid #444;
-
   border-radius:12px;
-
   background:#111;
   color:white;
-
   font-size:27px;
-
   cursor:pointer;
 }
 
@@ -551,29 +522,18 @@ const supabaseClient =
 
 .twitter-button{
   display:inline-flex;
-
   align-items:center;
   justify-content:center;
-
   gap:12px;
-
   min-width:min(620px,90%);
-
   padding:18px 25px;
-
   margin-top:12px;
-
   border-radius:18px;
-
   border:1px solid rgba(255,255,255,.22);
-
   background:#111;
-
   color:#fff;
-
   font-size:16px;
   font-weight:800;
-
   transition:.25s;
 }
 
@@ -592,34 +552,22 @@ const supabaseClient =
 
 .contact-buttons{
   display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
-
   max-width:760px;
-
   margin:25px auto 0;
 }
 
 .custom-contact-button{
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   gap:10px;
-
   min-height:58px;
-
   border-radius:15px;
-
   font-size:14px;
   font-weight:800;
-
   transition:.25s;
-
   border:1px solid rgba(255,255,255,.15);
 }
 
@@ -630,9 +578,7 @@ const supabaseClient =
 .custom-contact-button img{
   width:25px;
   height:25px;
-
   object-fit:contain;
-
   border-radius:6px;
 }
 
@@ -680,16 +626,13 @@ html{
 
   .twitter-button{
     min-width:100%;
-
     font-size:14px;
-
     padding:18px 12px;
   }
 
   .loader-logo-wrap{
     width:135px;
     height:135px;
-
     background:transparent !important;
     border-radius:50% !important;
     overflow:hidden !important;
@@ -698,12 +641,10 @@ html{
   .loader-logo-img{
     width:135px;
     height:135px;
-
     border-radius:50% !important;
     clip-path:circle(50% at 50% 50%);
     background:transparent !important;
     box-shadow:none !important;
-
     transform:none !important;
     animation:none !important;
   }
@@ -711,17 +652,32 @@ html{
   .loader-logo-wrap .logo-fallback{
     width:135px;
     height:135px;
-
     border-radius:50% !important;
     background:transparent !important;
     box-shadow:none !important;
-
     transform:none !important;
     animation:none !important;
   }
 
   .loader-bar{
     width:180px;
+  }
+
+  .availability{
+    padding:11px 18px !important;
+    gap:10px !important;
+    font-size:14px !important;
+    border-width:1.5px !important;
+  }
+
+  .availability > span:first-child{
+    width:9px !important;
+    min-width:9px !important;
+    max-width:9px !important;
+
+    height:9px !important;
+    min-height:9px !important;
+    max-height:9px !important;
   }
 
   .site-footer{
@@ -1034,6 +990,81 @@ html{
 
 
 <!-- =====================================================
+     CREATORS / CLIENTS
+===================================================== -->
+
+<section class="section creators" id="creators">
+
+  <div class="section-head centered">
+
+    <div>
+
+      <div class="eyebrow">
+
+        <span></span>
+
+        CLIENTS
+
+      </div>
+
+
+      <h2>
+
+        Trusted by
+
+        <em>creators.</em>
+
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <p class="creators-intro">
+
+    Creators who trust Mr CrowSensei for their Minecraft thumbnails.
+
+  </p>
+
+
+  <div class="creator-row" id="creatorGrid">
+
+    <div
+      style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:40px;
+        color:#777;
+      "
+    >
+
+      Loading creators...
+
+    </div>
+
+  </div>
+
+
+  <div class="load-more-wrap">
+
+    <button
+      id="creatorLoadMore"
+      class="load-more"
+      type="button"
+      style="display:none"
+    >
+
+      View All Creators
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
      ABOUT
 ===================================================== -->
 
@@ -1114,81 +1145,6 @@ html{
       </p>
 
     </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     CREATORS
-===================================================== -->
-
-<section class="section creators" id="creators">
-
-  <div class="section-head centered">
-
-    <div>
-
-      <div class="eyebrow">
-
-        <span></span>
-
-        CLIENTS
-
-      </div>
-
-
-      <h2>
-
-        Trusted by
-
-        <em>creators.</em>
-
-      </h2>
-
-    </div>
-
-  </div>
-
-
-  <p class="creators-intro">
-
-    Creators who trust Mr CrowSensei for their Minecraft thumbnails.
-
-  </p>
-
-
-  <div class="creator-row" id="creatorGrid">
-
-    <div
-      style="
-        grid-column:1/-1;
-        text-align:center;
-        padding:40px;
-        color:#777;
-      "
-    >
-
-      Loading creators...
-
-    </div>
-
-  </div>
-
-
-  <div class="load-more-wrap">
-
-    <button
-      id="creatorLoadMore"
-      class="load-more"
-      type="button"
-      style="display:none"
-    >
-
-      View All Creators
-
-    </button>
 
   </div>
 
@@ -2030,12 +1986,6 @@ async function loadPortfolio(){
 
   }
 
-
-  /*
-    KEEP ADMIN/DATABASE ORDER SAFE.
-    CREATE A COPY AND RANDOMIZE ONLY
-    THE DISPLAY ORDER ON THE WEBSITE.
-  */
 
   portfolio = [...data];
 
