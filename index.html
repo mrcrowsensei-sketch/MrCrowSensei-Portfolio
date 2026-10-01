@@ -194,7 +194,7 @@ const supabaseClient =
 }
 
 
-/* SCREENSHOT STYLE LINE */
+/* CENTER EXPANDING LINE */
 
 .loader-bar{
 
@@ -261,7 +261,7 @@ const supabaseClient =
 
 
 /* =====================================================
-   NEW DESIGNS PILL FIX
+   NEW DESIGNS PILL
 ===================================================== */
 
 .availability{
@@ -525,6 +525,35 @@ const supabaseClient =
 
 
 /* =====================================================
+   CREATOR VIEW ALL BUTTON
+===================================================== */
+
+#creatorLoadMore{
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   FAQ OPEN/CLOSE
+===================================================== */
+
+.faq-item{
+
+  cursor:pointer;
+
+}
+
+
+.faq-item p{
+
+  overflow:hidden;
+
+}
+
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -741,9 +770,7 @@ const supabaseClient =
   <div class="hero-copy">
 
     <div id="heroTitle">
-
       Professional Minecraft Thumbnails
-
     </div>
 
 
@@ -1088,7 +1115,7 @@ const supabaseClient =
       style="display:none"
     >
 
-      Load More
+      View All Creators
 
     </button>
 
@@ -1381,7 +1408,14 @@ let faqs = [];
 
 let portfolioVisible = 6;
 
-let creatorVisible = 8;
+
+/* =====================================================
+   CREATOR SETTINGS
+===================================================== */
+
+let creatorVisible = 6;
+
+let creatorsExpanded = false;
 
 
 /* =====================================================
@@ -2165,152 +2199,163 @@ function renderCreators(){
   grid.innerHTML = "";
 
 
-  creators
-    .slice(
-      0,
-      creatorVisible
-    )
-    .forEach(
-      (creator,index)=>{
+  const visibleCreators =
+    creatorsExpanded
+      ? creators
+      : creators.slice(0,6);
 
 
-        const card =
+  visibleCreators.forEach(
+    (creator,index)=>{
+
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "creator-card";
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.className =
+        "creator-link";
+
+
+      link.href =
+        creator.youtube_url ||
+        "#";
+
+
+      link.target =
+        "_blank";
+
+
+      link.rel =
+        "noopener";
+
+
+      const avatar =
+        document.createElement(
+          "div"
+        );
+
+
+      avatar.className =
+        "creator-avatar";
+
+
+      if(creator.image_url){
+
+        const img =
           document.createElement(
-            "article"
+            "img"
           );
 
 
-        card.className =
-          "creator-card";
+        img.src =
+          creator.image_url;
 
 
-        const link =
-          document.createElement(
-            "a"
-          );
-
-
-        link.className =
-          "creator-link";
-
-
-        link.href =
-          creator.youtube_url ||
-          "#";
-
-
-        link.target =
-          "_blank";
-
-
-        link.rel =
-          "noopener";
-
-
-        const avatar =
-          document.createElement(
-            "div"
-          );
-
-
-        avatar.className =
-          "creator-avatar";
-
-
-        if(creator.image_url){
-
-          const img =
-            document.createElement(
-              "img"
-            );
-
-
-          img.src =
-            creator.image_url;
-
-
-          img.alt =
-            creator.name ||
-            "Creator";
-
-
-          img.loading =
-            "lazy";
-
-
-          avatar.appendChild(img);
-
-        }else{
-
-          const number =
-            document.createElement(
-              "span"
-            );
-
-
-          number.textContent =
-            String(index+1)
-              .padStart(2,"0");
-
-
-          avatar.appendChild(
-            number
-          );
-
-        }
-
-
-        const name =
-          document.createElement(
-            "h3"
-          );
-
-
-        name.textContent =
+        img.alt =
           creator.name ||
           "Creator";
 
 
-        const channel =
+        img.loading =
+          "lazy";
+
+
+        avatar.appendChild(img);
+
+      }else{
+
+        const number =
           document.createElement(
-            "p"
+            "span"
           );
 
 
-        channel.textContent =
-          getYouTubeHandle(
-            creator.youtube_url
-          );
+        number.textContent =
+          String(index+1)
+            .padStart(2,"0");
 
 
-        const subscribers =
-          document.createElement(
-            "b"
-          );
+        avatar.appendChild(
+          number
+        );
+
+      }
 
 
-        subscribers.textContent =
-          creator.subscribers ||
-          "Subscribers unavailable";
-
-
-        link.appendChild(avatar);
-
-        link.appendChild(name);
-
-        link.appendChild(channel);
-
-        link.appendChild(
-          subscribers
+      const name =
+        document.createElement(
+          "h3"
         );
 
 
-        card.appendChild(link);
+      name.textContent =
+        creator.name ||
+        "Creator";
 
-        grid.appendChild(card);
 
-      }
-    );
+      const channel =
+        document.createElement(
+          "p"
+        );
+
+
+      channel.textContent =
+        getYouTubeHandle(
+          creator.youtube_url
+        );
+
+
+      const subscribers =
+        document.createElement(
+          "b"
+        );
+
+
+      subscribers.textContent =
+        creator.subscribers ||
+        "Subscribers unavailable";
+
+
+      link.appendChild(
+        avatar
+      );
+
+      link.appendChild(
+        name
+      );
+
+      link.appendChild(
+        channel
+      );
+
+      link.appendChild(
+        subscribers
+      );
+
+
+      card.appendChild(
+        link
+      );
+
+      grid.appendChild(
+        card
+      );
+
+    }
+  );
 
 
   const button =
@@ -2319,13 +2364,16 @@ function renderCreators(){
     );
 
 
-  if(
-    creatorVisible <
-    creators.length
-  ){
+  if(creators.length > 6){
 
     button.style.display =
       "inline-block";
+
+
+    button.textContent =
+      creatorsExpanded
+        ? "Show Less <"
+        : "View All Creators";
 
   }else{
 
@@ -2338,7 +2386,7 @@ function renderCreators(){
 
 
 /* =====================================================
-   CREATOR LOAD MORE
+   CREATOR VIEW ALL / SHOW LESS
 ===================================================== */
 
 document
@@ -2349,9 +2397,27 @@ document
     "click",
     () => {
 
-      creatorVisible += 8;
+      creatorsExpanded =
+        !creatorsExpanded;
+
 
       renderCreators();
+
+
+      if(creatorsExpanded){
+
+        setTimeout(() => {
+
+          document
+            .getElementById("creatorLoadMore")
+            .scrollIntoView({
+              behavior:"smooth",
+              block:"center"
+            });
+
+        },100);
+
+      }
 
     }
   );
@@ -2447,6 +2513,10 @@ async function loadFAQs(){
         "faq-item";
 
 
+      button.type =
+        "button";
+
+
       const question =
         document.createElement(
           "span"
@@ -2454,13 +2524,18 @@ async function loadFAQs(){
 
 
       question.textContent =
-        item.question;
+        item.question ||
+        "";
 
 
       const plus =
         document.createElement(
           "b"
         );
+
+
+      plus.className =
+        "faq-toggle";
 
 
       plus.textContent =
@@ -2474,16 +2549,19 @@ async function loadFAQs(){
 
 
       answer.textContent =
-        item.answer;
+        item.answer ||
+        "";
 
 
       button.appendChild(
         question
       );
 
+
       button.appendChild(
         plus
       );
+
 
       button.appendChild(
         answer
@@ -2494,9 +2572,16 @@ async function loadFAQs(){
         "click",
         () => {
 
-          button.classList.toggle(
-            "open"
-          );
+          const isOpen =
+            button.classList.toggle(
+              "open"
+            );
+
+
+          plus.textContent =
+            isOpen
+              ? "−"
+              : "+";
 
         }
       );
@@ -2622,10 +2707,14 @@ function loadCustomContactButtons(){
         button.name;
 
 
-      a.appendChild(text);
+      a.appendChild(
+        text
+      );
 
 
-      container.appendChild(a);
+      container.appendChild(
+        a
+      );
 
     }
   );
@@ -2716,12 +2805,6 @@ async function registerPortfolioView(){
     Date.now();
 
 
-  /*
-    Same visitor ko 30 minutes ke
-    andar multiple views count nahi
-    karenge.
-  */
-
   if(
     now - last <
     30 * 60 * 1000
@@ -2793,7 +2876,7 @@ function animateNumber(element){
 
   if(
     !number ||
-    number < 2
+    number < 1
   ){
 
     return;
@@ -2809,7 +2892,7 @@ function animateNumber(element){
 
 
   const duration =
-    1200;
+    1500;
 
 
   const start =
@@ -2861,7 +2944,7 @@ function animateNumber(element){
 
 
   element.textContent =
-    "1";
+    "0" + suffix;
 
 
   requestAnimationFrame(
@@ -2972,7 +3055,7 @@ function getYouTubeHandle(url){
 
 
 /* =====================================================
-   LOADER HIDE
+   LOADER HIDE + STATS ANIMATION
 ===================================================== */
 
 function hideLoader(){
@@ -2993,6 +3076,21 @@ function hideLoader(){
         );
 
       }
+
+
+      /*
+        Loader hide hone ke baad
+        stats counting start hogi.
+      */
+
+      setTimeout(
+        () => {
+
+          animateStats();
+
+        },
+        100
+      );
 
     },
     1900
@@ -3024,7 +3122,12 @@ async function startWebsite(){
   loadCustomContactButtons();
 
 
-  animateStats();
+  /*
+    Stats animation yahan directly
+    nahi chalegi.
+    Loader ke baad hideLoader()
+    se chalegi.
+  */
 
 
   hideLoader();
@@ -3032,12 +3135,16 @@ async function startWebsite(){
 }
 
 
-/* REGISTER VIEW */
+/* =====================================================
+   REGISTER VIEW
+===================================================== */
 
 registerPortfolioView();
 
 
-/* START */
+/* =====================================================
+   START
+===================================================== */
 
 startWebsite();
 
