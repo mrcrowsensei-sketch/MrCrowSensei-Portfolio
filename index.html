@@ -1,183 +1,599 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
-<title>Mr CrowSensei — Thumbnail Designer</title>
+<meta id="metaDescription"
+      name="description"
+      content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
 
-<meta id="metaDescription" name="description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
+<title id="pageTitle">
+  Mr CrowSensei — Thumbnail Designer
+</title>
 
-<meta id="ogTitle" property="og:title" content="Mr CrowSensei — Thumbnail Designer">
-<meta id="ogDescription" property="og:description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
-<meta id="ogImage" property="og:image" content="https://mrcrowsensei.vercel.app/og-banner.png">
-<meta property="og:url" content="https://mrcrowsensei.vercel.app/">
-<meta property="og:type" content="website">
+<meta id="ogTitle"
+      property="og:title"
+      content="Mr CrowSensei — Thumbnail Designer">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta id="twitterTitle" name="twitter:title" content="Mr CrowSensei — Thumbnail Designer">
-<meta id="twitterDescription" name="twitter:description" content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
-<meta id="twitterImage" name="twitter:image" content="https://mrcrowsensei.vercel.app/og-banner.png">
+<meta id="ogDescription"
+      property="og:description"
+      content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta id="ogImage"
+      property="og:image"
+      content="https://mrcrowsensei.vercel.app/og-banner.png">
 
-<link rel="stylesheet" href="style.css">
+<meta property="og:url"
+      content="https://mrcrowsensei.vercel.app/">
+
+<meta property="og:type"
+      content="website">
+
+<meta name="twitter:card"
+      content="summary_large_image">
+
+<meta id="twitterTitle"
+      name="twitter:title"
+      content="Mr CrowSensei — Thumbnail Designer">
+
+<meta id="twitterDescription"
+      name="twitter:description"
+      content="Mr CrowSensei — Professional Minecraft Thumbnail Designer">
+
+<meta id="twitterImage"
+      name="twitter:image"
+      content="https://mrcrowsensei.vercel.app/og-banner.png">
+
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="style.css">
+
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
 const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
 const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
 </script>
 
+
 <style>
-/* Dynamic website additions */
 
-.twitter-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  min-width:min(620px,90%);
-  padding:18px 25px;
-  margin-top:12px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.22);
-  background:#111;
-  color:#fff;
-  font-size:16px;
-  font-weight:800;
-  transition:.25s;
+/* =====================================================
+   DYNAMIC SETTINGS
+===================================================== */
+
+:root{
+
+  --site-bg:#080808;
+  --site-text:#f7f8ff;
+  --site-muted:#85858a;
+  --site-card:#111111;
+  --site-border:#292929;
+  --site-accent:#35e36b;
+
 }
 
-.twitter-button:hover{
-  transform:translateY(-3px);
-  border-color:#666;
-}
 
-.twitter-icon{
-  font-size:22px;
-}
+/* =====================================================
+   LOADING SCREEN
+===================================================== */
 
-.contact-buttons{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  max-width:760px;
-  margin:25px auto 0;
-}
+.loader-screen{
 
-.custom-contact-button{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  min-height:58px;
-  border-radius:15px;
-  font-size:14px;
-  font-weight:800;
-  transition:.25s;
-  border:1px solid rgba(255,255,255,.15);
-}
-
-.custom-contact-button:hover{
-  transform:translateY(-3px);
-}
-
-.custom-contact-button img{
-  width:25px;
-  height:25px;
-  object-fit:contain;
-  border-radius:6px;
-}
-
-.fullscreen-viewer{
   position:fixed;
   inset:0;
+
   z-index:999999;
-  display:none;
+
+  display:flex;
+
   align-items:center;
   justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.88);
-  backdrop-filter:blur(16px);
+
+  background:#1e1e1e;
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .55s ease,
+    visibility .55s ease;
+
 }
 
-.fullscreen-viewer.show{
+
+.loader-screen.hide{
+
+  opacity:0;
+  visibility:hidden;
+
+  pointer-events:none;
+
+}
+
+
+.loader-inner{
+
   display:flex;
-}
 
-.fullscreen-viewer img{
-  max-width:95vw;
-  max-height:90vh;
-  object-fit:contain;
-  border-radius:14px;
-  box-shadow:0 25px 100px rgba(0,0,0,.7);
-}
-
-.viewer-close{
-  position:absolute;
-  top:20px;
-  right:20px;
-  width:44px;
-  height:44px;
-  border:1px solid #444;
-  border-radius:12px;
-  background:#111;
-  color:#fff;
-  font-size:25px;
-  cursor:pointer;
-}
-
-.creator-link{
-  display:flex;
   flex-direction:column;
+
   align-items:center;
-  width:100%;
+  justify-content:center;
+
 }
 
-.creator-card{
-  cursor:pointer;
+
+.loader-logo-wrap{
+
+  width:150px;
+  height:150px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:45px;
+
 }
 
-.creator-card.hidden{
+
+.loader-logo-img{
+
+  width:150px;
+  height:150px;
+
+  object-fit:contain;
+
+  border-radius:50%;
+
+}
+
+
+.loader-logo-wrap .logo-fallback{
+
   display:none;
+
+  width:150px;
+  height:150px;
+
+  place-items:center;
+
+  border-radius:50%;
+
+  background:#e00000;
+
+  color:white;
+
+  font-size:42px;
+
+  font-weight:900;
+
 }
+
+
+/* SCREENSHOT STYLE LINE */
+
+.loader-bar{
+
+  position:relative;
+
+  width:185px;
+  height:4px;
+
+  overflow:hidden;
+
+  border-radius:10px;
+
+}
+
+
+.loader-bar span{
+
+  position:absolute;
+
+  left:50%;
+  top:0;
+
+  width:100%;
+  height:4px;
+
+  border-radius:10px;
+
+  background:#fff;
+
+  transform:
+    translateX(-50%)
+    scaleX(0);
+
+  transform-origin:center;
+
+  animation:
+    loaderCenterExpand
+    1.6s
+    cubic-bezier(.22,.61,.36,1)
+    forwards;
+
+}
+
+
+@keyframes loaderCenterExpand{
+
+  0%{
+
+    transform:
+      translateX(-50%)
+      scaleX(0);
+
+  }
+
+  100%{
+
+    transform:
+      translateX(-50%)
+      scaleX(1);
+
+  }
+
+}
+
+
+/* =====================================================
+   NEW DESIGNS PILL FIX
+===================================================== */
+
+.availability{
+
+  display:inline-flex !important;
+
+  align-items:center !important;
+
+  justify-content:center !important;
+
+  width:max-content !important;
+
+  max-width:none !important;
+
+  white-space:nowrap !important;
+
+  flex-wrap:nowrap !important;
+
+}
+
+
+.availability > span:first-child{
+
+  display:inline-block !important;
+
+  width:8px !important;
+  height:8px !important;
+
+  min-width:8px !important;
+
+  border-radius:50% !important;
+
+  margin-right:9px !important;
+
+}
+
+
+.availability > span:nth-child(2){
+
+  display:inline !important;
+
+  width:auto !important;
+  height:auto !important;
+
+  margin:0 !important;
+
+  white-space:nowrap !important;
+
+}
+
+
+/* =====================================================
+   THUMBNAIL SCROLL ANIMATION
+===================================================== */
 
 .work-card{
-  cursor:zoom-in;
+
+  opacity:0;
+
+  transform:translateY(45px);
+
+  transition:
+    opacity .7s ease,
+    transform .7s cubic-bezier(.2,.8,.2,1);
+
 }
 
-.work-card.hidden{
-  display:none;
+
+.work-card.reveal{
+
+  opacity:1;
+
+  transform:translateY(0);
+
 }
+
+
+/* =====================================================
+   FULLSCREEN IMAGE VIEWER
+===================================================== */
+
+.fullscreen-viewer{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:9999999;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  background:rgba(0,0,0,.9);
+
+  backdrop-filter:blur(15px);
+
+}
+
+
+.fullscreen-viewer.show{
+
+  display:flex;
+
+}
+
+
+.fullscreen-viewer img{
+
+  max-width:95vw;
+
+  max-height:90vh;
+
+  object-fit:contain;
+
+  border-radius:14px;
+
+}
+
+
+.viewer-close{
+
+  position:absolute;
+
+  top:20px;
+  right:20px;
+
+  width:45px;
+  height:45px;
+
+  border:1px solid #444;
+
+  border-radius:12px;
+
+  background:#111;
+
+  color:white;
+
+  font-size:27px;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   TWITTER
+===================================================== */
+
+.twitter-button{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
+  min-width:min(620px,90%);
+
+  padding:18px 25px;
+
+  margin-top:12px;
+
+  border-radius:18px;
+
+  border:1px solid rgba(255,255,255,.22);
+
+  background:#111;
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:800;
+
+  transition:.25s;
+
+}
+
+
+.twitter-button:hover{
+
+  transform:translateY(-3px);
+
+}
+
+
+.twitter-icon{
+
+  font-size:22px;
+
+}
+
+
+/* =====================================================
+   CUSTOM CONTACT BUTTONS
+===================================================== */
+
+.contact-buttons{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:12px;
+
+  max-width:760px;
+
+  margin:25px auto 0;
+
+}
+
+
+.custom-contact-button{
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:10px;
+
+  min-height:58px;
+
+  border-radius:15px;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  transition:.25s;
+
+  border:1px solid rgba(255,255,255,.15);
+
+}
+
+
+.custom-contact-button:hover{
+
+  transform:translateY(-3px);
+
+}
+
+
+.custom-contact-button img{
+
+  width:25px;
+  height:25px;
+
+  object-fit:contain;
+
+  border-radius:6px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:700px){
+
   .contact-buttons{
+
     grid-template-columns:1fr;
+
   }
 
+
   .twitter-button{
+
     min-width:100%;
+
     font-size:14px;
+
     padding:18px 12px;
+
   }
+
+
+  .loader-logo-wrap{
+
+    width:140px;
+    height:140px;
+
+  }
+
+
+  .loader-logo-img{
+
+    width:140px;
+    height:140px;
+
+  }
+
+
+  .loader-logo-wrap .logo-fallback{
+
+    width:140px;
+    height:140px;
+
+  }
+
+
+  .loader-bar{
+
+    width:185px;
+
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loader" class="loader-screen">
+
+<!-- =====================================================
+     LOADER
+===================================================== -->
+
+<div id="loader"
+     class="loader-screen">
 
   <div class="loader-inner">
 
@@ -186,21 +602,25 @@ const supabaseClient = supabase.createClient(
       <img
         id="loaderLogo"
         src="images/logo.png"
-        alt="CrowSensei logo"
+        alt="Mr CrowSensei"
         class="loader-logo-img"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='grid'
+        "
       >
 
-      <div class="logo-fallback">CS</div>
+      <div class="logo-fallback">
+        CS
+      </div>
 
     </div>
 
-    <div class="loader-name" id="loaderName">
-      Mr CrowSensei
-    </div>
 
     <div class="loader-bar">
+
       <span></span>
+
     </div>
 
   </div>
@@ -212,10 +632,14 @@ const supabaseClient = supabase.createClient(
 <div class="bg-glow glow-two"></div>
 
 
-<!-- NAVBAR -->
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
 <header class="navbar">
 
-  <a class="brand" href="#home">
+  <a class="brand"
+     href="#home">
 
     <span class="brand-logo-wrap">
 
@@ -224,12 +648,18 @@ const supabaseClient = supabase.createClient(
         src="images/logo.png"
         alt=""
         class="brand-logo"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='grid'
+        "
       >
 
-      <span class="brand-fallback">CS</span>
+      <span class="brand-fallback">
+        CS
+      </span>
 
     </span>
+
 
     <span id="navName">
       Mr CrowSensei
@@ -239,16 +669,35 @@ const supabaseClient = supabase.createClient(
 
 
   <nav>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#creators">Creators</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
+
+    <a href="#work">
+      Work
+    </a>
+
+    <a href="#about">
+      About
+    </a>
+
+    <a href="#creators">
+      Creators
+    </a>
+
+    <a href="#faq">
+      FAQ
+    </a>
+
+    <a href="#contact">
+      Contact
+    </a>
+
   </nav>
 
 
-  <a class="nav-cta" href="#contact">
+  <a class="nav-cta"
+     href="#contact">
+
     Let's Work
+
   </a>
 
 </header>
@@ -256,8 +705,14 @@ const supabaseClient = supabase.createClient(
 
 <main>
 
-<!-- HERO -->
-<section class="hero section" id="home">
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero section"
+         id="home">
+
 
   <div class="availability">
 
@@ -272,8 +727,13 @@ const supabaseClient = supabase.createClient(
 
   <h1 id="heroName">
 
-    <span>Mr</span>
-    <span>CrowSensei</span>
+    <span>
+      Mr
+    </span>
+
+    <span>
+      CrowSensei
+    </span>
 
   </h1>
 
@@ -281,20 +741,38 @@ const supabaseClient = supabase.createClient(
   <div class="hero-copy">
 
     <div id="heroTitle">
+
       Professional Minecraft Thumbnails
+
     </div>
 
-    <div class="hero-subline" id="heroSubtitle">
+
+    <div class="hero-subline"
+         id="heroSubtitle">
+
       Crafted for Creators
+
     </div>
 
-    <div class="curve-line" aria-hidden="true">
+
+    <div class="curve-line"
+         aria-hidden="true">
 
       <svg
         viewBox="0 0 390 48"
         preserveAspectRatio="none"
       >
-        <path d="M4 25 C70 5, 118 39, 178 22 C236 6, 286 42, 386 19"/>
+
+        <path d="
+          M4 25
+          C70 5,
+          118 39,
+          178 22
+          C236 6,
+          286 42,
+          386 19
+        "/>
+
       </svg>
 
     </div>
@@ -304,12 +782,23 @@ const supabaseClient = supabase.createClient(
 
   <div class="hero-actions">
 
-    <a class="button primary" href="#work">
-      Browse Portfolio <span>→</span>
+    <a class="button primary"
+       href="#work">
+
+      Browse Portfolio
+
+      <span>
+        →
+      </span>
+
     </a>
 
-    <a class="button secondary" href="#contact">
+
+    <a class="button secondary"
+       href="#contact">
+
       Let's Work
+
     </a>
 
   </div>
@@ -318,18 +807,41 @@ const supabaseClient = supabase.createClient(
   <div class="hero-stats">
 
     <div>
-      <strong id="statThumbs">100+</strong>
-      <span>THUMBNAILS</span>
+
+      <strong id="statThumbs">
+        100+
+      </strong>
+
+      <span>
+        THUMBNAILS
+      </span>
+
     </div>
 
-    <div>
-      <strong id="statCreators">50+</strong>
-      <span>CREATORS</span>
-    </div>
 
     <div>
-      <strong id="statYears">2+</strong>
-      <span>YEARS DESIGNING</span>
+
+      <strong id="statCreators">
+        50+
+      </strong>
+
+      <span>
+        CREATORS
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong id="statYears">
+        2+
+      </strong>
+
+      <span>
+        YEARS DESIGNING
+      </span>
+
     </div>
 
   </div>
@@ -337,23 +849,39 @@ const supabaseClient = supabase.createClient(
 </section>
 
 
-<!-- PORTFOLIO -->
-<section class="section" id="work">
+<!-- =====================================================
+     PORTFOLIO
+===================================================== -->
+
+<section class="section"
+         id="work">
+
 
   <div class="section-head">
 
     <div>
 
       <div class="eyebrow">
+
         <span></span>
+
         SELECTED WORK
+
       </div>
 
+
       <h2>
-        My latest <em>thumbnails.</em>
+
+        My latest
+
+        <em>
+          thumbnails.
+        </em>
+
       </h2>
 
     </div>
+
 
     <p>
       My latest Minecraft thumbnail designs.
@@ -362,15 +890,17 @@ const supabaseClient = supabase.createClient(
   </div>
 
 
-  <div class="work-grid" id="portfolioGrid">
+  <div class="work-grid"
+       id="portfolioGrid">
 
     <div style="
       grid-column:1/-1;
       text-align:center;
       padding:40px;
-      color:#777;
     ">
+
       Loading thumbnails...
+
     </div>
 
   </div>
@@ -384,7 +914,9 @@ const supabaseClient = supabase.createClient(
       type="button"
       style="display:none"
     >
+
       Load More
+
     </button>
 
   </div>
@@ -392,8 +924,13 @@ const supabaseClient = supabase.createClient(
 </section>
 
 
-<!-- ABOUT -->
-<section class="section about" id="about">
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="section about"
+         id="about">
+
 
   <div class="about-intro">
 
@@ -401,21 +938,28 @@ const supabaseClient = supabase.createClient(
 
       <span></span>
 
-      <span id="aboutLabel">
-        ABOUT ME
-      </span>
+      ABOUT ME
 
     </div>
 
 
-    <h2 id="aboutSectionTitle">
+    <h2>
+
       The designer behind<br>
-      the <em>thumbnails.</em>
+
+      the
+
+      <em>
+        thumbnails.
+      </em>
+
     </h2>
 
 
-    <p id="aboutSectionSubtitle">
+    <p>
+
       The person behind professional Minecraft thumbnails for creators.
+
     </p>
 
   </div>
@@ -423,14 +967,18 @@ const supabaseClient = supabase.createClient(
 
   <div class="about-card">
 
+
     <div class="about-photo-wrap">
 
       <img
         id="aboutImage"
         src="images/logo.png"
-        alt="CrowSensei"
+        alt="CrowSensei logo"
         class="about-photo"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='grid'
+        "
       >
 
       <div class="about-fallback">
@@ -442,19 +990,26 @@ const supabaseClient = supabase.createClient(
 
     <div class="about-copy">
 
-      <div class="about-label" id="aboutCardLabel">
+      <div class="about-label">
         MR CROWSENSEI
       </div>
 
 
-      <h3 id="aboutHeading">
+      <h3>
+
         Turning Minecraft ideas into
-        <em>clickable visuals.</em>
+
+        <em>
+          clickable visuals.
+        </em>
+
       </h3>
 
 
       <p id="aboutText">
+
         I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story.
+
       </p>
 
     </div>
@@ -464,20 +1019,35 @@ const supabaseClient = supabase.createClient(
 </section>
 
 
-<!-- CREATORS -->
-<section class="section creators" id="creators">
+<!-- =====================================================
+     CREATORS
+===================================================== -->
+
+<section class="section creators"
+         id="creators">
+
 
   <div class="section-head centered">
 
     <div>
 
       <div class="eyebrow">
+
         <span></span>
+
         CLIENTS
+
       </div>
 
+
       <h2>
-        Trusted by <em>creators.</em>
+
+        Trusted by
+
+        <em>
+          creators.
+        </em>
+
       </h2>
 
     </div>
@@ -486,19 +1056,24 @@ const supabaseClient = supabase.createClient(
 
 
   <p class="creators-intro">
+
     Creators who trust Mr CrowSensei for their Minecraft thumbnails.
+
   </p>
 
 
-  <div class="creator-row" id="creatorGrid">
+  <div class="creator-row"
+       id="creatorGrid">
 
     <div style="
       grid-column:1/-1;
       text-align:center;
-      color:#777;
       padding:40px;
+      color:#777;
     ">
+
       Loading creators...
+
     </div>
 
   </div>
@@ -512,7 +1087,9 @@ const supabaseClient = supabase.createClient(
       type="button"
       style="display:none"
     >
+
       Load More
+
     </button>
 
   </div>
@@ -520,20 +1097,35 @@ const supabaseClient = supabase.createClient(
 </section>
 
 
-<!-- FAQ -->
-<section class="section faq" id="faq">
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="section faq"
+         id="faq">
+
 
   <div class="section-head centered">
 
     <div>
 
       <div class="eyebrow">
+
         <span></span>
+
         FAQ
+
       </div>
 
+
       <h2>
-        Got <em>questions?</em>
+
+        Got
+
+        <em>
+          questions?
+        </em>
+
       </h2>
 
     </div>
@@ -541,14 +1133,17 @@ const supabaseClient = supabase.createClient(
   </div>
 
 
-  <div class="faq-list" id="faqList">
+  <div class="faq-list"
+       id="faqList">
 
     <div style="
       text-align:center;
       padding:40px;
       color:#777;
     ">
+
       Loading FAQ...
+
     </div>
 
   </div>
@@ -556,28 +1151,40 @@ const supabaseClient = supabase.createClient(
 </section>
 
 
-<!-- CONTACT -->
-<section class="section contact-wrap" id="contact">
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section class="section contact-wrap"
+         id="contact">
+
 
   <div class="contact-card">
 
+
     <div class="contact-small">
+
       CONTACT ME
+
     </div>
 
 
     <h2 id="contactTitle">
+
       Ready for<br>
       Thumbnails<br>
       That Get<br>
       Clicked?
+
     </h2>
 
 
     <p id="contactText">
+
       Send your video idea and deadline.<br>
       I'll reply with availability and the next<br>
       steps — fastest on Discord.
+
     </p>
 
 
@@ -620,6 +1227,7 @@ const supabaseClient = supabase.createClient(
       class="contact-buttons"
     ></div>
 
+
   </div>
 
 </section>
@@ -627,7 +1235,10 @@ const supabaseClient = supabase.createClient(
 </main>
 
 
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
 
   <span>
@@ -641,11 +1252,17 @@ const supabaseClient = supabase.createClient(
 </footer>
 
 
-<!-- FULLSCREEN IMAGE VIEWER -->
+<!-- =====================================================
+     IMAGE VIEWER
+===================================================== -->
+
 <div
   id="imageViewer"
   class="fullscreen-viewer"
-  onclick="if(event.target===this)closeImageViewer()"
+  onclick="
+    if(event.target===this)
+    closeImageViewer()
+  "
 >
 
   <button
@@ -654,6 +1271,7 @@ const supabaseClient = supabase.createClient(
   >
     ×
   </button>
+
 
   <img
     id="viewerImage"
@@ -664,32 +1282,47 @@ const supabaseClient = supabase.createClient(
 </div>
 
 
+<!-- EXISTING SCRIPT -->
+
 <script src="script.js"></script>
 
 
 <script>
 
-/* =========================================================
+/* =====================================================
    SETTINGS
-========================================================= */
+===================================================== */
 
 let siteSettings = {
-  header_name: "Mr CrowSensei",
-  logo_url: "",
 
-  new_design_text: "New Designs Available",
+  id:1,
 
-  hero_title: "Professional Minecraft Thumbnails",
-  hero_subtitle: "Crafted for Creators",
+  header_name:"Mr CrowSensei",
 
-  stats_thumbnails: "100+",
-  stats_creators: "50+",
-  stats_years: "2+",
+  logo_url:"",
+
+  new_design_text:
+    "New Designs Available",
+
+  hero_title:
+    "Professional Minecraft Thumbnails",
+
+  hero_subtitle:
+    "Crafted for Creators",
+
+  stats_thumbnails:
+    "100+",
+
+  stats_creators:
+    "50+",
+
+  stats_years:
+    "2+",
 
   about_text:
     "I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story.",
 
-  about_image_url: "",
+  about_image_url:"",
 
   discord_url:
     "https://discord.com/users/1492187397058855163",
@@ -704,57 +1337,77 @@ let siteSettings = {
     "Send your video idea and deadline.\nI'll reply with availability and the next steps — fastest on Discord.",
 
   bg_color:"#080808",
+
   bg_gradient_1:"#151515",
+
   bg_gradient_2:"#080808",
+
   bg_gradient_direction:"135deg",
 
   primary_color:"#ffffff",
+
   heading_color:"#ffffff",
+
   text_color:"#f7f8ff",
+
   muted_color:"#85858a",
+
   card_color:"#111111",
+
   border_color:"#292929",
+
   button_color:"#ffffff",
+
   button_text_color:"#080808",
+
   accent_color:"#35e36b",
 
-  og_title:"Mr CrowSensei — Thumbnail Designer",
+  og_title:
+    "Mr CrowSensei — Thumbnail Designer",
 
   og_description:
     "Mr CrowSensei — Professional Minecraft Thumbnail Designer",
 
   og_image_url:""
+
 };
 
 
-/* =========================================================
-   DATA
-========================================================= */
-
 let portfolio = [];
+
 let creators = [];
+
 let faqs = [];
 
 let portfolioVisible = 6;
+
 let creatorVisible = 8;
 
 
-/* =========================================================
-   LOAD SITE SETTINGS
-========================================================= */
+/* =====================================================
+   LOAD SETTINGS
+===================================================== */
 
 async function loadSiteSettings(){
 
-  const {data,error} = await supabaseClient
-    .from("site_settings")
-    .select("*")
-    .eq("id",1)
-    .maybeSingle();
+  const {data,error} =
+    await supabaseClient
+
+      .from("site_settings")
+
+      .select("*")
+
+      .eq("id",1)
+
+      .maybeSingle();
 
 
   if(error){
 
-    console.error("Site settings error:",error);
+    console.error(
+      "Site settings error:",
+      error
+    );
 
     return;
 
@@ -764,8 +1417,11 @@ async function loadSiteSettings(){
   if(data){
 
     siteSettings = {
+
       ...siteSettings,
+
       ...data
+
     };
 
   }
@@ -776,168 +1432,233 @@ async function loadSiteSettings(){
 }
 
 
-/* =========================================================
+/* =====================================================
    APPLY SETTINGS
-========================================================= */
+===================================================== */
 
 function applySiteSettings(){
 
-  const S = siteSettings;
+  const S =
+    siteSettings;
 
 
-  /* Header */
-
-  document.getElementById("navName").textContent =
-    S.header_name || "Mr CrowSensei";
-
+  /* LOGO */
 
   if(S.logo_url){
 
-    document.getElementById("navLogo").src =
-      S.logo_url;
+    document.getElementById(
+      "loaderLogo"
+    ).src = S.logo_url;
 
-    document.getElementById("loaderLogo").src =
-      S.logo_url;
+
+    document.getElementById(
+      "navLogo"
+    ).src = S.logo_url;
 
   }
 
 
-  /* Loader */
+  /* NAME */
 
-  document.getElementById("loaderName").textContent =
-    S.header_name || "Mr CrowSensei";
-
-
-  /* Hero */
-
-  document.getElementById("availabilityText").textContent =
-    S.new_design_text || "New Designs Available";
+  document.getElementById(
+    "navName"
+  ).textContent =
+    S.header_name ||
+    "Mr CrowSensei";
 
 
-  const nameParts =
-    (S.header_name || "Mr CrowSensei")
-      .trim()
-      .split(/\s+/);
+  /* AVAILABILITY */
+
+  document.getElementById(
+    "availabilityText"
+  ).textContent =
+    S.new_design_text ||
+    "New Designs Available";
 
 
-  const firstName =
-    nameParts.shift() || "";
+  /* HERO NAME */
+
+  const parts =
+    (
+      S.header_name ||
+      "Mr CrowSensei"
+    )
+    .trim()
+    .split(/\s+/);
 
 
-  const remainingName =
-    nameParts.join(" ");
+  const first =
+    parts.shift() || "";
 
 
-  document.getElementById("heroName").innerHTML =
-    `
-      <span>${escapeHTML(firstName)}</span>
-      <span>${escapeHTML(remainingName)}</span>
-    `;
+  const second =
+    parts.join(" ");
 
 
-  document.getElementById("heroTitle").textContent =
-    S.hero_title || "Professional Minecraft Thumbnails";
+  document.getElementById(
+    "heroName"
+  ).innerHTML = `
+
+    <span>
+      ${escapeHTML(first)}
+    </span>
+
+    <span>
+      ${escapeHTML(second)}
+    </span>
+
+  `;
 
 
-  document.getElementById("heroSubtitle").textContent =
-    S.hero_subtitle || "Crafted for Creators";
+  /* HERO */
+
+  document.getElementById(
+    "heroTitle"
+  ).textContent =
+    S.hero_title ||
+    "Professional Minecraft Thumbnails";
 
 
-  /* Stats */
-
-  document.getElementById("statThumbs").textContent =
-    S.stats_thumbnails || "100+";
-
-
-  document.getElementById("statCreators").textContent =
-    S.stats_creators || "50+";
+  document.getElementById(
+    "heroSubtitle"
+  ).textContent =
+    S.hero_subtitle ||
+    "Crafted for Creators";
 
 
-  document.getElementById("statYears").textContent =
-    S.stats_years || "2+";
+  /* STATS */
+
+  document.getElementById(
+    "statThumbs"
+  ).textContent =
+    S.stats_thumbnails ||
+    "100+";
 
 
-  /* About */
+  document.getElementById(
+    "statCreators"
+  ).textContent =
+    S.stats_creators ||
+    "50+";
+
+
+  document.getElementById(
+    "statYears"
+  ).textContent =
+    S.stats_years ||
+    "2+";
+
+
+  /* ABOUT */
+
+  document.getElementById(
+    "aboutText"
+  ).textContent =
+    S.about_text || "";
+
 
   if(S.about_image_url){
 
-    document.getElementById("aboutImage").src =
+    document.getElementById(
+      "aboutImage"
+    ).src =
       S.about_image_url;
 
   }
 
 
-  document.getElementById("aboutText").textContent =
-    S.about_text || "";
+  /* CONTACT */
 
-
-  /* Contact */
-
-  document.getElementById("contactTitle").innerHTML =
+  document.getElementById(
+    "contactTitle"
+  ).innerHTML =
     escapeHTML(
       S.contact_title ||
       "Ready for\nThumbnails\nThat Get\nClicked?"
-    ).replace(/\n/g,"<br>");
+    )
+    .replace(/\n/g,"<br>");
 
 
-  document.getElementById("contactText").innerHTML =
+  document.getElementById(
+    "contactText"
+  ).innerHTML =
     escapeHTML(
       S.contact_text ||
       "Send your video idea and deadline."
-    ).replace(/\n/g,"<br>");
+    )
+    .replace(/\n/g,"<br>");
 
 
-  document.getElementById("discordButton").href =
+  document.getElementById(
+    "discordButton"
+  ).href =
     S.discord_url || "#";
 
 
-  document.getElementById("twitterButton").href =
+  document.getElementById(
+    "twitterButton"
+  ).href =
     S.twitter_url || "#";
 
 
-  /* Theme */
+  /* THEME */
 
   applyTheme();
 
 
-  /* Social preview */
+  /* SEO */
 
   document.title =
     S.og_title ||
     "Mr CrowSensei — Thumbnail Designer";
 
 
-  document.getElementById("metaDescription").content =
+  document.getElementById(
+    "metaDescription"
+  ).content =
     S.og_description ||
     "Mr CrowSensei — Professional Minecraft Thumbnail Designer";
 
 
-  document.getElementById("ogTitle").content =
+  document.getElementById(
+    "ogTitle"
+  ).content =
     S.og_title ||
     "Mr CrowSensei — Thumbnail Designer";
 
 
-  document.getElementById("ogDescription").content =
+  document.getElementById(
+    "ogDescription"
+  ).content =
     S.og_description ||
     "Mr CrowSensei — Professional Minecraft Thumbnail Designer";
 
 
-  document.getElementById("twitterTitle").content =
+  document.getElementById(
+    "twitterTitle"
+  ).content =
     S.og_title ||
     "Mr CrowSensei — Thumbnail Designer";
 
 
-  document.getElementById("twitterDescription").content =
+  document.getElementById(
+    "twitterDescription"
+  ).content =
     S.og_description ||
     "Mr CrowSensei — Professional Minecraft Thumbnail Designer";
 
 
   if(S.og_image_url){
 
-    document.getElementById("ogImage").content =
+    document.getElementById(
+      "ogImage"
+    ).content =
       S.og_image_url;
 
-    document.getElementById("twitterImage").content =
+
+    document.getElementById(
+      "twitterImage"
+    ).content =
       S.og_image_url;
 
   }
@@ -945,60 +1666,82 @@ function applySiteSettings(){
 }
 
 
-/* =========================================================
+/* =====================================================
    THEME
-========================================================= */
+===================================================== */
 
 function applyTheme(){
 
-  const S = siteSettings;
+  const S =
+    siteSettings;
 
 
-  document.documentElement.style.setProperty(
-    "--site-bg",
-    S.bg_color || "#080808"
-  );
+  document.documentElement
+    .style
+    .setProperty(
+      "--site-bg",
+      S.bg_color ||
+      "#080808"
+    );
 
 
-  document.documentElement.style.setProperty(
-    "--site-text",
-    S.text_color || "#f7f8ff"
-  );
+  document.documentElement
+    .style
+    .setProperty(
+      "--site-text",
+      S.text_color ||
+      "#f7f8ff"
+    );
 
 
-  document.documentElement.style.setProperty(
-    "--site-muted",
-    S.muted_color || "#85858a"
-  );
+  document.documentElement
+    .style
+    .setProperty(
+      "--site-muted",
+      S.muted_color ||
+      "#85858a"
+    );
 
 
-  document.documentElement.style.setProperty(
-    "--site-card",
-    S.card_color || "#111111"
-  );
+  document.documentElement
+    .style
+    .setProperty(
+      "--site-card",
+      S.card_color ||
+      "#111111"
+    );
 
 
-  document.documentElement.style.setProperty(
-    "--site-border",
-    S.border_color || "#292929"
-  );
+  document.documentElement
+    .style
+    .setProperty(
+      "--site-border",
+      S.border_color ||
+      "#292929"
+    );
 
 
-  document.documentElement.style.setProperty(
-    "--site-accent",
-    S.accent_color || "#35e36b"
-  );
+  document.documentElement
+    .style
+    .setProperty(
+      "--site-accent",
+      S.accent_color ||
+      "#35e36b"
+    );
 
 
   document.body.style.backgroundColor =
-    S.bg_color || "#080808";
+    S.bg_color ||
+    "#080808";
 
 
   document.body.style.color =
-    S.text_color || "#f7f8ff";
+    S.text_color ||
+    "#f7f8ff";
 
 
   document.body.style.backgroundImage =
+
     `linear-gradient(
       ${S.bg_gradient_direction || "135deg"},
       ${S.bg_gradient_1 || "#151515"},
@@ -1008,37 +1751,60 @@ function applyTheme(){
 }
 
 
-/* =========================================================
+/* =====================================================
    PORTFOLIO
-========================================================= */
+===================================================== */
 
 async function loadPortfolio(){
 
   const grid =
-    document.getElementById("portfolioGrid");
+    document.getElementById(
+      "portfolioGrid"
+    );
 
 
   const {data,error} =
     await supabaseClient
+
       .from("portfolio")
+
       .select("*")
-      .order("display_order",{ascending:true})
-      .order("id",{ascending:true});
+
+      .order(
+        "display_order",
+        {
+          ascending:true
+        }
+      )
+
+      .order(
+        "id",
+        {
+          ascending:true
+        }
+      );
 
 
   if(error){
 
-    console.error("Portfolio error:",error);
+    console.error(
+      "Portfolio error:",
+      error
+    );
+
 
     grid.innerHTML = `
+
       <div style="
         grid-column:1/-1;
         text-align:center;
         padding:40px;
-        color:#777;
       ">
+
         Unable to load thumbnails.
+
       </div>
+
     `;
 
     return;
@@ -1049,14 +1815,17 @@ async function loadPortfolio(){
   if(!data || data.length === 0){
 
     grid.innerHTML = `
+
       <div style="
         grid-column:1/-1;
         text-align:center;
         padding:40px;
-        color:#777;
       ">
+
         No thumbnails available yet.
+
       </div>
+
     `;
 
     return;
@@ -1064,13 +1833,7 @@ async function loadPortfolio(){
   }
 
 
-  /*
-    IMPORTANT:
-    Admin order stays untouched in Supabase.
-    Only visitor presentation is shuffled.
-  */
-
-  portfolio = shuffle([...data]);
+  portfolio = data;
 
 
   renderPortfolio();
@@ -1078,107 +1841,130 @@ async function loadPortfolio(){
 }
 
 
-/* =========================================================
+/* =====================================================
    RENDER PORTFOLIO
-========================================================= */
+===================================================== */
 
 function renderPortfolio(){
 
   const grid =
-    document.getElementById("portfolioGrid");
+    document.getElementById(
+      "portfolioGrid"
+    );
 
 
   grid.innerHTML = "";
 
 
   const visible =
-    portfolio.slice(0,portfolioVisible);
+    portfolio.slice(
+      0,
+      portfolioVisible
+    );
 
 
-  visible.forEach((item,index)=>{
-
-    const card =
-      document.createElement("article");
+  visible.forEach(
+    (item,index)=>{
 
 
-    card.className =
-      "work-card";
+      const card =
+        document.createElement(
+          "article"
+        );
 
 
-    if(index === 0){
+      card.className =
+        "work-card";
 
-      card.classList.add("featured");
+
+      card.onclick = () => {
+
+        openImageViewer(
+          item.image_url
+        );
+
+      };
+
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+
+      img.src =
+        item.image_url;
+
+
+      img.alt =
+        item.title ||
+        "Minecraft thumbnail";
+
+
+      img.loading =
+        "lazy";
+
+
+      const info =
+        document.createElement(
+          "div"
+        );
+
+
+      info.className =
+        "work-info";
+
+
+      const category =
+        document.createElement(
+          "span"
+        );
+
+
+      category.textContent =
+        "Minecraft";
+
+
+      const title =
+        document.createElement(
+          "b"
+        );
+
+
+      title.textContent =
+        item.title ||
+        "Minecraft Thumbnail";
+
+
+      info.appendChild(category);
+
+      info.appendChild(title);
+
+
+      card.appendChild(img);
+
+      card.appendChild(info);
+
+
+      grid.appendChild(card);
 
     }
+  );
 
 
-    card.onclick = () => {
-
-      openImageViewer(item.image_url);
-
-    };
-
-
-    const img =
-      document.createElement("img");
-
-
-    img.src =
-      item.image_url;
-
-
-    img.alt =
-      item.title ||
-      "Minecraft thumbnail";
-
-
-    img.loading =
-      "lazy";
-
-
-    const info =
-      document.createElement("div");
-
-
-    info.className =
-      "work-info";
-
-
-    const category =
-      document.createElement("span");
-
-
-    category.textContent =
-      "Minecraft";
-
-
-    const title =
-      document.createElement("b");
-
-
-    title.textContent =
-      item.title ||
-      "Minecraft Thumbnail";
-
-
-    info.appendChild(category);
-    info.appendChild(title);
-
-
-    card.appendChild(img);
-    card.appendChild(info);
-
-
-    grid.appendChild(card);
-
-  });
+  observePortfolioCards();
 
 
   const button =
-    document.getElementById("portfolioLoadMore");
+    document.getElementById(
+      "portfolioLoadMore"
+    );
 
 
-  if(portfolioVisible < portfolio.length){
+  if(
+    portfolioVisible <
+    portfolio.length
+  ){
 
     button.style.display =
       "inline-block";
@@ -1193,53 +1979,140 @@ function renderPortfolio(){
 }
 
 
-/* =========================================================
+/* =====================================================
+   THUMBNAIL SCROLL OBSERVER
+===================================================== */
+
+function observePortfolioCards(){
+
+  const cards =
+    document.querySelectorAll(
+      ".work-card"
+    );
+
+
+  if(
+    !("IntersectionObserver"
+      in window)
+  ){
+
+    cards.forEach(
+      card =>
+        card.classList.add(
+          "reveal"
+        )
+    );
+
+    return;
+
+  }
+
+
+  const observer =
+    new IntersectionObserver(
+
+      entries => {
+
+        entries.forEach(
+          entry => {
+
+            if(
+              entry.isIntersecting
+            ){
+
+              entry.target
+                .classList
+                .add("reveal");
+
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          }
+        );
+
+      },
+
+      {
+        threshold:.12
+      }
+
+    );
+
+
+  cards.forEach(
+    card =>
+      observer.observe(card)
+  );
+
+}
+
+
+/* =====================================================
    PORTFOLIO LOAD MORE
-========================================================= */
+===================================================== */
 
 document
-  .getElementById("portfolioLoadMore")
-  .addEventListener("click",()=>{
+  .getElementById(
+    "portfolioLoadMore"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    portfolioVisible += 6;
+      portfolioVisible += 6;
 
-    renderPortfolio();
+      renderPortfolio();
 
-  });
+    }
+  );
 
 
-/* =========================================================
+/* =====================================================
    CREATORS
-========================================================= */
+===================================================== */
 
 async function loadCreators(){
 
   const grid =
-    document.getElementById("creatorGrid");
+    document.getElementById(
+      "creatorGrid"
+    );
 
 
   const {data,error} =
     await supabaseClient
+
       .from("creators")
+
       .select("*")
-      .order("display_order",{ascending:true})
-      .order("id",{ascending:true});
+
+      .order(
+        "display_order",
+        {
+          ascending:true
+        }
+      )
+
+      .order(
+        "id",
+        {
+          ascending:true
+        }
+      );
 
 
   if(error){
 
-    console.error("Creators error:",error);
+    console.error(
+      "Creators error:",
+      error
+    );
 
-    grid.innerHTML = `
-      <div style="
-        grid-column:1/-1;
-        text-align:center;
-        padding:40px;
-        color:#777;
-      ">
-        Unable to load creators.
-      </div>
-    `;
+    grid.innerHTML = "";
 
     return;
 
@@ -1249,14 +2122,18 @@ async function loadCreators(){
   if(!data || data.length === 0){
 
     grid.innerHTML = `
+
       <div style="
         grid-column:1/-1;
         text-align:center;
         padding:40px;
         color:#777;
       ">
+
         Creators will appear here soon.
+
       </div>
+
     `;
 
     return;
@@ -1264,148 +2141,188 @@ async function loadCreators(){
   }
 
 
-  creators = data;
+  creators =
+    data;
+
 
   renderCreators();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    RENDER CREATORS
-========================================================= */
+===================================================== */
 
 function renderCreators(){
 
   const grid =
-    document.getElementById("creatorGrid");
+    document.getElementById(
+      "creatorGrid"
+    );
 
 
   grid.innerHTML = "";
 
 
   creators
-    .slice(0,creatorVisible)
-    .forEach((creator,index)=>{
-
-      const card =
-        document.createElement("article");
-
-
-      card.className =
-        "creator-card";
+    .slice(
+      0,
+      creatorVisible
+    )
+    .forEach(
+      (creator,index)=>{
 
 
-      const link =
-        document.createElement("a");
+        const card =
+          document.createElement(
+            "article"
+          );
 
 
-      link.className =
-        "creator-link";
+        card.className =
+          "creator-card";
 
 
-      link.href =
-        creator.youtube_url || "#";
+        const link =
+          document.createElement(
+            "a"
+          );
 
 
-      link.target =
-        "_blank";
+        link.className =
+          "creator-link";
 
 
-      link.rel =
-        "noopener";
+        link.href =
+          creator.youtube_url ||
+          "#";
 
 
-      const avatar =
-        document.createElement("div");
+        link.target =
+          "_blank";
 
 
-      avatar.className =
-        "creator-avatar";
+        link.rel =
+          "noopener";
 
 
-      if(creator.image_url){
-
-        const img =
-          document.createElement("img");
-
-
-        img.src =
-          creator.image_url;
+        const avatar =
+          document.createElement(
+            "div"
+          );
 
 
-        img.alt =
-          creator.name || "Creator";
+        avatar.className =
+          "creator-avatar";
 
 
-        img.loading =
-          "lazy";
+        if(creator.image_url){
+
+          const img =
+            document.createElement(
+              "img"
+            );
 
 
-        avatar.appendChild(img);
-
-      }else{
-
-        const number =
-          document.createElement("span");
+          img.src =
+            creator.image_url;
 
 
-        number.textContent =
-          String(index + 1).padStart(2,"0");
+          img.alt =
+            creator.name ||
+            "Creator";
 
 
-        avatar.appendChild(number);
-
-      }
-
-
-      const name =
-        document.createElement("h3");
+          img.loading =
+            "lazy";
 
 
-      name.textContent =
-        creator.name ||
-        "Creator";
+          avatar.appendChild(img);
+
+        }else{
+
+          const number =
+            document.createElement(
+              "span"
+            );
 
 
-      const channel =
-        document.createElement("p");
+          number.textContent =
+            String(index+1)
+              .padStart(2,"0");
 
 
-      channel.textContent =
-        getYouTubeHandle(
-          creator.youtube_url
+          avatar.appendChild(
+            number
+          );
+
+        }
+
+
+        const name =
+          document.createElement(
+            "h3"
+          );
+
+
+        name.textContent =
+          creator.name ||
+          "Creator";
+
+
+        const channel =
+          document.createElement(
+            "p"
+          );
+
+
+        channel.textContent =
+          getYouTubeHandle(
+            creator.youtube_url
+          );
+
+
+        const subscribers =
+          document.createElement(
+            "b"
+          );
+
+
+        subscribers.textContent =
+          creator.subscribers ||
+          "Subscribers unavailable";
+
+
+        link.appendChild(avatar);
+
+        link.appendChild(name);
+
+        link.appendChild(channel);
+
+        link.appendChild(
+          subscribers
         );
 
 
-      const subscribers =
-        document.createElement("b");
+        card.appendChild(link);
 
+        grid.appendChild(card);
 
-      subscribers.textContent =
-        creator.subscribers ||
-        "Subscribers unavailable";
-
-
-      link.appendChild(avatar);
-      link.appendChild(name);
-      link.appendChild(channel);
-      link.appendChild(subscribers);
-
-
-      card.appendChild(link);
-
-
-      grid.appendChild(card);
-
-    });
+      }
+    );
 
 
   const button =
-    document.getElementById("creatorLoadMore");
+    document.getElementById(
+      "creatorLoadMore"
+    );
 
 
-  if(creatorVisible < creators.length){
+  if(
+    creatorVisible <
+    creators.length
+  ){
 
     button.style.display =
       "inline-block";
@@ -1420,42 +2337,66 @@ function renderCreators(){
 }
 
 
-/* =========================================================
+/* =====================================================
    CREATOR LOAD MORE
-========================================================= */
+===================================================== */
 
 document
-  .getElementById("creatorLoadMore")
-  .addEventListener("click",()=>{
+  .getElementById(
+    "creatorLoadMore"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    creatorVisible += 8;
+      creatorVisible += 8;
 
-    renderCreators();
+      renderCreators();
 
-  });
+    }
+  );
 
 
-/* =========================================================
+/* =====================================================
    FAQ
-========================================================= */
+===================================================== */
 
 async function loadFAQs(){
 
   const list =
-    document.getElementById("faqList");
+    document.getElementById(
+      "faqList"
+    );
 
 
   const {data,error} =
     await supabaseClient
+
       .from("faq")
+
       .select("*")
-      .order("display_order",{ascending:true})
-      .order("id",{ascending:true});
+
+      .order(
+        "display_order",
+        {
+          ascending:true
+        }
+      )
+
+      .order(
+        "id",
+        {
+          ascending:true
+        }
+      );
 
 
   if(error){
 
-    console.error("FAQ error:",error);
+    console.error(
+      "FAQ error:",
+      error
+    );
 
     list.innerHTML = "";
 
@@ -1467,13 +2408,17 @@ async function loadFAQs(){
   if(!data || data.length === 0){
 
     list.innerHTML = `
+
       <div style="
         text-align:center;
         padding:40px;
         color:#777;
       ">
+
         No FAQ available yet.
+
       </div>
+
     `;
 
     return;
@@ -1481,69 +2426,95 @@ async function loadFAQs(){
   }
 
 
-  faqs = data;
+  faqs =
+    data;
 
 
   list.innerHTML = "";
 
 
-  faqs.forEach(item=>{
-
-    const button =
-      document.createElement("button");
+  faqs.forEach(
+    item => {
 
 
-    button.className =
-      "faq-item";
+      const button =
+        document.createElement(
+          "button"
+        );
 
 
-    const question =
-      document.createElement("span");
+      button.className =
+        "faq-item";
 
 
-    question.textContent =
-      item.question;
+      const question =
+        document.createElement(
+          "span"
+        );
 
 
-    const plus =
-      document.createElement("b");
+      question.textContent =
+        item.question;
 
 
-    plus.textContent =
-      "+";
+      const plus =
+        document.createElement(
+          "b"
+        );
 
 
-    const answer =
-      document.createElement("p");
+      plus.textContent =
+        "+";
 
 
-    answer.textContent =
-      item.answer;
+      const answer =
+        document.createElement(
+          "p"
+        );
 
 
-    button.appendChild(question);
-    button.appendChild(plus);
-    button.appendChild(answer);
+      answer.textContent =
+        item.answer;
 
 
-    button.addEventListener("click",()=>{
+      button.appendChild(
+        question
+      );
 
-      button.classList.toggle("open");
+      button.appendChild(
+        plus
+      );
 
-    });
+      button.appendChild(
+        answer
+      );
 
 
-    list.appendChild(button);
+      button.addEventListener(
+        "click",
+        () => {
 
-  });
+          button.classList.toggle(
+            "open"
+          );
+
+        }
+      );
+
+
+      list.appendChild(
+        button
+      );
+
+    }
+  );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    CUSTOM CONTACT BUTTONS
-   Reads optional browser-side buttons created by admin.
-========================================================= */
+===================================================== */
 
 function loadCustomContactButtons(){
 
@@ -1575,96 +2546,117 @@ function loadCustomContactButtons(){
   }
 
 
-  buttons.forEach(button=>{
+  buttons.forEach(
+    button => {
 
-    if(!button.name || !button.url){
 
-      return;
+      if(
+        !button.name ||
+        !button.url
+      ){
+
+        return;
+
+      }
+
+
+      const a =
+        document.createElement(
+          "a"
+        );
+
+
+      a.className =
+        "custom-contact-button";
+
+
+      a.href =
+        button.url;
+
+
+      a.target =
+        "_blank";
+
+
+      a.rel =
+        "noopener";
+
+
+      a.style.background =
+        button.color ||
+        "#fff";
+
+
+      a.style.color =
+        button.text_color ||
+        "#080808";
+
+
+      if(button.logo_url){
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+
+        img.src =
+          button.logo_url;
+
+
+        img.alt = "";
+
+
+        a.appendChild(img);
+
+      }
+
+
+      const text =
+        document.createElement(
+          "span"
+        );
+
+
+      text.textContent =
+        button.name;
+
+
+      a.appendChild(text);
+
+
+      container.appendChild(a);
 
     }
-
-
-    const a =
-      document.createElement("a");
-
-
-    a.className =
-      "custom-contact-button";
-
-
-    a.href =
-      button.url;
-
-
-    a.target =
-      "_blank";
-
-
-    a.rel =
-      "noopener";
-
-
-    a.style.background =
-      button.color || "#fff";
-
-
-    a.style.color =
-      button.text_color || "#080808";
-
-
-    if(button.logo_url){
-
-      const img =
-        document.createElement("img");
-
-
-      img.src =
-        button.logo_url;
-
-
-      img.alt = "";
-
-
-      a.appendChild(img);
-
-    }
-
-
-    const text =
-      document.createElement("span");
-
-
-    text.textContent =
-      button.name;
-
-
-    a.appendChild(text);
-
-
-    container.appendChild(a);
-
-  });
+  );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    IMAGE VIEWER
-========================================================= */
+===================================================== */
 
 function openImageViewer(url){
 
-  if(!url) return;
+  if(!url){
+
+    return;
+
+  }
 
 
   document.getElementById(
     "viewerImage"
-  ).src = url;
+  ).src =
+    url;
 
 
   document.getElementById(
     "imageViewer"
-  ).classList.add("show");
+  ).classList.add(
+    "show"
+  );
 
 
   document.body.style.overflow =
@@ -1677,7 +2669,9 @@ function closeImageViewer(){
 
   document.getElementById(
     "imageViewer"
-  ).classList.remove("show");
+  ).classList.remove(
+    "show"
+  );
 
 
   document.body.style.overflow =
@@ -1688,7 +2682,7 @@ function closeImageViewer(){
 
 document.addEventListener(
   "keydown",
-  event=>{
+  event => {
 
     if(event.key === "Escape"){
 
@@ -1700,11 +2694,88 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   STATS ANIMATION
-========================================================= */
+/* =====================================================
+   PORTFOLIO VIEW COUNTER
+===================================================== */
+
+async function registerPortfolioView(){
+
+  const storageKey =
+    "mrcs_last_portfolio_view";
+
+
+  const last =
+    Number(
+      localStorage.getItem(
+        storageKey
+      ) || 0
+    );
+
+
+  const now =
+    Date.now();
+
+
+  /*
+    Same visitor ko 30 minutes ke
+    andar multiple views count nahi
+    karenge.
+  */
+
+  if(
+    now - last <
+    30 * 60 * 1000
+  ){
+
+    return;
+
+  }
+
+
+  const {data,error} =
+    await supabaseClient.rpc(
+      "increment_site_views"
+    );
+
+
+  if(error){
+
+    console.error(
+      "View counter error:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    storageKey,
+    String(now)
+  );
+
+
+  console.log(
+    "Portfolio view:",
+    data
+  );
+
+}
+
+
+/* =====================================================
+   STAT ANIMATION
+===================================================== */
 
 function animateNumber(element){
+
+  if(!element){
+
+    return;
+
+  }
+
 
   const finalText =
     element.textContent.trim();
@@ -1712,12 +2783,18 @@ function animateNumber(element){
 
   const number =
     parseInt(
-      finalText.replace(/\D/g,""),
+      finalText.replace(
+        /\D/g,
+        ""
+      ),
       10
     );
 
 
-  if(!number || number < 2){
+  if(
+    !number ||
+    number < 2
+  ){
 
     return;
 
@@ -1725,7 +2802,10 @@ function animateNumber(element){
 
 
   const suffix =
-    finalText.replace(/[0-9]/g,"");
+    finalText.replace(
+      /[0-9]/g,
+      ""
+    );
 
 
   const duration =
@@ -1740,17 +2820,24 @@ function animateNumber(element){
 
     const progress =
       Math.min(
-        (now-start)/duration,
+        (now-start) /
+        duration,
         1
       );
 
 
     const eased =
-      1-Math.pow(1-progress,3);
+      1 -
+      Math.pow(
+        1-progress,
+        3
+      );
 
 
     const value =
-      Math.floor(number*eased);
+      Math.floor(
+        number * eased
+      );
 
 
     element.textContent =
@@ -1759,7 +2846,9 @@ function animateNumber(element){
 
     if(progress < 1){
 
-      requestAnimationFrame(update);
+      requestAnimationFrame(
+        update
+      );
 
     }else{
 
@@ -1775,7 +2864,9 @@ function animateNumber(element){
     "1";
 
 
-  requestAnimationFrame(update);
+  requestAnimationFrame(
+    update
+  );
 
 }
 
@@ -1783,65 +2874,62 @@ function animateNumber(element){
 function animateStats(){
 
   animateNumber(
-    document.getElementById("statThumbs")
+    document.getElementById(
+      "statThumbs"
+    )
   );
 
 
   animateNumber(
-    document.getElementById("statCreators")
+    document.getElementById(
+      "statCreators"
+    )
   );
 
 
   animateNumber(
-    document.getElementById("statYears")
+    document.getElementById(
+      "statYears"
+    )
   );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    UTILITIES
-========================================================= */
-
-function shuffle(array){
-
-  for(
-    let i=array.length-1;
-    i>0;
-    i--
-  ){
-
-    const j =
-      Math.floor(
-        Math.random()*(i+1)
-      );
-
-
-    [
-      array[i],
-      array[j]
-    ] =
-    [
-      array[j],
-      array[i]
-    ];
-
-  }
-
-
-  return array;
-
-}
-
+===================================================== */
 
 function escapeHTML(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
@@ -1869,8 +2957,10 @@ function getYouTubeHandle(url){
 
     if(path.length){
 
-      return "@" + path[path.length-1]
-        .replace("@","");
+      return "@" +
+        path[path.length-1]
+          .replace("@","");
+
     }
 
   }catch(e){}
@@ -1881,41 +2971,53 @@ function getYouTubeHandle(url){
 }
 
 
-/* =========================================================
-   LOADER
-========================================================= */
+/* =====================================================
+   LOADER HIDE
+===================================================== */
 
 function hideLoader(){
 
-  setTimeout(()=>{
+  setTimeout(
+    () => {
 
-    const loader =
-      document.getElementById("loader");
+      const loader =
+        document.getElementById(
+          "loader"
+        );
 
 
-    if(loader){
+      if(loader){
 
-      loader.classList.add("hide");
+        loader.classList.add(
+          "hide"
+        );
 
-    }
+      }
 
-  },1800);
+    },
+    1900
+  );
 
 }
 
 
-/* =========================================================
-   START
-========================================================= */
+/* =====================================================
+   START WEBSITE
+===================================================== */
 
 async function startWebsite(){
 
   await loadSiteSettings();
 
+
   await Promise.all([
+
     loadPortfolio(),
+
     loadCreators(),
+
     loadFAQs()
+
   ]);
 
 
@@ -1930,9 +3032,17 @@ async function startWebsite(){
 }
 
 
+/* REGISTER VIEW */
+
+registerPortfolioView();
+
+
+/* START */
+
 startWebsite();
 
 </script>
+
 
 </body>
 </html>
