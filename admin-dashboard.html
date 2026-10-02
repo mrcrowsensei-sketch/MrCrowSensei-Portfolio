@@ -2,1835 +2,825 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mr CrowSensei — Admin Portfolio</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-  width:100%;
-  overflow-x:hidden;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-  width:100%;
-  min-height:100vh;
-  font-family:Inter,Arial,sans-serif;
-  background:#080808;
-  color:#fff;
-  overflow-x:hidden;
+font-family:Inter,Arial,sans-serif;
+background:#080808;color:#fff;overflow-x:hidden
 }
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,
-input,
-textarea,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
 
 :root{
-  --card:#111111;
-  --border:#292929;
-  --muted:#85858a;
-  --accent:#35e36b;
-  --btn:#ffffff;
-  --bt:#080808;
+--card:#111;
+--border:#292929;
+--muted:#85858a;
+--accent:#35e36b;
+--btn:#fff;
+--bt:#080808
 }
 
-/* =========================
-   NAV
-========================= */
-
+/* NAV */
 .nav{
-  position:sticky;
-  top:8px;
-  z-index:50;
-  width:calc(100% - 28px);
-  max-width:1180px;
-  margin:8px auto;
-  padding:11px 14px;
-  border:1px solid var(--border);
-  border-radius:18px;
-  background:#0d0d0de8;
-  backdrop-filter:blur(18px);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+position:sticky;top:8px;z-index:20;width:92%;max-width:1180px;
+margin:8px auto;padding:11px 14px;border:1px solid var(--border);
+border-radius:18px;background:#0d0d0de8;backdrop-filter:blur(15px);
+display:flex;justify-content:space-between;align-items:center
 }
+.brand{display:flex;align-items:center;gap:9px;font-weight:900}
+.brand img{width:35px;height:35px;border-radius:50%;object-fit:cover}
+.navright{display:flex;gap:8px}
 
-.brand{
-  min-width:0;
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-weight:900;
+.btn,.edit,.mini{
+border:1px solid #333;background:#151515;color:#fff;border-radius:9px;
+padding:9px 12px;font-size:11px;font-weight:800
 }
+.primary{background:var(--btn);color:var(--bt)}
+.danger{color:#ff7777}
 
-.brand img{
-  width:38px;
-  height:38px;
-  flex:none;
-  border-radius:50%;
-  object-fit:cover;
-}
-
-.brand span{
-  white-space:nowrap;
-}
-
-.navright{
-  display:flex;
-  gap:8px;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn,
-.edit,
-.mini{
-  border:1px solid #333;
-  background:#151515;
-  color:#fff;
-  border-radius:10px;
-  padding:10px 13px;
-  font-size:11px;
-  font-weight:800;
-}
-
-.btn:hover,
-.edit:hover,
-.mini:hover{
-  border-color:#555;
-}
-
-.primary{
-  background:var(--btn);
-  color:var(--bt);
-}
-
-.danger{
-  color:#ff7777;
-}
-
-/* =========================
-   VIEWS
-========================= */
-
-.viewsTop{
-  width:calc(100% - 28px);
-  max-width:1120px;
-  margin:18px auto 0;
-  padding:17px 20px;
-  border:1px solid var(--border);
-  border-radius:20px;
-  background:
-    radial-gradient(circle at 10% 0%,#1c1c1c,#101010 55%,#0b0b0b);
-  display:flex;
-  align-items:center;
-  gap:14px;
-  box-shadow:0 15px 50px #0006;
-}
-
-.viewsIcon{
-  width:45px;
-  height:45px;
-  flex:none;
-  display:grid;
-  place-items:center;
-  border:1px solid #333;
-  border-radius:13px;
-  background:#171717;
-  font-size:20px;
-}
-
-.viewsText{
-  flex:1;
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-
-.viewsText span{
-  font-size:9px;
-  letter-spacing:2px;
-  color:#777;
-  font-weight:800;
-}
-
-.viewsText strong{
-  font-size:28px;
-  line-height:1;
-}
-
-.viewsRefresh{
-  font-size:17px;
-  padding:8px 11px;
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
+/* SECTIONS */
 .section{
-  position:relative;
-  width:100%;
-  max-width:1120px;
-  margin:0 auto;
-  padding:82px 20px;
+width:92%;max-width:1120px;margin:auto;padding:80px 0;position:relative
 }
 
 .edit{
-  position:absolute;
-  top:50px;
-  right:20px;
+position:absolute;right:0;top:52px
 }
 
 .hero{
-  min-height:82vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+text-align:center;min-height:88vh;display:flex;flex-direction:column;
+align-items:center;justify-content:center
 }
 
 .avail{
-  border:1px solid #333;
-  border-radius:999px;
-  padding:10px 18px;
-  font-size:12px;
-  color:#ccc;
-  white-space:nowrap;
+border:1px solid #333;border-radius:999px;padding:9px 18px;
+font-size:12px;color:#ccc
 }
-
 .avail i{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  background:var(--accent);
-  border-radius:50%;
-  margin-right:8px;
+display:inline-block;width:7px;height:7px;background:var(--accent);
+border-radius:50%;margin-right:8px
 }
 
 .hero h1{
-  width:100%;
-  max-width:1000px;
-  font-size:clamp(52px,10vw,112px);
-  line-height:.86;
-  letter-spacing:-6px;
-  margin:55px auto 42px;
-  overflow-wrap:anywhere;
+font-size:clamp(58px,10vw,115px);
+line-height:.84;letter-spacing:-6px;margin:55px 0 45px
 }
+.hero h1 span{display:block}
 
-.hero h1 span{
-  display:block;
-}
+.hero-copy{font-size:21px;color:#aaa;line-height:1.55}
+.hero-copy strong{display:block;color:#fff}
+.hero-copy small{display:block;color:#777}
 
-.hero-copy{
-  font-size:21px;
-  color:#aaa;
-  line-height:1.55;
-}
-
-.hero-copy strong{
-  display:block;
-  color:#fff;
-}
-
-.hero-copy small{
-  display:block;
-  color:#777;
-}
-
-.actions{
-  display:flex;
-  gap:10px;
-  margin-top:38px;
-}
+.actions{display:flex;gap:10px;margin-top:38px}
 
 .stats{
-  width:min(720px,100%);
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:72px;
+width:min(720px,95%);display:grid;grid-template-columns:repeat(3,1fr);
+gap:12px;margin-top:75px
 }
-
 .stats div{
-  position:relative;
-  min-width:0;
-  padding:20px 15px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:#0d0d0d;
+position:relative;padding:18px;border:1px solid var(--border);
+border-radius:15px;background:#0d0d0d
 }
-
-.stats strong{
-  display:block;
-  font-size:42px;
-}
-
-.stats span{
-  font-size:10px;
-  color:#777;
-  letter-spacing:1.4px;
-}
-
+.stats strong{font-size:43px;display:block}
+.stats span{font-size:10px;color:#777;letter-spacing:1.4px}
 .stats .se{
-  position:absolute;
-  top:8px;
-  right:8px;
-  padding:5px 7px;
-  font-size:9px;
+position:absolute;right:8px;top:8px;padding:5px 7px;font-size:9px
 }
 
 .head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:20px;
-  margin-bottom:32px;
+display:flex;justify-content:space-between;align-items:end;margin-bottom:32px
 }
-
 .head h2{
-  font-size:clamp(35px,5vw,58px);
-  line-height:1;
-  letter-spacing:-2.5px;
-  margin-top:10px;
+font-size:clamp(35px,5vw,58px);letter-spacing:-2px;margin-top:10px
 }
-
-.head em{
-  font-style:normal;
-}
-
-.head p{
-  color:#666;
-  font-size:12px;
-}
-
+.head em{font-style:normal}
+.head p{color:#666;font-size:12px}
 .eyebrow{
-  font-size:10px;
-  letter-spacing:2.3px;
-  color:#999;
-  font-weight:800;
+font-size:10px;letter-spacing:2.3px;color:#999;font-weight:800
 }
 
-/* =========================
-   PORTFOLIO
-========================= */
-
+/* CARDS */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:16px;
+display:grid;grid-template-columns:repeat(2,1fr);gap:16px
 }
-
 .card{
-  min-width:0;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
+background:var(--card);border:1px solid var(--border);
+border-radius:17px;overflow:hidden
 }
-
 .card>img{
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  display:block;
-  cursor:zoom-in;
+width:100%;aspect-ratio:16/9;object-fit:cover;
+display:block;cursor:zoom-in
 }
+.info{padding:14px 16px}
+.tools{display:flex;gap:5px;padding:0 16px 15px}
 
-.info{
-  padding:15px 16px;
-}
-
-.tools{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  padding:0 16px 15px;
-}
-
-/* =========================
-   ABOUT
-========================= */
-
+/* ABOUT */
 .about{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:42px;
-  display:grid;
-  grid-template-columns:minmax(230px,320px) minmax(0,1fr);
-  gap:48px;
-  background:#111;
+border:1px solid var(--border);border-radius:24px;padding:48px;
+display:grid;grid-template-columns:320px 1fr;gap:50px;background:#111
 }
-
 .about img{
-  width:100%;
-  aspect-ratio:1;
-  object-fit:cover;
-  border-radius:18px;
+width:100%;aspect-ratio:1;object-fit:cover;border-radius:18px
 }
-
 .about h3{
-  font-size:clamp(30px,5vw,54px);
-  line-height:1.02;
-  margin:14px 0;
+font-size:clamp(30px,5vw,54px);line-height:1.02;margin:14px 0
 }
+.about p{color:#888;line-height:1.7}
 
-.about p{
-  color:#888;
-  line-height:1.75;
-}
-
-/* =========================
-   CREATORS
-========================= */
-
+/* CREATORS */
 .creators{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:22px;
+display:grid;grid-template-columns:repeat(4,1fr);gap:22px
 }
-
-.creator{
-  min-width:0;
-  text-align:center;
-}
-
+.creator{text-align:center}
 .avatar{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  overflow:hidden;
-  border:2px solid #333;
-  margin:auto;
-  background:#171717;
+width:140px;height:140px;border-radius:50%;overflow:hidden;
+border:2px solid #333;margin:auto;background:#171717
 }
+.avatar img{width:100%;height:100%;object-fit:cover}
+.creator h3{margin-top:13px;font-size:17px}
+.creator p{color:#777;font-size:11px;margin:6px 0}
+.creator b{font-size:12px}
 
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.creator h3{
-  margin-top:13px;
-  font-size:17px;
-  overflow-wrap:anywhere;
-}
-
-.creator p{
-  color:#777;
-  font-size:10px;
-  margin:6px 0;
-  overflow-wrap:anywhere;
-}
-
-.creator b{
-  font-size:12px;
-}
-
-/* =========================
-   FAQ
-========================= */
-
-.faq{
-  width:100%;
-  max-width:850px;
-  margin:auto;
-}
-
+/* FAQ */
+.faq{max-width:850px;margin:auto}
 .faqitem{
-  width:100%;
-  text-align:left;
-  border:0;
-  border-bottom:1px solid #292929;
-  background:none;
-  color:#fff;
-  padding:21px 35px 21px 0;
-  position:relative;
+width:100%;text-align:left;border:0;border-bottom:1px solid #292929;
+background:none;color:#fff;padding:21px 35px 21px 0;position:relative
 }
-
-.faqitem>b{
-  position:absolute;
-  right:4px;
-  color:#777;
-  font-size:22px;
+.faqitem b{
+position:absolute;right:4px;color:#777;font-size:22px
 }
-
 .faqitem p{
-  display:none;
-  color:#777;
-  font-size:13px;
-  line-height:1.7;
-  padding-top:12px;
+display:none;color:#777;font-size:13px;line-height:1.7;padding-top:12px
 }
+.faqitem.open p{display:block}
 
-.faqitem.open p{
-  display:block;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
+/* CONTACT */
 .contact{
-  width:100%;
-  border:1px solid #333;
-  border-radius:35px;
-  padding:85px 25px;
-  text-align:center;
-  background:
-    radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808);
+border:1px solid #333;border-radius:35px;padding:85px 20px;
+text-align:center;
+background:radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808)
 }
-
 .contact h2{
-  font-size:clamp(45px,8vw,88px);
-  line-height:.9;
-  letter-spacing:-4px;
+font-size:clamp(45px,8vw,88px);line-height:.9;letter-spacing:-4px
 }
-
-.contact p{
-  color:#999;
-  line-height:1.7;
-  margin:35px auto;
-}
-
+.contact p{color:#999;line-height:1.7;margin:35px auto}
 .links{
-  width:100%;
-  max-width:650px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
+display:grid;grid-template-columns:repeat(2,minmax(150px,1fr));
+gap:10px;max-width:650px;margin:auto
 }
-
 .links a{
-  min-width:0;
-  padding:15px;
-  border-radius:12px;
-  font-weight:800;
-  font-size:12px;
-  overflow-wrap:anywhere;
+padding:15px;border-radius:12px;font-weight:800;font-size:12px
 }
 
-/* =========================
-   ADMIN
-========================= */
-
+/* ADMIN */
 .adminbox{
-  width:100%;
-  border:1px solid var(--border);
-  background:#101010;
-  border-radius:20px;
-  padding:24px;
+border:1px solid var(--border);background:#101010;
+border-radius:20px;padding:24px
 }
-
-.formgrid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+.themegrid,.formgrid{
+display:grid;grid-template-columns:repeat(3,1fr);gap:12px
 }
-
-.themegrid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-}
-
-.field{
-  min-width:0;
-}
-
 .field label{
-  display:block;
-  color:#888;
-  font-size:11px;
-  font-weight:700;
-  margin-bottom:6px;
+display:block;color:#888;font-size:11px;font-weight:700;margin-bottom:6px
 }
-
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  min-width:0;
-  background:#151515;
-  border:1px solid #333;
-  color:#fff;
-  border-radius:9px;
-  padding:11px;
-  outline:none;
+.field input,.field textarea,.field select{
+width:100%;background:#151515;border:1px solid #333;color:#fff;
+border-radius:9px;padding:10px;outline:0
 }
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:#666;
-}
-
-.field textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.full{
-  grid-column:1/-1;
-}
-
-/* =========================
-   SAVE
-========================= */
+.field textarea{min-height:110px}
+.full{grid-column:1/-1}
 
 .savebar{
-  position:sticky;
-  bottom:12px;
-  z-index:100;
-  width:calc(100% - 28px);
-  max-width:1120px;
-  margin:0 auto 25px;
-  border:1px solid #333;
-  border-radius:17px;
-  background:#101010ed;
-  backdrop-filter:blur(15px);
-  padding:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  box-shadow:0 15px 50px #0008;
+width:92%;max-width:1120px;margin:0 auto 70px;
+border:1px solid #333;border-radius:16px;background:#101010;
+padding:16px;display:flex;justify-content:space-between;
+align-items:center;position:sticky;bottom:12px;z-index:50
+}
+.success{color:#65e88a;font-size:12px}
+
+/* FOOTER */
+.footer-admin{
+width:92%;max-width:1120px;margin:20px auto 35px;
+border:1px solid var(--border);border-radius:22px;
+background:#101010;padding:55px 30px;text-align:center;
+position:relative
+}
+.footer-logo{
+width:60px;height:60px;border-radius:50%;object-fit:cover;
+margin-bottom:12px
+}
+.footer-name{font-size:22px;font-weight:900}
+.footer-desc{
+max-width:600px;margin:12px auto 28px;
+color:#888;line-height:1.7;font-size:13px
+}
+.footer-explore{
+font-size:10px;letter-spacing:2px;color:#888;
+font-weight:800;margin-bottom:15px
+}
+.footer-links{
+display:flex;justify-content:center;gap:25px;flex-wrap:wrap
+}
+.footer-links a{font-size:12px;color:#aaa}
+.footer-line{
+height:1px;background:#292929;margin:30px auto 20px;
+max-width:700px
+}
+.footer-copy{font-size:11px;color:#666}
+
+/* SECTION REORDER */
+.reorder-list{display:flex;flex-direction:column;gap:8px}
+.reorder-item{
+display:flex;align-items:center;justify-content:space-between;
+padding:15px 16px;background:#151515;border:1px solid #292929;
+border-radius:11px
+}
+.drag{
+font-size:20px;color:#777;cursor:grab;
+user-select:none
+}
+.reorder-save{
+margin-top:14px;width:100%
 }
 
-.success{
-  color:#65e88a;
-  font-size:12px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
+/* MODAL */
 .modal{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  background:#000d;
-  backdrop-filter:blur(9px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:16px;
+position:fixed;inset:0;z-index:1000;background:#000c;
+backdrop-filter:blur(8px);display:none;
+align-items:center;justify-content:center;padding:16px
 }
-
-.modal.show{
-  display:flex;
-}
-
+.modal.show{display:flex}
 .box{
-  width:min(720px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#101010;
-  border:1px solid #333;
-  border-radius:20px;
-  padding:20px;
+width:min(720px,100%);max-height:90vh;overflow:auto;
+background:#101010;border:1px solid #333;border-radius:18px;padding:20px
 }
-
 .mhead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:18px;
+display:flex;justify-content:space-between;margin-bottom:18px
 }
-
 .close{
-  border:0;
-  background:#191919;
-  color:#fff;
-  border-radius:8px;
-  width:36px;
-  height:36px;
-  font-size:20px;
+border:0;background:#191919;color:#fff;border-radius:8px;
+width:34px;height:34px;font-size:20px
 }
-
 .mfoot{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:18px;
+display:flex;justify-content:flex-end;gap:8px;margin-top:18px
 }
-
-/* =========================
-   IMAGES
-========================= */
-
 .preview{
-  margin-top:9px;
-  border:1px solid #333;
-  border-radius:10px;
-  overflow:hidden;
+margin-top:9px;border:1px solid #333;border-radius:10px;overflow:hidden
 }
-
 .preview img{
-  width:100%;
-  max-height:240px;
-  object-fit:contain;
-  display:block;
+width:100%;max-height:230px;object-fit:contain;display:block
 }
-
 .deleteimg{
-  margin-top:8px;
-  color:#ff7777;
-  border:1px solid #4a2222;
-  background:#180c0c;
-  border-radius:7px;
-  padding:8px;
-  font-size:10px;
+margin-top:7px;color:#ff7777;border:1px solid #4a2222;
+background:#180c0c;border-radius:7px;padding:7px;font-size:10px
 }
-
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:9px;
-  margin-top:10px;
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:9px;margin-top:10px
 }
-
-.galleryItem{
-  min-width:0;
-}
-
 .gallery img{
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  border:2px solid #333;
-  border-radius:8px;
-  cursor:pointer;
+width:100%;aspect-ratio:16/9;object-fit:cover;
+border:2px solid #333;border-radius:8px;cursor:pointer
+}
+.gallery small{
+display:block;color:#777;font-size:9px;margin-top:4px
 }
 
-.galleryItem small{
-  display:block;
-  color:#777;
-  margin-top:4px;
-  font-size:9px;
-  overflow-wrap:anywhere;
-}
-
-/* =========================
-   VIEWER
-========================= */
-
+/* VIEWER */
 .viewer{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  background:#000e;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+position:fixed;inset:0;z-index:2000;background:#000e;
+display:none;align-items:center;justify-content:center;padding:20px
 }
-
-.viewer.show{
-  display:flex;
-}
-
-.viewer img{
-  max-width:94vw;
-  max-height:90vh;
-  border-radius:12px;
-}
-
+.viewer.show{display:flex}
+.viewer img{max-width:94vw;max-height:90vh;border-radius:12px}
 .vclose{
-  position:absolute;
-  right:20px;
-  top:20px;
-  background:#111;
-  color:#fff;
-  border:1px solid #444;
-  border-radius:9px;
-  width:40px;
-  height:40px;
-  font-size:22px;
+position:absolute;right:20px;top:20px;background:#111;color:#fff;
+border:1px solid #444;border-radius:9px;width:40px;height:40px;
+font-size:22px
 }
 
-/* =========================
-   LOADING SCREEN
-========================= */
-
+/* LOADER */
 .loader{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  width:100vw;
-  height:100vh;
-  background:#050505;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  transition:opacity .55s ease,visibility .55s ease;
+position:fixed;inset:0;z-index:9999;background:#050505;
+display:grid;place-items:center;transition:.7s
 }
-
-.loader.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-
-.loaderbox{
-  width:min(500px,calc(100vw - 40px));
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-
+.loader.hide{opacity:0;visibility:hidden}
+.loaderbox{text-align:center;width:min(380px,80vw)}
 .loaderlogo{
-  width:145px;
-  height:145px;
-  flex:none;
-  border-radius:50%;
-  overflow:hidden;
-  border:1px solid #555;
-  box-shadow:0 0 70px #fff3;
-  animation:loaderPop 1.15s cubic-bezier(.2,1.4,.3,1);
+width:145px;height:145px;border-radius:50%;overflow:hidden;
+border:1px solid #555;margin:auto;box-shadow:0 0 70px #fff3;
+animation:pop 1.25s cubic-bezier(.2,1.4,.3,1)
+}
+.loaderlogo img{width:100%;height:100%;object-fit:cover}
+.loadername{font-weight:900;font-size:20px;margin:20px 0}
+.line{
+height:4px;background:#222;border-radius:99px;overflow:hidden
+}
+.line span{
+display:block;height:100%;
+background:linear-gradient(90deg,#fff,#777,#fff);
+width:0;transform-origin:center;
+animation:line 1.7s ease forwards
+}
+@keyframes pop{
+0%{transform:scale(.15);opacity:0}
+70%{transform:scale(1.12)}
+100%{transform:scale(1)}
+}
+@keyframes line{
+0%{width:0;transform:scaleX(0)}
+100%{width:100%;transform:scaleX(1)}
 }
 
-.loaderlogo img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
+/* ONE TIME FADE */
+.fade-effect{
+opacity:0;
+transform:translateY(28px);
+transition:opacity .8s ease,transform .8s ease
+}
+.fade-effect.show{
+opacity:1;
+transform:translateY(0)
 }
 
-.loadername{
-  width:100%;
-  margin:20px 0 24px;
-  font-size:20px;
-  font-weight:900;
-}
-
-.loaderline{
-  width:100%;
-  height:4px;
-  background:#222;
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.loaderline span{
-  display:block;
-  width:100%;
-  height:100%;
-  background:linear-gradient(90deg,#fff,#777,#fff);
-  transform:scaleX(0);
-  transform-origin:center;
-  animation:loaderLine 1.8s cubic-bezier(.4,0,.2,1) forwards;
-}
-
-@keyframes loaderPop{
-  0%{
-    transform:scale(.15);
-    opacity:0;
-  }
-  70%{
-    transform:scale(1.1);
-  }
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-@keyframes loaderLine{
-  0%{
-    transform:scaleX(0);
-  }
-  100%{
-    transform:scaleX(1);
-  }
-}
-
-/* =========================
-   MOBILE
-========================= */
-
+/* MOBILE */
 @media(max-width:700px){
-
-  .nav{
-    width:calc(100% - 20px);
-    margin:8px 10px;
-    padding:10px 11px;
-  }
-
-  .brand{
-    gap:8px;
-  }
-
-  .brand img{
-    width:34px;
-    height:34px;
-  }
-
-  .brand span{
-    font-size:14px;
-  }
-
-  .navright .view{
-    display:none;
-  }
-
-  .viewsTop{
-    width:calc(100% - 20px);
-    margin:14px 10px 0;
-    padding:14px;
-  }
-
-  .viewsIcon{
-    width:40px;
-    height:40px;
-  }
-
-  .viewsText strong{
-    font-size:23px;
-  }
-
-  .section{
-    width:100%;
-    max-width:100%;
-    padding:70px 16px;
-  }
-
-  .hero{
-    min-height:78vh;
-    padding-top:55px;
-  }
-
-  .edit{
-    top:38px;
-    right:16px;
-  }
-
-  .hero h1{
-    font-size:clamp(48px,14vw,78px);
-    letter-spacing:-4px;
-    line-height:.88;
-    margin:48px 0 35px;
-  }
-
-  .hero-copy{
-    font-size:18px;
-  }
-
-  .actions{
-    width:min(340px,100%);
-    flex-direction:column;
-  }
-
-  .stats{
-    width:100%;
-    gap:8px;
-    margin-top:58px;
-  }
-
-  .stats div{
-    padding:17px 8px;
-  }
-
-  .stats strong{
-    font-size:30px;
-  }
-
-  .stats span{
-    font-size:8px;
-    letter-spacing:.6px;
-  }
-
-  .stats .se{
-    top:5px;
-    right:5px;
-  }
-
-  .head{
-    display:block;
-  }
-
-  .head p{
-    margin-top:10px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .about{
-    grid-template-columns:1fr;
-    padding:22px;
-    gap:25px;
-  }
-
-  .about h3{
-    font-size:34px;
-  }
-
-  .creators{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:20px 10px;
-  }
-
-  .avatar{
-    width:105px;
-    height:105px;
-  }
-
-  .links{
-    grid-template-columns:1fr;
-  }
-
-  .contact{
-    padding:65px 16px;
-    border-radius:25px;
-  }
-
-  .contact h2{
-    letter-spacing:-3px;
-  }
-
-  .formgrid,
-  .themegrid{
-    grid-template-columns:1fr;
-  }
-
-  .full{
-    grid-column:auto;
-  }
-
-  .gallery{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .savebar{
-    width:calc(100% - 20px);
-    margin-bottom:12px;
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .savebar .btn{
-    width:100%;
-  }
-
-  .loaderbox{
-    width:calc(100vw - 44px);
-  }
-
-  .loaderlogo{
-    width:125px;
-    height:125px;
-  }
-
-  .loadername{
-    font-size:19px;
-    margin:18px 0 22px;
-  }
-
-  .loaderline{
-    width:100%;
-    max-width:100%;
-  }
+.navright .view{display:none}
+.section{padding:70px 0}
+.edit{top:42px}
+.head{display:block}
+.head p{margin-top:10px}
+.grid{grid-template-columns:1fr}
+.about{grid-template-columns:1fr;padding:25px}
+.creators{grid-template-columns:1fr 1fr}
+.avatar{width:120px;height:120px}
+.themegrid,.formgrid{grid-template-columns:1fr}
+.full{grid-column:auto}
+.savebar{
+flex-direction:column;align-items:stretch;gap:10px
+}
+.actions{
+flex-direction:column;width:min(320px,90vw)
+}
+.links{grid-template-columns:1fr}
+.gallery{grid-template-columns:repeat(2,1fr)}
+.footer-links{gap:15px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     LOADING SCREEN
-========================= -->
-
+<!-- LOADING -->
 <div class="loader" id="loader">
-  <div class="loaderbox">
-    <div class="loaderlogo">
-      <img id="loadLogo" src="images/logo.png">
-    </div>
-
-    <div class="loadername" id="loadName">
-      Mr CrowSensei
-    </div>
-
-    <div class="loaderline">
-      <span></span>
-    </div>
-  </div>
+<div class="loaderbox">
+<div class="loaderlogo">
+<img id="loadLogo" src="images/logo.png">
+</div>
+<div class="loadername" id="loadName">Mr CrowSensei</div>
+<div class="line"><span></span></div>
+</div>
 </div>
 
-<!-- =========================
-     NAVBAR
-========================= -->
-
+<!-- HEADER -->
 <header class="nav">
+<a class="brand" href="#home">
+<img id="navLogo" src="images/logo.png">
+<span id="navName">Mr CrowSensei</span>
+</a>
 
-  <a class="brand" href="#home">
-    <img id="navLogo" src="images/logo.png">
-    <span id="navName">Mr CrowSensei</span>
-  </a>
-
-  <div class="navright">
-    <a class="btn view" href="/" target="_blank">
-      View Portfolio
-    </a>
-
-    <button class="btn danger" onclick="logout()">
-      Logout
-    </button>
-  </div>
-
+<div class="navright">
+<a class="btn view" href="/" target="_blank">View Portfolio</a>
+<button class="btn danger" onclick="logout()">Logout</button>
+</div>
 </header>
 
-<!-- =========================
-     VIEWS - ABSOLUTE TOP
-========================= -->
+<main id="mainContent">
 
-<section class="viewsTop">
-
-  <div class="viewsIcon">
-    👁
-  </div>
-
-  <div class="viewsText">
-    <span>PORTFOLIO VIEWS</span>
-    <strong id="viewsCount">—</strong>
-  </div>
-
-  <button
-    class="mini viewsRefresh"
-    onclick="refreshViews()">
-    ↻
-  </button>
-
-</section>
-
-<main>
-
-<!-- =========================
-     HERO
-========================= -->
-
+<!-- HERO -->
 <section class="section hero" id="home">
+<button class="edit" onclick="openEditor('hero')">✏️ Edit</button>
 
-  <button
-    class="edit"
-    onclick="openEditor('hero')">
-    ✏️ Edit
-  </button>
+<div class="avail">
+<i></i>
+<span id="avail"></span>
+</div>
 
-  <div class="avail">
-    <i></i>
-    <span id="avail">New Designs Available</span>
-  </div>
+<h1 id="heroName"></h1>
 
-  <h1 id="heroName">
-    <span>Mr</span>
-    <span>CrowSensei</span>
-  </h1>
+<div class="hero-copy">
+<strong id="heroTitle"></strong>
+<small id="heroSub"></small>
+<small id="crafted"></small>
+</div>
 
-  <div class="hero-copy">
-    <strong id="heroTitle">
-      Professional Minecraft Thumbnails
-    </strong>
+<div class="actions">
+<a class="btn primary" href="#work">Browse Portfolio →</a>
+<a class="btn" href="#contact">Let's Work</a>
+</div>
 
-    <small id="heroSub"></small>
+<div class="stats">
+<div>
+<button class="mini se" onclick="openEditor('stats')">✏️ Edit</button>
+<strong id="st1"></strong>
+<span id="sl1"></span>
+</div>
 
-    <small id="crafted">
-      Crafted for Creators
-    </small>
-  </div>
+<div>
+<strong id="st2"></strong>
+<span id="sl2"></span>
+</div>
 
-  <div class="actions">
-
-    <a class="btn primary" href="#work">
-      Browse Portfolio →
-    </a>
-
-    <a class="btn" href="#contact">
-      Let's Work
-    </a>
-
-  </div>
-
-  <div class="stats">
-
-    <div>
-      <button
-        class="mini se"
-        onclick="openEditor('stats')">
-        ✏️
-      </button>
-
-      <strong id="st1">100+</strong>
-      <span id="sl1">THUMBNAILS</span>
-    </div>
-
-    <div>
-      <strong id="st2">50+</strong>
-      <span id="sl2">CREATORS</span>
-    </div>
-
-    <div>
-      <strong id="st3">2+</strong>
-      <span id="sl3">YEARS DESIGNING</span>
-    </div>
-
-  </div>
-
+<div>
+<strong id="st3"></strong>
+<span id="sl3"></span>
+</div>
+</div>
 </section>
 
-<!-- =========================
-     PORTFOLIO
-========================= -->
-
+<!-- PORTFOLIO -->
 <section class="section" id="work">
+<button class="edit" onclick="openEditor('portfolio')">✏️ Edit</button>
 
-  <button
-    class="edit"
-    onclick="openEditor('portfolio')">
-    ✏️ Edit
-  </button>
+<div class="head">
+<div>
+<div class="eyebrow">● SELECTED WORK</div>
+<h2>My latest <em>thumbnails.</em></h2>
+</div>
+<p>Manage your portfolio gallery.</p>
+</div>
 
-  <div class="head">
+<div class="grid" id="portfolioGrid"></div>
 
-    <div>
-      <div class="eyebrow">
-        ● SELECTED WORK
-      </div>
-
-      <h2>
-        My latest <em>thumbnails.</em>
-      </h2>
-    </div>
-
-    <p>
-      Manage your portfolio gallery.
-    </p>
-
-  </div>
-
-  <div
-    class="grid"
-    id="portfolioGrid">
-  </div>
-
+<div style="text-align:center;margin-top:25px">
+<button class="btn primary" onclick="openEditor('portfolio')">
+＋ Add Thumbnail
+</button>
+</div>
 </section>
 
-<!-- =========================
-     ABOUT
-========================= -->
-
+<!-- ABOUT -->
 <section class="section" id="about">
+<button class="edit" onclick="openEditor('about')">✏️ Edit</button>
 
-  <button
-    class="edit"
-    onclick="openEditor('about')">
-    ✏️ Edit
-  </button>
+<div class="head">
+<div>
+<div class="eyebrow">● ABOUT ME</div>
+<h2 id="aboutHeading"></h2>
+</div>
+</div>
 
-  <div class="head">
+<div class="about">
+<img id="aboutImg">
 
-    <div>
-      <div class="eyebrow">
-        ● ABOUT ME
-      </div>
-
-      <h2 id="aboutHeading">
-        The designer behind the thumbnails.
-      </h2>
-    </div>
-
-  </div>
-
-  <div class="about">
-
-    <img
-      id="aboutImg"
-      src="images/logo.png">
-
-    <div>
-
-      <div class="eyebrow">
-        MR CROWSENSEI
-      </div>
-
-      <h3 id="aboutSub">
-        Turning Minecraft ideas into clickable visuals.
-      </h3>
-
-      <p id="aboutText"></p>
-
-    </div>
-
-  </div>
-
+<div>
+<div class="eyebrow">MR CROWSENSEI</div>
+<h3 id="aboutSub"></h3>
+<p id="aboutText"></p>
+</div>
+</div>
 </section>
 
-<!-- =========================
-     CLIENTS
-========================= -->
+<!-- CLIENTS -->
+<section class="section" id="clients">
+<button class="edit" onclick="openEditor('creator')">✏️ Edit</button>
 
-<section class="section">
+<div class="head">
+<div>
+<div class="eyebrow">● CLIENTS</div>
+<h2 id="creatorHeading"></h2>
+</div>
+</div>
 
-  <button
-    class="edit"
-    onclick="openEditor('creator')">
-    ✏️ Edit
-  </button>
+<p style="color:#777;text-align:center;margin:-10px auto 40px;max-width:650px"
+id="creatorIntro"></p>
 
-  <div class="head">
+<div class="creators" id="creatorGrid"></div>
 
-    <div>
-      <div class="eyebrow">
-        ● CLIENTS
-      </div>
-
-      <h2 id="creatorHeading">
-        Trusted by creators.
-      </h2>
-    </div>
-
-  </div>
-
-  <p
-    id="creatorIntro"
-    style="
-      color:#777;
-      text-align:center;
-      margin:-10px auto 40px;
-      max-width:650px">
-  </p>
-
-  <div
-    class="creators"
-    id="creatorGrid">
-  </div>
-
-  <div
-    style="
-      text-align:center;
-      margin-top:25px">
-
-    <button
-      class="btn primary"
-      onclick="openEditor('creator')">
-      ＋ Add Creator
-    </button>
-
-  </div>
-
+<div style="text-align:center;margin-top:25px">
+<button class="btn primary" onclick="openEditor('creator')">
+＋ Add Creator
+</button>
+</div>
 </section>
 
-<!-- =========================
-     FAQ
-========================= -->
+<!-- FAQ -->
+<section class="section" id="faq">
+<button class="edit" onclick="openEditor('faq')">✏️ Edit</button>
 
-<section class="section">
+<div class="head">
+<div>
+<div class="eyebrow">● FAQ</div>
+<h2>Got <em>questions?</em></h2>
+</div>
+</div>
 
-  <button
-    class="edit"
-    onclick="openEditor('faq')">
-    ✏️ Edit
-  </button>
+<div class="faq" id="faqList"></div>
 
-  <div class="head">
-
-    <div>
-      <div class="eyebrow">
-        ● FAQ
-      </div>
-
-      <h2>
-        Got <em>questions?</em>
-      </h2>
-    </div>
-
-  </div>
-
-  <div
-    class="faq"
-    id="faqList">
-  </div>
-
-  <div
-    style="
-      text-align:center;
-      margin-top:25px">
-
-    <button
-      class="btn primary"
-      onclick="openEditor('faq')">
-      ＋ Add FAQ
-    </button>
-
-  </div>
-
+<div style="text-align:center;margin-top:25px">
+<button class="btn primary" onclick="openEditor('faq')">
+＋ Add FAQ
+</button>
+</div>
 </section>
 
-<!-- =========================
-     CONTACT
-========================= -->
+<!-- CONTACT -->
+<section class="section" id="contact">
+<button class="edit" onclick="openEditor('contact')">✏️ Edit</button>
 
-<section
-  class="section"
-  id="contact">
-
-  <button
-    class="edit"
-    onclick="openEditor('contact')">
-    ✏️ Edit
-  </button>
-
-  <div class="contact">
-
-    <div class="eyebrow">
-      CONTACT ME
-    </div>
-
-    <h2 id="contactTitle">
-      Ready for<br>
-      Thumbnails<br>
-      That Get<br>
-      Clicked?
-    </h2>
-
-    <p id="contactText">
-      Send your video idea and deadline.
-    </p>
-
-    <div
-      class="links"
-      id="contactLinks">
-    </div>
-
-  </div>
-
+<div class="contact">
+<div class="eyebrow">CONTACT ME</div>
+<h2 id="contactTitle"></h2>
+<p id="contactText"></p>
+<div class="links" id="contactLinks"></div>
+</div>
 </section>
 
-<!-- =========================
-     THEME
-========================= -->
+<!-- FOOTER -->
+<section class="section" id="footerAdmin">
+<button class="edit" onclick="openEditor('footer')">✏️ Edit</button>
 
-<section class="section">
+<div class="head">
+<div>
+<div class="eyebrow">● FOOTER</div>
+<h2>Footer <em>settings.</em></h2>
+</div>
+</div>
 
-  <button
-    class="edit"
-    onclick="openEditor('theme')">
-    ✏️ Edit
-  </button>
+<footer class="footer-admin">
+<img class="footer-logo" id="footerLogo">
+<div class="footer-name" id="footerName"></div>
+<div class="footer-desc" id="footerDesc"></div>
 
-  <div class="head">
+<div class="footer-explore" id="footerExplore"></div>
 
-    <div>
-      <div class="eyebrow">
-        ● ADMIN
-      </div>
+<div class="footer-links">
+<a href="#work" id="footerPortfolio"></a>
+<a href="#clients" id="footerClients"></a>
+<a href="#about" id="footerAbout"></a>
+<a href="#faq" id="footerFaq"></a>
+</div>
 
-      <h2>
-        Theme & <em>colors.</em>
-      </h2>
-    </div>
-
-  </div>
-
-  <div class="adminbox">
-    <div
-      class="themegrid"
-      id="themePreview">
-    </div>
-  </div>
-
+<div class="footer-line"></div>
+<div class="footer-copy" id="footerCopyright"></div>
+</footer>
 </section>
 
-<!-- =========================
-     LINK PREVIEW
-========================= -->
+<!-- SECTION REORDER -->
+<section class="section" id="sectionReorder">
+<button class="edit" onclick="openEditor('reorder')">✏️ Edit</button>
 
-<section class="section">
+<div class="head">
+<div>
+<div class="eyebrow">● SETTINGS</div>
+<h2>Section <em>Reorder.</em></h2>
+</div>
+</div>
 
-  <button
-    class="edit"
-    onclick="openEditor('link')">
-    ✏️ Edit
-  </button>
-
-  <div class="head">
-
-    <div>
-      <div class="eyebrow">
-        ● LINK PREVIEW
-      </div>
-
-      <h2>
-        Link <em>Preview.</em>
-      </h2>
-    </div>
-
-  </div>
-
-  <div class="adminbox">
-
-    <div class="formgrid">
-
-      <div class="field full">
-        <label>Title</label>
-        <input
-          id="ogtv"
-          readonly>
-      </div>
-
-      <div class="field full">
-        <label>Description</label>
-        <input
-          id="ogdv"
-          readonly>
-      </div>
-
-    </div>
-
-    <div
-      id="ogiv"
-      class="preview">
-    </div>
-
-  </div>
-
+<div class="adminbox">
+<div id="reorderPreview" class="reorder-list"></div>
+</div>
 </section>
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- LINK PREVIEW -->
+<section class="section" id="linkPreviewAdmin">
+<button class="edit" onclick="openEditor('link')">✏️ Edit</button>
 
-<section class="section">
+<div class="head">
+<div>
+<div class="eyebrow">● LINK PREVIEW</div>
+<h2>Link <em>Preview.</em></h2>
+</div>
+</div>
 
-  <button
-    class="edit"
-    onclick="openEditor('header')">
-    ✏️ Edit
-  </button>
+<div class="adminbox">
+<div class="formgrid">
 
-  <div class="head">
+<div class="field full">
+<label>Title</label>
+<input id="ogtv" readonly>
+</div>
 
-    <div>
-      <div class="eyebrow">
-        ● HEADER
-      </div>
+<div class="field full">
+<label>Description</label>
+<input id="ogdv" readonly>
+</div>
 
-      <h2>
-        Header <em>identity.</em>
-      </h2>
-    </div>
+</div>
 
-  </div>
-
-  <div class="adminbox">
-
-    <img
-      id="headerPreviewLogo"
-      src="images/logo.png"
-      style="
-        width:52px;
-        height:52px;
-        border-radius:50%;
-        object-fit:cover;
-        vertical-align:middle;
-        margin-right:10px">
-
-    <b id="headerPreviewName">
-      Mr CrowSensei
-    </b>
-
-  </div>
-
+<div id="ogiv" class="preview"></div>
+</div>
 </section>
 
-<!-- =========================
-     LOADING SCREEN SETTINGS
-========================= -->
+<!-- LOADING -->
+<section class="section" id="loadingAdmin">
+<button class="edit" onclick="openEditor('loading')">✏️ Edit</button>
 
-<section class="section">
+<div class="head">
+<div>
+<div class="eyebrow">● LOADING SCREEN</div>
+<h2>Loading <em>screen.</em></h2>
+</div>
+</div>
 
-  <button
-    class="edit"
-    onclick="openEditor('loading')">
-    ✏️ Edit
-  </button>
+<div class="adminbox" style="text-align:center">
+<img id="loadPreview"
+style="width:100px;height:100px;border-radius:50%;object-fit:cover">
 
-  <div class="head">
+<p id="loadPreviewName"
+style="margin-top:12px;font-weight:800"></p>
+</div>
+</section>
 
-    <div>
-      <div class="eyebrow">
-        ● LOADING SCREEN
-      </div>
+<!-- THEME -->
+<section class="section" id="themeAdmin">
+<button class="edit" onclick="openEditor('theme')">✏️ Edit</button>
 
-      <h2>
-        Loading <em>screen.</em>
-      </h2>
-    </div>
+<div class="head">
+<div>
+<div class="eyebrow">● ADMIN</div>
+<h2>Theme & <em>colors.</em></h2>
+</div>
+</div>
 
-  </div>
-
-  <div
-    class="adminbox"
-    style="text-align:center">
-
-    <img
-      id="loadPreview"
-      src="images/logo.png"
-      style="
-        width:110px;
-        height:110px;
-        border-radius:50%;
-        object-fit:cover">
-
-    <p
-      id="loadPreviewName"
-      style="
-        margin-top:12px;
-        font-weight:800">
-      Mr CrowSensei
-    </p>
-
-  </div>
-
+<div class="adminbox">
+<div class="themegrid" id="themePreview"></div>
+</div>
 </section>
 
 </main>
 
-<!-- =========================
-     SAVE BAR
-========================= -->
-
+<!-- SAVE -->
 <div class="savebar">
-
-  <span
-    id="status"
-    class="success">
-  </span>
-
-  <button
-    class="btn primary"
-    onclick="saveAll()">
-    💾 Save All Changes
-  </button>
-
+<span id="status" class="success"></span>
+<button class="btn primary" onclick="saveAll()">
+💾 Save All Changes
+</button>
 </div>
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="box">
 
-<footer
-  style="
-    width:calc(100% - 40px);
-    max-width:1120px;
-    margin:0 auto 35px;
-    padding:30px 0;
-    border-top:1px solid #292929;
-    text-align:center;
-    color:#777;
-    font-size:11px">
-
-  <div
-    style="
-      font-weight:900;
-      color:#fff;
-      font-size:15px">
-    Mr CrowSensei
-  </div>
-
-  <div style="margin-top:8px">
-    Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.
-  </div>
-
-  <div
-    style="
-      margin-top:18px;
-      color:#555">
-    © 2026 Mr CrowSensei
-  </div>
-
-</footer>
-
-<!-- =========================
-     MODAL
-========================= -->
-
-<div
-  class="modal"
-  id="modal">
-
-  <div class="box">
-
-    <div class="mhead">
-
-      <h3 id="mtitle">
-        Edit
-      </h3>
-
-      <button
-        class="close"
-        onclick="closeEditor()">
-        ×
-      </button>
-
-    </div>
-
-    <div id="mbody"></div>
-
-    <div class="mfoot">
-
-      <button
-        class="btn"
-        onclick="closeEditor()">
-        Cancel
-      </button>
-
-      <button
-        class="btn primary"
-        onclick="saveModal()">
-        Save
-      </button>
-
-    </div>
-
-  </div>
-
+<div class="mhead">
+<h3 id="mtitle">Edit</h3>
+<button class="close" onclick="closeEditor()">×</button>
 </div>
 
-<!-- =========================
-     VIEWER
-========================= -->
+<div id="mbody"></div>
 
-<div
-  class="viewer"
-  id="viewer"
-  onclick="if(event.target===this)closeViewer()">
+<div class="mfoot">
+<button class="btn" onclick="closeEditor()">Cancel</button>
+<button class="btn primary" onclick="saveModal()">Save</button>
+</div>
 
-  <button
-    class="vclose"
-    onclick="closeViewer()">
-    ×
-  </button>
+</div>
+</div>
 
-  <img id="vimg">
+<!-- IMAGE VIEWER -->
+<div class="viewer" id="viewer"
+onclick="if(event.target===this)closeViewer()">
+
+<button class="vclose" onclick="closeViewer()">×</button>
+<img id="vimg">
 
 </div>
 
 <script>
 
 /* =========================================================
-   SUPABASE
-   ========================================================= */
+SUPABASE
+========================================================= */
 
 const SUPABASE_URL="https://ozjugaedukcztmywtexk.supabase.co";
 const SUPABASE_KEY="sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
 const sb=supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
+
 /* =========================================================
-   DEFAULT DATA
-   ========================================================= */
+DEFAULT SETTINGS
+========================================================= */
 
 const D={
-  id:1,
 
-  header_name:"Mr CrowSensei",
-  logo_url:"",
+id:1,
 
-  new_design_text:"New Designs Available",
+header_name:"Mr CrowSensei",
 
-  hero_title:"Professional Minecraft Thumbnails",
-  hero_subtitle:"",
-  crafted_text:"Crafted for Creators",
+logo_url:"",
 
-  stats_thumbnails:"100+",
-  stats_creators:"50+",
-  stats_years:"2+",
+new_design_text:"New Designs Available",
 
-  stats_thumbnails_label:"THUMBNAILS",
-  stats_creators_label:"CREATORS",
-  stats_years_label:"YEARS DESIGNING",
+hero_title:"Professional Minecraft Thumbnails",
 
-  about_heading:"The designer behind the thumbnails.",
-  about_sub:"Turning Minecraft ideas into clickable visuals.",
-  about_text:"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",
-  about_image_url:"",
+hero_subtitle:"",
 
-  creator_heading:"Trusted by creators.",
-  creator_intro:"Creators who trust Mr CrowSensei for their Minecraft thumbnails.",
+crafted_text:"Crafted for Creators",
 
-  discord_url:"https://discord.com/users/1492187397058855163",
-  twitter_url:"https://x.com/MrCrowSensei",
+stats_thumbnails:"100+",
+stats_creators:"50+",
+stats_years:"2+",
 
-  contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",
-  contact_text:"Send your video idea and deadline.\nI'll reply with availability and the next steps.",
-  contact_buttons:[],
+stats_thumbnails_label:"THUMBNAILS",
+stats_creators_label:"CREATORS",
+stats_years_label:"YEARS DESIGNING",
 
-  bg_color:"#080808",
-  bg_gradient_1:"#151515",
-  bg_gradient_2:"#080808",
-  bg_gradient_direction:"135deg",
+about_heading:"The designer behind the thumbnails.",
 
-  primary_color:"#ffffff",
-  heading_color:"#ffffff",
-  text_color:"#f7f8ff",
-  muted_color:"#85858a",
-  card_color:"#111111",
-  border_color:"#292929",
+about_sub:"Turning Minecraft ideas into clickable visuals.",
 
-  button_color:"#ffffff",
-  button_text_color:"#080808",
-  accent_color:"#35e36b",
+about_text:
+"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",
 
-  og_title:"Mr CrowSensei — Thumbnail Designer",
-  og_description:"Mr CrowSensei — Professional Minecraft Thumbnail Designer",
-  og_image_url:"",
+about_image_url:"",
 
-  loading_logo_url:"",
-  loading_name:"Mr CrowSensei"
+creator_heading:"Trusted by creators.",
+
+creator_intro:
+"Creators who trust Mr CrowSensei for their Minecraft thumbnails.",
+
+discord_url:"https://discord.com/users/1492187397058855163",
+
+twitter_url:"https://x.com/MrCrowSensei",
+
+contact_buttons:[],
+
+contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",
+
+contact_text:
+"Send your video idea and deadline.\nI'll reply with availability and the next steps.",
+
+bg_color:"#080808",
+bg_gradient_1:"#151515",
+bg_gradient_2:"#080808",
+bg_gradient_direction:"135deg",
+
+primary_color:"#ffffff",
+heading_color:"#ffffff",
+text_color:"#f7f8ff",
+muted_color:"#85858a",
+
+card_color:"#111111",
+border_color:"#292929",
+
+button_color:"#ffffff",
+button_text_color:"#080808",
+
+accent_color:"#35e36b",
+
+og_title:"Mr CrowSensei — Thumbnail Designer",
+
+og_description:
+"Mr CrowSensei — Professional Minecraft Thumbnail Designer",
+
+og_image_url:"",
+
+loading_logo_url:"",
+
+loading_name:"Mr CrowSensei",
+
+/* NEW FOOTER */
+footer_logo_url:"",
+footer_name:"Mr CrowSensei",
+footer_description:
+"Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.",
+footer_explore:"Explore",
+footer_portfolio:"Portfolio",
+footer_clients:"Clients",
+footer_about:"About",
+footer_faq:"FAQ",
+footer_copyright:"© 2026 Mr CrowSensei",
+
+/* NEW SECTION ORDER */
+section_order:[
+"home",
+"stats",
+"work",
+"clients",
+"about",
+"faq",
+"contact"
+]
+
 };
+
+
+/* =========================================================
+STATE
+========================================================= */
 
 let S={...D};
 
@@ -1844,2750 +834,2419 @@ let file=null;
 let del=false;
 let creatorMeta=null;
 
+
 /* =========================================================
-   HELPERS
-   ========================================================= */
+HELPERS
+========================================================= */
 
 const $=id=>document.getElementById(id);
 
-const esc=v=>
-String(v??"").replace(
-  /[&<>"']/g,
-  m=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  }[m])
+const esc=v=>String(v??"").replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
 );
 
 function msg(
-  text="✓ All changes saved successfully!",
-  bad=false
+t="✓ All changes saved successfully!",
+bad=false
 ){
+$("status").textContent=t;
+$("status").style.color=
+bad?"#ff7777":"#65e88a";
 
-  const el=$("status");
-
-  if(!el)return;
-
-  el.textContent=text;
-
-  el.style.color=
-    bad
-    ?"#ff7777"
-    :"#65e88a";
-
-  clearTimeout(window.msgTimer);
-
-  window.msgTimer=setTimeout(()=>{
-    el.textContent="";
-  },4500);
+setTimeout(()=>{
+$("status").textContent="";
+},3500);
 }
+
 
 /* =========================================================
-   VIEWS
-   ========================================================= */
-
-/*
-  This function is deliberately safe.
-
-  If your existing portfolio stores views in a supported
-  Supabase table/column, it will try to read them.
-
-  If the view database is not available, the admin panel
-  stays working instead of becoming blank.
-*/
-
-let currentViews="—";
-
-function renderViews(){
-
-  const el=$("viewsCount");
-
-  if(!el)return;
-
-  el.textContent=currentViews;
-}
-
-async function refreshViews(){
-
-  const el=$("viewsCount");
-
-  if(el){
-    el.textContent="…";
-  }
-
-  try{
-
-    /* First try site_settings.views */
-
-    const a=
-      await sb
-      .from("site_settings")
-      .select("views")
-      .eq("id",1)
-      .maybeSingle();
-
-    if(
-      !a.error &&
-      a.data &&
-      a.data.views!==undefined
-    ){
-
-      currentViews=
-        Number(a.data.views).toLocaleString();
-
-      renderViews();
-
-      return;
-    }
-
-  }catch(e){}
-
-  try{
-
-    /* Try common site_views table */
-
-    const b=
-      await sb
-      .from("site_views")
-      .select("views")
-      .eq("id",1)
-      .maybeSingle();
-
-    if(
-      !b.error &&
-      b.data &&
-      b.data.views!==undefined
-    ){
-
-      currentViews=
-        Number(b.data.views).toLocaleString();
-
-      renderViews();
-
-      return;
-    }
-
-  }catch(e){}
-
-  /*
-    No compatible views source found.
-    Do NOT fake a number.
-  */
-
-  currentViews="—";
-
-  renderViews();
-
-}
-
-/* =========================================================
-   RENDER EVERYTHING
+RENDER EVERYTHING
 ========================================================= */
 
 function render(){
 
-  /* IMPORTANT:
-     renderViews exists now, so an unavailable views
-     counter can NEVER break the entire dashboard.
-  */
+let parts=S.header_name.trim().split(/\s+/);
 
-  renderViews();
+let first=parts.shift()||"";
+let rest=parts.join(" ");
 
-  const words=
-    S.header_name
-      .trim()
-      .split(/\s+/);
+$("navName").textContent=S.header_name;
 
-  const first=words.shift()||"";
-  const rest=words.join(" ");
+$("navLogo").src=
+S.logo_url||"images/logo.png";
 
-  $("navName").textContent=
-    S.header_name;
+$("headerPreviewName") &&
+($("headerPreviewName").textContent=S.header_name);
 
-  $("navLogo").src=
-    S.logo_url||"images/logo.png";
+$("avail").textContent=S.new_design_text;
 
-  $("headerPreviewLogo").src=
-    S.logo_url||"images/logo.png";
+$("heroName").innerHTML=
+`<span>${esc(first)}</span>
+<span>${esc(rest)}</span>`;
 
-  $("headerPreviewName").textContent=
-    S.header_name;
+$("heroTitle").textContent=S.hero_title;
+$("heroSub").textContent=S.hero_subtitle;
+$("crafted").textContent=S.crafted_text;
 
-  $("avail").textContent=
-    S.new_design_text;
+$("st1").textContent=S.stats_thumbnails;
+$("st2").textContent=S.stats_creators;
+$("st3").textContent=S.stats_years;
 
-  $("heroName").innerHTML=
-    `<span>${esc(first)}</span>
-     <span>${esc(rest)}</span>`;
+$("sl1").textContent=S.stats_thumbnails_label;
+$("sl2").textContent=S.stats_creators_label;
+$("sl3").textContent=S.stats_years_label;
 
-  $("heroTitle").textContent=
-    S.hero_title;
+$("aboutHeading").textContent=S.about_heading;
+$("aboutSub").textContent=S.about_sub;
+$("aboutText").textContent=S.about_text;
 
-  $("heroSub").textContent=
-    S.hero_subtitle;
+$("aboutImg").src=
+S.about_image_url||"images/logo.png";
 
-  $("crafted").textContent=
-    S.crafted_text;
+$("creatorHeading").textContent=S.creator_heading;
+$("creatorIntro").textContent=S.creator_intro;
 
-  $("st1").textContent=
-    S.stats_thumbnails;
+$("contactTitle").innerHTML=
+esc(S.contact_title).replace(/\n/g,"<br>");
 
-  $("st2").textContent=
-    S.stats_creators;
+$("contactText").innerHTML=
+esc(S.contact_text).replace(/\n/g,"<br>");
 
-  $("st3").textContent=
-    S.stats_years;
+$("ogtv").value=S.og_title;
+$("ogdv").value=S.og_description;
 
-  $("sl1").textContent=
-    S.stats_thumbnails_label;
+$("ogiv").innerHTML=S.og_image_url
+?
+`<img src="${esc(S.og_image_url)}">
+<button class="deleteimg"
+onclick="openEditor('link');del=true">
+🗑 Delete Image
+</button>`
+:
+`<div style="padding:30px;text-align:center;color:#666">
+No preview image selected.
+</div>`;
 
-  $("sl2").textContent=
-    S.stats_creators_label;
+renderButtons();
+renderP();
+renderC();
+renderF();
+renderFooter();
+renderReorder();
+theme();
+apply();
 
-  $("sl3").textContent=
-    S.stats_years_label;
+$("loadLogo").src=
+S.loading_logo_url||
+S.logo_url||
+"images/logo.png";
 
-  $("aboutHeading").textContent=
-    S.about_heading;
+$("loadName").textContent=S.loading_name;
 
-  $("aboutSub").textContent=
-    S.about_sub;
+$("loadPreview").src=
+S.loading_logo_url||
+S.logo_url||
+"images/logo.png";
 
-  $("aboutText").textContent=
-    S.about_text;
-
-  $("aboutImg").src=
-    S.about_image_url||"images/logo.png";
-
-  $("creatorHeading").textContent=
-    S.creator_heading;
-
-  $("creatorIntro").textContent=
-    S.creator_intro;
-
-  $("contactTitle").innerHTML=
-    esc(S.contact_title)
-    .replace(/\n/g,"<br>");
-
-  $("contactText").innerHTML=
-    esc(S.contact_text)
-    .replace(/\n/g,"<br>");
-
-  $("ogtv").value=
-    S.og_title;
-
-  $("ogdv").value=
-    S.og_description;
-
-  if(S.og_image_url){
-
-    $("ogiv").innerHTML=`
-      <img src="${esc(S.og_image_url)}">
-      <button
-        class="deleteimg"
-        onclick="openEditor('link')">
-        🗑 Delete Image
-      </button>
-    `;
-
-  }else{
-
-    $("ogiv").innerHTML=`
-      <div
-        style="
-          padding:30px;
-          text-align:center;
-          color:#666">
-        No preview image selected.
-      </div>
-    `;
-
-  }
-
-  $("loadLogo").src=
-    S.loading_logo_url||
-    S.logo_url||
-    "images/logo.png";
-
-  $("loadName").textContent=
-    S.loading_name;
-
-  $("loadPreview").src=
-    S.loading_logo_url||
-    S.logo_url||
-    "images/logo.png";
-
-  $("loadPreviewName").textContent=
-    S.loading_name;
-
-  renderButtons();
-  renderP();
-  renderC();
-  renderF();
-  theme();
-  apply();
-
+$("loadPreviewName").textContent=S.loading_name;
 }
 
+
 /* =========================================================
-   CONTACT BUTTONS
+CONTACT
 ========================================================= */
 
 function renderButtons(){
 
-  const buttons=[
-    {
-      name:"Discord",
-      link:S.discord_url,
-      color:"#5865F2",
-      text:"#ffffff",
-      icon:""
-    },
+let b=[
+{
+name:"Discord",
+link:S.discord_url,
+color:"#5865F2",
+text:"#fff"
+},
+{
+name:"𝕏 Twitter / X",
+link:S.twitter_url,
+color:"#fff",
+text:"#080808"
+},
+...(S.contact_buttons||[])
+];
 
-    {
-      name:"𝕏 Twitter / X",
-      link:S.twitter_url,
-      color:"#ffffff",
-      text:"#080808",
-      icon:""
-    },
-
-    ...(S.contact_buttons||[])
-  ];
-
-  $("contactLinks").innerHTML=
-    buttons.map(x=>`
-
-      <a
-        href="${esc(x.link||"#")}"
-        target="_blank"
-        style="
-          background:${esc(x.color||"#ffffff")};
-          color:${esc(x.text||"#080808")}">
-
-        ${
-          x.icon
-          ?`<span>${esc(x.icon)}</span> `
-          :""
-        }
-
-        ${esc(x.name)}
-
-      </a>
-
-    `).join("");
-
+$("contactLinks").innerHTML=b.map(x=>
+`
+<a href="${esc(x.link||"#")}"
+target="_blank"
+style="
+background:${esc(x.color||"#fff")};
+color:${esc(x.text||"#080808")}
+">
+${x.icon?`<span>${esc(x.icon)}</span> `:""}
+${esc(x.name)}
+</a>
+`
+).join("");
 }
 
+
 /* =========================================================
-   PORTFOLIO
+PORTFOLIO
 ========================================================= */
 
 function renderP(){
 
-  const g=$("portfolioGrid");
+let g=$("portfolioGrid");
 
-  if(!P.length){
+if(!P.length){
 
-    g.innerHTML=`
-      <div
-        style="
-          grid-column:1/-1;
-          text-align:center;
-          color:#666;
-          padding:45px">
-        No thumbnails yet.
-      </div>
-    `;
+g.innerHTML=
+`
+<div style="
+grid-column:1/-1;
+text-align:center;
+color:#666;
+padding:40px">
+No thumbnails yet.
+</div>
+`;
 
-    return;
-  }
-
-  g.innerHTML=
-    P.map((x,i)=>`
-
-      <article class="card">
-
-        <img
-          src="${esc(x.image_url)}"
-          onclick="view('${esc(x.image_url)}')">
-
-        <div class="info">
-          <b>
-            ${esc(
-              x.title||
-              "Minecraft Thumbnail"
-            )}
-          </b>
-        </div>
-
-        <div class="tools">
-
-          <button
-            class="mini"
-            onclick="openEditor('portfolio',${x.id})">
-            ✏️
-          </button>
-
-          <button
-            class="mini"
-            onclick="move('portfolio',${i},-1)">
-            ↑
-          </button>
-
-          <button
-            class="mini"
-            onclick="move('portfolio',${i},1)">
-            ↓
-          </button>
-
-          <button
-            class="mini danger"
-            onclick="delRow('portfolio',${x.id})">
-            🗑
-          </button>
-
-        </div>
-
-      </article>
-
-    `).join("");
-
+return;
 }
 
+g.innerHTML=P.map((x,i)=>
+`
+<article class="card">
+
+<img
+src="${esc(x.image_url)}"
+onclick="view('${esc(x.image_url)}')">
+
+<div class="info">
+<b>${esc(x.title||"Minecraft Thumbnail")}</b>
+</div>
+
+<div class="tools">
+
+<button class="mini"
+onclick="openEditor('portfolio',${x.id})">
+✏️
+</button>
+
+<button class="mini"
+onclick="move('portfolio',${i},-1)">
+↑
+</button>
+
+<button class="mini"
+onclick="move('portfolio',${i},1)">
+↓
+</button>
+
+<button class="mini"
+onclick="delRow('portfolio',${x.id})">
+🗑
+</button>
+
+</div>
+
+</article>
+`
+).join("");
+}
+
+
 /* =========================================================
-   CREATORS
+CREATORS
 ========================================================= */
 
 function renderC(){
 
-  const g=$("creatorGrid");
+let g=$("creatorGrid");
 
-  if(!C.length){
+if(!C.length){
 
-    g.innerHTML=`
-      <div
-        style="
-          grid-column:1/-1;
-          text-align:center;
-          color:#666;
-          padding:30px">
-        No creators added yet.
-      </div>
-    `;
+g.innerHTML=
+`
+<div style="
+grid-column:1/-1;
+text-align:center;
+color:#666">
+No creators added yet.
+</div>
+`;
 
-    return;
-  }
-
-  g.innerHTML=
-    C.map((x,i)=>`
-
-      <article class="creator">
-
-        <a
-          href="${esc(x.youtube_url||"#")}"
-          target="_blank">
-
-          <div class="avatar">
-            <img
-              src="${esc(
-                x.image_url||
-                "images/logo.png"
-              )}">
-          </div>
-
-          <h3>
-            ${esc(x.name||"Creator")}
-          </h3>
-
-          <p>
-            ${esc(x.youtube_url||"")}
-          </p>
-
-          <b>
-            ${esc(
-              x.subscribers||
-              "Subscribers unavailable"
-            )}
-          </b>
-
-        </a>
-
-        <div style="margin-top:10px">
-
-          <button
-            class="mini"
-            onclick="openEditor('creator',${x.id})">
-            ✏️
-          </button>
-
-          <button
-            class="mini"
-            onclick="move('creators',${i},-1)">
-            ↑
-          </button>
-
-          <button
-            class="mini"
-            onclick="move('creators',${i},1)">
-            ↓
-          </button>
-
-          <button
-            class="mini danger"
-            onclick="delRow('creators',${x.id})">
-            🗑
-          </button>
-
-        </div>
-
-      </article>
-
-    `).join("");
-
+return;
 }
 
+g.innerHTML=C.map((x,i)=>
+`
+<article class="creator">
+
+<a href="${esc(x.youtube_url)}"
+target="_blank">
+
+<div class="avatar">
+<img src="${esc(x.image_url||"images/logo.png")}">
+</div>
+
+<h3>${esc(x.name||"Creator")}</h3>
+
+<p>${esc(x.youtube_url)}</p>
+
+<b>${esc(
+x.subscribers||
+"Subscribers unavailable"
+)}</b>
+
+</a>
+
+<div style="margin-top:10px">
+
+<button class="mini"
+onclick="openEditor('creator',${x.id})">
+✏️
+</button>
+
+<button class="mini"
+onclick="move('creators',${i},-1)">
+↑
+</button>
+
+<button class="mini"
+onclick="move('creators',${i},1)">
+↓
+</button>
+
+<button class="mini"
+onclick="delRow('creators',${x.id})">
+🗑
+</button>
+
+</div>
+
+</article>
+`
+).join("");
+}
+
+
 /* =========================================================
-   FAQ
+FAQ
 ========================================================= */
 
 function renderF(){
 
-  const g=$("faqList");
+let g=$("faqList");
 
-  if(!F.length){
+if(!F.length){
 
-    g.innerHTML=`
-      <div
-        style="
-          text-align:center;
-          color:#666;
-          padding:30px">
-        No FAQ items yet.
-      </div>
-    `;
+g.innerHTML=
+`
+<div style="
+text-align:center;
+color:#666;
+padding:30px">
+No FAQ items yet.
+</div>
+`;
 
-    return;
-  }
-
-  g.innerHTML=
-    F.map((x,i)=>`
-
-      <div
-        class="faqitem"
-        onclick="this.classList.toggle('open')">
-
-        <span>
-          ${esc(x.question)}
-        </span>
-
-        <b>+</b>
-
-        <p>
-          ${esc(x.answer)}
-        </p>
-
-        <small
-          onclick="event.stopPropagation()"
-          style="
-            display:block;
-            margin-top:10px">
-
-          <button
-            class="mini"
-            onclick="openEditor('faq',${x.id})">
-            ✏️
-          </button>
-
-          <button
-            class="mini"
-            onclick="move('faq',${i},-1)">
-            ↑
-          </button>
-
-          <button
-            class="mini"
-            onclick="move('faq',${i},1)">
-            ↓
-          </button>
-
-          <button
-            class="mini danger"
-            onclick="delRow('faq',${x.id})">
-            🗑
-          </button>
-
-        </small>
-
-      </div>
-
-    `).join("");
-
+return;
 }
 
+g.innerHTML=F.map((x,i)=>
+`
+<div class="faqitem"
+onclick="this.classList.toggle('open')">
+
+<span>${esc(x.question)}</span>
+
+<b>+</b>
+
+<p>${esc(x.answer)}</p>
+
+<small
+onclick="event.stopPropagation()"
+style="display:block;margin-top:10px">
+
+<button class="mini"
+onclick="openEditor('faq',${x.id})">
+✏️
+</button>
+
+<button class="mini"
+onclick="move('faq',${i},-1)">
+↑
+</button>
+
+<button class="mini"
+onclick="move('faq',${i},1)">
+↓
+</button>
+
+<button class="mini"
+onclick="delRow('faq',${x.id})">
+🗑
+</button>
+
+</small>
+
+</div>
+`
+).join("");
+}
+
+
 /* =========================================================
-   THEME
+FOOTER
+========================================================= */
+
+function renderFooter(){
+
+$("footerLogo").src=
+S.footer_logo_url||
+S.logo_url||
+"images/logo.png";
+
+$("footerName").textContent=
+S.footer_name;
+
+$("footerDesc").textContent=
+S.footer_description;
+
+$("footerExplore").textContent=
+S.footer_explore;
+
+$("footerPortfolio").textContent=
+S.footer_portfolio;
+
+$("footerClients").textContent=
+S.footer_clients;
+
+$("footerAbout").textContent=
+S.footer_about;
+
+$("footerFaq").textContent=
+S.footer_faq;
+
+$("footerCopyright").textContent=
+S.footer_copyright;
+}
+
+
+/* =========================================================
+SECTION REORDER
+========================================================= */
+
+const sectionNames={
+home:"Hero",
+stats:"Stats",
+work:"Portfolio",
+clients:"Clients",
+about:"About Me",
+faq:"FAQ",
+contact:"Contact"
+};
+
+function renderReorder(){
+
+let order=S.section_order||[
+"home",
+"stats",
+"work",
+"clients",
+"about",
+"faq",
+"contact"
+];
+
+$("reorderPreview").innerHTML=
+order.map((id,i)=>
+`
+<div class="reorder-item"
+draggable="true"
+data-section="${id}"
+ondragstart="dragStart(event)"
+ondragover="event.preventDefault()"
+ondrop="dropSection(event)">
+
+<span>${sectionNames[id]||id}</span>
+
+<span class="drag">☰</span>
+
+</div>
+`
+).join("");
+}
+
+let draggedSection=null;
+
+function dragStart(e){
+draggedSection=e.currentTarget.dataset.section;
+}
+
+function dropSection(e){
+
+let target=e.currentTarget.dataset.section;
+
+if(!draggedSection||draggedSection===target)return;
+
+let arr=[...(S.section_order||[])];
+
+let from=arr.indexOf(draggedSection);
+let to=arr.indexOf(target);
+
+if(from<0||to<0)return;
+
+arr.splice(from,1);
+arr.splice(to,0,draggedSection);
+
+S.section_order=arr;
+
+renderReorder();
+
+msg("✓ Section order changed. Click Save All Changes.");
+}
+
+
+/* =========================================================
+THEME
 ========================================================= */
 
 function theme(){
 
-  const colors=[
-    ["Background",S.bg_color],
-    ["Gradient 1",S.bg_gradient_1],
-    ["Gradient 2",S.bg_gradient_2],
-    ["Primary",S.primary_color],
-    ["Heading",S.heading_color],
-    ["Text",S.text_color],
-    ["Muted",S.muted_color],
-    ["Card",S.card_color],
-    ["Border",S.border_color],
-    ["Button",S.button_color],
-    ["Button Text",S.button_text_color],
-    ["Accent",S.accent_color]
-  ];
+let z=[
+["Background",S.bg_color],
+["Gradient 1",S.bg_gradient_1],
+["Gradient 2",S.bg_gradient_2],
+["Primary",S.primary_color],
+["Heading",S.heading_color],
+["Text",S.text_color],
+["Muted",S.muted_color],
+["Card",S.card_color],
+["Border",S.border_color],
+["Button",S.button_color],
+["Button Text",S.button_text_color],
+["Accent",S.accent_color]
+];
 
-  $("themePreview").innerHTML=
-    colors.map(x=>`
+$("themePreview").innerHTML=z.map(x=>
+`
+<div style="
+border:1px solid #292929;
+border-radius:9px;
+padding:9px;
+background:#111">
 
-      <div
-        style="
-          border:1px solid #292929;
-          border-radius:10px;
-          padding:9px;
-          background:#111">
+<div style="
+height:23px;
+border-radius:5px;
+background:${esc(x[1])}">
+</div>
 
-        <div
-          style="
-            height:25px;
-            border-radius:6px;
-            background:${esc(x[1])}">
-        </div>
+<small style="
+display:block;
+color:#777;
+margin-top:6px">
 
-        <small
-          style="
-            display:block;
-            color:#777;
-            margin-top:6px">
-          ${esc(x[0])}: ${esc(x[1])}
-        </small>
+${esc(x[0])}: ${esc(x[1])}
 
-      </div>
-
-    `).join("");
-
+</small>
+</div>
+`
+).join("");
 }
 
+
 /* =========================================================
-   APPLY THEME
+APPLY THEME
 ========================================================= */
 
 function apply(){
 
-  document.documentElement.style.setProperty(
-    "--card",
-    S.card_color
-  );
+document.documentElement.style.setProperty(
+"--card",S.card_color
+);
 
-  document.documentElement.style.setProperty(
-    "--border",
-    S.border_color
-  );
+document.documentElement.style.setProperty(
+"--border",S.border_color
+);
 
-  document.documentElement.style.setProperty(
-    "--accent",
-    S.accent_color
-  );
+document.documentElement.style.setProperty(
+"--accent",S.accent_color
+);
 
-  document.documentElement.style.setProperty(
-    "--btn",
-    S.button_color
-  );
+document.documentElement.style.setProperty(
+"--btn",S.button_color
+);
 
-  document.documentElement.style.setProperty(
-    "--bt",
-    S.button_text_color
-  );
+document.documentElement.style.setProperty(
+"--bt",S.button_text_color
+);
 
-  document.body.style.background=
-    `linear-gradient(
-      ${S.bg_gradient_direction},
-      ${S.bg_gradient_1},
-      ${S.bg_gradient_2}
-    )`;
-
+document.body.style.background=
+`linear-gradient(
+${S.bg_gradient_direction},
+${S.bg_gradient_1},
+${S.bg_gradient_2}
+)`;
 }
 
+
 /* =========================================================
-   LOAD DATABASE
+LOAD SUPABASE
 ========================================================= */
 
 async function load(){
 
-  try{
+try{
 
-    const s=
-      await sb
-      .from("site_settings")
-      .select("*")
-      .eq("id",1)
-      .maybeSingle();
+let s=await sb
+.from("site_settings")
+.select("*")
+.eq("id",1)
+.maybeSingle();
 
-    if(s.error)throw s.error;
+if(s.error){
+msg("Supabase: "+s.error.message,true);
+return;
+}
 
-    if(s.data){
+if(s.data){
 
-      S={
-        ...D,
-        ...s.data
-      };
+S={
+...D,
+...s.data
+};
 
-    }else{
+}else{
 
-      const r=
-        await sb
-        .from("site_settings")
-        .insert(D)
-        .select()
-        .single();
+let r=await sb
+.from("site_settings")
+.insert(D);
 
-      if(r.error)throw r.error;
+if(r.error){
+msg(r.error.message,true);
+return;
+}
 
-      if(r.data){
-        S={
-          ...D,
-          ...r.data
-        };
-      }
+S={...D};
+}
 
-    }
 
-    const p=
-      await sb
-      .from("portfolio")
-      .select("*")
-      .order("display_order")
-      .order("id");
+/* PORTFOLIO */
 
-    if(p.error)throw p.error;
+let p=await sb
+.from("portfolio")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
 
-    P=p.data||[];
+if(p.error){
+msg("Portfolio: "+p.error.message,true);
+P=[];
+}else{
+P=p.data||[];
+}
 
-    const c=
-      await sb
-      .from("creators")
-      .select("*")
-      .order("display_order")
-      .order("id");
 
-    if(c.error){
+/* CREATORS */
 
-      C=[];
+let c=await sb
+.from("creators")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
 
-      console.warn(
-        "Creators:",
-        c.error.message
-      );
+if(c.error){
+C=[];
+}else{
+C=c.data||[];
+}
 
-    }else{
 
-      C=c.data||[];
+/* FAQ */
 
-    }
+let f=await sb
+.from("faq")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
 
-    const f=
-      await sb
-      .from("faq")
-      .select("*")
-      .order("display_order")
-      .order("id");
+if(f.error){
+F=[];
+}else{
+F=f.data||[];
+}
 
-    if(f.error){
+render();
 
-      F=[];
+setTimeout(()=>{
+$("loader").classList.add("hide");
+},1400);
 
-      console.warn(
-        "FAQ:",
-        f.error.message
-      );
+}catch(e){
 
-    }else{
-
-      F=f.data||[];
-
-    }
-
-    render();
-
-    await refreshViews();
-
-  }catch(e){
-
-    console.error(e);
-
-    /*
-      Even if a database request fails,
-      render the dashboard instead of leaving
-      a blank screen.
-    */
-
-    render();
-
-    msg(
-      "Admin loaded: "+
-      (e.message||"Unknown error"),
-      true
-    );
-
-  }
+msg(e.message,true);
 
 }
 
+}
+
+
 /* =========================================================
-   UPDATE SETTINGS
+PATCH SETTINGS
 ========================================================= */
 
 async function patch(x){
 
-  const r=
-    await sb
-    .from("site_settings")
-    .update(x)
-    .eq("id",1);
+let r=await sb
+.from("site_settings")
+.update(x)
+.eq("id",1);
 
-  if(r.error)throw r.error;
+if(r.error)throw r.error;
 
-  S={
-    ...S,
-    ...x
-  };
+S={
+...S,
+...x
+};
 
-  render();
+render();
 
 }
 
+
 /* =========================================================
-   UPLOAD
+UPLOAD
 ========================================================= */
 
 async function upload(f,folder){
 
-  if(!f)return "";
+let ext=
+(f.name.split(".").pop()||"png").toLowerCase();
 
-  const ext=
-    (f.name.split(".").pop()||"png")
-    .toLowerCase();
+let path=
+`admin/${folder}/${Date.now()}-${Math.random()
+.toString(36)
+.slice(2)}.${ext}`;
 
-  const path=
-    `admin/${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+let r=await sb
+.storage
+.from("portfolio-images")
+.upload(
+path,
+f,
+{
+contentType:f.type||"image/png"
+}
+);
 
-  const r=
-    await sb
-    .storage
-    .from("portfolio-images")
-    .upload(
-      path,
-      f,
-      {
-        contentType:
-          f.type||"image/png",
-        upsert:false
-      }
-    );
+if(r.error)throw r.error;
 
-  if(r.error)throw r.error;
-
-  return sb
-    .storage
-    .from("portfolio-images")
-    .getPublicUrl(path)
-    .data
-    .publicUrl;
-
+return sb
+.storage
+.from("portfolio-images")
+.getPublicUrl(path)
+.data.publicUrl;
 }
 
+
 /* =========================================================
-   IMAGE INPUT
+IMAGE INPUT
 ========================================================= */
 
-function imageInput(
-  id,
-  label,
-  url
-){
+function imageInput(id,label,url){
 
-  return `
+return `
+<div class="field full">
 
-    <div class="field full">
+<label>${label}</label>
 
-      <label>${label}</label>
+<input
+id="${id}"
+type="file"
+accept="image/*"
+onchange="pick(this,'${id}p')">
 
-      <input
-        id="${id}"
-        type="file"
-        accept="image/*"
-        onchange="pick(this,'${id}p')">
+<div id="${id}p">
 
-      <div id="${id}p">
+${url?
+`
+<div class="preview">
+<img src="${esc(url)}">
+</div>
+`
+:""}
 
-        ${
-          url
-          ?
-          `<div class="preview">
-             <img src="${esc(url)}">
-           </div>`
-          :
-          ""
-        }
+</div>
 
-      </div>
+</div>
+`;
+}
 
-    </div>
+function pick(i,t){
 
-  `;
+file=i.files[0]||null;
+
+if(file){
+
+$(t).innerHTML=
+`
+<div class="preview">
+<img src="${URL.createObjectURL(file)}">
+</div>
+`;
 
 }
 
-function pick(input,target){
-
-  file=
-    input.files[0]||
-    null;
-
-  if(file){
-
-    $(target).innerHTML=`
-      <div class="preview">
-        <img src="${URL.createObjectURL(file)}">
-      </div>
-    `;
-
-  }
-
 }
+
 
 /* =========================================================
-   GALLERY
+GALLERY
 ========================================================= */
 
 async function chooseGallery(kind){
 
-  const q=
-    await sb
-    .from("portfolio")
-    .select("id,title,image_url")
-    .order("display_order")
-    .order("id");
+let q=await sb
+.from("portfolio")
+.select("id,title,image_url")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
 
-  if(q.error){
-
-    msg(q.error.message,true);
-
-    return;
-  }
-
-  const arr=q.data||[];
-
-  const gallery=
-    document.getElementById("gallery");
-
-  if(!gallery)return;
-
-  gallery.innerHTML=
-    arr.length
-    ?
-    arr.map(x=>`
-
-      <div class="galleryItem">
-
-        <img
-          src="${esc(x.image_url)}"
-          onclick="selectGallery('${esc(x.image_url)}','${kind}')">
-
-        <small>
-          ${esc(x.title||"Thumbnail")}
-        </small>
-
-      </div>
-
-    `).join("")
-    :
-    `<p style="color:#777">
-      No portfolio images available.
-    </p>`;
-
+if(q.error){
+msg(q.error.message,true);
+return;
 }
 
-function selectGallery(
-  url,
-  kind
-){
+let arr=q.data||[];
 
-  if(kind==="og"){
+$("gallery").innerHTML=
+arr.length
+?
+arr.map(x=>
+`
+<div>
 
-    S.og_image_url=url;
-    del=false;
+<img
+src="${esc(x.image_url)}"
+onclick="selectGallery('${esc(x.image_url)}','${kind}')">
 
-  }
+<small>
+${esc(x.title||"Thumbnail")}
+</small>
 
-  if(kind==="about"){
-
-    S.about_image_url=url;
-
-  }
-
-  if(kind==="logo"){
-
-    S.logo_url=url;
-
-  }
-
-  if(kind==="loading"){
-
-    S.loading_logo_url=url;
-
-  }
-
-  render();
-
-  closeEditor();
-
-  msg(
-    "✓ Image selected from gallery!"
-  );
-
+</div>
+`
+).join("")
+:
+`
+<p style="color:#777">
+No portfolio images available.
+</p>
+`;
 }
+
 
 /* =========================================================
-   EDITOR
+SELECT GALLERY IMAGE
 ========================================================= */
 
-function openEditor(
-  t,
-  id=null
-){
+function selectGallery(u,kind){
 
-  type=t;
-  mid=id;
-  file=null;
-  del=false;
-  creatorMeta=null;
+if(kind==="og"){
 
-  let h="";
-  let b="";
+S.og_image_url=u;
+del=false;
 
-  /* HERO */
+render();
+closeEditor();
 
-  if(t==="hero"){
-
-    h="Edit Hero";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field">
-          <label>Availability</label>
-          <input
-            id="availx"
-            value="${esc(S.new_design_text)}">
-        </div>
-
-        <div class="field">
-          <label>Name</label>
-          <input
-            id="namex"
-            value="${esc(S.header_name)}">
-        </div>
-
-        <div class="field full">
-          <label>Hero Title</label>
-          <input
-            id="ht"
-            value="${esc(S.hero_title)}">
-        </div>
-
-        <div class="field full">
-          <label>Hero Subtitle</label>
-          <input
-            id="hs"
-            value="${esc(S.hero_subtitle)}">
-        </div>
-
-        <div class="field full">
-          <label>Crafted Text</label>
-          <input
-            id="hc"
-            value="${esc(S.crafted_text)}">
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  /* STATS */
-
-  else if(t==="stats"){
-
-    h="Edit Stats";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field">
-          <label>Stat 1 Number</label>
-          <input
-            id="s1"
-            value="${esc(S.stats_thumbnails)}">
-        </div>
-
-        <div class="field">
-          <label>Stat 1 Label</label>
-          <input
-            id="l1"
-            value="${esc(S.stats_thumbnails_label)}">
-        </div>
-
-        <div class="field">
-          <label>Stat 2 Number</label>
-          <input
-            id="s2"
-            value="${esc(S.stats_creators)}">
-        </div>
-
-        <div class="field">
-          <label>Stat 2 Label</label>
-          <input
-            id="l2"
-            value="${esc(S.stats_creators_label)}">
-        </div>
-
-        <div class="field">
-          <label>Stat 3 Number</label>
-          <input
-            id="s3"
-            value="${esc(S.stats_years)}">
-        </div>
-
-        <div class="field">
-          <label>Stat 3 Label</label>
-          <input
-            id="l3"
-            value="${esc(S.stats_years_label)}">
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  /* ABOUT */
-
-  else if(t==="about"){
-
-    h="Edit About";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Main Heading</label>
-          <input
-            id="abh"
-            value="${esc(S.about_heading)}">
-        </div>
-
-        <div class="field full">
-          <label>Sub Heading</label>
-          <input
-            id="abs"
-            value="${esc(S.about_sub)}">
-        </div>
-
-        <div class="field full">
-          <label>About Text</label>
-          <textarea id="at">${esc(S.about_text)}</textarea>
-        </div>
-
-        ${imageInput(
-          "about",
-          "About Image",
-          S.about_image_url
-        )}
-
-        <div class="field full">
-
-          <button
-            class="btn"
-            onclick="chooseGallery('about')">
-            🖼️ Choose from Gallery
-          </button>
-
-          <div
-            id="gallery"
-            class="gallery">
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  /* CONTACT */
-
-  else if(t==="contact"){
-
-    h="Edit Contact";
-
-    const custom=
-      S.contact_buttons||[];
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Heading</label>
-          <textarea id="ct">${esc(S.contact_title)}</textarea>
-        </div>
-
-        <div class="field full">
-          <label>Text</label>
-          <textarea id="cx">${esc(S.contact_text)}</textarea>
-        </div>
-
-        <div class="field">
-          <label>Discord Link</label>
-          <input
-            id="dc"
-            value="${esc(S.discord_url)}">
-        </div>
-
-        <div class="field">
-          <label>Twitter / X Link</label>
-          <input
-            id="tw"
-            value="${esc(S.twitter_url)}">
-        </div>
-
-      </div>
-
-      <hr
-        style="
-          border-color:#292929;
-          margin:18px 0">
-
-      <button
-        class="btn primary"
-        onclick="addContactButton()">
-        ＋ Add Button
-      </button>
-
-      <div
-        id="customButtons"
-        style="margin-top:12px">
-
-        ${
-          custom.map(
-            (x,i)=>buttonEditor(x,i)
-          ).join("")
-        }
-
-      </div>
-
-    `;
-
-  }
-
-  /* THEME */
-
-  else if(t==="theme"){
-
-    h="Edit Theme & Colors";
-
-    const z=[
-      ["bg","bg_color"],
-      ["g1","bg_gradient_1"],
-      ["g2","bg_gradient_2"],
-      ["pr","primary_color"],
-      ["hd","heading_color"],
-      ["tx","text_color"],
-      ["mu","muted_color"],
-      ["ca","card_color"],
-      ["bo","border_color"],
-      ["bu","button_color"],
-      ["bt","button_text_color"],
-      ["ac","accent_color"]
-    ];
-
-    b=`
-
-      <div class="themegrid">
-
-        ${
-          z.map(x=>`
-
-            <div class="field">
-
-              <label>
-                ${x[1]}
-              </label>
-
-              <input
-                id="${x[0]}"
-                type="color"
-                value="${S[x[1]]}">
-
-            </div>
-
-          `).join("")
-        }
-
-      </div>
-
-      <div
-        class="field"
-        style="margin-top:12px">
-
-        <label>
-          Gradient Direction
-        </label>
-
-        <select id="gd">
-
-          <option
-            ${S.bg_gradient_direction==="135deg"?"selected":""}>
-            135deg
-          </option>
-
-          <option
-            ${S.bg_gradient_direction==="90deg"?"selected":""}>
-            90deg
-          </option>
-
-          <option
-            ${S.bg_gradient_direction==="180deg"?"selected":""}>
-            180deg
-          </option>
-
-          <option
-            ${S.bg_gradient_direction==="45deg"?"selected":""}>
-            45deg
-          </option>
-
-        </select>
-
-      </div>
-
-    `;
-
-  }
-
-  /* LINK PREVIEW */
-
-  else if(t==="link"){
-
-    h="Link Preview";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Title</label>
-          <input
-            id="ot"
-            value="${esc(S.og_title)}">
-        </div>
-
-        <div class="field full">
-          <label>Description</label>
-          <textarea
-            id="od">${esc(S.og_description)}</textarea>
-        </div>
-
-        ${imageInput(
-          "og",
-          "Preview Image",
-          S.og_image_url
-        )}
-
-        <div class="field full">
-
-          <button
-            class="btn"
-            onclick="chooseGallery('og')">
-            🖼️ Choose from Gallery
-          </button>
-
-          <div
-            id="gallery"
-            class="gallery">
-          </div>
-
-          ${
-            S.og_image_url
-            ?
-            `<button
-              class="deleteimg"
-              onclick="
-                del=true;
-                S.og_image_url='';
-                render();
-              ">
-              🗑 Delete Image
-            </button>`
-            :
-            ""
-          }
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  /* PORTFOLIO */
-
-  else if(t==="portfolio"){
-
-    const x=
-      mid
-      ?P.find(a=>a.id===mid)
-      :null;
-
-    h=
-      x
-      ?"Edit Thumbnail"
-      :"Add Thumbnail";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field full">
-
-          <label>
-            Title
-          </label>
-
-          <input
-            id="pt"
-            value="${esc(x?.title||"")}">
-
-        </div>
-
-        ${imageInput(
-          "pi",
-          "Thumbnail Image",
-          x?.image_url||""
-        )}
-
-      </div>
-
-    `;
-
-  }
-
-  /* CREATOR */
-
-  else if(t==="creator"){
-
-    const x=
-      mid
-      ?C.find(a=>a.id===mid)
-      :null;
-
-    h=
-      x
-      ?"Edit Creator"
-      :"Add Creator";
-
-    b=`
-
-      <div class="field">
-
-        <label>
-          YouTube Channel URL only
-        </label>
-
-        <input
-          id="yu"
-          value="${esc(x?.youtube_url||"")}"
-          placeholder="https://youtube.com/@channel">
-
-        <button
-          class="btn"
-          style="margin-top:8px"
-          onclick="fetchCreator()">
-          Fetch Creator
-        </button>
-
-      </div>
-
-      <div
-        id="crmsg"
-        style="
-          color:#777;
-          font-size:12px;
-          margin-top:13px">
-
-        ${
-          x
-          ?
-          `Current: ${esc(x.name)} — ${esc(
-            x.subscribers||
-            "Subscribers unavailable"
-          )}`
-          :
-          "Enter the channel URL and tap Fetch Creator."
-        }
-
-      </div>
-
-    `;
-
-  }
-
-  /* FAQ */
-
-  else if(t==="faq"){
-
-    const x=
-      mid
-      ?F.find(a=>a.id===mid)
-      :null;
-
-    h=
-      x
-      ?"Edit FAQ"
-      :"Add FAQ";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field full">
-
-          <label>
-            Question
-          </label>
-
-          <input
-            id="fq"
-            value="${esc(x?.question||"")}">
-
-        </div>
-
-        <div class="field full">
-
-          <label>
-            Answer
-          </label>
-
-          <textarea id="fa">${esc(
-            x?.answer||""
-          )}</textarea>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  /* HEADER */
-
-  else if(t==="header"){
-
-    h="Edit Header";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field full">
-
-          <label>
-            Header Name
-          </label>
-
-          <input
-            id="hn"
-            value="${esc(S.header_name)}">
-
-        </div>
-
-        ${imageInput(
-          "lg",
-          "Header Logo",
-          S.logo_url
-        )}
-
-        <div class="field full">
-
-          <button
-            class="btn"
-            onclick="chooseGallery('logo')">
-            🖼️ Choose from Gallery
-          </button>
-
-          <div
-            id="gallery"
-            class="gallery">
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  /* LOADING */
-
-  else if(t==="loading"){
-
-    h="Edit Loading Screen";
-
-    b=`
-
-      <div class="formgrid">
-
-        <div class="field full">
-
-          <label>
-            Loading Screen Text
-          </label>
-
-          <input
-            id="ln"
-            value="${esc(S.loading_name)}">
-
-        </div>
-
-        ${imageInput(
-          "ll",
-          "Loading Logo",
-          S.loading_logo_url||
-          S.logo_url
-        )}
-
-        <div class="field full">
-
-          <button
-            class="btn"
-            onclick="chooseGallery('loading')">
-            🖼️ Choose from Gallery
-          </button>
-
-          <div
-            id="gallery"
-            class="gallery">
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-  $("mtitle").textContent=h;
-
-  $("mbody").innerHTML=b;
-
-  $("modal").classList.add("show");
+msg("✓ Preview image selected!");
 
 }
 
+else if(kind==="about"){
+
+S.about_image_url=u;
+
+render();
+closeEditor();
+
+msg("✓ About image selected!");
+
+}
+
+else if(kind==="logo"){
+
+S.logo_url=u;
+
+render();
+closeEditor();
+
+msg("✓ Logo selected!");
+
+}
+
+else if(kind==="loading"){
+
+S.loading_logo_url=u;
+
+render();
+closeEditor();
+
+msg("✓ Loading logo selected!");
+
+}
+
+else if(kind==="footer"){
+
+S.footer_logo_url=u;
+
+render();
+closeEditor();
+
+msg("✓ Footer logo selected!");
+
+}
+
+}
+
+
 /* =========================================================
-   CUSTOM CONTACT BUTTON
+OPEN EDITOR
+========================================================= */
+
+function openEditor(t,id=null){
+
+type=t;
+mid=id;
+file=null;
+del=false;
+creatorMeta=null;
+
+let h="";
+let b="";
+
+
+/* HERO */
+
+if(t==="hero"){
+
+h="Edit Hero";
+
+b=`
+<div class="formgrid">
+
+<div class="field">
+<label>Availability</label>
+<input id="availx"
+value="${esc(S.new_design_text)}">
+</div>
+
+<div class="field">
+<label>Name</label>
+<input id="namex"
+value="${esc(S.header_name)}">
+</div>
+
+<div class="field">
+<label>Hero Title</label>
+<input id="ht"
+value="${esc(S.hero_title)}">
+</div>
+
+<div class="field">
+<label>Hero Subtitle</label>
+<input id="hs"
+value="${esc(S.hero_subtitle)}">
+</div>
+
+<div class="field">
+<label>Crafted Text</label>
+<input id="hc"
+value="${esc(S.crafted_text)}">
+</div>
+
+</div>
+`;
+}
+
+
+/* STATS */
+
+else if(t==="stats"){
+
+h="Edit Stats";
+
+b=`
+<div class="formgrid">
+
+<div class="field">
+<label>Stat 1 Number</label>
+<input id="s1"
+value="${esc(S.stats_thumbnails)}">
+</div>
+
+<div class="field">
+<label>Stat 1 Label</label>
+<input id="l1"
+value="${esc(S.stats_thumbnails_label)}">
+</div>
+
+<div class="field">
+<label>Stat 2 Number</label>
+<input id="s2"
+value="${esc(S.stats_creators)}">
+</div>
+
+<div class="field">
+<label>Stat 2 Label</label>
+<input id="l2"
+value="${esc(S.stats_creators_label)}">
+</div>
+
+<div class="field">
+<label>Stat 3 Number</label>
+<input id="s3"
+value="${esc(S.stats_years)}">
+</div>
+
+<div class="field">
+<label>Stat 3 Label</label>
+<input id="l3"
+value="${esc(S.stats_years_label)}">
+</div>
+
+</div>
+`;
+}
+
+
+/* ABOUT */
+
+else if(t==="about"){
+
+h="Edit About";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Main Heading</label>
+<input id="abh"
+value="${esc(S.about_heading)}">
+</div>
+
+<div class="field full">
+<label>Sub Heading</label>
+<input id="abs"
+value="${esc(S.about_sub)}">
+</div>
+
+<div class="field full">
+<label>About Text</label>
+<textarea id="at">${esc(S.about_text)}</textarea>
+</div>
+
+${imageInput(
+"about",
+"About Image",
+S.about_image_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('about')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* CONTACT */
+
+else if(t==="contact"){
+
+h="Edit Contact";
+
+let custom=S.contact_buttons||[];
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Heading</label>
+<textarea id="ct">${esc(S.contact_title)}</textarea>
+</div>
+
+<div class="field full">
+<label>Text</label>
+<textarea id="cx">${esc(S.contact_text)}</textarea>
+</div>
+
+<div class="field">
+<label>Discord Link</label>
+<input id="dc"
+value="${esc(S.discord_url)}">
+</div>
+
+<div class="field">
+<label>Twitter / X Link</label>
+<input id="tw"
+value="${esc(S.twitter_url)}">
+</div>
+
+</div>
+
+<hr style="border-color:#292929;margin:18px 0">
+
+<button class="btn primary"
+onclick="addContactButton()">
+＋ Add Button
+</button>
+
+<div id="customButtons"
+style="margin-top:12px">
+
+${custom.map((x,i)=>
+buttonEditor(x,i)
+).join("")}
+
+</div>
+`;
+}
+
+
+/* THEME */
+
+else if(t==="theme"){
+
+h="Edit Theme & Colors";
+
+let z=[
+["bg","bg_color"],
+["g1","bg_gradient_1"],
+["g2","bg_gradient_2"],
+["pr","primary_color"],
+["hd","heading_color"],
+["tx","text_color"],
+["mu","muted_color"],
+["ca","card_color"],
+["bo","border_color"],
+["bu","button_color"],
+["bt","button_text_color"],
+["ac","accent_color"]
+];
+
+b=`
+<div class="themegrid">
+
+${z.map(x=>
+`
+<div class="field">
+<label>${x[1]}</label>
+<input
+id="${x[0]}"
+type="color"
+value="${S[x[1]]}">
+</div>
+`
+).join("")}
+
+</div>
+
+<div class="field" style="margin-top:12px">
+
+<label>Gradient Direction</label>
+
+<select id="gd">
+
+<option ${S.bg_gradient_direction==="135deg"?"selected":""}>
+135deg
+</option>
+
+<option ${S.bg_gradient_direction==="90deg"?"selected":""}>
+90deg
+</option>
+
+<option ${S.bg_gradient_direction==="180deg"?"selected":""}>
+180deg
+</option>
+
+<option ${S.bg_gradient_direction==="45deg"?"selected":""}>
+45deg
+</option>
+
+</select>
+
+</div>
+`;
+}
+
+
+/* LINK PREVIEW */
+
+else if(t==="link"){
+
+h="Link Preview";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Title</label>
+<input id="ot"
+value="${esc(S.og_title)}">
+</div>
+
+<div class="field full">
+<label>Description</label>
+<textarea id="od">${esc(S.og_description)}</textarea>
+</div>
+
+${imageInput(
+"og",
+"Preview Image",
+S.og_image_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('og')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+${
+S.og_image_url
+?
+`
+<button class="deleteimg"
+onclick="
+del=true;
+S.og_image_url='';
+document.getElementById('ogp').innerHTML='';
+">
+🗑 Delete Image
+</button>
+`
+:""
+}
+
+</div>
+
+</div>
+`;
+}
+
+
+/* PORTFOLIO */
+
+else if(t==="portfolio"){
+
+let x=mid?P.find(a=>a.id===mid):null;
+
+h=x?"Edit Thumbnail":"Add Thumbnail";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Title</label>
+<input id="pt"
+value="${esc(x?.title||"")}">
+</div>
+
+${imageInput(
+"pi",
+"Thumbnail Image",
+x?.image_url||""
+)}
+
+</div>
+`;
+}
+
+
+/* CREATOR */
+
+else if(t==="creator"){
+
+let x=mid?C.find(a=>a.id===mid):null;
+
+h=x?"Edit Creator":"Add Creator";
+
+b=`
+<div class="field">
+
+<label>YouTube Channel URL only</label>
+
+<input
+id="yu"
+value="${esc(x?.youtube_url||"")}"
+placeholder="https://youtube.com/@channel">
+
+<button class="btn"
+style="margin-top:8px"
+onclick="fetchCreator()">
+Fetch Creator
+</button>
+
+</div>
+
+<div id="crmsg"
+style="color:#777;font-size:12px;margin-top:13px">
+
+${
+x
+?
+`Current: ${esc(x.name)} — ${esc(
+x.subscribers||"Subscribers unavailable"
+)}`
+:
+"Enter the channel URL and tap Fetch Creator."
+}
+
+</div>
+`;
+}
+
+
+/* FAQ */
+
+else if(t==="faq"){
+
+let x=mid?F.find(a=>a.id===mid):null;
+
+h=x?"Edit FAQ":"Add FAQ";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Question</label>
+<input id="fq"
+value="${esc(x?.question||"")}">
+</div>
+
+<div class="field full">
+<label>Answer</label>
+<textarea id="fa">${esc(x?.answer||"")}</textarea>
+</div>
+
+</div>
+`;
+}
+
+
+/* HEADER */
+
+else if(t==="header"){
+
+h="Edit Header";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Header Name</label>
+<input id="hn"
+value="${esc(S.header_name)}">
+</div>
+
+${imageInput(
+"lg",
+"Header Logo",
+S.logo_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('logo')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* LOADING */
+
+else if(t==="loading"){
+
+h="Edit Loading Screen";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Loading Screen Text</label>
+<input id="ln"
+value="${esc(S.loading_name)}">
+</div>
+
+${imageInput(
+"ll",
+"Loading Logo",
+S.loading_logo_url||S.logo_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('loading')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+<div class="field full">
+
+<p style="color:#777;font-size:11px">
+Logo uses the pop animation and the line expands from the center.
+</p>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* FOOTER */
+
+else if(t==="footer"){
+
+h="Edit Footer";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Footer Name</label>
+<input id="fn"
+value="${esc(S.footer_name)}">
+</div>
+
+<div class="field full">
+<label>Description</label>
+<textarea id="fd">${esc(S.footer_description)}</textarea>
+</div>
+
+<div class="field">
+<label>Explore Heading</label>
+<input id="fe"
+value="${esc(S.footer_explore)}">
+</div>
+
+<div class="field">
+<label>Portfolio</label>
+<input id="fp"
+value="${esc(S.footer_portfolio)}">
+</div>
+
+<div class="field">
+<label>Clients</label>
+<input id="fc"
+value="${esc(S.footer_clients)}">
+</div>
+
+<div class="field">
+<label>About</label>
+<input id="fab"
+value="${esc(S.footer_about)}">
+</div>
+
+<div class="field">
+<label>FAQ</label>
+<input id="ff"
+value="${esc(S.footer_faq)}">
+</div>
+
+<div class="field full">
+<label>Copyright</label>
+<input id="fcopy"
+value="${esc(S.footer_copyright)}">
+</div>
+
+${imageInput(
+"fl",
+"Footer Logo",
+S.footer_logo_url||S.logo_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('footer')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* REORDER */
+
+else if(t==="reorder"){
+
+h="Section Reorder";
+
+b=`
+<div class="reorder-list" id="modalReorder">
+
+${
+(S.section_order||[]).map(id=>
+`
+<div class="reorder-item"
+draggable="true"
+data-section="${id}"
+ondragstart="dragStart(event)"
+ondragover="event.preventDefault()"
+ondrop="dropSection(event)">
+
+<span>${sectionNames[id]||id}</span>
+
+<span class="drag">☰</span>
+
+</div>
+`
+).join("")
+}
+
+</div>
+
+<button
+class="btn primary reorder-save"
+onclick="closeEditor();msg('✓ Section order changed. Click Save All Changes.')">
+
+Save Section Order
+</button>
+`;
+}
+
+$("mtitle").textContent=h;
+$("mbody").innerHTML=b;
+$("modal").classList.add("show");
+
+}
+
+
+/* =========================================================
+BUTTON EDITOR
 ========================================================= */
 
 function buttonEditor(x,i){
 
-  return `
+return `
+<div class="adminbox" style="margin-top:10px">
 
-    <div
-      class="adminbox"
-      style="margin-top:10px">
+<div class="formgrid">
 
-      <div class="formgrid">
+<div class="field">
+<label>Button Name</label>
+<input
+data-bi="${i}"
+data-k="name"
+value="${esc(x.name||"")}">
+</div>
 
-        <div class="field">
-          <label>Button Name</label>
+<div class="field">
+<label>Link</label>
+<input
+data-bi="${i}"
+data-k="link"
+value="${esc(x.link||"")}">
+</div>
 
-          <input
-            data-bi="${i}"
-            data-k="name"
-            value="${esc(x.name||"")}">
-        </div>
+<div class="field">
+<label>Icon / Logo</label>
+<input
+data-bi="${i}"
+data-k="icon"
+value="${esc(x.icon||"")}"
+placeholder="Emoji / icon">
+</div>
 
-        <div class="field">
-          <label>Link</label>
+<div class="field">
+<label>Background Color</label>
+<input
+data-bi="${i}"
+data-k="color"
+type="color"
+value="${x.color||"#ffffff"}">
+</div>
 
-          <input
-            data-bi="${i}"
-            data-k="link"
-            value="${esc(x.link||"")}">
-        </div>
+<div class="field">
+<label>Text Color</label>
+<input
+data-bi="${i}"
+data-k="text"
+type="color"
+value="${x.text||"#080808"}">
+</div>
 
-        <div class="field">
-          <label>Icon / Logo</label>
+</div>
 
-          <input
-            data-bi="${i}"
-            data-k="icon"
-            value="${esc(x.icon||"")}"
-            placeholder="Discord / 𝕏 / emoji">
-        </div>
+<button
+class="mini danger"
+onclick="this.parentElement.remove()">
+🗑 Remove
+</button>
 
-        <div class="field">
-          <label>Background</label>
-
-          <input
-            data-bi="${i}"
-            data-k="color"
-            type="color"
-            value="${x.color||"#ffffff"}">
-        </div>
-
-        <div class="field">
-          <label>Text Color</label>
-
-          <input
-            data-bi="${i}"
-            data-k="text"
-            type="color"
-            value="${x.text||"#080808"}">
-        </div>
-
-      </div>
-
-      <button
-        class="mini danger"
-        onclick="this.parentElement.remove()">
-        🗑 Remove
-      </button>
-
-    </div>
-
-  `;
-
+</div>
+`;
 }
+
 
 function addContactButton(){
 
-  const box=
-    document.getElementById(
-      "customButtons"
-    );
+let box=document.getElementById("customButtons");
 
-  const i=
-    box.children.length;
+let i=box.children.length;
 
-  box.insertAdjacentHTML(
-    "beforeend",
-    buttonEditor(
-      {
-        name:"New Button",
-        link:"#",
-        icon:"",
-        color:"#ffffff",
-        text:"#080808"
-      },
-      i
-    )
-  );
-
+box.insertAdjacentHTML(
+"beforeend",
+buttonEditor(
+{
+name:"New Button",
+link:"#",
+icon:"",
+color:"#ffffff",
+text:"#080808"
+},
+i
+)
+);
 }
 
+
 /* =========================================================
-   CLOSE EDITOR
+CLOSE
 ========================================================= */
 
 function closeEditor(){
-
-  $("modal")
-    .classList
-    .remove("show");
-
+$("modal").classList.remove("show");
 }
 
+
 /* =========================================================
-   SAVE MODAL
+SAVE MODAL
 ========================================================= */
 
 async function saveModal(){
 
-  try{
+try{
 
-    /* HERO */
+/* HERO */
 
-    if(type==="hero"){
+if(type==="hero"){
 
-      await patch({
+await patch({
 
-        header_name:
-          $("namex").value.trim(),
+header_name:$("namex").value.trim(),
 
-        new_design_text:
-          $("availx").value.trim(),
+new_design_text:
+$("availx").value.trim(),
 
-        hero_title:
-          $("ht").value.trim(),
+hero_title:
+$("ht").value.trim(),
 
-        hero_subtitle:
-          $("hs").value.trim(),
+hero_subtitle:
+$("hs").value.trim(),
 
-        crafted_text:
-          $("hc").value.trim()
+crafted_text:
+$("hc").value.trim()
 
-      });
-
-    }
-
-    /* STATS */
-
-    else if(type==="stats"){
-
-      await patch({
-
-        stats_thumbnails:
-          $("s1").value.trim(),
-
-        stats_thumbnails_label:
-          $("l1").value.trim(),
-
-        stats_creators:
-          $("s2").value.trim(),
-
-        stats_creators_label:
-          $("l2").value.trim(),
-
-        stats_years:
-          $("s3").value.trim(),
-
-        stats_years_label:
-          $("l3").value.trim()
-
-      });
-
-    }
-
-    /* ABOUT */
-
-    else if(type==="about"){
-
-      let im=
-        S.about_image_url;
-
-      if(file){
-        im=
-          await upload(
-            file,
-            "about"
-          );
-      }
-
-      await patch({
-
-        about_heading:
-          $("abh").value.trim(),
-
-        about_sub:
-          $("abs").value.trim(),
-
-        about_text:
-          $("at").value.trim(),
-
-        about_image_url:im
-
-      });
-
-    }
-
-    /* CONTACT */
-
-    else if(type==="contact"){
-
-      const elements=
-        [
-          ...document.querySelectorAll(
-            "[data-bi]"
-          )
-        ];
-
-      const arr=[];
-
-      elements.forEach(el=>{
-
-        const i=
-          Number(el.dataset.bi);
-
-        if(!arr[i]){
-          arr[i]={};
-        }
-
-        arr[i][el.dataset.k]=
-          el.value;
-
-      });
-
-      await patch({
-
-        contact_title:
-          $("ct").value,
-
-        contact_text:
-          $("cx").value,
-
-        discord_url:
-          $("dc").value.trim(),
-
-        twitter_url:
-          $("tw").value.trim(),
-
-        contact_buttons:
-          arr.filter(x=>x.name)
-
-      });
-
-    }
-
-    /* THEME */
-
-    else if(type==="theme"){
-
-      await patch({
-
-        bg_color:
-          $("bg").value,
-
-        bg_gradient_1:
-          $("g1").value,
-
-        bg_gradient_2:
-          $("g2").value,
-
-        primary_color:
-          $("pr").value,
-
-        heading_color:
-          $("hd").value,
-
-        text_color:
-          $("tx").value,
-
-        muted_color:
-          $("mu").value,
-
-        card_color:
-          $("ca").value,
-
-        border_color:
-          $("bo").value,
-
-        button_color:
-          $("bu").value,
-
-        button_text_color:
-          $("bt").value,
-
-        accent_color:
-          $("ac").value,
-
-        bg_gradient_direction:
-          $("gd").value
-
-      });
-
-    }
-
-    /* LINK PREVIEW */
-
-    else if(type==="link"){
-
-      let im=
-        S.og_image_url;
-
-      if(del){
-        im="";
-      }
-
-      if(file){
-
-        im=
-          await upload(
-            file,
-            "link-preview"
-          );
-
-      }
-
-      await patch({
-
-        og_title:
-          $("ot").value.trim(),
-
-        og_description:
-          $("od").value.trim(),
-
-        og_image_url:im
-
-      });
-
-    }
-
-    /* HEADER */
-
-    else if(type==="header"){
-
-      let im=
-        S.logo_url;
-
-      if(file){
-
-        im=
-          await upload(
-            file,
-            "logo"
-          );
-
-      }
-
-      await patch({
-
-        header_name:
-          $("hn").value.trim(),
-
-        logo_url:im
-
-      });
-
-    }
-
-    /* LOADING */
-
-    else if(type==="loading"){
-
-      let im=
-        S.loading_logo_url||
-        S.logo_url;
-
-      if(file){
-
-        im=
-          await upload(
-            file,
-            "loading"
-          );
-
-      }
-
-      await patch({
-
-        loading_name:
-          $("ln").value.trim(),
-
-        loading_logo_url:
-          im
-
-      });
-
-    }
-
-    /* PORTFOLIO */
-
-    else if(type==="portfolio"){
-
-      const x=
-        mid
-        ?P.find(a=>a.id===mid)
-        :null;
-
-      let im=
-        x?.image_url||
-        "";
-
-      if(file){
-
-        im=
-          await upload(
-            file,
-            "portfolio"
-          );
-
-      }
-
-      if(!im){
-
-        throw new Error(
-          "Please choose a thumbnail image."
-        );
-
-      }
-
-      let r;
-
-      if(x){
-
-        r=
-          await sb
-          .from("portfolio")
-          .update({
-
-            title:
-              $("pt").value.trim(),
-
-            image_url:im
-
-          })
-          .eq("id",x.id);
-
-      }else{
-
-        r=
-          await sb
-          .from("portfolio")
-          .insert({
-
-            title:
-              $("pt").value.trim()||
-              "Minecraft Thumbnail",
-
-            image_url:im,
-
-            display_order:
-              P.length
-
-          });
-
-      }
-
-      if(r.error)throw r.error;
-
-      const q=
-        await sb
-        .from("portfolio")
-        .select("*")
-        .order("display_order")
-        .order("id");
-
-      P=q.data||[];
-
-      render();
-
-    }
-
-    /* CREATOR */
-
-    else if(type==="creator"){
-
-      const u=
-        $("yu").value.trim();
-
-      if(!u){
-
-        throw new Error(
-          "Enter a YouTube channel URL."
-        );
-
-      }
-
-      const m=
-        creatorMeta||
-        await creatorData(u);
-
-      const payload={
-
-        youtube_url:u,
-
-        name:
-          m.name||
-          "Creator",
-
-        image_url:
-          m.image_url||
-          "images/logo.png",
-
-        subscribers:
-          m.subscribers||
-          "Subscribers unavailable"
-
-      };
-
-      let r;
-
-      if(mid){
-
-        r=
-          await sb
-          .from("creators")
-          .update(payload)
-          .eq("id",mid);
-
-      }else{
-
-        r=
-          await sb
-          .from("creators")
-          .insert({
-
-            ...payload,
-
-            display_order:
-              C.length
-
-          });
-
-      }
-
-      if(r.error)throw r.error;
-
-      const q=
-        await sb
-        .from("creators")
-        .select("*")
-        .order("display_order")
-        .order("id");
-
-      C=q.data||[];
-
-      render();
-
-    }
-
-    /* FAQ */
-
-    else if(type==="faq"){
-
-      let r;
-
-      if(mid){
-
-        r=
-          await sb
-          .from("faq")
-          .update({
-
-            question:
-              $("fq").value.trim(),
-
-            answer:
-              $("fa").value.trim()
-
-          })
-          .eq("id",mid);
-
-      }else{
-
-        r=
-          await sb
-          .from("faq")
-          .insert({
-
-            question:
-              $("fq").value.trim(),
-
-            answer:
-              $("fa").value.trim(),
-
-            display_order:
-              F.length
-
-          });
-
-      }
-
-      if(r.error)throw r.error;
-
-      const q=
-        await sb
-        .from("faq")
-        .select("*")
-        .order("display_order")
-        .order("id");
-
-      F=q.data||[];
-
-      render();
-
-    }
-
-    closeEditor();
-
-    msg(
-      "✓ Changes saved successfully!"
-    );
-
-  }catch(e){
-
-    console.error(e);
-
-    msg(
-      e.message||
-      "Something went wrong.",
-      true
-    );
-
-  }
+});
 
 }
 
+
+/* STATS */
+
+else if(type==="stats"){
+
+await patch({
+
+stats_thumbnails:
+$("s1").value.trim(),
+
+stats_thumbnails_label:
+$("l1").value.trim(),
+
+stats_creators:
+$("s2").value.trim(),
+
+stats_creators_label:
+$("l2").value.trim(),
+
+stats_years:
+$("s3").value.trim(),
+
+stats_years_label:
+$("l3").value.trim()
+
+});
+
+}
+
+
+/* ABOUT */
+
+else if(type==="about"){
+
+let im=S.about_image_url;
+
+if(file)
+im=await upload(file,"about");
+
+await patch({
+
+about_heading:
+$("abh").value.trim(),
+
+about_sub:
+$("abs").value.trim(),
+
+about_text:
+$("at").value.trim(),
+
+about_image_url:im
+
+});
+
+}
+
+
+/* CONTACT */
+
+else if(type==="contact"){
+
+let els=[
+...document.querySelectorAll("[data-bi]")
+];
+
+let arr=[];
+
+els.forEach(el=>{
+
+let i=+el.dataset.bi;
+
+if(!arr[i])arr[i]={};
+
+arr[i][el.dataset.k]=el.value;
+
+});
+
+await patch({
+
+contact_title:$("ct").value,
+
+contact_text:$("cx").value,
+
+discord_url:$("dc").value.trim(),
+
+twitter_url:$("tw").value.trim(),
+
+contact_buttons:
+arr.filter(x=>x.name)
+
+});
+
+}
+
+
+/* THEME */
+
+else if(type==="theme"){
+
+await patch({
+
+bg_color:$("bg").value,
+
+bg_gradient_1:$("g1").value,
+
+bg_gradient_2:$("g2").value,
+
+primary_color:$("pr").value,
+
+heading_color:$("hd").value,
+
+text_color:$("tx").value,
+
+muted_color:$("mu").value,
+
+card_color:$("ca").value,
+
+border_color:$("bo").value,
+
+button_color:$("bu").value,
+
+button_text_color:$("bt").value,
+
+accent_color:$("ac").value,
+
+bg_gradient_direction:$("gd").value
+
+});
+
+}
+
+
+/* LINK PREVIEW */
+
+else if(type==="link"){
+
+let im=S.og_image_url;
+
+if(del)im="";
+
+if(file)
+im=await upload(file,"link-preview");
+
+await patch({
+
+og_title:$("ot").value.trim(),
+
+og_description:
+$("od").value.trim(),
+
+og_image_url:im
+
+});
+
+}
+
+
+/* HEADER */
+
+else if(type==="header"){
+
+let im=S.logo_url;
+
+if(file)
+im=await upload(file,"logo");
+
+await patch({
+
+header_name:
+$("hn").value.trim(),
+
+logo_url:im
+
+});
+
+}
+
+
+/* LOADING */
+
+else if(type==="loading"){
+
+let im=
+S.loading_logo_url||
+S.logo_url;
+
+if(file)
+im=await upload(file,"loading");
+
+await patch({
+
+loading_name:
+$("ln").value.trim(),
+
+loading_logo_url:im
+
+});
+
+}
+
+
+/* FOOTER */
+
+else if(type==="footer"){
+
+let im=
+S.footer_logo_url||
+S.logo_url;
+
+if(file)
+im=await upload(file,"footer");
+
+await patch({
+
+footer_name:
+$("fn").value.trim(),
+
+footer_description:
+$("fd").value.trim(),
+
+footer_explore:
+$("fe").value.trim(),
+
+footer_portfolio:
+$("fp").value.trim(),
+
+footer_clients:
+$("fc").value.trim(),
+
+footer_about:
+$("fab").value.trim(),
+
+footer_faq:
+$("ff").value.trim(),
+
+footer_copyright:
+$("fcopy").value.trim(),
+
+footer_logo_url:im
+
+});
+
+}
+
+
+/* PORTFOLIO */
+
+else if(type==="portfolio"){
+
+let x=mid
+?P.find(a=>a.id===mid)
+:null;
+
+let im=x?.image_url||"";
+
+if(file)
+im=await upload(file,"portfolio");
+
+if(!im)
+throw Error("Please choose a thumbnail image.");
+
+let r;
+
+if(x){
+
+r=await sb
+.from("portfolio")
+.update({
+title:$("pt").value.trim(),
+image_url:im
+})
+.eq("id",x.id);
+
+}else{
+
+r=await sb
+.from("portfolio")
+.insert({
+title:$("pt").value.trim()||
+"Minecraft Thumbnail",
+
+image_url:im,
+
+display_order:P.length
+});
+
+}
+
+if(r.error)throw r.error;
+
+let q=await sb
+.from("portfolio")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
+
+P=q.data||[];
+
+render();
+
+}
+
+
+/* CREATOR */
+
+else if(type==="creator"){
+
+let u=$("yu").value.trim();
+
+if(!u)
+throw Error("Please enter a YouTube channel URL.");
+
+let m=
+creatorMeta||
+await creatorData(u);
+
+let payload={
+youtube_url:u,
+name:m.name||"Creator",
+image_url:m.image_url||"images/logo.png",
+subscribers:m.subscribers||
+"Subscribers unavailable"
+};
+
+let r;
+
+if(mid){
+
+r=await sb
+.from("creators")
+.update(payload)
+.eq("id",mid);
+
+}else{
+
+r=await sb
+.from("creators")
+.insert({
+...payload,
+display_order:C.length
+});
+
+}
+
+if(r.error)throw r.error;
+
+let q=await sb
+.from("creators")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
+
+C=q.data||[];
+
+render();
+
+}
+
+
+/* FAQ */
+
+else if(type==="faq"){
+
+let r;
+
+if(mid){
+
+r=await sb
+.from("faq")
+.update({
+question:$("fq").value.trim(),
+answer:$("fa").value.trim()
+})
+.eq("id",mid);
+
+}else{
+
+r=await sb
+.from("faq")
+.insert({
+question:$("fq").value.trim(),
+answer:$("fa").value.trim(),
+display_order:F.length
+});
+
+}
+
+if(r.error)throw r.error;
+
+let q=await sb
+.from("faq")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
+
+F=q.data||[];
+
+render();
+
+}
+
+
+/* REORDER */
+
+else if(type==="reorder"){
+
+await patch({
+section_order:S.section_order
+});
+
+}
+
+closeEditor();
+
+msg("✓ Changes saved successfully!");
+
+}catch(e){
+
+msg(e.message,true);
+
+}
+
+}
+
+
 /* =========================================================
-   YOUTUBE
+YOUTUBE
 ========================================================= */
 
 async function creatorData(u){
 
-  const key=
-    "ytcache:"+u;
+let key="ytcache:"+u;
 
-  try{
+try{
 
-    const cached=
-      JSON.parse(
-        localStorage.getItem(key)||
-        "null"
-      );
+let c=
+JSON.parse(
+localStorage.getItem(key)||"null"
+);
 
-    if(
-      cached &&
-      Date.now()-cached.time<
-      86400000
-    ){
+if(
+c &&
+Date.now()-c.time<86400000
+)
+return c.data;
 
-      return cached.data;
+}catch(e){}
 
-    }
+let r=await fetch(
+"https://www.youtube.com/oembed?url="+
+encodeURIComponent(u)+
+"&format=json"
+);
 
-  }catch(e){}
+if(!r.ok)
+throw Error(
+"Could not read this YouTube channel."
+);
 
-  const r=
-    await fetch(
-      "https://www.youtube.com/oembed?url="+
-      encodeURIComponent(u)+
-      "&format=json"
-    );
+let j=await r.json();
 
-  if(!r.ok){
+let d={
+name:j.author_name||"",
+image_url:j.thumbnail_url||"",
+subscribers:"Subscribers unavailable"
+};
 
-    throw new Error(
-      "Could not read this YouTube channel."
-    );
+localStorage.setItem(
+key,
+JSON.stringify({
+time:Date.now(),
+data:d
+})
+);
 
-  }
-
-  const j=
-    await r.json();
-
-  const data={
-
-    name:
-      j.author_name||"",
-
-    image_url:
-      j.thumbnail_url||"",
-
-    subscribers:
-      "Subscribers unavailable"
-
-  };
-
-  localStorage.setItem(
-    key,
-    JSON.stringify({
-      time:Date.now(),
-      data:data
-    })
-  );
-
-  return data;
-
+return d;
 }
+
 
 async function fetchCreator(){
 
-  try{
+try{
 
-    creatorMeta=
-      await creatorData(
-        $("yu").value.trim()
-      );
+creatorMeta=
+await creatorData(
+$("yu").value.trim()
+);
 
-    $("crmsg").innerHTML=`
+$("crmsg").innerHTML=
+`
+<b style="color:#fff">
+${esc(creatorMeta.name)}
+</b>
+<br>
+${esc(creatorMeta.subscribers)}
+`;
 
-      <b style="color:#fff">
-        ${esc(creatorMeta.name)}
-      </b>
+}catch(e){
 
-      <br>
-
-      ${esc(
-        creatorMeta.subscribers
-      )}
-
-    `;
-
-  }catch(e){
-
-    $("crmsg").textContent=
-      e.message;
-
-  }
+$("crmsg").textContent=e.message;
 
 }
 
+}
+
+
 /* =========================================================
-   REORDER
+MOVE
 ========================================================= */
 
-async function move(
-  kind,
-  index,
-  direction
-){
+async function move(kind,i,d){
 
-  const arr=
-    kind==="portfolio"
-    ?P
-    :kind==="creators"
-    ?C
-    :F;
+let a=
+kind==="portfolio"
+?P
+:kind==="creators"
+?C
+:F;
 
-  const newIndex=
-    index+direction;
+let n=i+d;
 
-  if(
-    newIndex<0||
-    newIndex>=arr.length
-  ){
+if(n<0||n>=a.length)return;
 
-    return;
-  }
+let b=[...a];
 
-  const copy=[...arr];
+[b[i],b[n]]=[b[n],b[i]];
 
-  [
-    copy[index],
-    copy[newIndex]
-  ]=[
-    copy[newIndex],
-    copy[index]
-  ];
+let table=
+kind==="portfolio"
+?"portfolio"
+:kind==="creators"
+?"creators"
+:"faq";
 
-  const table=
-    kind==="portfolio"
-    ?"portfolio"
-    :kind;
+for(let j=0;j<b.length;j++){
 
-  for(
-    let i=0;
-    i<copy.length;
-    i++
-  ){
+let r=await sb
+.from(table)
+.update({
+display_order:j
+})
+.eq("id",b[j].id);
 
-    const r=
-      await sb
-      .from(table)
-      .update({
-        display_order:i
-      })
-      .eq("id",copy[i].id);
-
-    if(r.error){
-
-      msg(
-        r.error.message,
-        true
-      );
-
-      return;
-    }
-
-  }
-
-  if(kind==="portfolio")P=copy;
-  else if(kind==="creators")C=copy;
-  else F=copy;
-
-  render();
-
-  msg("✓ Order updated!");
+if(r.error)
+return msg(r.error.message,true);
 
 }
 
-/* =========================================================
-   DELETE
-========================================================= */
+if(kind==="portfolio")P=b;
+else if(kind==="creators")C=b;
+else F=b;
 
-async function delRow(
-  kind,
-  id
-){
+render();
 
-  if(
-    !confirm(
-      "Delete this item?"
-    )
-  ){
-
-    return;
-  }
-
-  const table=
-    kind==="portfolio"
-    ?"portfolio"
-    :kind;
-
-  const r=
-    await sb
-    .from(table)
-    .delete()
-    .eq("id",id);
-
-  if(r.error){
-
-    msg(
-      r.error.message,
-      true
-    );
-
-    return;
-  }
-
-  if(kind==="portfolio"){
-
-    P=
-      P.filter(
-        x=>x.id!==id
-      );
-
-  }else if(kind==="creators"){
-
-    C=
-      C.filter(
-        x=>x.id!==id
-      );
-
-  }else{
-
-    F=
-      F.filter(
-        x=>x.id!==id
-      );
-
-  }
-
-  render();
-
-  msg(
-    "✓ Deleted successfully!"
-  );
+msg("✓ Order updated!");
 
 }
 
+
 /* =========================================================
-   VIEWER
+DELETE
 ========================================================= */
 
-function view(url){
+async function delRow(kind,id){
 
-  $("vimg").src=url;
+if(!confirm("Delete this item?"))
+return;
 
-  $("viewer")
-    .classList
-    .add("show");
+let table=
+kind==="portfolio"
+?"portfolio"
+:kind==="creators"
+?"creators"
+:"faq";
+
+let r=await sb
+.from(table)
+.delete()
+.eq("id",id);
+
+if(r.error)
+return msg(r.error.message,true);
+
+if(kind==="portfolio")
+P=P.filter(x=>x.id!==id);
+
+else if(kind==="creators")
+C=C.filter(x=>x.id!==id);
+
+else
+F=F.filter(x=>x.id!==id);
+
+render();
+
+msg("✓ Deleted successfully!");
+
+}
+
+
+/* =========================================================
+VIEW IMAGE
+========================================================= */
+
+function view(u){
+
+$("vimg").src=u;
+
+$("viewer").classList.add("show");
 
 }
 
 function closeViewer(){
 
-  $("viewer")
-    .classList
-    .remove("show");
+$("viewer").classList.remove("show");
 
 }
 
+
 /* =========================================================
-   SAVE ALL
+SAVE ALL
 ========================================================= */
 
 async function saveAll(){
 
-  try{
+try{
 
-    const r=
-      await sb
-      .from("site_settings")
-      .update(S)
-      .eq("id",1);
+let r=await sb
+.from("site_settings")
+.update(S)
+.eq("id",1);
 
-    if(r.error)throw r.error;
+if(r.error)
+throw r.error;
 
-    msg(
-      "✓ All changes saved successfully!"
-    );
+msg(
+"✓ All changes saved successfully!"
+);
 
-  }catch(e){
+}catch(e){
 
-    msg(
-      e.message||
-      "Could not save changes.",
-      true
-    );
-
-  }
+msg(e.message,true);
 
 }
 
+}
+
+
 /* =========================================================
-   LOGOUT
+LOGOUT
 ========================================================= */
 
 async function logout(){
 
-  try{
+await sb.auth.signOut();
 
-    await sb.auth.signOut();
-
-  }catch(e){}
-
-  location.href=
-    "admin.html";
+location.href="admin.html";
 
 }
 
+
 /* =========================================================
-   START
+ONE TIME SCROLL FADE
+========================================================= */
+
+function setupFade(){
+
+const observer=
+new IntersectionObserver(
+entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+observer.unobserve(
+entry.target
+);
+
+}
+
+});
+
+},
+{
+threshold:.12
+}
+);
+
+document
+.querySelectorAll(
+".section"
+)
+.forEach(el=>{
+
+el.classList.add(
+"fade-effect"
+);
+
+observer.observe(el);
+
+});
+
+}
+
+
+/* =========================================================
+START
 ========================================================= */
 
 async function start(){
 
-  try{
+let r=
+await sb.auth.getSession();
 
-    const r=
-      await sb.auth.getSession();
+if(!r.data.session){
 
-    if(
-      !r.data||
-      !r.data.session
-    ){
+location.href="admin.html";
 
-      location.href=
-        "admin.html";
-
-      return;
-    }
-
-    await load();
-
-  }catch(e){
-
-    console.error(e);
-
-    render();
-
-    msg(
-      "Could not open admin panel: "+
-      (e.message||"Unknown error"),
-      true
-    );
-
-  }
+return;
 
 }
 
-/* =========================================================
-   AUTH
-========================================================= */
+await load();
+
+setupFade();
+
+}
 
 sb.auth.onAuthStateChange(
-  event=>{
+e=>{
 
-    if(
-      event==="SIGNED_OUT"
-    ){
+if(e==="SIGNED_OUT")
+location.href="admin.html";
 
-      location.href=
-        "admin.html";
-
-    }
-
-  }
+}
 );
-
-/* =========================================================
-   ESCAPE KEY
-========================================================= */
 
 document.addEventListener(
-  "keydown",
-  e=>{
+"keydown",
+e=>{
 
-    if(e.key==="Escape"){
+if(e.key==="Escape"){
 
-      closeEditor();
-      closeViewer();
+closeEditor();
+closeViewer();
 
-    }
+}
 
-  }
+}
 );
 
-/* =========================================================
-   START PAGE
-========================================================= */
-
-window.addEventListener(
-  "load",
-  ()=>{
-
-    /*
-      Loader is ALWAYS hidden after 2.5 seconds.
-      Database errors can no longer keep the
-      loading screen permanently stuck.
-    */
-
-    setTimeout(
-      ()=>{
-
-        const loader=
-          $("loader");
-
-        if(loader){
-
-          loader.classList.add(
-            "hide"
-          );
-
-        }
-
-      },
-      2500
-    );
-
-    start();
-
-  }
-);
+start();
 
 </script>
 
