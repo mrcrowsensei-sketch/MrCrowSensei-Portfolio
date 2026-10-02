@@ -12,1263 +12,817 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:Inter,Arial,sans-serif;
-  background:#080808;
-  color:#fff;
-  overflow-x:hidden
+font-family:Inter,Arial,sans-serif;
+background:#080808;color:#fff;overflow-x:hidden
 }
 a{text-decoration:none;color:inherit}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 
 :root{
-  --card:#111;
-  --border:#292929;
-  --muted:#85858a;
-  --accent:#35e36b;
-  --btn:#fff;
-  --bt:#080808;
-  --heading:#fff;
-  --text:#f7f8ff
+--card:#111;
+--border:#292929;
+--muted:#85858a;
+--accent:#35e36b;
+--btn:#fff;
+--bt:#080808
 }
 
-/* ---------- NAV ---------- */
+/* NAV */
 .nav{
-  position:sticky;
-  top:8px;
-  z-index:50;
-  width:calc(100% - 32px);
-  max-width:1180px;
-  margin:8px auto;
-  padding:11px 14px;
-  border:1px solid var(--border);
-  border-radius:18px;
-  background:#0d0d0de8;
-  backdrop-filter:blur(15px);
-  display:flex;
-  justify-content:space-between;
-  align-items:center
+position:sticky;top:8px;z-index:20;width:92%;max-width:1180px;
+margin:8px auto;padding:11px 14px;border:1px solid var(--border);
+border-radius:18px;background:#0d0d0de8;backdrop-filter:blur(15px);
+display:flex;justify-content:space-between;align-items:center
 }
-.brand{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-weight:900
-}
-.brand img{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  object-fit:cover
-}
-.navright{
-  display:flex;
-  gap:8px
-}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900}
+.brand img{width:35px;height:35px;border-radius:50%;object-fit:cover}
+.navright{display:flex;gap:8px}
 
-/* ---------- BUTTONS ---------- */
 .btn,.edit,.mini{
-  border:1px solid #333;
-  background:#151515;
-  color:#fff;
-  border-radius:9px;
-  padding:9px 12px;
-  font-size:11px;
-  font-weight:800
+border:1px solid #333;background:#151515;color:#fff;border-radius:9px;
+padding:9px 12px;font-size:11px;font-weight:800
 }
-.primary{
-  background:var(--btn);
-  color:var(--bt)
-}
+.primary{background:var(--btn);color:var(--bt)}
 .danger{color:#ff7777}
-.edit{
-  position:absolute;
-  right:0;
-  top:42px
-}
-.mini{
-  padding:7px 9px;
-  font-size:10px
+
+/* SECTIONS */
+.section{
+width:92%;max-width:1120px;margin:auto;padding:80px 0;position:relative
 }
 
-/* ---------- SECTIONS ---------- */
-.section{
-  width:calc(100% - 32px);
-  max-width:1120px;
-  margin:auto;
-  padding:80px 0;
-  position:relative
+.edit{
+position:absolute;right:0;top:52px
+}
+
+.hero{
+text-align:center;min-height:88vh;display:flex;flex-direction:column;
+align-items:center;justify-content:center
+}
+
+.avail{
+border:1px solid #333;border-radius:999px;padding:9px 18px;
+font-size:12px;color:#ccc
+}
+.avail i{
+display:inline-block;width:7px;height:7px;background:var(--accent);
+border-radius:50%;margin-right:8px
+}
+
+.hero h1{
+font-size:clamp(58px,10vw,115px);
+line-height:.84;letter-spacing:-6px;margin:55px 0 45px
+}
+.hero h1 span{display:block}
+
+.hero-copy{font-size:21px;color:#aaa;line-height:1.55}
+.hero-copy strong{display:block;color:#fff}
+.hero-copy small{display:block;color:#777}
+
+.actions{display:flex;gap:10px;margin-top:38px}
+
+.stats{
+width:min(720px,95%);display:grid;grid-template-columns:repeat(3,1fr);
+gap:12px;margin-top:75px
+}
+.stats div{
+position:relative;padding:18px;border:1px solid var(--border);
+border-radius:15px;background:#0d0d0d
+}
+.stats strong{font-size:43px;display:block}
+.stats span{font-size:10px;color:#777;letter-spacing:1.4px}
+.stats .se{
+position:absolute;right:8px;top:8px;padding:5px 7px;font-size:9px
 }
 
 .head{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin-bottom:32px
+display:flex;justify-content:space-between;align-items:end;margin-bottom:32px
 }
 .head h2{
-  font-size:clamp(35px,5vw,58px);
-  letter-spacing:-2px;
-  margin-top:10px
+font-size:clamp(35px,5vw,58px);letter-spacing:-2px;margin-top:10px
 }
 .head em{font-style:normal}
-.head p{
-  color:#666;
-  font-size:12px
-}
+.head p{color:#666;font-size:12px}
 .eyebrow{
-  font-size:10px;
-  letter-spacing:2.3px;
-  color:#999;
-  font-weight:800
+font-size:10px;letter-spacing:2.3px;color:#999;font-weight:800
 }
 
-/* ---------- HERO ---------- */
-.hero{
-  text-align:center;
-  min-height:78vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center
-}
-.avail{
-  border:1px solid #333;
-  border-radius:999px;
-  padding:9px 18px;
-  font-size:12px;
-  color:#ccc
-}
-.avail i{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  background:var(--accent);
-  border-radius:50%;
-  margin-right:8px
-}
-.hero h1{
-  font-size:clamp(58px,10vw,115px);
-  line-height:.84;
-  letter-spacing:-6px;
-  margin:55px 0 45px
-}
-.hero h1 span{display:block}
-.hero-copy{
-  font-size:21px;
-  color:#aaa;
-  line-height:1.55
-}
-.hero-copy strong{
-  display:block;
-  color:var(--heading)
-}
-.hero-copy small{
-  display:block;
-  color:var(--muted)
-}
-.actions{
-  display:flex;
-  gap:10px;
-  margin-top:38px
-}
-
-/* ---------- STATS ---------- */
-.stats{
-  width:min(720px,95%);
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin:0 auto
-}
-.stats div{
-  padding:25px 18px;
-  border:1px solid var(--border);
-  border-radius:15px;
-  background:#0d0d0d;
-  text-align:center
-}
-.stats strong{
-  font-size:43px;
-  display:block
-}
-.stats span{
-  font-size:10px;
-  color:#777;
-  letter-spacing:1.4px
-}
-
-/* ---------- PORTFOLIO ---------- */
+/* CARDS */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px
+display:grid;grid-template-columns:repeat(2,1fr);gap:16px
 }
 .card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:17px;
-  overflow:hidden
+background:var(--card);border:1px solid var(--border);
+border-radius:17px;overflow:hidden
 }
 .card>img{
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  display:block;
-  cursor:zoom-in
+width:100%;aspect-ratio:16/9;object-fit:cover;
+display:block;cursor:zoom-in
 }
 .info{padding:14px 16px}
-.tools{
-  display:flex;
-  gap:5px;
-  padding:0 16px 15px;
-  flex-wrap:wrap
-}
-.loadmore{
-  display:block;
-  margin:25px auto 0
-}
+.tools{display:flex;gap:5px;padding:0 16px 15px}
 
-/* ---------- ABOUT ---------- */
+/* ABOUT */
 .about{
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:48px;
-  display:grid;
-  grid-template-columns:320px 1fr;
-  gap:50px;
-  background:#111
+border:1px solid var(--border);border-radius:24px;padding:48px;
+display:grid;grid-template-columns:320px 1fr;gap:50px;background:#111
 }
 .about img{
-  width:100%;
-  aspect-ratio:1;
-  object-fit:cover;
-  border-radius:18px
+width:100%;aspect-ratio:1;object-fit:cover;border-radius:18px
 }
 .about h3{
-  font-size:clamp(30px,5vw,54px);
-  line-height:1.02;
-  margin:14px 0
+font-size:clamp(30px,5vw,54px);line-height:1.02;margin:14px 0
 }
-.about p{
-  color:#888;
-  line-height:1.7
-}
+.about p{color:#888;line-height:1.7}
 
-/* ---------- CREATORS ---------- */
+/* CREATORS */
 .creators{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:22px
+display:grid;grid-template-columns:repeat(4,1fr);gap:22px
 }
 .creator{text-align:center}
 .avatar{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  overflow:hidden;
-  border:2px solid #333;
-  margin:auto;
-  background:#171717
+width:140px;height:140px;border-radius:50%;overflow:hidden;
+border:2px solid #333;margin:auto;background:#171717
 }
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-.creator h3{
-  margin-top:13px;
-  font-size:17px
-}
-.creator p{
-  color:#777;
-  font-size:11px;
-  margin:6px 0;
-  word-break:break-all
-}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.creator h3{margin-top:13px;font-size:17px}
+.creator p{color:#777;font-size:11px;margin:6px 0}
 .creator b{font-size:12px}
 
-/* ---------- FAQ ---------- */
-.faq{
-  max-width:850px;
-  margin:auto
-}
+/* FAQ */
+.faq{max-width:850px;margin:auto}
 .faqitem{
-  width:100%;
-  text-align:left;
-  border:0;
-  border-bottom:1px solid #292929;
-  background:none;
-  color:#fff;
-  padding:21px 35px 21px 0;
-  position:relative
+width:100%;text-align:left;border:0;border-bottom:1px solid #292929;
+background:none;color:#fff;padding:21px 35px 21px 0;position:relative
 }
-.faqitem>b{
-  position:absolute;
-  right:4px;
-  color:#777;
-  font-size:22px
+.faqitem b{
+position:absolute;right:4px;color:#777;font-size:22px
 }
 .faqitem p{
-  display:none;
-  color:#777;
-  font-size:13px;
-  line-height:1.7;
-  padding-top:12px
+display:none;color:#777;font-size:13px;line-height:1.7;padding-top:12px
 }
 .faqitem.open p{display:block}
 
-/* ---------- CONTACT ---------- */
+/* CONTACT */
 .contact{
-  border:1px solid #333;
-  border-radius:35px;
-  padding:85px 20px;
-  text-align:center;
-  background:radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808)
+border:1px solid #333;border-radius:35px;padding:85px 20px;
+text-align:center;
+background:radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808)
 }
 .contact h2{
-  font-size:clamp(45px,8vw,88px);
-  line-height:.9;
-  letter-spacing:-4px
+font-size:clamp(45px,8vw,88px);line-height:.9;letter-spacing:-4px
 }
-.contact p{
-  color:#999;
-  line-height:1.7;
-  margin:35px auto
-}
+.contact p{color:#999;line-height:1.7;margin:35px auto}
 .links{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(150px,1fr));
-  gap:10px;
-  max-width:650px;
-  margin:auto
+display:grid;grid-template-columns:repeat(2,minmax(150px,1fr));
+gap:10px;max-width:650px;margin:auto
 }
 .links a{
-  padding:15px;
-  border-radius:12px;
-  font-weight:800;
-  font-size:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px
-}
-.links img{
-  width:18px;
-  height:18px;
-  object-fit:contain;
-  border-radius:4px
+padding:15px;border-radius:12px;font-weight:800;font-size:12px
 }
 
-/* ---------- ADMIN ---------- */
+/* ADMIN */
 .adminbox{
-  border:1px solid var(--border);
-  background:#101010;
-  border-radius:20px;
-  padding:24px
+border:1px solid var(--border);background:#101010;
+border-radius:20px;padding:24px
 }
-.formgrid,.themegrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px
+.themegrid,.formgrid{
+display:grid;grid-template-columns:repeat(3,1fr);gap:12px
 }
 .field label{
-  display:block;
-  color:#888;
-  font-size:11px;
-  font-weight:700;
-  margin-bottom:6px
+display:block;color:#888;font-size:11px;font-weight:700;margin-bottom:6px
 }
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  background:#151515;
-  border:1px solid #333;
-  color:#fff;
-  border-radius:9px;
-  padding:10px;
-  outline:0
+.field input,.field textarea,.field select{
+width:100%;background:#151515;border:1px solid #333;color:#fff;
+border-radius:9px;padding:10px;outline:0
 }
 .field textarea{min-height:110px}
 .full{grid-column:1/-1}
 
-/* ---------- IMAGE CONTROLS ---------- */
-.image-control{
-  border:1px solid #333;
-  border-radius:12px;
-  padding:12px;
-  background:#0d0d0d
+.savebar{
+width:92%;max-width:1120px;margin:0 auto 70px;
+border:1px solid #333;border-radius:16px;background:#101010;
+padding:16px;display:flex;justify-content:space-between;
+align-items:center;position:sticky;bottom:12px;z-index:50
 }
-.image-control img{
-  display:block;
-  width:100%;
-  max-height:230px;
-  object-fit:contain;
-  border-radius:8px
-}
-.ic-actions{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
-  flex-wrap:wrap
-}
-.deleteimg{
-  margin-top:7px;
-  color:#ff7777;
-  border:1px solid #4a2222;
-  background:#180c0c;
-  border-radius:7px;
-  padding:7px;
-  font-size:10px
-}
+.success{color:#65e88a;font-size:12px}
 
-/* ---------- GALLERY ---------- */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:10px
+/* FOOTER */
+.footer-admin{
+width:92%;max-width:1120px;margin:20px auto 35px;
+border:1px solid var(--border);border-radius:22px;
+background:#101010;padding:55px 30px;text-align:center;
+position:relative
 }
-.gallery-item{
-  cursor:pointer
+.footer-logo{
+width:60px;height:60px;border-radius:50%;object-fit:cover;
+margin-bottom:12px
 }
-.gallery-item img{
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  border:2px solid #333;
-  border-radius:8px
+.footer-name{font-size:22px;font-weight:900}
+.footer-desc{
+max-width:600px;margin:12px auto 28px;
+color:#888;line-height:1.7;font-size:13px
 }
-.gallery-item small{
-  display:block;
-  color:#777;
-  margin-top:4px;
-  font-size:9px
-}
-
-/* ---------- REORDER ---------- */
-.reorder-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  margin-top:15px
-}
-.reorder-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:14px 15px;
-  background:#151515;
-  border:1px solid #303030;
-  border-radius:10px;
-  user-select:none
-}
-.reorder-row.dragging{opacity:.45}
-.reorder-label{
-  font-size:12px;
-  font-weight:800
-}
-.drag-handle{
-  font-size:20px;
-  line-height:1;
-  color:#aaa;
-  cursor:grab;
-  padding:2px 4px
-}
-.reorder-actions{
-  margin-top:14px;
-  display:flex;
-  justify-content:flex-end;
-  gap:8px
-}
-
-/* ---------- FOOTER ---------- */
-.footer-preview{
-  text-align:center;
-  padding:40px 20px
-}
-.footer-preview .flogo{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  object-fit:cover
-}
-.footer-preview h3{margin:10px 0 7px}
-.footer-preview p{
-  color:#777;
-  font-size:12px;
-  line-height:1.6;
-  max-width:650px;
-  margin:auto
+.footer-explore{
+font-size:10px;letter-spacing:2px;color:#888;
+font-weight:800;margin-bottom:15px
 }
 .footer-links{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:16px;
-  margin:18px 0
+display:flex;justify-content:center;gap:25px;flex-wrap:wrap
 }
-.footer-links a{
-  font-size:11px;
-  color:#aaa
-}
+.footer-links a{font-size:12px;color:#aaa}
 .footer-line{
-  height:1px;
-  background:#333;
-  margin:20px 0
+height:1px;background:#292929;margin:30px auto 20px;
+max-width:700px
+}
+.footer-copy{font-size:11px;color:#666}
+
+/* SECTION REORDER */
+.reorder-list{display:flex;flex-direction:column;gap:8px}
+.reorder-item{
+display:flex;align-items:center;justify-content:space-between;
+padding:15px 16px;background:#151515;border:1px solid #292929;
+border-radius:11px
+}
+.drag{
+font-size:20px;color:#777;cursor:grab;
+user-select:none
+}
+.reorder-save{
+margin-top:14px;width:100%
 }
 
-/* ---------- VIEWS ---------- */
-.viewsbar{
-  width:calc(100% - 32px);
-  max-width:1120px;
-  margin:22px auto 0;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:#101010;
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between
-}
-.viewsbar .vlabel{
-  font-size:12px;
-  font-weight:800;
-  color:#aaa
-}
-.viewsbar strong{font-size:24px}
-
-/* ---------- SAVE BAR ---------- */
-.savebar{
-  width:calc(100% - 32px);
-  max-width:1120px;
-  margin:0 auto 70px;
-  border:1px solid #333;
-  border-radius:16px;
-  background:#101010;
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  bottom:12px;
-  z-index:60;
-  box-shadow:0 15px 50px #000
-}
-.savebar.dirty{
-  border-color:#fff
-}
-.savebar.dirty .primary{
-  box-shadow:0 0 0 2px #fff3,0 0 30px #fff2
-}
-.success{
-  color:#65e88a;
-  font-size:12px
-}
-
-/* ---------- MODAL ---------- */
+/* MODAL */
 .modal{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  background:#000c;
-  backdrop-filter:blur(8px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:16px
+position:fixed;inset:0;z-index:1000;background:#000c;
+backdrop-filter:blur(8px);display:none;
+align-items:center;justify-content:center;padding:16px
 }
 .modal.show{display:flex}
 .box{
-  width:min(760px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#101010;
-  border:1px solid #333;
-  border-radius:18px;
-  padding:20px
+width:min(720px,100%);max-height:90vh;overflow:auto;
+background:#101010;border:1px solid #333;border-radius:18px;padding:20px
 }
 .mhead{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:18px
+display:flex;justify-content:space-between;margin-bottom:18px
 }
 .close{
-  border:0;
-  background:#191919;
-  color:#fff;
-  border-radius:8px;
-  width:34px;
-  height:34px;
-  font-size:20px
+border:0;background:#191919;color:#fff;border-radius:8px;
+width:34px;height:34px;font-size:20px
 }
 .mfoot{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:18px
+display:flex;justify-content:flex-end;gap:8px;margin-top:18px
+}
+.preview{
+margin-top:9px;border:1px solid #333;border-radius:10px;overflow:hidden
+}
+.preview img{
+width:100%;max-height:230px;object-fit:contain;display:block
+}
+.deleteimg{
+margin-top:7px;color:#ff7777;border:1px solid #4a2222;
+background:#180c0c;border-radius:7px;padding:7px;font-size:10px
+}
+.gallery{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:9px;margin-top:10px
+}
+.gallery img{
+width:100%;aspect-ratio:16/9;object-fit:cover;
+border:2px solid #333;border-radius:8px;cursor:pointer
+}
+.gallery small{
+display:block;color:#777;font-size:9px;margin-top:4px
 }
 
-/* ---------- VIEWER ---------- */
+/* VIEWER */
 .viewer{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  background:#000e;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px
+position:fixed;inset:0;z-index:2000;background:#000e;
+display:none;align-items:center;justify-content:center;padding:20px
 }
 .viewer.show{display:flex}
-.viewer img{
-  max-width:94vw;
-  max-height:90vh;
-  border-radius:12px
-}
+.viewer img{max-width:94vw;max-height:90vh;border-radius:12px}
 .vclose{
-  position:absolute;
-  right:20px;
-  top:20px;
-  background:#111;
-  color:#fff;
-  border:1px solid #444;
-  border-radius:9px;
-  width:40px;
-  height:40px;
-  font-size:22px
+position:absolute;right:20px;top:20px;background:#111;color:#fff;
+border:1px solid #444;border-radius:9px;width:40px;height:40px;
+font-size:22px
 }
 
-/* ---------- LOADER ---------- */
+/* LOADER */
 .loader{
-  position:fixed;
-  inset:0;
-  width:100vw;
-  height:100dvh;
-  z-index:9999;
-  background:#050505;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  transition:opacity .55s ease,visibility .55s ease
+position:fixed;inset:0;z-index:9999;background:#050505;
+display:grid;place-items:center;transition:.7s
 }
-.loader.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none
-}
-.loaderbox{
-  width:min(420px,calc(100vw - 40px));
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center
-}
+.loader.hide{opacity:0;visibility:hidden}
+.loaderbox{text-align:center;width:min(380px,80vw)}
 .loaderlogo{
-  width:clamp(112px,31vw,145px);
-  height:clamp(112px,31vw,145px);
-  border-radius:50%;
-  overflow:hidden;
-  border:1px solid #555;
-  box-shadow:0 0 70px #fff3;
-  animation:pop 1.25s cubic-bezier(.2,1.4,.3,1)
+width:145px;height:145px;border-radius:50%;overflow:hidden;
+border:1px solid #555;margin:auto;box-shadow:0 0 70px #fff3;
+animation:pop 1.25s cubic-bezier(.2,1.4,.3,1)
 }
-.loaderlogo img{
-  width:100%;
-  height:100%;
-  object-fit:cover
+.loaderlogo img{width:100%;height:100%;object-fit:cover}
+.loadername{font-weight:900;font-size:20px;margin:20px 0}
+.line{
+height:4px;background:#222;border-radius:99px;overflow:hidden
 }
-.loadername{
-  font-weight:900;
-  font-size:20px;
-  margin:20px 0
-}
-.loaderline{
-  width:min(390px,calc(100vw - 64px));
-  height:4px;
-  background:#222;
-  border-radius:99px;
-  overflow:hidden
-}
-.loaderline span{
-  display:block;
-  width:100%;
-  height:100%;
-  background:linear-gradient(90deg,#fff,#777,#fff);
-  transform:scaleX(0);
-  transform-origin:center;
-  animation:lineCenter 1.7s ease forwards
+.line span{
+display:block;height:100%;
+background:linear-gradient(90deg,#fff,#777,#fff);
+width:0;transform-origin:center;
+animation:line 1.7s ease forwards
 }
 @keyframes pop{
-  0%{transform:scale(.15);opacity:0}
-  70%{transform:scale(1.12)}
-  100%{transform:scale(1)}
+0%{transform:scale(.15);opacity:0}
+70%{transform:scale(1.12)}
+100%{transform:scale(1)}
 }
-@keyframes lineCenter{
-  0%{transform:scaleX(0)}
-  100%{transform:scaleX(1)}
+@keyframes line{
+0%{width:0;transform:scaleX(0)}
+100%{width:100%;transform:scaleX(1)}
 }
 
-/* ---------- FADE ---------- */
+/* ONE TIME FADE */
 .fade-effect{
-  opacity:0;
-  transform:translateY(24px);
-  transition:opacity .8s ease,transform .8s ease
+opacity:0;
+transform:translateY(28px);
+transition:opacity .8s ease,transform .8s ease
 }
 .fade-effect.show{
-  opacity:1;
-  transform:translateY(0)
+opacity:1;
+transform:translateY(0)
 }
 
-/* ---------- MOBILE ---------- */
+/* MOBILE */
 @media(max-width:700px){
-  .nav{
-    width:calc(100% - 24px)
-  }
-  .navright .view{display:none}
-  .section{
-    width:100%;
-    padding:70px 16px
-  }
-  .viewsbar{
-    width:calc(100% - 24px)
-  }
-  .head{
-    display:block
-  }
-  .head p{
-    margin-top:10px
-  }
-  .grid{
-    grid-template-columns:1fr
-  }
-  .about{
-    grid-template-columns:1fr;
-    padding:25px
-  }
-  .creators{
-    grid-template-columns:1fr 1fr
-  }
-  .avatar{
-    width:120px;
-    height:120px
-  }
-  .formgrid,
-  .themegrid{
-    grid-template-columns:1fr
-  }
-  .full{
-    grid-column:auto
-  }
-  .links{
-    grid-template-columns:1fr
-  }
-  .gallery{
-    grid-template-columns:repeat(2,1fr)
-  }
-  .savebar{
-    width:calc(100% - 24px);
-    flex-direction:column;
-    align-items:stretch;
-    gap:10px
-  }
-  .actions{
-    flex-direction:column;
-    width:min(320px,90vw)
-  }
-  .stats strong{
-    font-size:32px
-  }
-  .hero h1{
-    letter-spacing:-4px
-  }
+.navright .view{display:none}
+.section{padding:70px 0}
+.edit{top:42px}
+.head{display:block}
+.head p{margin-top:10px}
+.grid{grid-template-columns:1fr}
+.about{grid-template-columns:1fr;padding:25px}
+.creators{grid-template-columns:1fr 1fr}
+.avatar{width:120px;height:120px}
+.themegrid,.formgrid{grid-template-columns:1fr}
+.full{grid-column:auto}
+.savebar{
+flex-direction:column;align-items:stretch;gap:10px
+}
+.actions{
+flex-direction:column;width:min(320px,90vw)
+}
+.links{grid-template-columns:1fr}
+.gallery{grid-template-columns:repeat(2,1fr)}
+.footer-links{gap:15px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
 <div class="loader" id="loader">
-  <div class="loaderbox">
-    <div class="loaderlogo">
-      <img id="loadLogo" src="images/logo.png">
-    </div>
-    <div class="loadername" id="loadName">Mr CrowSensei</div>
-    <div class="loaderline"><span></span></div>
-  </div>
+<div class="loaderbox">
+<div class="loaderlogo">
+<img id="loadLogo" src="images/logo.png">
+</div>
+<div class="loadername" id="loadName">Mr CrowSensei</div>
+<div class="line"><span></span></div>
+</div>
 </div>
 
 <!-- HEADER -->
 <header class="nav">
-  <a class="brand" href="#home">
-    <img id="navLogo" src="images/logo.png">
-    <span id="navName">Mr CrowSensei</span>
-  </a>
+<a class="brand" href="#home">
+<img id="navLogo" src="images/logo.png">
+<span id="navName">Mr CrowSensei</span>
+</a>
 
-  <div class="navright">
-    <a class="btn view" href="/" target="_blank">View Portfolio</a>
-    <button class="btn danger" onclick="logout()">Logout</button>
-  </div>
+<div class="navright">
+<a class="btn view" href="/" target="_blank">View Portfolio</a>
+<button class="btn danger" onclick="logout()">Logout</button>
+</div>
 </header>
 
-<!-- VIEWS -->
-<section class="viewsbar">
-  <span class="vlabel">👁 Views</span>
-  <strong id="viewsCount">0</strong>
-</section>
-
-<main id="adminMain">
-
-<!-- HEADER -->
-<section class="section" id="headerSection">
-  <button class="edit" onclick="openEditor('header')">✏️ Edit</button>
-
-  <div class="head">
-    <div>
-      <div class="eyebrow">● HEADER</div>
-      <h2>Header <em>identity.</em></h2>
-    </div>
-  </div>
-
-  <div class="adminbox">
-    <div class="brand">
-      <img id="headerPreviewLogo" src="images/logo.png">
-      <span id="headerPreviewName">Mr CrowSensei</span>
-    </div>
-  </div>
-</section>
+<main id="mainContent">
 
 <!-- HERO -->
 <section class="section hero" id="home">
-  <button class="edit" onclick="openEditor('hero')">✏️ Edit</button>
+<button class="edit" onclick="openEditor('hero')">✏️ Edit</button>
 
-  <div class="avail">
-    <i></i>
-    <span id="avail"></span>
-  </div>
+<div class="avail">
+<i></i>
+<span id="avail"></span>
+</div>
 
-  <h1 id="heroName"></h1>
+<h1 id="heroName"></h1>
 
-  <div class="hero-copy">
-    <strong id="heroTitle"></strong>
-    <small id="heroSub"></small>
-    <small id="crafted"></small>
-  </div>
+<div class="hero-copy">
+<strong id="heroTitle"></strong>
+<small id="heroSub"></small>
+<small id="crafted"></small>
+</div>
 
-  <div class="actions">
-    <a class="btn primary" href="#work">Browse Portfolio →</a>
-    <a class="btn" href="#contact">Let's Work</a>
-  </div>
-</section>
+<div class="actions">
+<a class="btn primary" href="#work">Browse Portfolio →</a>
+<a class="btn" href="#contact">Let's Work</a>
+</div>
 
-<!-- STATS -->
-<section class="section" id="stats">
-  <button class="edit" onclick="openEditor('stats')">✏️ Edit</button>
+<div class="stats">
+<div>
+<button class="mini se" onclick="openEditor('stats')">✏️ Edit</button>
+<strong id="st1"></strong>
+<span id="sl1"></span>
+</div>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● STATS</div>
-      <h2>Numbers that <em>matter.</em></h2>
-    </div>
-  </div>
+<div>
+<strong id="st2"></strong>
+<span id="sl2"></span>
+</div>
 
-  <div class="stats">
-    <div>
-      <strong id="st1"></strong>
-      <span id="sl1"></span>
-    </div>
-    <div>
-      <strong id="st2"></strong>
-      <span id="sl2"></span>
-    </div>
-    <div>
-      <strong id="st3"></strong>
-      <span id="sl3"></span>
-    </div>
-  </div>
+<div>
+<strong id="st3"></strong>
+<span id="sl3"></span>
+</div>
+</div>
 </section>
 
 <!-- PORTFOLIO -->
 <section class="section" id="work">
-  <button class="edit" onclick="openEditor('portfolio')">✏️ Edit</button>
+<button class="edit" onclick="openEditor('portfolio')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● SELECTED WORK</div>
-      <h2>My latest <em>thumbnails.</em></h2>
-    </div>
-    <p>Manage your portfolio gallery.</p>
-  </div>
+<div class="head">
+<div>
+<div class="eyebrow">● SELECTED WORK</div>
+<h2>My latest <em>thumbnails.</em></h2>
+</div>
+<p>Manage your portfolio gallery.</p>
+</div>
 
-  <div class="grid" id="portfolioGrid"></div>
+<div class="grid" id="portfolioGrid"></div>
 
-  <button id="portfolioMore"
-          class="btn loadmore"
-          style="display:none"
-          onclick="toggleMore('portfolio')">
-    Load More
-  </button>
-</section>
-
-<!-- CLIENTS -->
-<section class="section" id="clients">
-  <button class="edit" onclick="openEditor('creator')">✏️ Edit</button>
-
-  <div class="head">
-    <div>
-      <div class="eyebrow">● CLIENTS</div>
-      <h2 id="creatorHeading"></h2>
-    </div>
-  </div>
-
-  <p id="creatorIntro"
-     style="color:#777;text-align:center;margin:-10px auto 40px;max-width:650px"></p>
-
-  <div class="creators" id="creatorGrid"></div>
-
-  <button id="creatorMore"
-          class="btn loadmore"
-          style="display:none"
-          onclick="toggleMore('creators')">
-    Load More
-  </button>
-
-  <div style="text-align:center;margin-top:25px">
-    <button class="btn primary" onclick="openEditor('creator')">
-      ＋ Add Creator
-    </button>
-  </div>
+<div style="text-align:center;margin-top:25px">
+<button class="btn primary" onclick="openEditor('portfolio')">
+＋ Add Thumbnail
+</button>
+</div>
 </section>
 
 <!-- ABOUT -->
 <section class="section" id="about">
-  <button class="edit" onclick="openEditor('about')">✏️ Edit</button>
+<button class="edit" onclick="openEditor('about')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● ABOUT ME</div>
-      <h2 id="aboutHeading"></h2>
-    </div>
-  </div>
+<div class="head">
+<div>
+<div class="eyebrow">● ABOUT ME</div>
+<h2 id="aboutHeading"></h2>
+</div>
+</div>
 
-  <div class="about">
-    <img id="aboutImg" src="images/logo.png">
+<div class="about">
+<img id="aboutImg">
 
-    <div>
-      <div class="eyebrow">MR CROWSENSEI</div>
-      <h3 id="aboutSub"></h3>
-      <p id="aboutText"></p>
-    </div>
-  </div>
+<div>
+<div class="eyebrow">MR CROWSENSEI</div>
+<h3 id="aboutSub"></h3>
+<p id="aboutText"></p>
+</div>
+</div>
+</section>
+
+<!-- CLIENTS -->
+<section class="section" id="clients">
+<button class="edit" onclick="openEditor('creator')">✏️ Edit</button>
+
+<div class="head">
+<div>
+<div class="eyebrow">● CLIENTS</div>
+<h2 id="creatorHeading"></h2>
+</div>
+</div>
+
+<p style="color:#777;text-align:center;margin:-10px auto 40px;max-width:650px"
+id="creatorIntro"></p>
+
+<div class="creators" id="creatorGrid"></div>
+
+<div style="text-align:center;margin-top:25px">
+<button class="btn primary" onclick="openEditor('creator')">
+＋ Add Creator
+</button>
+</div>
 </section>
 
 <!-- FAQ -->
 <section class="section" id="faq">
-  <button class="edit" onclick="openEditor('faq')">✏️ Edit</button>
+<button class="edit" onclick="openEditor('faq')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● FAQ</div>
-      <h2>Got <em>questions?</em></h2>
-    </div>
-  </div>
+<div class="head">
+<div>
+<div class="eyebrow">● FAQ</div>
+<h2>Got <em>questions?</em></h2>
+</div>
+</div>
 
-  <div class="faq" id="faqList"></div>
+<div class="faq" id="faqList"></div>
 
-  <div style="text-align:center;margin-top:25px">
-    <button class="btn primary" onclick="openEditor('faq')">
-      ＋ Add FAQ
-    </button>
-  </div>
+<div style="text-align:center;margin-top:25px">
+<button class="btn primary" onclick="openEditor('faq')">
+＋ Add FAQ
+</button>
+</div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
-  <button class="edit" onclick="openEditor('contact')">✏️ Edit</button>
+<button class="edit" onclick="openEditor('contact')">✏️ Edit</button>
 
-  <div class="contact">
-    <div class="eyebrow">CONTACT ME</div>
-    <h2 id="contactTitle"></h2>
-    <p id="contactText"></p>
-    <div class="links" id="contactLinks"></div>
-  </div>
+<div class="contact">
+<div class="eyebrow">CONTACT ME</div>
+<h2 id="contactTitle"></h2>
+<p id="contactText"></p>
+<div class="links" id="contactLinks"></div>
+</div>
 </section>
 
 <!-- FOOTER -->
 <section class="section" id="footerAdmin">
-  <button class="edit" onclick="openEditor('footer')">✏️ Edit</button>
+<button class="edit" onclick="openEditor('footer')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● FOOTER</div>
-      <h2>Footer <em>identity.</em></h2>
-    </div>
-  </div>
+<div class="head">
+<div>
+<div class="eyebrow">● FOOTER</div>
+<h2>Footer <em>settings.</em></h2>
+</div>
+</div>
 
-  <div class="adminbox footer-preview">
-    <img id="footerLogoPreview"
-         class="flogo"
-         src="images/logo.png">
+<footer class="footer-admin">
+<img class="footer-logo" id="footerLogo">
+<div class="footer-name" id="footerName"></div>
+<div class="footer-desc" id="footerDesc"></div>
 
-    <h3 id="footerNamePreview">Mr CrowSensei</h3>
+<div class="footer-explore" id="footerExplore"></div>
 
-    <p id="footerDescPreview">
-      Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.
-    </p>
+<div class="footer-links">
+<a href="#work" id="footerPortfolio"></a>
+<a href="#clients" id="footerClients"></a>
+<a href="#about" id="footerAbout"></a>
+<a href="#faq" id="footerFaq"></a>
+</div>
 
-    <div class="eyebrow" style="margin-top:25px">
-      EXPLORE
-    </div>
-
-    <div class="footer-links">
-      <a href="#work">Portfolio</a>
-      <a href="#clients">Clients</a>
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
-    </div>
-
-    <div class="footer-line"></div>
-
-    <p id="footerCopyPreview">
-      © 2026 Mr CrowSensei
-    </p>
-  </div>
+<div class="footer-line"></div>
+<div class="footer-copy" id="footerCopyright"></div>
+</footer>
 </section>
 
 <!-- SECTION REORDER -->
-<section class="section" id="reorderSection">
-  <button class="edit" onclick="openEditor('reorder')">✏️ Edit</button>
+<section class="section" id="sectionReorder">
+<button class="edit" onclick="openEditor('reorder')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● SETTINGS</div>
-      <h2>Section <em>reorder.</em></h2>
-    </div>
+<div class="head">
+<div>
+<div class="eyebrow">● SETTINGS</div>
+<h2>Section <em>Reorder.</em></h2>
+</div>
+</div>
 
-    <p>Drag the ☰ handle to change section order.</p>
-  </div>
-
-  <div class="adminbox">
-    <div id="reorderPreview" class="reorder-list"></div>
-
-    <div class="reorder-actions">
-      <button class="btn primary" onclick="saveSectionOrder()">
-        Save Section Order
-      </button>
-    </div>
-  </div>
+<div class="adminbox">
+<div id="reorderPreview" class="reorder-list"></div>
+</div>
 </section>
 
 <!-- LINK PREVIEW -->
-<section class="section" id="linkSection">
-  <button class="edit" onclick="openEditor('link')">✏️ Edit</button>
+<section class="section" id="linkPreviewAdmin">
+<button class="edit" onclick="openEditor('link')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● LINK PREVIEW</div>
-      <h2>Link <em>Preview.</em></h2>
-    </div>
-  </div>
+<div class="head">
+<div>
+<div class="eyebrow">● LINK PREVIEW</div>
+<h2>Link <em>Preview.</em></h2>
+</div>
+</div>
 
-  <div class="adminbox">
-    <div class="field">
-      <label>Title</label>
-      <input id="ogtv" readonly>
-    </div>
+<div class="adminbox">
+<div class="formgrid">
 
-    <div class="field" style="margin-top:12px">
-      <label>Description</label>
-      <input id="ogdv" readonly>
-    </div>
+<div class="field full">
+<label>Title</label>
+<input id="ogtv" readonly>
+</div>
 
-    <div id="ogiv" class="preview"></div>
-  </div>
+<div class="field full">
+<label>Description</label>
+<input id="ogdv" readonly>
+</div>
+
+</div>
+
+<div id="ogiv" class="preview"></div>
+</div>
 </section>
 
-<!-- LOGO & LOADING -->
-<section class="section" id="loadingSection">
-  <button class="edit" onclick="openEditor('loading')">✏️ Edit</button>
+<!-- LOADING -->
+<section class="section" id="loadingAdmin">
+<button class="edit" onclick="openEditor('loading')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● LOGO & LOADING SCREEN</div>
-      <h2>Logo & <em>loading.</em></h2>
-    </div>
-  </div>
+<div class="head">
+<div>
+<div class="eyebrow">● LOADING SCREEN</div>
+<h2>Loading <em>screen.</em></h2>
+</div>
+</div>
 
-  <div class="adminbox" style="text-align:center">
-    <img id="loadPreview"
-         style="width:100px;height:100px;border-radius:50%;object-fit:cover">
+<div class="adminbox" style="text-align:center">
+<img id="loadPreview"
+style="width:100px;height:100px;border-radius:50%;object-fit:cover">
 
-    <p id="loadPreviewName"
-       style="margin-top:12px;font-weight:800"></p>
-  </div>
+<p id="loadPreviewName"
+style="margin-top:12px;font-weight:800"></p>
+</div>
 </section>
 
 <!-- THEME -->
-<section class="section" id="themeSection">
-  <button class="edit" onclick="openEditor('theme')">✏️ Edit</button>
+<section class="section" id="themeAdmin">
+<button class="edit" onclick="openEditor('theme')">✏️ Edit</button>
 
-  <div class="head">
-    <div>
-      <div class="eyebrow">● THEME</div>
-      <h2>Theme & <em>colors.</em></h2>
-    </div>
-  </div>
+<div class="head">
+<div>
+<div class="eyebrow">● ADMIN</div>
+<h2>Theme & <em>colors.</em></h2>
+</div>
+</div>
 
-  <div class="adminbox">
-    <div class="themegrid" id="themePreview"></div>
-  </div>
+<div class="adminbox">
+<div class="themegrid" id="themePreview"></div>
+</div>
 </section>
 
 </main>
 
-<!-- SAVE BAR -->
-<div class="savebar" id="savebar">
-  <span id="status" class="success">✓ Ready</span>
-
-  <button class="btn primary" onclick="saveAll()">
-    💾 Save All Changes
-  </button>
+<!-- SAVE -->
+<div class="savebar">
+<span id="status" class="success"></span>
+<button class="btn primary" onclick="saveAll()">
+💾 Save All Changes
+</button>
 </div>
-
-<footer style="text-align:center;color:#666;font-size:10px;padding:0 16px 45px">
-  Admin Portfolio
-</footer>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
-  <div class="box">
+<div class="box">
 
-    <div class="mhead">
-      <h3 id="mtitle">Edit</h3>
-      <button class="close" onclick="closeEditor()">×</button>
-    </div>
+<div class="mhead">
+<h3 id="mtitle">Edit</h3>
+<button class="close" onclick="closeEditor()">×</button>
+</div>
 
-    <div id="mbody"></div>
+<div id="mbody"></div>
 
-    <div class="mfoot">
-      <button class="btn" onclick="closeEditor()">Cancel</button>
-      <button class="btn primary" onclick="saveModal()">Save</button>
-    </div>
+<div class="mfoot">
+<button class="btn" onclick="closeEditor()">Cancel</button>
+<button class="btn primary" onclick="saveModal()">Save</button>
+</div>
 
-  </div>
+</div>
 </div>
 
 <!-- IMAGE VIEWER -->
-<div class="viewer"
-     id="viewer"
-     onclick="if(event.target===this)closeViewer()">
+<div class="viewer" id="viewer"
+onclick="if(event.target===this)closeViewer()">
 
-  <button class="vclose" onclick="closeViewer()">×</button>
-  <img id="vimg">
+<button class="vclose" onclick="closeViewer()">×</button>
+<img id="vimg">
+
 </div>
-
 
 <script>
 
 /* =========================================================
-   SUPABASE
-   ========================================================= */
+SUPABASE
+========================================================= */
 
 const SUPABASE_URL="https://ozjugaedukcztmywtexk.supabase.co";
 const SUPABASE_KEY="sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
 const sb=supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
 
 /* =========================================================
-   DEFAULT SETTINGS
-   ========================================================= */
+DEFAULT SETTINGS
+========================================================= */
 
-const DEFAULTS={
-  id:1,
-  views:0,
+const D={
 
-  header_name:"Mr CrowSensei",
-  logo_url:"",
+id:1,
 
-  new_design_text:"New Designs Available",
+header_name:"Mr CrowSensei",
 
-  hero_title:"Professional Minecraft Thumbnails",
-  hero_subtitle:"",
-  crafted_text:"Crafted for Creators",
+logo_url:"",
 
-  stats_thumbnails:"100+",
-  stats_creators:"50+",
-  stats_years:"2+",
+new_design_text:"New Designs Available",
 
-  stats_thumbnails_label:"THUMBNAILS",
-  stats_creators_label:"CREATORS",
-  stats_years_label:"YEARS DESIGNING",
+hero_title:"Professional Minecraft Thumbnails",
 
-  about_heading:"The designer behind the thumbnails.",
-  about_sub:"Turning Minecraft ideas into clickable visuals.",
-  about_text:"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",
-  about_image_url:"",
+hero_subtitle:"",
 
-  creator_heading:"Trusted by creators.",
-  creator_intro:"Creators who trust Mr CrowSensei for their Minecraft thumbnails.",
+crafted_text:"Crafted for Creators",
 
-  discord_url:"https://discord.com/users/1492187397058855163",
-  twitter_url:"https://x.com/MrCrowSensei",
+stats_thumbnails:"100+",
+stats_creators:"50+",
+stats_years:"2+",
 
-  contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",
-  contact_text:"Send your video idea and deadline.\nI'll reply with availability and the next steps.",
+stats_thumbnails_label:"THUMBNAILS",
+stats_creators_label:"CREATORS",
+stats_years_label:"YEARS DESIGNING",
 
-  contact_buttons:[],
+about_heading:"The designer behind the thumbnails.",
 
-  footer_name:"Mr CrowSensei",
-  footer_description:"Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.",
-  footer_copyright:"© 2026 Mr CrowSensei",
-  footer_logo_url:"",
+about_sub:"Turning Minecraft ideas into clickable visuals.",
 
-  bg_color:"#080808",
-  bg_gradient_1:"#151515",
-  bg_gradient_2:"#080808",
-  bg_gradient_direction:"135deg",
+about_text:
+"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",
 
-  primary_color:"#ffffff",
-  heading_color:"#ffffff",
-  text_color:"#f7f8ff",
-  muted_color:"#85858a",
-  card_color:"#111111",
-  border_color:"#292929",
-  button_color:"#ffffff",
-  button_text_color:"#080808",
-  accent_color:"#35e36b",
+about_image_url:"",
 
-  og_title:"Mr CrowSensei — Thumbnail Designer",
-  og_description:"Mr CrowSensei — Professional Minecraft Thumbnail Designer",
-  og_image_url:"",
+creator_heading:"Trusted by creators.",
 
-  loading_logo_url:"",
-  loading_name:"Mr CrowSensei",
+creator_intro:
+"Creators who trust Mr CrowSensei for their Minecraft thumbnails.",
 
-  section_order:[
-    "home",
-    "stats",
-    "work",
-    "clients",
-    "about",
-    "faq",
-    "contact"
-  ]
+discord_url:"https://discord.com/users/1492187397058855163",
+
+twitter_url:"https://x.com/MrCrowSensei",
+
+contact_buttons:[],
+
+contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",
+
+contact_text:
+"Send your video idea and deadline.\nI'll reply with availability and the next steps.",
+
+bg_color:"#080808",
+bg_gradient_1:"#151515",
+bg_gradient_2:"#080808",
+bg_gradient_direction:"135deg",
+
+primary_color:"#ffffff",
+heading_color:"#ffffff",
+text_color:"#f7f8ff",
+muted_color:"#85858a",
+
+card_color:"#111111",
+border_color:"#292929",
+
+button_color:"#ffffff",
+button_text_color:"#080808",
+
+accent_color:"#35e36b",
+
+og_title:"Mr CrowSensei — Thumbnail Designer",
+
+og_description:
+"Mr CrowSensei — Professional Minecraft Thumbnail Designer",
+
+og_image_url:"",
+
+loading_logo_url:"",
+
+loading_name:"Mr CrowSensei",
+
+/* NEW FOOTER */
+footer_logo_url:"",
+footer_name:"Mr CrowSensei",
+footer_description:
+"Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.",
+footer_explore:"Explore",
+footer_portfolio:"Portfolio",
+footer_clients:"Clients",
+footer_about:"About",
+footer_faq:"FAQ",
+footer_copyright:"© 2026 Mr CrowSensei",
+
+/* NEW SECTION ORDER */
+section_order:[
+"home",
+"stats",
+"work",
+"clients",
+"about",
+"faq",
+"contact"
+]
+
 };
 
 
 /* =========================================================
-   VARIABLES
-   ========================================================= */
+STATE
+========================================================= */
 
-let S={...DEFAULTS};
+let S={...D};
 
 let P=[];
 let C=[];
@@ -1276,3142 +830,2421 @@ let F=[];
 
 let type="";
 let mid=null;
-
 let file=null;
 let del=false;
-
 let creatorMeta=null;
-
-let dirty=false;
-
-let reorderOrder=[
-  "home",
-  "stats",
-  "work",
-  "clients",
-  "about",
-  "faq",
-  "contact"
-];
-
-let expanded={
-  portfolio:false,
-  creators:false
-};
-
-const ORDER_LABELS={
-  home:"Hero",
-  stats:"Stats",
-  work:"Portfolio",
-  clients:"Clients",
-  about:"About Me",
-  faq:"FAQ",
-  contact:"Contact"
-};
 
 
 /* =========================================================
-   HELPERS
-   ========================================================= */
+HELPERS
+========================================================= */
 
 const $=id=>document.getElementById(id);
 
-const esc=v=>
-  String(v??"").replace(
-    /[&<>"']/g,
-    m=>({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    }[m])
-  );
-
-function markDirty(){
-  dirty=true;
-
-  const bar=$("savebar");
-
-  if(bar){
-    bar.classList.add("dirty");
-  }
-
-  $("status").textContent="● Unsaved changes";
-  $("status").style.color="#fff";
-}
+const esc=v=>String(v??"").replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
+);
 
 function msg(
-  text="✓ All changes saved successfully!",
-  bad=false
+t="✓ All changes saved successfully!",
+bad=false
 ){
-  $("status").textContent=text;
-  $("status").style.color=
-    bad ? "#ff7777" : "#65e88a";
+$("status").textContent=t;
+$("status").style.color=
+bad?"#ff7777":"#65e88a";
 
-  if(!bad){
-    dirty=false;
-    $("savebar").classList.remove("dirty");
-  }
+setTimeout(()=>{
+$("status").textContent="";
+},3500);
 }
 
 
 /* =========================================================
-   RENDER
-   ========================================================= */
+RENDER EVERYTHING
+========================================================= */
 
 function render(){
 
-  $("viewsCount").textContent=
-    Number(S.views||0).toLocaleString();
+let parts=S.header_name.trim().split(/\s+/);
 
-  const logo=
-    S.logo_url ||
-    "images/logo.png";
+let first=parts.shift()||"";
+let rest=parts.join(" ");
 
-  const loadingLogo=
-    S.loading_logo_url ||
-    logo;
+$("navName").textContent=S.header_name;
 
-  $("navLogo").src=logo;
-  $("navName").textContent=
-    S.header_name || "Mr CrowSensei";
+$("navLogo").src=
+S.logo_url||"images/logo.png";
 
-  $("headerPreviewLogo").src=logo;
-  $("headerPreviewName").textContent=
-    S.header_name || "Mr CrowSensei";
+$("headerPreviewName") &&
+($("headerPreviewName").textContent=S.header_name);
 
-  $("loadLogo").src=loadingLogo;
-  $("loadName").textContent=
-    S.loading_name ||
-    S.header_name ||
-    "Mr CrowSensei";
+$("avail").textContent=S.new_design_text;
 
-  $("loadPreview").src=loadingLogo;
-  $("loadPreviewName").textContent=
-    S.loading_name ||
-    S.header_name ||
-    "Mr CrowSensei";
+$("heroName").innerHTML=
+`<span>${esc(first)}</span>
+<span>${esc(rest)}</span>`;
 
+$("heroTitle").textContent=S.hero_title;
+$("heroSub").textContent=S.hero_subtitle;
+$("crafted").textContent=S.crafted_text;
 
-  /* HERO */
+$("st1").textContent=S.stats_thumbnails;
+$("st2").textContent=S.stats_creators;
+$("st3").textContent=S.stats_years;
 
-  $("avail").textContent=
-    S.new_design_text || "";
+$("sl1").textContent=S.stats_thumbnails_label;
+$("sl2").textContent=S.stats_creators_label;
+$("sl3").textContent=S.stats_years_label;
 
-  const name=
-    (S.header_name || "Mr CrowSensei")
-    .trim()
-    .split(/\s+/);
+$("aboutHeading").textContent=S.about_heading;
+$("aboutSub").textContent=S.about_sub;
+$("aboutText").textContent=S.about_text;
 
-  const first=name.shift() || "";
-  const rest=name.join(" ");
+$("aboutImg").src=
+S.about_image_url||"images/logo.png";
 
-  $("heroName").innerHTML=
-    `<span>${esc(first)}</span>
-     <span>${esc(rest)}</span>`;
+$("creatorHeading").textContent=S.creator_heading;
+$("creatorIntro").textContent=S.creator_intro;
 
-  $("heroTitle").textContent=
-    S.hero_title || "";
+$("contactTitle").innerHTML=
+esc(S.contact_title).replace(/\n/g,"<br>");
 
-  $("heroSub").textContent=
-    S.hero_subtitle || "";
+$("contactText").innerHTML=
+esc(S.contact_text).replace(/\n/g,"<br>");
 
-  $("crafted").textContent=
-    S.crafted_text || "";
+$("ogtv").value=S.og_title;
+$("ogdv").value=S.og_description;
 
+$("ogiv").innerHTML=S.og_image_url
+?
+`<img src="${esc(S.og_image_url)}">
+<button class="deleteimg"
+onclick="openEditor('link');del=true">
+🗑 Delete Image
+</button>`
+:
+`<div style="padding:30px;text-align:center;color:#666">
+No preview image selected.
+</div>`;
 
-  /* STATS */
+renderButtons();
+renderP();
+renderC();
+renderF();
+renderFooter();
+renderReorder();
+theme();
+apply();
 
-  $("st1").textContent=S.stats_thumbnails;
-  $("st2").textContent=S.stats_creators;
-  $("st3").textContent=S.stats_years;
+$("loadLogo").src=
+S.loading_logo_url||
+S.logo_url||
+"images/logo.png";
 
-  $("sl1").textContent=S.stats_thumbnails_label;
-  $("sl2").textContent=S.stats_creators_label;
-  $("sl3").textContent=S.stats_years_label;
+$("loadName").textContent=S.loading_name;
 
+$("loadPreview").src=
+S.loading_logo_url||
+S.logo_url||
+"images/logo.png";
 
-  /* ABOUT */
-
-  $("aboutHeading").textContent=
-    S.about_heading;
-
-  $("aboutSub").textContent=
-    S.about_sub;
-
-  $("aboutText").textContent=
-    S.about_text;
-
-  $("aboutImg").src=
-    S.about_image_url ||
-    logo;
-
-
-  /* CLIENTS */
-
-  $("creatorHeading").textContent=
-    S.creator_heading;
-
-  $("creatorIntro").textContent=
-    S.creator_intro;
-
-
-  /* CONTACT */
-
-  $("contactTitle").innerHTML=
-    esc(S.contact_title)
-      .replace(/\n/g,"<br>");
-
-  $("contactText").innerHTML=
-    esc(S.contact_text)
-      .replace(/\n/g,"<br>");
-
-  renderButtons();
-
-
-  /* FOOTER */
-
-  $("footerLogoPreview").src=
-    S.footer_logo_url ||
-    logo;
-
-  $("footerNamePreview").textContent=
-    S.footer_name ||
-    S.header_name;
-
-  $("footerDescPreview").textContent=
-    S.footer_description || "";
-
-  $("footerCopyPreview").textContent=
-    S.footer_copyright || "";
-
-
-  /* LINK PREVIEW */
-
-  $("ogtv").value=
-    S.og_title || "";
-
-  $("ogdv").value=
-    S.og_description || "";
-
-  if(S.og_image_url){
-
-    $("ogiv").innerHTML=`
-      <img src="${esc(S.og_image_url)}"
-           style="width:100%;max-height:230px;object-fit:contain">
-
-      <button class="deleteimg"
-              onclick="deleteLinkImage()">
-        🗑 Delete Image
-      </button>
-    `;
-
-  }else{
-
-    $("ogiv").innerHTML=`
-      <div style="padding:30px;text-align:center;color:#666">
-        No preview image selected.
-      </div>
-    `;
-  }
-
-
-  renderPortfolio();
-  renderCreators();
-  renderFaq();
-  renderReorder();
-  renderTheme();
-  applyTheme();
+$("loadPreviewName").textContent=S.loading_name;
 }
 
 
 /* =========================================================
-   CONTACT BUTTONS
-   ========================================================= */
+CONTACT
+========================================================= */
 
 function renderButtons(){
 
-  const arr=[
-    {
-      name:"Discord",
-      link:S.discord_url,
-      color:"#ffffff",
-      text:"#080808",
-      icon_url:""
-    },
-    {
-      name:"Twitter / X",
-      link:S.twitter_url,
-      color:"#ffffff",
-      text:"#080808",
-      icon_url:""
-    },
-    ...(S.contact_buttons || [])
-  ];
+let b=[
+{
+name:"Discord",
+link:S.discord_url,
+color:"#5865F2",
+text:"#fff"
+},
+{
+name:"𝕏 Twitter / X",
+link:S.twitter_url,
+color:"#fff",
+text:"#080808"
+},
+...(S.contact_buttons||[])
+];
 
-  $("contactLinks").innerHTML=
-    arr
-      .filter(x=>x && x.name && x.link)
-      .map(x=>`
-        <a href="${esc(x.link)}"
-           target="_blank"
-           style="
-             background:${esc(x.color||"#fff")};
-             color:${esc(x.text||"#080808")}
-           ">
-
-          ${
-            x.icon_url
-            ? `<img src="${esc(x.icon_url)}">`
-            : ""
-          }
-
-          ${esc(x.name)}
-        </a>
-      `)
-      .join("");
+$("contactLinks").innerHTML=b.map(x=>
+`
+<a href="${esc(x.link||"#")}"
+target="_blank"
+style="
+background:${esc(x.color||"#fff")};
+color:${esc(x.text||"#080808")}
+">
+${x.icon?`<span>${esc(x.icon)}</span> `:""}
+${esc(x.name)}
+</a>
+`
+).join("");
 }
 
 
 /* =========================================================
-   PORTFOLIO
-   ========================================================= */
+PORTFOLIO
+========================================================= */
 
-function visibleSlice(arr,key){
+function renderP(){
 
-  if(expanded[key]) return arr;
+let g=$("portfolioGrid");
 
-  return arr.slice(0,6);
+if(!P.length){
+
+g.innerHTML=
+`
+<div style="
+grid-column:1/-1;
+text-align:center;
+color:#666;
+padding:40px">
+No thumbnails yet.
+</div>
+`;
+
+return;
 }
 
-function renderPortfolio(){
+g.innerHTML=P.map((x,i)=>
+`
+<article class="card">
 
-  const arr=
-    visibleSlice(P,"portfolio");
+<img
+src="${esc(x.image_url)}"
+onclick="view('${esc(x.image_url)}')">
 
-  const g=$("portfolioGrid");
+<div class="info">
+<b>${esc(x.title||"Minecraft Thumbnail")}</b>
+</div>
 
-  if(!P.length){
+<div class="tools">
 
-    g.innerHTML=`
-      <div style="
-        grid-column:1/-1;
-        text-align:center;
-        color:#666;
-        padding:40px">
-        No thumbnails yet.
-      </div>
-    `;
+<button class="mini"
+onclick="openEditor('portfolio',${x.id})">
+✏️
+</button>
 
-  }else{
+<button class="mini"
+onclick="move('portfolio',${i},-1)">
+↑
+</button>
 
-    g.innerHTML=
-      arr.map(x=>`
-        <article class="card">
+<button class="mini"
+onclick="move('portfolio',${i},1)">
+↓
+</button>
 
-          <img src="${esc(x.image_url)}"
-               onclick="view('${esc(x.image_url)}')">
+<button class="mini"
+onclick="delRow('portfolio',${x.id})">
+🗑
+</button>
 
-          <div class="info">
-            <b>${esc(x.title||"Minecraft Thumbnail")}</b>
-          </div>
+</div>
 
-        </article>
-      `).join("");
-  }
-
-  const btn=$("portfolioMore");
-
-  if(P.length>6){
-
-    btn.style.display="block";
-
-    btn.textContent=
-      expanded.portfolio
-      ? "Show Less"
-      : "Load More";
-
-  }else{
-
-    btn.style.display="none";
-  }
-}
-
-
-/* =========================================================
-   CREATOR RENDER
-   ========================================================= */
-
-function renderCreators(){
-
-  const arr=
-    visibleSlice(C,"creators");
-
-  const g=$("creatorGrid");
-
-  if(!C.length){
-
-    g.innerHTML=`
-      <div style="
-        grid-column:1/-1;
-        text-align:center;
-        color:#666">
-        No creators added yet.
-      </div>
-    `;
-
-  }else{
-
-    g.innerHTML=
-      arr.map(x=>`
-        <article class="creator">
-
-          <a href="${esc(x.youtube_url)}"
-             target="_blank">
-
-            <div class="avatar">
-              <img src="${esc(
-                x.image_url ||
-                "images/logo.png"
-              )}">
-            </div>
-
-            <h3>${esc(x.name||"Creator")}</h3>
-
-            <p>${esc(x.youtube_url||"")}</p>
-
-            <b>
-              ${esc(
-                x.subscribers ||
-                "Subscribers unavailable"
-              )}
-            </b>
-
-          </a>
-
-        </article>
-      `).join("");
-  }
-
-  const btn=$("creatorMore");
-
-  if(C.length>6){
-
-    btn.style.display="block";
-
-    btn.textContent=
-      expanded.creators
-      ? "Show Less"
-      : "Load More";
-
-  }else{
-
-    btn.style.display="none";
-  }
+</article>
+`
+).join("");
 }
 
 
 /* =========================================================
-   LOAD MORE
-   ========================================================= */
+CREATORS
+========================================================= */
 
-function toggleMore(key){
+function renderC(){
 
-  expanded[key]=!expanded[key];
+let g=$("creatorGrid");
 
-  if(key==="portfolio"){
-    renderPortfolio();
-  }
+if(!C.length){
 
-  if(key==="creators"){
-    renderCreators();
-  }
+g.innerHTML=
+`
+<div style="
+grid-column:1/-1;
+text-align:center;
+color:#666">
+No creators added yet.
+</div>
+`;
+
+return;
+}
+
+g.innerHTML=C.map((x,i)=>
+`
+<article class="creator">
+
+<a href="${esc(x.youtube_url)}"
+target="_blank">
+
+<div class="avatar">
+<img src="${esc(x.image_url||"images/logo.png")}">
+</div>
+
+<h3>${esc(x.name||"Creator")}</h3>
+
+<p>${esc(x.youtube_url)}</p>
+
+<b>${esc(
+x.subscribers||
+"Subscribers unavailable"
+)}</b>
+
+</a>
+
+<div style="margin-top:10px">
+
+<button class="mini"
+onclick="openEditor('creator',${x.id})">
+✏️
+</button>
+
+<button class="mini"
+onclick="move('creators',${i},-1)">
+↑
+</button>
+
+<button class="mini"
+onclick="move('creators',${i},1)">
+↓
+</button>
+
+<button class="mini"
+onclick="delRow('creators',${x.id})">
+🗑
+</button>
+
+</div>
+
+</article>
+`
+).join("");
 }
 
 
 /* =========================================================
-   FAQ
-   ========================================================= */
+FAQ
+========================================================= */
 
-function renderFaq(){
+function renderF(){
 
-  const g=$("faqList");
+let g=$("faqList");
 
-  if(!F.length){
+if(!F.length){
 
-    g.innerHTML=`
-      <div style="
-        text-align:center;
-        color:#666;
-        padding:30px">
-        No FAQ items yet.
-      </div>
-    `;
+g.innerHTML=
+`
+<div style="
+text-align:center;
+color:#666;
+padding:30px">
+No FAQ items yet.
+</div>
+`;
 
-    return;
-  }
+return;
+}
 
-  g.innerHTML=
-    F.map(x=>`
-      <div class="faqitem"
-           onclick="this.classList.toggle('open')">
+g.innerHTML=F.map((x,i)=>
+`
+<div class="faqitem"
+onclick="this.classList.toggle('open')">
 
-        <span>${esc(x.question)}</span>
+<span>${esc(x.question)}</span>
 
-        <b>+</b>
+<b>+</b>
 
-        <p>${esc(x.answer)}</p>
+<p>${esc(x.answer)}</p>
 
-      </div>
-    `).join("");
+<small
+onclick="event.stopPropagation()"
+style="display:block;margin-top:10px">
+
+<button class="mini"
+onclick="openEditor('faq',${x.id})">
+✏️
+</button>
+
+<button class="mini"
+onclick="move('faq',${i},-1)">
+↑
+</button>
+
+<button class="mini"
+onclick="move('faq',${i},1)">
+↓
+</button>
+
+<button class="mini"
+onclick="delRow('faq',${x.id})">
+🗑
+</button>
+
+</small>
+
+</div>
+`
+).join("");
 }
 
 
 /* =========================================================
-   THEME
-   ========================================================= */
+FOOTER
+========================================================= */
 
-function renderTheme(){
+function renderFooter(){
 
-  const items=[
-    ["Background",S.bg_color],
-    ["Gradient 1",S.bg_gradient_1],
-    ["Gradient 2",S.bg_gradient_2],
-    ["Primary",S.primary_color],
-    ["Heading",S.heading_color],
-    ["Text",S.text_color],
-    ["Muted",S.muted_color],
-    ["Card",S.card_color],
-    ["Border",S.border_color],
-    ["Button",S.button_color],
-    ["Button Text",S.button_text_color],
-    ["Accent",S.accent_color]
-  ];
+$("footerLogo").src=
+S.footer_logo_url||
+S.logo_url||
+"images/logo.png";
 
-  $("themePreview").innerHTML=
-    items.map(x=>`
-      <div style="
-        border:1px solid #292929;
-        border-radius:9px;
-        padding:9px;
-        background:#111">
+$("footerName").textContent=
+S.footer_name;
 
-        <div style="
-          height:23px;
-          border-radius:5px;
-          background:${esc(x[1])}">
-        </div>
+$("footerDesc").textContent=
+S.footer_description;
 
-        <small style="
-          display:block;
-          color:#777;
-          margin-top:6px">
+$("footerExplore").textContent=
+S.footer_explore;
 
-          ${esc(x[0])}: ${esc(x[1])}
+$("footerPortfolio").textContent=
+S.footer_portfolio;
 
-        </small>
-      </div>
-    `).join("");
-}
+$("footerClients").textContent=
+S.footer_clients;
 
+$("footerAbout").textContent=
+S.footer_about;
 
-function applyTheme(){
+$("footerFaq").textContent=
+S.footer_faq;
 
-  document.documentElement
-    .style
-    .setProperty("--card",S.card_color);
-
-  document.documentElement
-    .style
-    .setProperty("--border",S.border_color);
-
-  document.documentElement
-    .style
-    .setProperty("--accent",S.accent_color);
-
-  document.documentElement
-    .style
-    .setProperty("--btn",S.button_color);
-
-  document.documentElement
-    .style
-    .setProperty("--bt",S.button_text_color);
-
-  document.documentElement
-    .style
-    .setProperty("--heading",S.heading_color);
-
-  document.documentElement
-    .style
-    .setProperty("--text",S.text_color);
-
-  document.documentElement
-    .style
-    .setProperty("--muted",S.muted_color);
-
-  document.body.style.background=
-    `linear-gradient(
-      ${S.bg_gradient_direction},
-      ${S.bg_gradient_1},
-      ${S.bg_gradient_2}
-    )`;
+$("footerCopyright").textContent=
+S.footer_copyright;
 }
 
 
 /* =========================================================
-   SECTION REORDER
-   ========================================================= */
+SECTION REORDER
+========================================================= */
 
-function normalizeOrder(arr){
-
-  const allowed=[
-    "home",
-    "stats",
-    "work",
-    "clients",
-    "about",
-    "faq",
-    "contact"
-  ];
-
-  let out=[];
-
-  (Array.isArray(arr)?arr:[])
-    .forEach(x=>{
-      if(
-        allowed.includes(x) &&
-        !out.includes(x)
-      ){
-        out.push(x);
-      }
-    });
-
-  allowed.forEach(x=>{
-    if(!out.includes(x)){
-      out.push(x);
-    }
-  });
-
-  return out;
-}
-
+const sectionNames={
+home:"Hero",
+stats:"Stats",
+work:"Portfolio",
+clients:"Clients",
+about:"About Me",
+faq:"FAQ",
+contact:"Contact"
+};
 
 function renderReorder(){
 
-  reorderOrder=
-    normalizeOrder(reorderOrder);
+let order=S.section_order||[
+"home",
+"stats",
+"work",
+"clients",
+"about",
+"faq",
+"contact"
+];
 
-  $("reorderPreview").innerHTML=
-    reorderOrder.map(id=>`
-      <div class="reorder-row"
-           draggable="true"
-           data-section="${id}"
-           ondragstart="dragStart(event)"
-           ondragover="dragOver(event)"
-           ondrop="dropRow(event)">
+$("reorderPreview").innerHTML=
+order.map((id,i)=>
+`
+<div class="reorder-item"
+draggable="true"
+data-section="${id}"
+ondragstart="dragStart(event)"
+ondragover="event.preventDefault()"
+ondrop="dropSection(event)">
 
-        <span class="reorder-label">
-          ${ORDER_LABELS[id]}
-        </span>
+<span>${sectionNames[id]||id}</span>
 
-        <span class="drag-handle">
-          ☰
-        </span>
+<span class="drag">☰</span>
 
-      </div>
-    `).join("");
+</div>
+`
+).join("");
 }
 
-let dragId=null;
+let draggedSection=null;
 
 function dragStart(e){
-
-  dragId=
-    e.currentTarget.dataset.section;
-
-  e.currentTarget.classList.add("dragging");
+draggedSection=e.currentTarget.dataset.section;
 }
 
-function dragOver(e){
+function dropSection(e){
 
-  e.preventDefault();
-}
+let target=e.currentTarget.dataset.section;
 
-function dropRow(e){
+if(!draggedSection||draggedSection===target)return;
 
-  e.preventDefault();
+let arr=[...(S.section_order||[])];
 
-  const target=
-    e.currentTarget.dataset.section;
+let from=arr.indexOf(draggedSection);
+let to=arr.indexOf(target);
 
-  if(
-    !dragId ||
-    dragId===target
-  ) return;
+if(from<0||to<0)return;
 
-  const a=
-    reorderOrder.indexOf(dragId);
+arr.splice(from,1);
+arr.splice(to,0,draggedSection);
 
-  const b=
-    reorderOrder.indexOf(target);
+S.section_order=arr;
 
-  reorderOrder.splice(a,1);
-  reorderOrder.splice(b,0,dragId);
+renderReorder();
 
-  renderReorder();
-
-  applyAdminOrder();
-
-  markDirty();
-}
-
-
-function applyAdminOrder(){
-
-  const main=$("adminMain");
-
-  const anchor=$("footerAdmin");
-
-  reorderOrder.forEach(id=>{
-
-    const el=$(id);
-
-    if(el){
-      main.insertBefore(el,anchor);
-    }
-  });
-}
-
-
-async function saveSectionOrder(){
-
-  reorderOrder=
-    normalizeOrder(reorderOrder);
-
-  const r=
-    await sb
-      .from("site_settings")
-      .update({
-        section_order:reorderOrder
-      })
-      .eq("id",1);
-
-  if(r.error){
-
-    msg(
-      "Section order save failed: "+
-      r.error.message,
-      true
-    );
-
-    return;
-  }
-
-  S.section_order=
-    [...reorderOrder];
-
-  applyAdminOrder();
-
-  msg("✓ Section order saved!");
+msg("✓ Section order changed. Click Save All Changes.");
 }
 
 
 /* =========================================================
-   DATABASE LOAD
-   ========================================================= */
+THEME
+========================================================= */
+
+function theme(){
+
+let z=[
+["Background",S.bg_color],
+["Gradient 1",S.bg_gradient_1],
+["Gradient 2",S.bg_gradient_2],
+["Primary",S.primary_color],
+["Heading",S.heading_color],
+["Text",S.text_color],
+["Muted",S.muted_color],
+["Card",S.card_color],
+["Border",S.border_color],
+["Button",S.button_color],
+["Button Text",S.button_text_color],
+["Accent",S.accent_color]
+];
+
+$("themePreview").innerHTML=z.map(x=>
+`
+<div style="
+border:1px solid #292929;
+border-radius:9px;
+padding:9px;
+background:#111">
+
+<div style="
+height:23px;
+border-radius:5px;
+background:${esc(x[1])}">
+</div>
+
+<small style="
+display:block;
+color:#777;
+margin-top:6px">
+
+${esc(x[0])}: ${esc(x[1])}
+
+</small>
+</div>
+`
+).join("");
+}
+
+
+/* =========================================================
+APPLY THEME
+========================================================= */
+
+function apply(){
+
+document.documentElement.style.setProperty(
+"--card",S.card_color
+);
+
+document.documentElement.style.setProperty(
+"--border",S.border_color
+);
+
+document.documentElement.style.setProperty(
+"--accent",S.accent_color
+);
+
+document.documentElement.style.setProperty(
+"--btn",S.button_color
+);
+
+document.documentElement.style.setProperty(
+"--bt",S.button_text_color
+);
+
+document.body.style.background=
+`linear-gradient(
+${S.bg_gradient_direction},
+${S.bg_gradient_1},
+${S.bg_gradient_2}
+)`;
+}
+
+
+/* =========================================================
+LOAD SUPABASE
+========================================================= */
 
 async function load(){
 
-  const s=
-    await sb
-      .from("site_settings")
-      .select("*")
-      .eq("id",1)
-      .maybeSingle();
+try{
 
-  if(s.error){
-    throw s.error;
-  }
+let s=await sb
+.from("site_settings")
+.select("*")
+.eq("id",1)
+.maybeSingle();
 
-  if(s.data){
+if(s.error){
+msg("Supabase: "+s.error.message,true);
+return;
+}
 
-    S={
-      ...DEFAULTS,
-      ...s.data
-    };
+if(s.data){
 
-  }else{
+S={
+...D,
+...s.data
+};
 
-    const r=
-      await sb
-        .from("site_settings")
-        .insert(DEFAULTS);
+}else{
 
-    if(r.error){
-      throw r.error;
-    }
+let r=await sb
+.from("site_settings")
+.insert(D);
 
-    S={...DEFAULTS};
-  }
+if(r.error){
+msg(r.error.message,true);
+return;
+}
 
-
-  const p=
-    await sb
-      .from("portfolio")
-      .select("*")
-      .order("display_order",{ascending:true})
-      .order("id",{ascending:true});
-
-  if(p.error) throw p.error;
-
-  P=p.data||[];
+S={...D};
+}
 
 
-  const c=
-    await sb
-      .from("creators")
-      .select("*")
-      .order("display_order",{ascending:true})
-      .order("id",{ascending:true});
+/* PORTFOLIO */
 
-  C=
-    c.error
-    ? []
-    : c.data||[];
+let p=await sb
+.from("portfolio")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
 
-
-  const f=
-    await sb
-      .from("faq")
-      .select("*")
-      .order("display_order",{ascending:true})
-      .order("id",{ascending:true});
-
-  F=
-    f.error
-    ? []
-    : f.data||[];
+if(p.error){
+msg("Portfolio: "+p.error.message,true);
+P=[];
+}else{
+P=p.data||[];
+}
 
 
-  reorderOrder=
-    normalizeOrder(
-      S.section_order
-    );
+/* CREATORS */
 
-  applyAdminOrder();
+let c=await sb
+.from("creators")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
 
-  render();
+if(c.error){
+C=[];
+}else{
+C=c.data||[];
+}
+
+
+/* FAQ */
+
+let f=await sb
+.from("faq")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
+
+if(f.error){
+F=[];
+}else{
+F=f.data||[];
+}
+
+render();
+
+setTimeout(()=>{
+$("loader").classList.add("hide");
+},1400);
+
+}catch(e){
+
+msg(e.message,true);
+
+}
+
 }
 
 
 /* =========================================================
-   SETTINGS PATCH
-   ========================================================= */
+PATCH SETTINGS
+========================================================= */
 
 async function patch(x){
 
-  S={
-    ...S,
-    ...x
-  };
+let r=await sb
+.from("site_settings")
+.update(x)
+.eq("id",1);
 
-  render();
+if(r.error)throw r.error;
 
-  markDirty();
+S={
+...S,
+...x
+};
+
+render();
+
 }
 
 
 /* =========================================================
-   STORAGE UPLOAD
-   ========================================================= */
+UPLOAD
+========================================================= */
 
-async function uploadImage(
-  f,
-  folder
-){
+async function upload(f,folder){
 
-  if(!f){
-    throw Error(
-      "Please choose an image."
-    );
-  }
+let ext=
+(f.name.split(".").pop()||"png").toLowerCase();
 
-  const ext=
-    (
-      f.name
-        .split(".")
-        .pop() ||
-      "png"
-    ).toLowerCase();
+let path=
+`admin/${folder}/${Date.now()}-${Math.random()
+.toString(36)
+.slice(2)}.${ext}`;
 
-  const path=
-    `admin/${folder}/${Date.now()}-${Math.random()
-      .toString(36)
-      .slice(2)}.${ext}`;
+let r=await sb
+.storage
+.from("portfolio-images")
+.upload(
+path,
+f,
+{
+contentType:f.type||"image/png"
+}
+);
 
-  const r=
-    await sb
-      .storage
-      .from("portfolio-images")
-      .upload(
-        path,
-        f,
-        {
-          contentType:
-            f.type ||
-            "image/png"
-        }
-      );
+if(r.error)throw r.error;
 
-  if(r.error){
-    throw r.error;
-  }
-
-  return sb
-    .storage
-    .from("portfolio-images")
-    .getPublicUrl(path)
-    .data
-    .publicUrl;
+return sb
+.storage
+.from("portfolio-images")
+.getPublicUrl(path)
+.data.publicUrl;
 }
 
 
 /* =========================================================
-   IMAGE PICK
-   ========================================================= */
+IMAGE INPUT
+========================================================= */
 
-function pick(input,target){
+function imageInput(id,label,url){
 
-  file=
-    input.files[0] ||
-    null;
+return `
+<div class="field full">
 
-  if(file){
+<label>${label}</label>
 
-    $(target).innerHTML=`
-      <div class="preview">
-        <img src="${URL.createObjectURL(file)}"
-             style="
-               width:100%;
-               max-height:230px;
-               object-fit:contain">
-      </div>
-    `;
-  }
+<input
+id="${id}"
+type="file"
+accept="image/*"
+onchange="pick(this,'${id}p')">
+
+<div id="${id}p">
+
+${url?
+`
+<div class="preview">
+<img src="${esc(url)}">
+</div>
+`
+:""}
+
+</div>
+
+</div>
+`;
+}
+
+function pick(i,t){
+
+file=i.files[0]||null;
+
+if(file){
+
+$(t).innerHTML=
+`
+<div class="preview">
+<img src="${URL.createObjectURL(file)}">
+</div>
+`;
+
+}
+
 }
 
 
 /* =========================================================
-   IMAGE EDITOR
-   ========================================================= */
-
-function imageEditor(
-  id,
-  label,
-  url
-){
-
-  return `
-    <div class="field full">
-
-      <label>${label}</label>
-
-      <div class="image-control">
-
-        ${
-          url
-          ? `
-            <img src="${esc(url)}">
-
-            <div class="ic-actions">
-
-              <button
-                type="button"
-                class="btn danger"
-                onclick="deleteImageSetting('${id}')">
-
-                🗑 Delete
-
-              </button>
-
-              <button
-                type="button"
-                class="btn"
-                onclick="chooseGallery('${id}')">
-
-                🖼️ Choose from Gallery
-
-              </button>
-
-            </div>
-          `
-          : `
-            <div style="
-              color:#666;
-              padding:20px;
-              text-align:center">
-              No image selected.
-            </div>
-
-            <button
-              type="button"
-              class="btn"
-              onclick="chooseGallery('${id}')">
-
-              🖼️ Choose from Gallery
-
-            </button>
-          `
-        }
-
-        <input
-          id="${id}File"
-          type="file"
-          accept="image/*"
-          style="margin-top:12px"
-          onchange="pick(this,'${id}Preview')">
-
-        <div id="${id}Preview"></div>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-function deleteImageSetting(id){
-
-  if(id==="about"){
-    S.about_image_url="";
-  }
-
-  if(id==="header"){
-    S.logo_url="";
-  }
-
-  if(id==="loading"){
-    S.loading_logo_url="";
-  }
-
-  if(id==="footer"){
-    S.footer_logo_url="";
-  }
-
-  if(id==="og"){
-    S.og_image_url="";
-  }
-
-  file=null;
-
-  markDirty();
-
-  openEditor(type);
-}
-
-
-/* =========================================================
-   GALLERY
-   ========================================================= */
+GALLERY
+========================================================= */
 
 async function chooseGallery(kind){
 
-  const q=
-    await sb
-      .from("portfolio")
-      .select("id,title,image_url")
-      .order("display_order",{ascending:true})
-      .order("id",{ascending:true});
+let q=await sb
+.from("portfolio")
+.select("id,title,image_url")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
 
-  const arr=
-    q.data||[];
-
-  $("gallery").innerHTML=
-    arr.length
-    ? arr.map(x=>`
-        <div class="gallery-item">
-
-          <img
-            src="${esc(x.image_url)}"
-            onclick="selectGallery(
-              '${esc(x.image_url)}',
-              '${kind}'
-            )">
-
-          <small>
-            ${esc(
-              x.title ||
-              "Thumbnail"
-            )}
-          </small>
-
-        </div>
-      `).join("")
-    : `
-      <p style="color:#777">
-        No portfolio images available.
-      </p>
-    `;
+if(q.error){
+msg(q.error.message,true);
+return;
 }
 
+let arr=q.data||[];
 
-function selectGallery(
-  url,
-  kind
-){
+$("gallery").innerHTML=
+arr.length
+?
+arr.map(x=>
+`
+<div>
 
-  if(kind==="about"){
-    S.about_image_url=url;
-  }
+<img
+src="${esc(x.image_url)}"
+onclick="selectGallery('${esc(x.image_url)}','${kind}')">
 
-  if(kind==="header"){
-    S.logo_url=url;
-  }
+<small>
+${esc(x.title||"Thumbnail")}
+</small>
 
-  if(kind==="loading"){
-    S.loading_logo_url=url;
-  }
-
-  if(kind==="footer"){
-    S.footer_logo_url=url;
-  }
-
-  if(kind==="og"){
-    S.og_image_url=url;
-  }
-
-  if(kind.startsWith("button:")){
-
-    const i=
-      Number(
-        kind.split(":")[1]
-      );
-
-    if(!S.contact_buttons){
-      S.contact_buttons=[];
-    }
-
-    if(!S.contact_buttons[i]){
-      S.contact_buttons[i]={};
-    }
-
-    S.contact_buttons[i].icon_url=url;
-  }
-
-  file=null;
-
-  markDirty();
-
-  render();
-
-  closeEditor();
-}
-
-
-function deleteLinkImage(){
-
-  S.og_image_url="";
-
-  markDirty();
-
-  render();
+</div>
+`
+).join("")
+:
+`
+<p style="color:#777">
+No portfolio images available.
+</p>
+`;
 }
 
 
 /* =========================================================
-   OPEN EDITOR
-   ========================================================= */
+SELECT GALLERY IMAGE
+========================================================= */
 
-function openEditor(
-  t,
-  id=null
-){
+function selectGallery(u,kind){
 
-  type=t;
-  mid=id;
+if(kind==="og"){
 
-  file=null;
-  del=false;
-  creatorMeta=null;
+S.og_image_url=u;
+del=false;
 
-  let h="";
-  let b="";
+render();
+closeEditor();
 
+msg("✓ Preview image selected!");
 
-  /* HERO */
+}
 
-  if(t==="hero"){
+else if(kind==="about"){
 
-    h="Edit Hero";
+S.about_image_url=u;
 
-    b=`
-      <div class="formgrid">
+render();
+closeEditor();
 
-        <div class="field">
-          <label>Availability</label>
-          <input id="availx"
-                 value="${esc(S.new_design_text)}">
-        </div>
+msg("✓ About image selected!");
 
-        <div class="field">
-          <label>Name</label>
-          <input id="namex"
-                 value="${esc(S.header_name)}">
-        </div>
+}
 
-        <div class="field full">
-          <label>Hero Title</label>
-          <input id="ht"
-                 value="${esc(S.hero_title)}">
-        </div>
+else if(kind==="logo"){
 
-        <div class="field full">
-          <label>Hero Subtitle</label>
-          <input id="hs"
-                 value="${esc(S.hero_subtitle)}">
-        </div>
+S.logo_url=u;
 
-        <div class="field full">
-          <label>Crafted Text</label>
-          <input id="hc"
-                 value="${esc(S.crafted_text)}">
-        </div>
+render();
+closeEditor();
 
-      </div>
-    `;
-  }
+msg("✓ Logo selected!");
 
+}
 
-  /* STATS */
+else if(kind==="loading"){
 
-  else if(t==="stats"){
+S.loading_logo_url=u;
 
-    h="Edit Stats";
+render();
+closeEditor();
 
-    b=`
-      <div class="formgrid">
+msg("✓ Loading logo selected!");
 
-        <div class="field">
-          <label>Stat 1 Number</label>
-          <input id="s1"
-                 value="${esc(S.stats_thumbnails)}">
-        </div>
+}
 
-        <div class="field">
-          <label>Stat 1 Label</label>
-          <input id="l1"
-                 value="${esc(S.stats_thumbnails_label)}">
-        </div>
+else if(kind==="footer"){
 
-        <div class="field">
-          <label>Stat 2 Number</label>
-          <input id="s2"
-                 value="${esc(S.stats_creators)}">
-        </div>
+S.footer_logo_url=u;
 
-        <div class="field">
-          <label>Stat 2 Label</label>
-          <input id="l2"
-                 value="${esc(S.stats_creators_label)}">
-        </div>
+render();
+closeEditor();
 
-        <div class="field">
-          <label>Stat 3 Number</label>
-          <input id="s3"
-                 value="${esc(S.stats_years)}">
-        </div>
+msg("✓ Footer logo selected!");
 
-        <div class="field">
-          <label>Stat 3 Label</label>
-          <input id="l3"
-                 value="${esc(S.stats_years_label)}">
-        </div>
+}
 
-      </div>
-    `;
-  }
-
-
-  /* ABOUT */
-
-  else if(t==="about"){
-
-    h="Edit About";
-
-    b=`
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Main Heading</label>
-          <input id="abh"
-                 value="${esc(S.about_heading)}">
-        </div>
-
-        <div class="field full">
-          <label>Sub Heading</label>
-          <input id="abs"
-                 value="${esc(S.about_sub)}">
-        </div>
-
-        <div class="field full">
-          <label>About Text</label>
-          <textarea id="at">${esc(S.about_text)}</textarea>
-        </div>
-
-        ${imageEditor(
-          "about",
-          "About Image",
-          S.about_image_url
-        )}
-
-        <div class="field full">
-          <div id="gallery" class="gallery"></div>
-        </div>
-
-      </div>
-    `;
-  }
-
-
-  /* CONTACT */
-
-  else if(t==="contact"){
-
-    h="Edit Contact";
-
-    b=`
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Heading</label>
-          <textarea id="ct">${esc(S.contact_title)}</textarea>
-        </div>
-
-        <div class="field full">
-          <label>Text</label>
-          <textarea id="cx">${esc(S.contact_text)}</textarea>
-        </div>
-
-        <div class="field">
-          <label>Discord Link</label>
-          <input id="dc"
-                 value="${esc(S.discord_url)}">
-        </div>
-
-        <div class="field">
-          <label>Twitter / X Link</label>
-          <input id="tw"
-                 value="${esc(S.twitter_url)}">
-        </div>
-
-      </div>
-
-      <hr style="border-color:#292929;margin:20px 0">
-
-      <button class="btn primary"
-              onclick="addContactButton()">
-        ＋ Add Button
-      </button>
-
-      <div id="customButtons"
-           style="margin-top:12px">
-
-        ${
-          (S.contact_buttons||[])
-          .map((x,i)=>
-            buttonEditor(x,i)
-          ).join("")
-        }
-
-      </div>
-    `;
-  }
-
-
-  /* THEME */
-
-  else if(t==="theme"){
-
-    h="Edit Theme & Colors";
-
-    const z=[
-      ["bg","bg_color"],
-      ["g1","bg_gradient_1"],
-      ["g2","bg_gradient_2"],
-      ["pr","primary_color"],
-      ["hd","heading_color"],
-      ["tx","text_color"],
-      ["mu","muted_color"],
-      ["ca","card_color"],
-      ["bo","border_color"],
-      ["bu","button_color"],
-      ["bt","button_text_color"],
-      ["ac","accent_color"]
-    ];
-
-    b=`
-      <div class="themegrid">
-
-        ${
-          z.map(x=>`
-            <div class="field">
-
-              <label>${x[1]}</label>
-
-              <input
-                id="${x[0]}"
-                type="color"
-                value="${S[x[1]]}">
-
-            </div>
-          `).join("")
-        }
-
-      </div>
-
-      <div class="field"
-           style="margin-top:12px">
-
-        <label>Gradient Direction</label>
-
-        <select id="gd">
-
-          <option ${
-            S.bg_gradient_direction==="135deg"
-            ?"selected":""
-          }>135deg</option>
-
-          <option ${
-            S.bg_gradient_direction==="90deg"
-            ?"selected":""
-          }>90deg</option>
-
-          <option ${
-            S.bg_gradient_direction==="180deg"
-            ?"selected":""
-          }>180deg</option>
-
-          <option ${
-            S.bg_gradient_direction==="45deg"
-            ?"selected":""
-          }>45deg</option>
-
-        </select>
-
-      </div>
-    `;
-  }
-
-
-  /* LINK PREVIEW */
-
-  else if(t==="link"){
-
-    h="Link Preview";
-
-    b=`
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Title</label>
-          <input id="ot"
-                 value="${esc(S.og_title)}">
-        </div>
-
-        <div class="field full">
-          <label>Description</label>
-          <textarea id="od">${esc(S.og_description)}</textarea>
-        </div>
-
-        ${imageEditor(
-          "og",
-          "Preview Image",
-          S.og_image_url
-        )}
-
-        <div class="field full">
-          <div id="gallery"
-               class="gallery"></div>
-        </div>
-
-      </div>
-    `;
-  }
-
-
-  /* HEADER */
-
-  else if(t==="header"){
-
-    h="Edit Header";
-
-    b=`
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Header Name</label>
-          <input id="hn"
-                 value="${esc(S.header_name)}">
-        </div>
-
-        ${imageEditor(
-          "header",
-          "Header Logo",
-          S.logo_url
-        )}
-
-        <div class="field full">
-          <div id="gallery"
-               class="gallery"></div>
-        </div>
-
-      </div>
-    `;
-  }
-
-
-  /* LOADING */
-
-  else if(t==="loading"){
-
-    h="Edit Logo & Loading Screen";
-
-    b=`
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Loading Screen Text</label>
-          <input id="ln"
-                 value="${esc(S.loading_name)}">
-        </div>
-
-        ${imageEditor(
-          "loading",
-          "Loading Screen Logo",
-          S.loading_logo_url || S.logo_url
-        )}
-
-        <div class="field full">
-          <div id="gallery"
-               class="gallery"></div>
-        </div>
-
-      </div>
-    `;
-  }
-
-
-  /* FOOTER */
-
-  else if(t==="footer"){
-
-    h="Edit Footer";
-
-    b=`
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Footer Name</label>
-          <input id="fn"
-                 value="${esc(S.footer_name)}">
-        </div>
-
-        <div class="field full">
-          <label>Description</label>
-          <textarea id="fd">${esc(S.footer_description)}</textarea>
-        </div>
-
-        <div class="field full">
-          <label>Copyright</label>
-          <input id="fc"
-                 value="${esc(S.footer_copyright)}">
-        </div>
-
-        ${imageEditor(
-          "footer",
-          "Footer Logo",
-          S.footer_logo_url ||
-          S.logo_url
-        )}
-
-        <div class="field full">
-          <div id="gallery"
-               class="gallery"></div>
-        </div>
-
-      </div>
-    `;
-  }
-
-
-  /* CREATOR */
-
-  else if(t==="creator"){
-
-    const x=
-      mid
-      ? C.find(a=>a.id===mid)
-      : null;
-
-    h=
-      x
-      ? "Edit Creator"
-      : "Add Creator";
-
-    b=`
-      <div class="field">
-
-        <label>
-          YouTube Channel URL only
-        </label>
-
-        <input
-          id="yu"
-          value="${esc(x?.youtube_url||"")}"
-          placeholder="https://youtube.com/@channel">
-
-        <button
-          class="btn"
-          style="margin-top:8px"
-          onclick="fetchCreator()">
-
-          Fetch Creator
-
-        </button>
-
-      </div>
-
-      <div id="crmsg"
-           style="
-             color:#777;
-             font-size:12px;
-             margin-top:13px">
-
-        ${
-          x
-          ? `Current: ${esc(x.name)}
-             — ${esc(
-               x.subscribers ||
-               "Subscribers unavailable"
-             )}`
-          : "Enter the channel URL and tap Fetch Creator."
-        }
-
-      </div>
-    `;
-  }
-
-
-  /* FAQ */
-
-  else if(t==="faq"){
-
-    const x=
-      mid
-      ? F.find(a=>a.id===mid)
-      : null;
-
-    h=
-      x
-      ? "Edit FAQ"
-      : "Add FAQ";
-
-    b=`
-      <div class="formgrid">
-
-        <div class="field full">
-          <label>Question</label>
-          <input id="fq"
-                 value="${esc(x?.question||"")}">
-        </div>
-
-        <div class="field full">
-          <label>Answer</label>
-          <textarea id="fa">${esc(x?.answer||"")}</textarea>
-        </div>
-
-      </div>
-    `;
-  }
-
-
-  /* REORDER */
-
-  else if(t==="reorder"){
-
-    h="Edit Section Order";
-
-    b=`
-      <p style="
-        color:#777;
-        font-size:11px;
-        line-height:1.6">
-
-        Drag the ☰ handle on the right.
-        Footer, Link Preview, Logo & Loading Screen,
-        and Theme & Colors stay outside this list.
-
-      </p>
-
-      <div id="modalReorder"
-           class="reorder-list"></div>
-
-      <div class="reorder-actions">
-
-        <button
-          class="btn primary"
-          onclick="saveSectionOrder();closeEditor()">
-
-          Save Section Order
-
-        </button>
-
-      </div>
-    `;
-  }
-
-
-  /* PORTFOLIO */
-
-  else if(t==="portfolio"){
-
-    h="Manage Portfolio";
-
-    b=`
-      <div class="field full">
-
-        <label>Add New Thumbnail</label>
-
-        <input
-          id="pinew"
-          type="file"
-          accept="image/*">
-
-      </div>
-
-      <div class="field full"
-           style="margin-top:12px">
-
-        <label>Thumbnail Title</label>
-
-        <input
-          id="ptnew"
-          placeholder="Minecraft Thumbnail">
-
-      </div>
-
-      <button
-        class="btn primary"
-        style="margin-top:12px"
-        onclick="addPortfolioFromModal()">
-
-        ＋ Add Thumbnail
-
-      </button>
-
-      <div
-        id="portfolioManager"
-        style="margin-top:20px">
-
-      </div>
-    `;
-  }
-
-
-  $("mtitle").textContent=h;
-  $("mbody").innerHTML=b;
-
-  $("modal").classList.add("show");
-
-  if(t==="reorder"){
-    renderModalReorder();
-  }
-
-  if(t==="portfolio"){
-    renderPortfolioManager();
-  }
 }
 
 
 /* =========================================================
-   CONTACT BUTTON EDITOR
-   ========================================================= */
+OPEN EDITOR
+========================================================= */
+
+function openEditor(t,id=null){
+
+type=t;
+mid=id;
+file=null;
+del=false;
+creatorMeta=null;
+
+let h="";
+let b="";
+
+
+/* HERO */
+
+if(t==="hero"){
+
+h="Edit Hero";
+
+b=`
+<div class="formgrid">
+
+<div class="field">
+<label>Availability</label>
+<input id="availx"
+value="${esc(S.new_design_text)}">
+</div>
+
+<div class="field">
+<label>Name</label>
+<input id="namex"
+value="${esc(S.header_name)}">
+</div>
+
+<div class="field">
+<label>Hero Title</label>
+<input id="ht"
+value="${esc(S.hero_title)}">
+</div>
+
+<div class="field">
+<label>Hero Subtitle</label>
+<input id="hs"
+value="${esc(S.hero_subtitle)}">
+</div>
+
+<div class="field">
+<label>Crafted Text</label>
+<input id="hc"
+value="${esc(S.crafted_text)}">
+</div>
+
+</div>
+`;
+}
+
+
+/* STATS */
+
+else if(t==="stats"){
+
+h="Edit Stats";
+
+b=`
+<div class="formgrid">
+
+<div class="field">
+<label>Stat 1 Number</label>
+<input id="s1"
+value="${esc(S.stats_thumbnails)}">
+</div>
+
+<div class="field">
+<label>Stat 1 Label</label>
+<input id="l1"
+value="${esc(S.stats_thumbnails_label)}">
+</div>
+
+<div class="field">
+<label>Stat 2 Number</label>
+<input id="s2"
+value="${esc(S.stats_creators)}">
+</div>
+
+<div class="field">
+<label>Stat 2 Label</label>
+<input id="l2"
+value="${esc(S.stats_creators_label)}">
+</div>
+
+<div class="field">
+<label>Stat 3 Number</label>
+<input id="s3"
+value="${esc(S.stats_years)}">
+</div>
+
+<div class="field">
+<label>Stat 3 Label</label>
+<input id="l3"
+value="${esc(S.stats_years_label)}">
+</div>
+
+</div>
+`;
+}
+
+
+/* ABOUT */
+
+else if(t==="about"){
+
+h="Edit About";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Main Heading</label>
+<input id="abh"
+value="${esc(S.about_heading)}">
+</div>
+
+<div class="field full">
+<label>Sub Heading</label>
+<input id="abs"
+value="${esc(S.about_sub)}">
+</div>
+
+<div class="field full">
+<label>About Text</label>
+<textarea id="at">${esc(S.about_text)}</textarea>
+</div>
+
+${imageInput(
+"about",
+"About Image",
+S.about_image_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('about')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* CONTACT */
+
+else if(t==="contact"){
+
+h="Edit Contact";
+
+let custom=S.contact_buttons||[];
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Heading</label>
+<textarea id="ct">${esc(S.contact_title)}</textarea>
+</div>
+
+<div class="field full">
+<label>Text</label>
+<textarea id="cx">${esc(S.contact_text)}</textarea>
+</div>
+
+<div class="field">
+<label>Discord Link</label>
+<input id="dc"
+value="${esc(S.discord_url)}">
+</div>
+
+<div class="field">
+<label>Twitter / X Link</label>
+<input id="tw"
+value="${esc(S.twitter_url)}">
+</div>
+
+</div>
+
+<hr style="border-color:#292929;margin:18px 0">
+
+<button class="btn primary"
+onclick="addContactButton()">
+＋ Add Button
+</button>
+
+<div id="customButtons"
+style="margin-top:12px">
+
+${custom.map((x,i)=>
+buttonEditor(x,i)
+).join("")}
+
+</div>
+`;
+}
+
+
+/* THEME */
+
+else if(t==="theme"){
+
+h="Edit Theme & Colors";
+
+let z=[
+["bg","bg_color"],
+["g1","bg_gradient_1"],
+["g2","bg_gradient_2"],
+["pr","primary_color"],
+["hd","heading_color"],
+["tx","text_color"],
+["mu","muted_color"],
+["ca","card_color"],
+["bo","border_color"],
+["bu","button_color"],
+["bt","button_text_color"],
+["ac","accent_color"]
+];
+
+b=`
+<div class="themegrid">
+
+${z.map(x=>
+`
+<div class="field">
+<label>${x[1]}</label>
+<input
+id="${x[0]}"
+type="color"
+value="${S[x[1]]}">
+</div>
+`
+).join("")}
+
+</div>
+
+<div class="field" style="margin-top:12px">
+
+<label>Gradient Direction</label>
+
+<select id="gd">
+
+<option ${S.bg_gradient_direction==="135deg"?"selected":""}>
+135deg
+</option>
+
+<option ${S.bg_gradient_direction==="90deg"?"selected":""}>
+90deg
+</option>
+
+<option ${S.bg_gradient_direction==="180deg"?"selected":""}>
+180deg
+</option>
+
+<option ${S.bg_gradient_direction==="45deg"?"selected":""}>
+45deg
+</option>
+
+</select>
+
+</div>
+`;
+}
+
+
+/* LINK PREVIEW */
+
+else if(t==="link"){
+
+h="Link Preview";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Title</label>
+<input id="ot"
+value="${esc(S.og_title)}">
+</div>
+
+<div class="field full">
+<label>Description</label>
+<textarea id="od">${esc(S.og_description)}</textarea>
+</div>
+
+${imageInput(
+"og",
+"Preview Image",
+S.og_image_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('og')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+${
+S.og_image_url
+?
+`
+<button class="deleteimg"
+onclick="
+del=true;
+S.og_image_url='';
+document.getElementById('ogp').innerHTML='';
+">
+🗑 Delete Image
+</button>
+`
+:""
+}
+
+</div>
+
+</div>
+`;
+}
+
+
+/* PORTFOLIO */
+
+else if(t==="portfolio"){
+
+let x=mid?P.find(a=>a.id===mid):null;
+
+h=x?"Edit Thumbnail":"Add Thumbnail";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Title</label>
+<input id="pt"
+value="${esc(x?.title||"")}">
+</div>
+
+${imageInput(
+"pi",
+"Thumbnail Image",
+x?.image_url||""
+)}
+
+</div>
+`;
+}
+
+
+/* CREATOR */
+
+else if(t==="creator"){
+
+let x=mid?C.find(a=>a.id===mid):null;
+
+h=x?"Edit Creator":"Add Creator";
+
+b=`
+<div class="field">
+
+<label>YouTube Channel URL only</label>
+
+<input
+id="yu"
+value="${esc(x?.youtube_url||"")}"
+placeholder="https://youtube.com/@channel">
+
+<button class="btn"
+style="margin-top:8px"
+onclick="fetchCreator()">
+Fetch Creator
+</button>
+
+</div>
+
+<div id="crmsg"
+style="color:#777;font-size:12px;margin-top:13px">
+
+${
+x
+?
+`Current: ${esc(x.name)} — ${esc(
+x.subscribers||"Subscribers unavailable"
+)}`
+:
+"Enter the channel URL and tap Fetch Creator."
+}
+
+</div>
+`;
+}
+
+
+/* FAQ */
+
+else if(t==="faq"){
+
+let x=mid?F.find(a=>a.id===mid):null;
+
+h=x?"Edit FAQ":"Add FAQ";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Question</label>
+<input id="fq"
+value="${esc(x?.question||"")}">
+</div>
+
+<div class="field full">
+<label>Answer</label>
+<textarea id="fa">${esc(x?.answer||"")}</textarea>
+</div>
+
+</div>
+`;
+}
+
+
+/* HEADER */
+
+else if(t==="header"){
+
+h="Edit Header";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Header Name</label>
+<input id="hn"
+value="${esc(S.header_name)}">
+</div>
+
+${imageInput(
+"lg",
+"Header Logo",
+S.logo_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('logo')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* LOADING */
+
+else if(t==="loading"){
+
+h="Edit Loading Screen";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Loading Screen Text</label>
+<input id="ln"
+value="${esc(S.loading_name)}">
+</div>
+
+${imageInput(
+"ll",
+"Loading Logo",
+S.loading_logo_url||S.logo_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('loading')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+<div class="field full">
+
+<p style="color:#777;font-size:11px">
+Logo uses the pop animation and the line expands from the center.
+</p>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* FOOTER */
+
+else if(t==="footer"){
+
+h="Edit Footer";
+
+b=`
+<div class="formgrid">
+
+<div class="field full">
+<label>Footer Name</label>
+<input id="fn"
+value="${esc(S.footer_name)}">
+</div>
+
+<div class="field full">
+<label>Description</label>
+<textarea id="fd">${esc(S.footer_description)}</textarea>
+</div>
+
+<div class="field">
+<label>Explore Heading</label>
+<input id="fe"
+value="${esc(S.footer_explore)}">
+</div>
+
+<div class="field">
+<label>Portfolio</label>
+<input id="fp"
+value="${esc(S.footer_portfolio)}">
+</div>
+
+<div class="field">
+<label>Clients</label>
+<input id="fc"
+value="${esc(S.footer_clients)}">
+</div>
+
+<div class="field">
+<label>About</label>
+<input id="fab"
+value="${esc(S.footer_about)}">
+</div>
+
+<div class="field">
+<label>FAQ</label>
+<input id="ff"
+value="${esc(S.footer_faq)}">
+</div>
+
+<div class="field full">
+<label>Copyright</label>
+<input id="fcopy"
+value="${esc(S.footer_copyright)}">
+</div>
+
+${imageInput(
+"fl",
+"Footer Logo",
+S.footer_logo_url||S.logo_url
+)}
+
+<div class="field full">
+
+<button class="btn"
+onclick="chooseGallery('footer')">
+🖼️ Choose from Gallery
+</button>
+
+<div id="gallery" class="gallery"></div>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* REORDER */
+
+else if(t==="reorder"){
+
+h="Section Reorder";
+
+b=`
+<div class="reorder-list" id="modalReorder">
+
+${
+(S.section_order||[]).map(id=>
+`
+<div class="reorder-item"
+draggable="true"
+data-section="${id}"
+ondragstart="dragStart(event)"
+ondragover="event.preventDefault()"
+ondrop="dropSection(event)">
+
+<span>${sectionNames[id]||id}</span>
+
+<span class="drag">☰</span>
+
+</div>
+`
+).join("")
+}
+
+</div>
+
+<button
+class="btn primary reorder-save"
+onclick="closeEditor();msg('✓ Section order changed. Click Save All Changes.')">
+
+Save Section Order
+</button>
+`;
+}
+
+$("mtitle").textContent=h;
+$("mbody").innerHTML=b;
+$("modal").classList.add("show");
+
+}
+
+
+/* =========================================================
+BUTTON EDITOR
+========================================================= */
 
 function buttonEditor(x,i){
 
-  return `
-    <div class="adminbox"
-         style="margin-top:10px">
+return `
+<div class="adminbox" style="margin-top:10px">
 
-      <div class="formgrid">
+<div class="formgrid">
 
-        <div class="field">
-          <label>Button Name</label>
+<div class="field">
+<label>Button Name</label>
+<input
+data-bi="${i}"
+data-k="name"
+value="${esc(x.name||"")}">
+</div>
 
-          <input
-            data-bi="${i}"
-            data-k="name"
-            value="${esc(x.name||"")}">
-        </div>
+<div class="field">
+<label>Link</label>
+<input
+data-bi="${i}"
+data-k="link"
+value="${esc(x.link||"")}">
+</div>
 
-        <div class="field">
-          <label>Link</label>
+<div class="field">
+<label>Icon / Logo</label>
+<input
+data-bi="${i}"
+data-k="icon"
+value="${esc(x.icon||"")}"
+placeholder="Emoji / icon">
+</div>
 
-          <input
-            data-bi="${i}"
-            data-k="link"
-            value="${esc(x.link||"")}">
-        </div>
+<div class="field">
+<label>Background Color</label>
+<input
+data-bi="${i}"
+data-k="color"
+type="color"
+value="${x.color||"#ffffff"}">
+</div>
 
-        <div class="field">
-          <label>Button Color</label>
+<div class="field">
+<label>Text Color</label>
+<input
+data-bi="${i}"
+data-k="text"
+type="color"
+value="${x.text||"#080808"}">
+</div>
 
-          <input
-            data-bi="${i}"
-            data-k="color"
-            type="color"
-            value="${x.color||"#ffffff"}">
-        </div>
+</div>
 
-        <div class="field">
-          <label>Text Color</label>
+<button
+class="mini danger"
+onclick="this.parentElement.remove()">
+🗑 Remove
+</button>
 
-          <input
-            data-bi="${i}"
-            data-k="text"
-            type="color"
-            value="${x.text||"#080808"}">
-        </div>
-
-        <div class="field full">
-
-          <label>Icon / Logo</label>
-
-          ${
-            x.icon_url
-            ? `
-              <div class="preview">
-                <img
-                  src="${esc(x.icon_url)}"
-                  style="
-                    width:70px;
-                    height:70px;
-                    object-fit:contain;
-                    margin:auto">
-              </div>
-            `
-            : ""
-          }
-
-          <button
-            type="button"
-            class="btn"
-            style="margin-top:8px"
-            onclick="chooseGallery('button:${i}')">
-
-            🖼️ Choose from Gallery
-
-          </button>
-
-          ${
-            x.icon_url
-            ? `
-              <button
-                type="button"
-                class="deleteimg"
-                onclick="removeButtonIcon(${i})">
-
-                🗑 Delete Icon
-
-              </button>
-            `
-            : ""
-          }
-
-        </div>
-
-      </div>
-
-      <button
-        class="mini danger"
-        onclick="
-          this.closest('.adminbox').remove();
-          markDirty()
-        ">
-
-        🗑 Remove
-
-      </button>
-
-    </div>
-  `;
+</div>
+`;
 }
 
 
 function addContactButton(){
 
-  const box=
-    $("customButtons");
+let box=document.getElementById("customButtons");
 
-  const i=
-    box.querySelectorAll(
-      ".adminbox"
-    ).length;
+let i=box.children.length;
 
-  box.insertAdjacentHTML(
-    "beforeend",
-    buttonEditor(
-      {
-        name:"New Button",
-        link:"#",
-        color:"#ffffff",
-        text:"#080808",
-        icon_url:""
-      },
-      i
-    )
-  );
-
-  markDirty();
-}
-
-
-function removeButtonIcon(i){
-
-  if(
-    S.contact_buttons &&
-    S.contact_buttons[i]
-  ){
-    S.contact_buttons[i].icon_url="";
-  }
-
-  markDirty();
-
-  openEditor("contact");
+box.insertAdjacentHTML(
+"beforeend",
+buttonEditor(
+{
+name:"New Button",
+link:"#",
+icon:"",
+color:"#ffffff",
+text:"#080808"
+},
+i
+)
+);
 }
 
 
 /* =========================================================
-   PORTFOLIO MANAGER
-   ========================================================= */
+CLOSE
+========================================================= */
 
-function renderPortfolioManager(){
-
-  const box=
-    $("portfolioManager");
-
-  if(!box) return;
-
-  box.innerHTML=
-    P.length
-    ? P.map((x,i)=>`
-        <div class="adminbox"
-             style="margin-top:10px">
-
-          <div style="
-            display:flex;
-            gap:12px;
-            align-items:center">
-
-            <img
-              src="${esc(x.image_url)}"
-              style="
-                width:100px;
-                height:58px;
-                object-fit:cover;
-                border-radius:7px">
-
-            <div style="flex:1">
-
-              <b>
-                ${esc(
-                  x.title ||
-                  "Minecraft Thumbnail"
-                )}
-              </b>
-
-              <div style="
-                color:#666;
-                font-size:10px;
-                margin-top:5px">
-
-                Position ${i+1}
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="ic-actions">
-
-            <button
-              class="mini"
-              onclick="
-                editPortfolioSave(${x.id})
-              ">
-
-              ✏️ Edit
-
-            </button>
-
-            <button
-              class="mini"
-              onclick="
-                moveRow(
-                  'portfolio',
-                  ${i},
-                  -1
-                )
-              ">
-
-              ↑
-
-            </button>
-
-            <button
-              class="mini"
-              onclick="
-                moveRow(
-                  'portfolio',
-                  ${i},
-                  1
-                )
-              ">
-
-              ↓
-
-            </button>
-
-            <button
-              class="mini danger"
-              onclick="
-                deleteRow(
-                  'portfolio',
-                  ${x.id}
-                )
-              ">
-
-              🗑 Delete
-
-            </button>
-
-          </div>
-
-        </div>
-      `).join("")
-    : `
-      <p style="color:#777">
-        No thumbnails yet.
-      </p>
-    `;
-}
-
-
-async function addPortfolioFromModal(){
-
-  try{
-
-    const f=
-      $("pinew")?.files?.[0];
-
-    const title=
-      $("ptnew")?.value.trim() ||
-      "Minecraft Thumbnail";
-
-    if(!f){
-      throw Error(
-        "Please choose a thumbnail image."
-      );
-    }
-
-    const im=
-      await uploadImage(
-        f,
-        "portfolio"
-      );
-
-    const r=
-      await sb
-        .from("portfolio")
-        .insert({
-          title,
-          image_url:im,
-          display_order:P.length
-        });
-
-    if(r.error){
-      throw r.error;
-    }
-
-    const q=
-      await sb
-        .from("portfolio")
-        .select("*")
-        .order(
-          "display_order",
-          {ascending:true}
-        )
-        .order(
-          "id",
-          {ascending:true}
-        );
-
-    if(q.error){
-      throw q.error;
-    }
-
-    P=q.data||[];
-
-    render();
-
-    markDirty();
-
-    msg(
-      "✓ Thumbnail added. Save All Changes."
-    );
-
-  }catch(e){
-
-    msg(
-      e.message ||
-      String(e),
-      true
-    );
-  }
-}
-
-
-async function editPortfolioSave(id){
-
-  const x=
-    P.find(a=>a.id===id);
-
-  if(!x) return;
-
-  const title=
-    prompt(
-      "Thumbnail title:",
-      x.title ||
-      "Minecraft Thumbnail"
-    );
-
-  if(title===null) return;
-
-  const r=
-    await sb
-      .from("portfolio")
-      .update({
-        title:
-          title.trim() ||
-          "Minecraft Thumbnail"
-      })
-      .eq("id",id);
-
-  if(r.error){
-    msg(
-      r.error.message,
-      true
-    );
-    return;
-  }
-
-  x.title=
-    title.trim() ||
-    "Minecraft Thumbnail";
-
-  render();
-
-  markDirty();
+function closeEditor(){
+$("modal").classList.remove("show");
 }
 
 
 /* =========================================================
-   MODAL REORDER
-   ========================================================= */
-
-function renderModalReorder(){
-
-  const box=
-    $("modalReorder");
-
-  if(!box) return;
-
-  box.innerHTML=
-    reorderOrder.map(id=>`
-      <div class="reorder-row"
-           draggable="true"
-           data-section="${id}"
-           ondragstart="dragStart(event)"
-           ondragover="dragOver(event)"
-           ondrop="dropModalRow(event)">
-
-        <span class="reorder-label">
-          ${ORDER_LABELS[id]}
-        </span>
-
-        <span class="drag-handle">
-          ☰
-        </span>
-
-      </div>
-    `).join("");
-}
-
-
-function dropModalRow(e){
-
-  e.preventDefault();
-
-  const target=
-    e.currentTarget.dataset.section;
-
-  if(
-    !dragId ||
-    dragId===target
-  ) return;
-
-  const a=
-    reorderOrder.indexOf(dragId);
-
-  const b=
-    reorderOrder.indexOf(target);
-
-  reorderOrder.splice(a,1);
-  reorderOrder.splice(b,0,dragId);
-
-  renderModalReorder();
-  renderReorder();
-
-  applyAdminOrder();
-
-  markDirty();
-}
-
-
-/* =========================================================
-   SAVE MODAL
-   ========================================================= */
+SAVE MODAL
+========================================================= */
 
 async function saveModal(){
 
-  try{
+try{
 
-    /* HERO */
+/* HERO */
 
-    if(type==="hero"){
+if(type==="hero"){
 
-      await patch({
-        header_name:
-          $("namex").value.trim(),
+await patch({
 
-        new_design_text:
-          $("availx").value.trim(),
+header_name:$("namex").value.trim(),
 
-        hero_title:
-          $("ht").value.trim(),
+new_design_text:
+$("availx").value.trim(),
 
-        hero_subtitle:
-          $("hs").value.trim(),
+hero_title:
+$("ht").value.trim(),
 
-        crafted_text:
-          $("hc").value.trim()
-      });
-    }
+hero_subtitle:
+$("hs").value.trim(),
 
+crafted_text:
+$("hc").value.trim()
 
-    /* STATS */
+});
 
-    else if(type==="stats"){
+}
 
-      await patch({
 
-        stats_thumbnails:
-          $("s1").value.trim(),
+/* STATS */
 
-        stats_thumbnails_label:
-          $("l1").value.trim(),
+else if(type==="stats"){
 
-        stats_creators:
-          $("s2").value.trim(),
+await patch({
 
-        stats_creators_label:
-          $("l2").value.trim(),
+stats_thumbnails:
+$("s1").value.trim(),
 
-        stats_years:
-          $("s3").value.trim(),
+stats_thumbnails_label:
+$("l1").value.trim(),
 
-        stats_years_label:
-          $("l3").value.trim()
-      });
-    }
+stats_creators:
+$("s2").value.trim(),
 
+stats_creators_label:
+$("l2").value.trim(),
 
-    /* ABOUT */
+stats_years:
+$("s3").value.trim(),
 
-    else if(type==="about"){
+stats_years_label:
+$("l3").value.trim()
 
-      let im=
-        S.about_image_url;
+});
 
-      const f=
-        $("aboutFile")?.files?.[0];
+}
 
-      if(f){
-        im=
-          await uploadImage(
-            f,
-            "about"
-          );
-      }
 
-      await patch({
+/* ABOUT */
 
-        about_heading:
-          $("abh").value.trim(),
+else if(type==="about"){
 
-        about_sub:
-          $("abs").value.trim(),
+let im=S.about_image_url;
 
-        about_text:
-          $("at").value.trim(),
+if(file)
+im=await upload(file,"about");
 
-        about_image_url:im
-      });
-    }
+await patch({
 
+about_heading:
+$("abh").value.trim(),
 
-    /* CONTACT */
+about_sub:
+$("abs").value.trim(),
 
-    else if(type==="contact"){
+about_text:
+$("at").value.trim(),
 
-      const els=
-        [
-          ...document.querySelectorAll(
-            "#customButtons [data-bi]"
-          )
-        ];
+about_image_url:im
 
-      let arr=[];
+});
 
-      els.forEach(el=>{
+}
 
-        const i=
-          Number(
-            el.dataset.bi
-          );
 
-        if(!arr[i]){
-          arr[i]={
-            ...(S.contact_buttons?.[i]||{})
-          };
-        }
+/* CONTACT */
 
-        arr[i][el.dataset.k]=
-          el.value;
-      });
+else if(type==="contact"){
 
-      arr=
-        arr.filter(
-          x=>x && x.name
-        );
+let els=[
+...document.querySelectorAll("[data-bi]")
+];
 
-      await patch({
+let arr=[];
 
-        contact_title:
-          $("ct").value,
+els.forEach(el=>{
 
-        contact_text:
-          $("cx").value,
+let i=+el.dataset.bi;
 
-        discord_url:
-          $("dc").value.trim(),
+if(!arr[i])arr[i]={};
 
-        twitter_url:
-          $("tw").value.trim(),
+arr[i][el.dataset.k]=el.value;
 
-        contact_buttons:arr
-      });
-    }
+});
 
+await patch({
 
-    /* THEME */
+contact_title:$("ct").value,
 
-    else if(type==="theme"){
+contact_text:$("cx").value,
 
-      await patch({
+discord_url:$("dc").value.trim(),
 
-        bg_color:$("bg").value,
-        bg_gradient_1:$("g1").value,
-        bg_gradient_2:$("g2").value,
+twitter_url:$("tw").value.trim(),
 
-        primary_color:$("pr").value,
-        heading_color:$("hd").value,
-        text_color:$("tx").value,
-        muted_color:$("mu").value,
+contact_buttons:
+arr.filter(x=>x.name)
 
-        card_color:$("ca").value,
-        border_color:$("bo").value,
+});
 
-        button_color:$("bu").value,
-        button_text_color:$("bt").value,
+}
 
-        accent_color:$("ac").value,
 
-        bg_gradient_direction:
-          $("gd").value
-      });
-    }
+/* THEME */
 
+else if(type==="theme"){
 
-    /* LINK PREVIEW */
+await patch({
 
-    else if(type==="link"){
+bg_color:$("bg").value,
 
-      let im=
-        S.og_image_url;
+bg_gradient_1:$("g1").value,
 
-      const f=
-        $("ogFile")?.files?.[0];
+bg_gradient_2:$("g2").value,
 
-      if(f){
-        im=
-          await uploadImage(
-            f,
-            "link-preview"
-          );
-      }
+primary_color:$("pr").value,
 
-      await patch({
+heading_color:$("hd").value,
 
-        og_title:
-          $("ot").value.trim(),
+text_color:$("tx").value,
 
-        og_description:
-          $("od").value.trim(),
+muted_color:$("mu").value,
 
-        og_image_url:im
-      });
-    }
+card_color:$("ca").value,
 
+border_color:$("bo").value,
 
-    /* HEADER */
+button_color:$("bu").value,
 
-    else if(type==="header"){
+button_text_color:$("bt").value,
 
-      let im=
-        S.logo_url;
+accent_color:$("ac").value,
 
-      const f=
-        $("headerFile")?.files?.[0];
+bg_gradient_direction:$("gd").value
 
-      if(f){
-        im=
-          await uploadImage(
-            f,
-            "logo"
-          );
-      }
+});
 
-      await patch({
+}
 
-        header_name:
-          $("hn").value.trim(),
 
-        logo_url:im
-      });
-    }
+/* LINK PREVIEW */
 
+else if(type==="link"){
 
-    /* LOADING */
+let im=S.og_image_url;
 
-    else if(type==="loading"){
+if(del)im="";
 
-      let im=
-        S.loading_logo_url ||
-        S.logo_url;
+if(file)
+im=await upload(file,"link-preview");
 
-      const f=
-        $("loadingFile")?.files?.[0];
+await patch({
 
-      if(f){
-        im=
-          await uploadImage(
-            f,
-            "loading"
-          );
-      }
+og_title:$("ot").value.trim(),
 
-      await patch({
+og_description:
+$("od").value.trim(),
 
-        loading_name:
-          $("ln").value.trim(),
+og_image_url:im
 
-        loading_logo_url:im
-      });
-    }
+});
 
+}
 
-    /* FOOTER */
 
-    else if(type==="footer"){
+/* HEADER */
 
-      let logo=
-        S.footer_logo_url ||
-        S.logo_url;
+else if(type==="header"){
 
-      const f=
-        $("footerFile")?.files?.[0];
+let im=S.logo_url;
 
-      if(f){
-        logo=
-          await uploadImage(
-            f,
-            "footer"
-          );
-      }
+if(file)
+im=await upload(file,"logo");
 
-      await patch({
+await patch({
 
-        footer_name:
-          $("fn").value.trim(),
+header_name:
+$("hn").value.trim(),
 
-        footer_description:
-          $("fd").value.trim(),
+logo_url:im
 
-        footer_copyright:
-          $("fc").value.trim(),
+});
 
-        footer_logo_url:
-          logo
-      });
-    }
+}
 
 
-    /* FAQ */
+/* LOADING */
 
-    else if(type==="faq"){
+else if(type==="loading"){
 
-      const payload={
-        question:
-          $("fq").value.trim(),
+let im=
+S.loading_logo_url||
+S.logo_url;
 
-        answer:
-          $("fa").value.trim()
-      };
+if(file)
+im=await upload(file,"loading");
 
-      let r;
+await patch({
 
-      if(mid){
+loading_name:
+$("ln").value.trim(),
 
-        r=
-          await sb
-            .from("faq")
-            .update(payload)
-            .eq("id",mid);
+loading_logo_url:im
 
-      }else{
+});
 
-        r=
-          await sb
-            .from("faq")
-            .insert({
-              ...payload,
-              display_order:F.length
-            });
-      }
+}
 
-      if(r.error){
-        throw r.error;
-      }
 
-      const q=
-        await sb
-          .from("faq")
-          .select("*")
-          .order(
-            "display_order",
-            {ascending:true}
-          )
-          .order(
-            "id",
-            {ascending:true}
-          );
+/* FOOTER */
 
-      F=q.data||[];
+else if(type==="footer"){
 
-      render();
+let im=
+S.footer_logo_url||
+S.logo_url;
 
-      markDirty();
-    }
+if(file)
+im=await upload(file,"footer");
 
+await patch({
 
-    /* CREATOR */
+footer_name:
+$("fn").value.trim(),
 
-    else if(type==="creator"){
+footer_description:
+$("fd").value.trim(),
 
-      const u=
-        $("yu").value.trim();
+footer_explore:
+$("fe").value.trim(),
 
-      if(!u){
-        throw Error(
-          "Please enter a YouTube channel URL."
-        );
-      }
+footer_portfolio:
+$("fp").value.trim(),
 
-      const m=
-        creatorMeta ||
-        await creatorData(u);
+footer_clients:
+$("fc").value.trim(),
 
-      const payload={
-        youtube_url:u,
-        name:
-          m.name ||
-          "Creator",
+footer_about:
+$("fab").value.trim(),
 
-        image_url:
-          m.image_url ||
-          "images/logo.png",
+footer_faq:
+$("ff").value.trim(),
 
-        subscribers:
-          m.subscribers ||
-          "Subscribers unavailable"
-      };
+footer_copyright:
+$("fcopy").value.trim(),
 
-      let r;
+footer_logo_url:im
 
-      if(mid){
+});
 
-        r=
-          await sb
-            .from("creators")
-            .update(payload)
-            .eq("id",mid);
+}
 
-      }else{
 
-        r=
-          await sb
-            .from("creators")
-            .insert({
-              ...payload,
-              display_order:C.length
-            });
-      }
+/* PORTFOLIO */
 
-      if(r.error){
-        throw r.error;
-      }
+else if(type==="portfolio"){
 
-      const q=
-        await sb
-          .from("creators")
-          .select("*")
-          .order(
-            "display_order",
-            {ascending:true}
-          )
-          .order(
-            "id",
-            {ascending:true}
-          );
+let x=mid
+?P.find(a=>a.id===mid)
+:null;
 
-      C=q.data||[];
+let im=x?.image_url||"";
 
-      render();
+if(file)
+im=await upload(file,"portfolio");
 
-      markDirty();
-    }
+if(!im)
+throw Error("Please choose a thumbnail image.");
 
+let r;
 
-    closeEditor();
+if(x){
 
-    msg(
-      "✓ Changes saved successfully!"
-    );
+r=await sb
+.from("portfolio")
+.update({
+title:$("pt").value.trim(),
+image_url:im
+})
+.eq("id",x.id);
 
-  }catch(e){
+}else{
 
-    msg(
-      e.message ||
-      String(e),
-      true
-    );
-  }
+r=await sb
+.from("portfolio")
+.insert({
+title:$("pt").value.trim()||
+"Minecraft Thumbnail",
+
+image_url:im,
+
+display_order:P.length
+});
+
+}
+
+if(r.error)throw r.error;
+
+let q=await sb
+.from("portfolio")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
+
+P=q.data||[];
+
+render();
+
+}
+
+
+/* CREATOR */
+
+else if(type==="creator"){
+
+let u=$("yu").value.trim();
+
+if(!u)
+throw Error("Please enter a YouTube channel URL.");
+
+let m=
+creatorMeta||
+await creatorData(u);
+
+let payload={
+youtube_url:u,
+name:m.name||"Creator",
+image_url:m.image_url||"images/logo.png",
+subscribers:m.subscribers||
+"Subscribers unavailable"
+};
+
+let r;
+
+if(mid){
+
+r=await sb
+.from("creators")
+.update(payload)
+.eq("id",mid);
+
+}else{
+
+r=await sb
+.from("creators")
+.insert({
+...payload,
+display_order:C.length
+});
+
+}
+
+if(r.error)throw r.error;
+
+let q=await sb
+.from("creators")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
+
+C=q.data||[];
+
+render();
+
+}
+
+
+/* FAQ */
+
+else if(type==="faq"){
+
+let r;
+
+if(mid){
+
+r=await sb
+.from("faq")
+.update({
+question:$("fq").value.trim(),
+answer:$("fa").value.trim()
+})
+.eq("id",mid);
+
+}else{
+
+r=await sb
+.from("faq")
+.insert({
+question:$("fq").value.trim(),
+answer:$("fa").value.trim(),
+display_order:F.length
+});
+
+}
+
+if(r.error)throw r.error;
+
+let q=await sb
+.from("faq")
+.select("*")
+.order("display_order",{ascending:true})
+.order("id",{ascending:true});
+
+F=q.data||[];
+
+render();
+
+}
+
+
+/* REORDER */
+
+else if(type==="reorder"){
+
+await patch({
+section_order:S.section_order
+});
+
+}
+
+closeEditor();
+
+msg("✓ Changes saved successfully!");
+
+}catch(e){
+
+msg(e.message,true);
+
+}
+
 }
 
 
 /* =========================================================
-   YOUTUBE
-   ========================================================= */
+YOUTUBE
+========================================================= */
 
 async function creatorData(u){
 
-  const key=
-    "ytcache:"+u;
+let key="ytcache:"+u;
 
-  try{
+try{
 
-    const c=
-      JSON.parse(
-        localStorage.getItem(key) ||
-        "null"
-      );
+let c=
+JSON.parse(
+localStorage.getItem(key)||"null"
+);
 
-    if(
-      c &&
-      Date.now()-c.time <
-      86400000
-    ){
-      return c.data;
-    }
+if(
+c &&
+Date.now()-c.time<86400000
+)
+return c.data;
 
-  }catch(e){}
+}catch(e){}
 
+let r=await fetch(
+"https://www.youtube.com/oembed?url="+
+encodeURIComponent(u)+
+"&format=json"
+);
 
-  const r=
-    await fetch(
-      "https://www.youtube.com/oembed?url="+
-      encodeURIComponent(u)+
-      "&format=json"
-    );
+if(!r.ok)
+throw Error(
+"Could not read this YouTube channel."
+);
 
-  if(!r.ok){
+let j=await r.json();
 
-    throw Error(
-      "Could not read this YouTube channel."
-    );
-  }
+let d={
+name:j.author_name||"",
+image_url:j.thumbnail_url||"",
+subscribers:"Subscribers unavailable"
+};
 
-  const j=
-    await r.json();
+localStorage.setItem(
+key,
+JSON.stringify({
+time:Date.now(),
+data:d
+})
+);
 
-  const d={
-    name:
-      j.author_name ||
-      "",
-
-    image_url:
-      j.thumbnail_url ||
-      "",
-
-    subscribers:
-      "Subscribers unavailable"
-  };
-
-  localStorage.setItem(
-    key,
-    JSON.stringify({
-      time:Date.now(),
-      data:d
-    })
-  );
-
-  return d;
+return d;
 }
 
 
 async function fetchCreator(){
 
-  try{
+try{
 
-    const u=
-      $("yu").value.trim();
+creatorMeta=
+await creatorData(
+$("yu").value.trim()
+);
 
-    if(!u){
-      throw Error(
-        "Enter the channel URL first."
-      );
-    }
+$("crmsg").innerHTML=
+`
+<b style="color:#fff">
+${esc(creatorMeta.name)}
+</b>
+<br>
+${esc(creatorMeta.subscribers)}
+`;
 
-    creatorMeta=
-      await creatorData(u);
+}catch(e){
 
-    $("crmsg").innerHTML=`
-      <b style="color:#fff">
-        ${esc(creatorMeta.name)}
-      </b>
+$("crmsg").textContent=e.message;
 
-      <br>
+}
 
-      ${esc(
-        creatorMeta.subscribers
-      )}
-    `;
-
-  }catch(e){
-
-    $("crmsg").textContent=
-      e.message;
-  }
 }
 
 
 /* =========================================================
-   MOVE / DELETE
-   ========================================================= */
+MOVE
+========================================================= */
 
-async function moveRow(
-  kind,
-  i,
-  d
-){
+async function move(kind,i,d){
 
-  const a=
-    kind==="portfolio"
-    ? P
-    : kind==="creators"
-    ? C
-    : F;
+let a=
+kind==="portfolio"
+?P
+:kind==="creators"
+?C
+:F;
 
-  const n=i+d;
+let n=i+d;
 
-  if(
-    n<0 ||
-    n>=a.length
-  ) return;
+if(n<0||n>=a.length)return;
 
-  const b=[...a];
+let b=[...a];
 
-  [b[i],b[n]]=
-    [b[n],b[i]];
+[b[i],b[n]]=[b[n],b[i]];
 
-  const table=
-    kind==="portfolio"
-    ? "portfolio"
-    : kind;
+let table=
+kind==="portfolio"
+?"portfolio"
+:kind==="creators"
+?"creators"
+:"faq";
 
-  for(
-    let j=0;
-    j<b.length;
-    j++
-  ){
+for(let j=0;j<b.length;j++){
 
-    const r=
-      await sb
-        .from(table)
-        .update({
-          display_order:j
-        })
-        .eq(
-          "id",
-          b[j].id
-        );
+let r=await sb
+.from(table)
+.update({
+display_order:j
+})
+.eq("id",b[j].id);
 
-    if(r.error){
+if(r.error)
+return msg(r.error.message,true);
 
-      msg(
-        r.error.message,
-        true
-      );
-
-      return;
-    }
-  }
-
-  if(kind==="portfolio") P=b;
-  if(kind==="creators") C=b;
-  if(kind==="faq") F=b;
-
-  render();
-
-  markDirty();
 }
 
+if(kind==="portfolio")P=b;
+else if(kind==="creators")C=b;
+else F=b;
 
-async function deleteRow(
-  kind,
-  id
-){
+render();
 
-  if(
-    !confirm(
-      "Delete this item?"
-    )
-  ){
-    return;
-  }
+msg("✓ Order updated!");
 
-  const table=
-    kind==="portfolio"
-    ? "portfolio"
-    : kind;
-
-  const r=
-    await sb
-      .from(table)
-      .delete()
-      .eq("id",id);
-
-  if(r.error){
-
-    msg(
-      r.error.message,
-      true
-    );
-
-    return;
-  }
-
-  if(kind==="portfolio"){
-    P=P.filter(x=>x.id!==id);
-  }
-
-  if(kind==="creators"){
-    C=C.filter(x=>x.id!==id);
-  }
-
-  if(kind==="faq"){
-    F=F.filter(x=>x.id!==id);
-  }
-
-  render();
-
-  markDirty();
-
-  msg(
-    "✓ Deleted. Save All Changes."
-  );
 }
 
 
 /* =========================================================
-   VIEWER
-   ========================================================= */
+DELETE
+========================================================= */
+
+async function delRow(kind,id){
+
+if(!confirm("Delete this item?"))
+return;
+
+let table=
+kind==="portfolio"
+?"portfolio"
+:kind==="creators"
+?"creators"
+:"faq";
+
+let r=await sb
+.from(table)
+.delete()
+.eq("id",id);
+
+if(r.error)
+return msg(r.error.message,true);
+
+if(kind==="portfolio")
+P=P.filter(x=>x.id!==id);
+
+else if(kind==="creators")
+C=C.filter(x=>x.id!==id);
+
+else
+F=F.filter(x=>x.id!==id);
+
+render();
+
+msg("✓ Deleted successfully!");
+
+}
+
+
+/* =========================================================
+VIEW IMAGE
+========================================================= */
 
 function view(u){
 
-  $("vimg").src=u;
+$("vimg").src=u;
 
-  $("viewer")
-    .classList
-    .add("show");
+$("viewer").classList.add("show");
+
 }
 
 function closeViewer(){
 
-  $("viewer")
-    .classList
-    .remove("show");
+$("viewer").classList.remove("show");
+
 }
 
 
 /* =========================================================
-   CLOSE
-   ========================================================= */
-
-function closeEditor(){
-
-  $("modal")
-    .classList
-    .remove("show");
-}
-
-
-/* =========================================================
-   SAVE ALL
-   ========================================================= */
+SAVE ALL
+========================================================= */
 
 async function saveAll(){
 
-  try{
+try{
 
-    const payload={
-      ...S,
-      section_order:
-        normalizeOrder(
-          reorderOrder
-        )
-    };
+let r=await sb
+.from("site_settings")
+.update(S)
+.eq("id",1);
 
-    const r=
-      await sb
-        .from("site_settings")
-        .update(payload)
-        .eq("id",1);
+if(r.error)
+throw r.error;
 
-    if(r.error){
-      throw r.error;
-    }
+msg(
+"✓ All changes saved successfully!"
+);
 
-    S={
-      ...S,
-      section_order:
-        normalizeOrder(
-          reorderOrder
-        )
-    };
+}catch(e){
 
-    render();
+msg(e.message,true);
 
-    msg(
-      "✓ All changes saved successfully!"
-    );
+}
 
-  }catch(e){
-
-    msg(
-      e.message ||
-      String(e),
-      true
-    );
-  }
 }
 
 
 /* =========================================================
-   LOGOUT
-   ========================================================= */
+LOGOUT
+========================================================= */
 
 async function logout(){
 
-  await sb.auth.signOut();
+await sb.auth.signOut();
 
-  location.href=
-    "admin.html";
+location.href="admin.html";
+
 }
 
 
 /* =========================================================
-   FADE EFFECT
-   ========================================================= */
+ONE TIME SCROLL FADE
+========================================================= */
 
 function setupFade(){
 
-  const o=
-    new IntersectionObserver(
-      entries=>{
-        entries.forEach(e=>{
+const observer=
+new IntersectionObserver(
+entries=>{
 
-          if(e.isIntersecting){
+entries.forEach(entry=>{
 
-            e.target
-              .classList
-              .add("show");
+if(entry.isIntersecting){
 
-            o.unobserve(
-              e.target
-            );
-          }
+entry.target.classList.add("show");
 
-        });
-      },
-      {
-        threshold:.12
-      }
-    );
+observer.unobserve(
+entry.target
+);
 
-  document
-    .querySelectorAll(
-      "#adminMain > .section"
-    )
-    .forEach(e=>{
+}
 
-      e.classList.add(
-        "fade-effect"
-      );
+});
 
-      o.observe(e);
-    });
+},
+{
+threshold:.12
+}
+);
+
+document
+.querySelectorAll(
+".section"
+)
+.forEach(el=>{
+
+el.classList.add(
+"fade-effect"
+);
+
+observer.observe(el);
+
+});
+
 }
 
 
 /* =========================================================
-   START
-   ========================================================= */
+START
+========================================================= */
 
 async function start(){
 
-  try{
+let r=
+await sb.auth.getSession();
 
-    const r=
-      await sb.auth.getSession();
+if(!r.data.session){
 
-    if(
-      !r.data.session
-    ){
+location.href="admin.html";
 
-      location.href=
-        "admin.html";
+return;
 
-      return;
-    }
-
-    await load();
-
-    setupFade();
-
-    setTimeout(
-      ()=>$("loader")
-        .classList
-        .add("hide"),
-      700
-    );
-
-  }catch(e){
-
-    $("status").textContent=
-      "Error: "+
-      (
-        e.message ||
-        e
-      );
-
-    $("status").style.color=
-      "#ff7777";
-
-    console.error(e);
-  }
-
-  setTimeout(()=>{
-
-    const l=
-      $("loader");
-
-    if(
-      l &&
-      !l.classList.contains("hide")
-    ){
-      l.classList.add("hide");
-    }
-
-  },5000);
 }
 
+await load();
 
-/* =========================================================
-   EVENTS
-   ========================================================= */
+setupFade();
+
+}
 
 sb.auth.onAuthStateChange(
-  e=>{
+e=>{
 
-    if(
-      e==="SIGNED_OUT"
-    ){
-      location.href=
-        "admin.html";
-    }
+if(e==="SIGNED_OUT")
+location.href="admin.html";
 
-  }
+}
 );
-
 
 document.addEventListener(
-  "keydown",
-  e=>{
+"keydown",
+e=>{
 
-    if(e.key==="Escape"){
+if(e.key==="Escape"){
 
-      closeEditor();
-      closeViewer();
+closeEditor();
+closeViewer();
 
-    }
+}
 
-  }
+}
 );
-
 
 start();
 
