@@ -12,6 +12,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+  .fade-effect {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-effect.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+  
 *{
   box-sizing:border-box;
   margin:0;
