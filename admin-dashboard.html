@@ -44,6 +44,12 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const DEFAULTS={id:1,views:0,header_name:"Mr CrowSensei",logo_url:"",new_design_text:"New Designs Available",hero_title:"Professional Minecraft Thumbnails",hero_subtitle:"",crafted_text:"Crafted for Creators",stats_thumbnails:"100+",stats_creators:"50+",stats_years:"2+",stats_thumbnails_label:"THUMBNAILS",stats_creators_label:"CREATORS",stats_years_label:"YEARS DESIGNING",about_heading:"The designer behind the thumbnails.",about_sub:"Turning Minecraft ideas into clickable visuals.",about_text:"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",about_image_url:"",creator_heading:"Trusted by creators.",creator_intro:"Creators who trust Mr CrowSensei for their Minecraft thumbnails.",discord_url:"https://discord.com/users/1492187397058855163",twitter_url:"https://x.com/MrCrowSensei",contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",contact_text:"Send your video idea and deadline.\nI'll reply with availability and the next steps.",contact_buttons:[],footer_name:"Mr CrowSensei",footer_description:"Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.",footer_copyright:"© 2026 Mr CrowSensei",bg_color:"#080808",bg_gradient_1:"#151515",bg_gradient_2:"#080808",bg_gradient_direction:"135deg",primary_color:"#ffffff",heading_color:"#ffffff",text_color:"#f7f8ff",muted_color:"#85858a",card_color:"#111111",border_color:"#292929",button_color:"#ffffff",button_text_color:"#080808",accent_color:"#35e36b",og_title:"Mr CrowSensei — Thumbnail Designer",og_description:"Mr CrowSensei — Professional Minecraft Thumbnail Designer",og_image_url:"/og-banner.png",loading_logo_url:"",loading_name:"Mr CrowSensei",section_order:["home","stats","work","clients","about","faq","contact"]};
 let S={...DEFAULTS},P=[],C=[],F=[],type="",mid=null,file=null,del=false,creatorMeta=null,dirty=false,reorderOrder=[...DEFAULTS.section_order],expanded={portfolio:false,creators:false};
 const $=id=>document.getElementById(id);
+function hideLoader(){
+  const el=$("loader");
+  if(!el)return;
+  el.classList.add("hide");
+  setTimeout(()=>{try{el.remove()}catch(e){}},650);
+}
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 function markDirty(){dirty=true;$('savebar').classList.add('dirty');$('status').textContent='• Unsaved changes';$('status').style.color='#fff'}
 function msg(t="✓ All changes saved successfully!",bad=false){$('status').textContent=t;$('status').style.color=bad?'#ff7777':'#65e88a';if(!bad){dirty=false;$('savebar').classList.remove('dirty')}clearTimeout(window.__msg);window.__msg=setTimeout(()=>{if(!dirty)$('status').textContent='';},3500)}
@@ -83,7 +89,9 @@ async function load(){
  let s=await sb.from('site_settings').select('*').eq('id',1).maybeSingle();
  if(s.error)throw s.error;
  if(s.data)S={...DEFAULTS,...s.data};
-if(!S.og_image_url || /(?:logo\.png|images\/logo)/i.test(String(S.og_image_url))) S.og_image_url='/og-banner.png';else{let r=await sb.from('site_settings').insert(DEFAULTS);if(r.error)throw r.error;S={...DEFAULTS}}
+if(!S.og_image_url || /(?:logo\.png|images\/logo)/i.test(String(S.og_image_url))){
+  S.og_image_url='/og-banner.png';
+}
  reorderOrder=normalizeOrder(S.section_order);applyPublicOrder();
  let p=await sb.from('portfolio').select('*').order('display_order',{ascending:true}).order('id',{ascending:true});if(p.error)throw p.error;P=p.data||[];
  let c=await sb.from('creators').select('*').order('display_order',{ascending:true}).order('id',{ascending:true});if(c.error&&c.code!=='42P01')throw c.error;C=c.data||[];
@@ -230,17 +238,8 @@ function setupFade(){const o=new IntersectionObserver(entries=>entries.forEach(e
 async function start(){
   const LOADER_MS=1500;
 
-  // The loading screen is independent from Supabase.
-  // It always ends after 1.5 seconds.
-  setTimeout(()=>{try{hideLoader()}catch(e){}},LOADER_MS);
-
-  // Render the panel first so a slow network request cannot keep it hidden.
-  try{
-    render();
-    setupFade();
-  }catch(e){
-    console.error("Initial panel render:",e);
-  }
+  // Loader is always released after 1.5 seconds.
+  window.setTimeout(()=>{try{hideLoader()}catch(e){console.error(e)}},LOADER_MS);
 
   try{
     const r=await Promise.race([
@@ -249,26 +248,31 @@ async function start(){
     ]);
 
     if(!r.data || !r.data.session){
+      // Not logged in: go to the existing login page.
       location.href="admin.html";
       return;
     }
 
+    // Only render the dashboard after authentication is confirmed.
     try{
+      render();
+      setupFade();
       await load();
+      render();
       setupFade();
       refreshViews();
     }catch(e){
-      console.error("Data load:",e);
+      console.error("Dashboard data error:",e);
+      try{render();setupFade()}catch(x){}
       msg("Panel opened, but some data could not load: "+(e.message||e),true);
     }
   }catch(e){
-    console.error("Auth:",e);
+    console.error("Dashboard auth error:",e);
+    // Never leave the user on a permanent loading screen.
+    try{render();setupFade()}catch(x){}
     msg("Could not connect to Supabase. Check your existing Project URL and publishable key.",true);
   }
 }
-window.setTimeout(()=>{try{hideLoader()}catch(e){}},1800);
-sb.auth.onAuthStateChange(e=>{if(e==='SIGNED_OUT')location.href='admin.html'});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditor();closeViewer()}});start();
-window.setTimeout(()=>{try{hideLoader()}catch(e){}},3500);
 </script>
 </body>
 </html>
