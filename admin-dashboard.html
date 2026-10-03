@@ -2,747 +2,862 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mr CrowSensei — Admin Portfolio</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-font-family:Inter,Arial,sans-serif;
-background:#080808;color:#fff;
-overflow-x:hidden;min-width:0
+  font-family:Inter,Arial,sans-serif;
+  background:#080808;
+  color:#fff;
+  overflow-x:hidden;
 }
+a{text-decoration:none;color:inherit}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-a{text-decoration:none;color:inherit}
 
 :root{
---card:#111;
---border:#292929;
---accent:#35e36b;
---btn:#fff;
---bt:#080808;
---muted:#85858a
+  --card:#111;
+  --border:#292929;
+  --muted:#85858a;
+  --accent:#35e36b;
+  --btn:#fff;
+  --bt:#080808;
+  --heading:#fff;
+  --text:#f7f8ff;
 }
 
-/* LOADING */
-.loader{
-position:fixed;
-inset:0;
-width:100vw;
-height:100dvh;
-z-index:99999;
-background:#050505;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:opacity .6s,visibility .6s
-}
-.loader.hide{
-opacity:0;
-visibility:hidden;
-pointer-events:none
-}
-.loaderbox{
-width:calc(100vw - 40px);
-max-width:430px;
-text-align:center;
-display:flex;
-flex-direction:column;
-align-items:center
-}
-.loaderlogo{
-width:145px;
-height:145px;
-border-radius:50%;
-overflow:hidden;
-border:1px solid #555;
-box-shadow:0 0 70px #fff3;
-animation:pop 1.2s cubic-bezier(.2,1.4,.3,1)
-}
-.loaderlogo img{
-width:100%;height:100%;object-fit:cover
-}
-.loadername{
-font-size:20px;
-font-weight:900;
-margin:20px 0
-}
-.loaderline{
-width:min(390px,calc(100vw - 70px));
-height:4px;
-border-radius:99px;
-background:#252525;
-overflow:hidden
-}
-.loaderline span{
-display:block;
-width:100%;
-height:100%;
-background:linear-gradient(90deg,#fff,#888,#fff);
-transform:scaleX(0);
-transform-origin:center;
-animation:centerLine 1.8s ease forwards
-}
-@keyframes pop{
-0%{transform:scale(.15);opacity:0}
-70%{transform:scale(1.12)}
-100%{transform:scale(1);opacity:1}
-}
-@keyframes centerLine{
-0%{transform:scaleX(0)}
-100%{transform:scaleX(1)}
-}
-
-/* NAV */
 .nav{
-position:sticky;
-top:8px;
-z-index:50;
-width:100%;
-padding:10px 14px;
-border:1px solid var(--border);
-border-radius:16px;
-background:#0d0d0de8;
-backdrop-filter:blur(15px);
-display:flex;
-justify-content:space-between;
-align-items:center
+  position:sticky;
+  top:8px;
+  z-index:50;
+  width:calc(100% - 24px);
+  max-width:1120px;
+  margin:8px auto;
+  padding:12px 15px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:#0d0d0ded;
+  backdrop-filter:blur(16px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-.brand{
-display:flex;
-align-items:center;
-gap:9px;
-font-weight:900
-}
-.brand img{
-width:36px;height:36px;
-border-radius:50%;
-object-fit:cover
-}
-.navright{display:flex;gap:8px}
 
-/* BUTTONS */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.brand img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid #333;
+}
+
+.navright{display:flex;align-items:center;gap:8px}
+
 .btn,.edit,.mini{
-border:1px solid #333;
-background:#151515;
-color:#fff;
-border-radius:9px;
-padding:9px 12px;
-font-size:11px;
-font-weight:800
+  border:1px solid #333;
+  background:#151515;
+  color:#fff;
+  border-radius:10px;
+  padding:9px 13px;
+  font-size:11px;
+  font-weight:800;
 }
-.primary{
-background:var(--btn);
-color:var(--bt)
-}
+
+.btn:hover,.edit:hover,.mini:hover{border-color:#666}
+.primary{background:var(--btn);color:var(--bt)}
 .danger{color:#ff7777}
 
-/* GENERAL */
 .section{
-width:100%;
-max-width:none;
-padding:65px 24px;
-position:relative
+  width:calc(100% - 32px);
+  max-width:1120px;
+  margin:auto;
+  padding:78px 0;
+  position:relative;
 }
+
 .edit{
-position:absolute;
-right:24px;
-top:40px
+  position:absolute;
+  right:0;
+  top:48px;
+  z-index:2;
 }
+
 .head{
-display:flex;
-justify-content:space-between;
-align-items:end;
-margin-bottom:30px
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:30px;
 }
+
 .head h2{
-font-size:clamp(34px,5vw,58px);
-letter-spacing:-2px;
-margin-top:10px
+  font-size:clamp(35px,5vw,58px);
+  letter-spacing:-2px;
+  margin-top:10px;
 }
+
 .head em{font-style:normal}
 .head p{color:#666;font-size:12px}
 .eyebrow{
-font-size:10px;
-letter-spacing:2.3px;
-color:#999;
-font-weight:800
+  font-size:10px;
+  letter-spacing:2.3px;
+  color:#999;
+  font-weight:800;
 }
 
-/* HERO */
-.hero{
-min-height:82dvh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center
-}
-.avail{
-border:1px solid #333;
-border-radius:999px;
-padding:9px 18px;
-font-size:12px;
-color:#ccc
-}
-.avail i{
-display:inline-block;
-width:7px;height:7px;
-border-radius:50%;
-background:var(--accent);
-margin-right:8px
-}
-.hero h1{
-font-size:clamp(58px,10vw,115px);
-line-height:.84;
-letter-spacing:-6px;
-margin:50px 0 40px
-}
-.hero h1 span{display:block}
-.hero-copy{
-font-size:20px;
-color:#aaa;
-line-height:1.5
-}
-.hero-copy strong{
-display:block;color:#fff
-}
-.hero-copy small{
-display:block;color:#777
-}
-.actions{
-display:flex;
-gap:10px;
-margin-top:35px
-}
-
-/* STATS */
-.stats{
-width:min(720px,100%);
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:70px
-}
-.stats div{
-position:relative;
-padding:18px;
-border:1px solid var(--border);
-border-radius:15px;
-background:#0d0d0d
-}
-.stats strong{
-font-size:40px;
-display:block
-}
-.stats span{
-font-size:9px;
-color:#777;
-letter-spacing:1.3px
-}
-.stats .mini{
-position:absolute;
-right:7px;
-top:7px
-}
-
-/* PORTFOLIO */
-.grid{
-display:grid;
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:16px
-}
-.card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:17px;
-overflow:hidden
-}
-.card>img{
-width:100%;
-aspect-ratio:16/9;
-object-fit:cover;
-display:block;
-cursor:zoom-in
-}
-.info{padding:14px 16px}
-.tools{
-display:flex;
-gap:5px;
-padding:0 16px 15px;
-flex-wrap:wrap
-}
-
-/* ABOUT */
-.about{
-border:1px solid var(--border);
-border-radius:24px;
-padding:45px;
-display:grid;
-grid-template-columns:320px 1fr;
-gap:45px;
-background:#111
-}
-.about img{
-width:100%;
-aspect-ratio:1;
-object-fit:cover;
-border-radius:18px
-}
-.about h3{
-font-size:clamp(30px,5vw,54px);
-line-height:1.02;
-margin:14px 0
-}
-.about p{
-color:#888;
-line-height:1.7
-}
-
-/* CREATORS */
-.creators{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:22px
-}
-.creator{text-align:center}
-.avatar{
-width:140px;height:140px;
-border-radius:50%;
-overflow:hidden;
-border:2px solid #333;
-margin:auto;
-background:#171717
-}
-.avatar img{
-width:100%;height:100%;
-object-fit:cover
-}
-.creator h3{
-margin-top:13px;
-font-size:17px
-}
-.creator p{
-color:#777;
-font-size:10px;
-margin:6px 0;
-word-break:break-all
-}
-.creator b{font-size:11px}
-
-/* FAQ */
-.faq{
-max-width:850px;
-margin:auto
-}
-.faqitem{
-border-bottom:1px solid #292929;
-padding:21px 35px 21px 0;
-position:relative
-}
-.faqq{
-font-size:13px;
-font-weight:700;
-cursor:pointer
-}
-.faqplus{
-position:absolute;
-right:5px;
-top:18px;
-color:#777;
-font-size:22px
-}
-.faqanswer{
-display:none;
-color:#777;
-font-size:13px;
-line-height:1.7;
-padding-top:12px
-}
-.faqitem.open .faqanswer{display:block}
-
-/* CONTACT */
-.contact{
-border:1px solid #333;
-border-radius:35px;
-padding:80px 20px;
-text-align:center;
-background:radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808)
-}
-.contact h2{
-font-size:clamp(45px,8vw,88px);
-line-height:.9;
-letter-spacing:-4px
-}
-.contact p{
-color:#999;
-line-height:1.7;
-margin:30px auto
-}
-.links{
-display:grid;
-grid-template-columns:repeat(2,minmax(150px,1fr));
-gap:10px;
-max-width:650px;
-margin:auto
-}
-.links a{
-padding:15px;
-border-radius:12px;
-font-weight:800;
-font-size:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px
-}
-
-/* ADMIN */
 .adminbox{
-border:1px solid var(--border);
-background:#101010;
-border-radius:20px;
-padding:22px
+  border:1px solid var(--border);
+  background:#101010;
+  border-radius:20px;
+  padding:24px;
 }
+
+.hero{
+  text-align:center;
+  min-height:76vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.avail{
+  border:1px solid #333;
+  border-radius:999px;
+  padding:9px 18px;
+  font-size:12px;
+  color:#ccc;
+}
+
+.avail i{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  background:var(--accent);
+  border-radius:50%;
+  margin-right:8px;
+}
+
+.hero h1{
+  font-size:clamp(58px,10vw,115px);
+  line-height:.84;
+  letter-spacing:-6px;
+  margin:55px 0 45px;
+}
+
+.hero h1 span{display:block}
+
+.hero-copy{
+  font-size:21px;
+  color:#aaa;
+  line-height:1.55;
+}
+
+.hero-copy strong{
+  display:block;
+  color:var(--heading);
+}
+
+.hero-copy small{
+  display:block;
+  color:var(--muted);
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:38px;
+}
+
+.stats{
+  width:min(720px,95%);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:0 auto;
+}
+
+.stats div{
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:#0d0d0d;
+  text-align:center;
+}
+
+.stats strong{
+  font-size:43px;
+  display:block;
+}
+
+.stats span{
+  font-size:10px;
+  color:#777;
+  letter-spacing:1.4px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  overflow:hidden;
+}
+
+.card>img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  display:block;
+  cursor:zoom-in;
+}
+
+.info{
+  padding:14px 16px;
+}
+
+.about{
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:48px;
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:50px;
+  background:#111;
+}
+
+.about img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+.about h3{
+  font-size:clamp(30px,5vw,54px);
+  line-height:1.02;
+  margin:14px 0;
+}
+
+.about p{
+  color:#888;
+  line-height:1.7;
+}
+
+.creators{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.creator{text-align:center}
+
+.avatar{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #333;
+  margin:auto;
+  background:#171717;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.creator h3{
+  margin-top:13px;
+  font-size:17px;
+}
+
+.creator p{
+  color:#777;
+  font-size:10px;
+  margin:6px 0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.creator b{font-size:12px}
+
+.faq{
+  max-width:850px;
+  margin:auto;
+}
+
+.faqitem{
+  width:100%;
+  text-align:left;
+  border:0;
+  border-bottom:1px solid #292929;
+  background:none;
+  color:#fff;
+  padding:21px 35px 21px 0;
+  position:relative;
+}
+
+.faqitem>b{
+  position:absolute;
+  right:4px;
+  color:#777;
+  font-size:22px;
+}
+
+.faqitem p{
+  display:none;
+  color:#777;
+  font-size:13px;
+  line-height:1.7;
+  padding-top:12px;
+}
+
+.faqitem.open p{display:block}
+
+.contact{
+  border:1px solid #333;
+  border-radius:35px;
+  padding:85px 20px;
+  text-align:center;
+  background:radial-gradient(circle at 50% 30%,#383838,#151515 55%,#080808);
+}
+
+.contact h2{
+  font-size:clamp(45px,8vw,88px);
+  line-height:.9;
+  letter-spacing:-4px;
+}
+
+.contact p{
+  color:#999;
+  line-height:1.7;
+  margin:35px auto;
+}
+
+.links{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(150px,1fr));
+  gap:10px;
+  max-width:650px;
+  margin:auto;
+}
+
+.links a{
+  padding:15px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.links img{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  border-radius:4px;
+}
+
+.viewsbar{
+  width:calc(100% - 32px);
+  max-width:1120px;
+  margin:22px auto 0;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#101010;
+  padding:15px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.viewsbar .vlabel{
+  font-size:12px;
+  font-weight:800;
+  color:#aaa;
+}
+
+.viewsbar strong{font-size:25px}
+
+.reorder-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:15px;
+}
+
+.reorder-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 15px;
+  background:#151515;
+  border:1px solid #303030;
+  border-radius:10px;
+  user-select:none;
+}
+
+.reorder-label{
+  font-size:12px;
+  font-weight:800;
+}
+
+.drag-handle{
+  font-size:20px;
+  line-height:1;
+  color:#aaa;
+  cursor:grab;
+  padding:2px 4px;
+}
+
+.reorder-actions{
+  margin-top:14px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+.footer-preview{
+  text-align:center;
+  padding:35px 20px;
+}
+
+.footer-preview .flogo{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.footer-preview h3{margin:10px 0 7px}
+
+.footer-preview p{
+  color:#777;
+  font-size:12px;
+  line-height:1.6;
+  max-width:650px;
+  margin:auto;
+}
+
+.footer-links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
+  margin:20px 0;
+}
+
+.footer-links a{
+  font-size:11px;
+  color:#aaa;
+}
+
+.footer-line{
+  height:1px;
+  background:#333;
+  margin:20px 0;
+}
+
 .formgrid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
+
+.themegrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
 .field label{
-display:block;
-color:#888;
-font-size:11px;
-font-weight:700;
-margin-bottom:6px
+  display:block;
+  color:#888;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:6px;
 }
+
 .field input,
 .field textarea,
 .field select{
-width:100%;
-background:#151515;
-border:1px solid #333;
-color:#fff;
-border-radius:9px;
-padding:10px;
-outline:0
+  width:100%;
+  background:#151515;
+  border:1px solid #333;
+  color:#fff;
+  border-radius:9px;
+  padding:10px;
+  outline:0;
 }
+
 .field textarea{min-height:110px}
 .full{grid-column:1/-1}
 
-/* IMAGE */
-.preview{
-margin-top:10px;
-border:1px solid #333;
-border-radius:10px;
-overflow:hidden;
-background:#090909
+.image-control{
+  border:1px solid #333;
+  border-radius:12px;
+  padding:12px;
+  background:#0d0d0d;
 }
-.preview img{
-width:100%;
-max-height:240px;
-object-fit:contain;
-display:block
+
+.image-control img{
+  display:block;
+  width:100%;
+  max-height:230px;
+  object-fit:contain;
+  border-radius:8px;
 }
-.image-actions{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-margin-top:9px
+
+.ic-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+  flex-wrap:wrap;
 }
+
+.deleteimg{
+  color:#ff7777;
+  border:1px solid #4a2222;
+  background:#180c0c;
+  border-radius:8px;
+  padding:8px 10px;
+  font-size:10px;
+}
+
 .gallery{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:9px;
-margin-top:10px
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:10px;
 }
-.gallery div{
-cursor:pointer
-}
+
 .gallery img{
-width:100%;
-aspect-ratio:16/9;
-object-fit:cover;
-border:2px solid #333;
-border-radius:8px
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  border:2px solid #333;
+  border-radius:8px;
+  cursor:pointer;
 }
+
 .gallery small{
-display:block;
-color:#777;
-font-size:9px;
-margin-top:4px
+  display:block;
+  color:#777;
+  margin-top:4px;
+  font-size:9px;
 }
 
-/* REORDER */
-.reorder-list{
-display:flex;
-flex-direction:column;
-gap:8px
-}
-.reorder-row{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:15px;
-background:#151515;
-border:1px solid #292929;
-border-radius:11px
-}
-.drag{
-font-size:20px;
-color:#aaa;
-cursor:grab;
-user-select:none
+.custom-button{
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:14px;
+  margin-top:10px;
+  background:#0d0d0d;
 }
 
-/* FOOTER */
-.footer-admin{
-border:1px solid var(--border);
-border-radius:22px;
-background:#101010;
-padding:50px 25px;
-text-align:center
-}
-.footer-logo{
-width:60px;height:60px;
-border-radius:50%;
-object-fit:cover
-}
-.footer-name{
-font-size:22px;
-font-weight:900;
-margin-top:10px
-}
-.footer-desc{
-max-width:600px;
-margin:12px auto;
-color:#888;
-line-height:1.7;
-font-size:13px
-}
-.footer-links{
-display:flex;
-justify-content:center;
-gap:22px;
-flex-wrap:wrap;
-margin:20px 0
-}
-.footer-links a{
-font-size:12px;
-color:#aaa
-}
-.footer-line{
-height:1px;
-background:#292929;
-margin:25px auto 18px;
-max-width:700px
-}
-.footer-copy{
-font-size:11px;
-color:#666
+.custom-button-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
 
-/* VIEWS */
-.viewsbar{
-width:100%;
-margin-top:20px;
-border:1px solid var(--border);
-border-radius:15px;
-background:#101010;
-padding:14px 18px;
-display:flex;
-justify-content:space-between;
-align-items:center
+.muted{
+  color:#777;
+  font-size:11px;
 }
-.viewsbar span{
-font-size:12px;
-font-weight:800;
-color:#aaa
-}
-.viewsbar strong{font-size:23px}
 
-/* SAVE */
+.section-title-small{
+  font-size:12px;
+  color:#777;
+  font-weight:800;
+  letter-spacing:1px;
+  margin:22px 0 10px;
+}
+
+.loadmore{
+  display:block;
+  margin:25px auto 0;
+}
+
+.count-note{
+  color:#666;
+  font-size:10px;
+  margin-top:8px;
+}
+
 .savebar{
-width:calc(100% - 32px);
-margin:0 16px 60px;
-padding:15px;
-border:1px solid #333;
-border-radius:16px;
-background:#101010;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:12px;
-position:sticky;
-bottom:12px;
-z-index:100;
-box-shadow:0 15px 50px #000
+  width:calc(100% - 32px);
+  max-width:1120px;
+  margin:0 auto 70px;
+  border:1px solid #333;
+  border-radius:16px;
+  background:#101010;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  bottom:12px;
+  z-index:100;
+  box-shadow:0 15px 50px #000;
 }
+
 .savebar.dirty{
-border-color:#fff
+  border-color:#fff;
 }
 
-/* MODAL */
+.savebar.dirty .primary{
+  box-shadow:0 0 0 2px #fff3,0 0 30px #fff2;
+}
+
+.success{
+  color:#65e88a;
+  font-size:12px;
+}
+
 .modal{
-position:fixed;
-inset:0;
-z-index:1000;
-background:#000c;
-backdrop-filter:blur(8px);
-display:none;
-align-items:center;
-justify-content:center;
-padding:15px
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:#000c;
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
 }
+
 .modal.show{display:flex}
+
 .box{
-width:min(760px,100%);
-max-height:90dvh;
-overflow:auto;
-background:#101010;
-border:1px solid #333;
-border-radius:18px;
-padding:20px
+  width:min(760px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:18px;
+  padding:20px;
 }
+
 .mhead{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:18px
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
 }
+
 .close{
-border:0;
-background:#191919;
-color:#fff;
-border-radius:8px;
-width:34px;height:34px;
-font-size:20px
+  border:0;
+  background:#191919;
+  color:#fff;
+  border-radius:8px;
+  width:34px;
+  height:34px;
+  font-size:20px;
 }
+
 .mfoot{
-display:flex;
-justify-content:flex-end;
-gap:8px;
-margin-top:18px
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:18px;
 }
 
-/* VIEWER */
+.preview{
+  margin-top:9px;
+  border:1px solid #333;
+  border-radius:10px;
+  overflow:hidden;
+  background:#0b0b0b;
+}
+
+.preview img{
+  width:100%;
+  max-height:230px;
+  object-fit:contain;
+  display:block;
+}
+
 .viewer{
-position:fixed;
-inset:0;
-z-index:2000;
-background:#000e;
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:#000e;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
+
 .viewer.show{display:flex}
+
 .viewer img{
-max-width:94vw;
-max-height:90vh;
-border-radius:12px
+  max-width:94vw;
+  max-height:90vh;
+  border-radius:12px;
 }
+
 .vclose{
-position:absolute;
-right:20px;
-top:20px;
-background:#111;
-color:#fff;
-border:1px solid #444;
-border-radius:9px;
-width:40px;height:40px;
-font-size:22px
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:#111;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:9px;
+  width:40px;
+  height:40px;
+  font-size:22px;
 }
 
-/* FADE */
-.fade{
-opacity:0;
-transform:translateY(24px);
-transition:.8s ease
-}
-.fade.show{
-opacity:1;
-transform:none
+.loader{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100dvh;
+  z-index:9999;
+  background:#050505;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  transition:opacity .45s ease,visibility .45s ease;
 }
 
-/* MOBILE */
+.loader.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loaderbox{
+  width:min(420px,calc(100vw - 40px));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.loaderlogo{
+  width:clamp(120px,32vw,150px);
+  height:clamp(120px,32vw,150px);
+  border-radius:50%;
+  overflow:hidden;
+  border:1px solid #555;
+  box-shadow:0 0 70px #fff3;
+  animation:pop 1s cubic-bezier(.2,1.4,.3,1);
+}
+
+.loaderlogo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.loadername{
+  font-weight:900;
+  font-size:20px;
+  margin:20px 0;
+}
+
+.loaderline{
+  width:min(390px,calc(100vw - 64px));
+  height:4px;
+  background:#222;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.loaderline span{
+  display:block;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,#fff,#777,#fff);
+  transform:scaleX(0);
+  transform-origin:center;
+  animation:lineCenter 1.2s ease forwards;
+}
+
+@keyframes pop{
+  0%{transform:scale(.15);opacity:0}
+  70%{transform:scale(1.12)}
+  100%{transform:scale(1)}
+}
+
+@keyframes lineCenter{
+  0%{transform:scaleX(0)}
+  100%{transform:scaleX(1)}
+}
+
+.fade-effect{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.fade-effect.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
 @media(max-width:700px){
-.nav{
-top:0;
-border-radius:0 0 14px 14px
-}
-.navright .view{display:none}
-.section{
-padding:55px 15px
-}
-.edit{
-right:15px;
-top:30px
-}
-.hero{
-min-height:75dvh
-}
-.hero h1{
-font-size:clamp(52px,15vw,80px);
-letter-spacing:-4px;
-margin:42px 0 32px
-}
-.hero-copy{font-size:17px}
-.actions{
-flex-direction:column;
-width:min(320px,90vw)
-}
-.stats{
-margin-top:55px;
-gap:7px
-}
-.stats div{padding:13px 7px}
-.stats strong{font-size:30px}
-.stats span{
-font-size:8px;
-letter-spacing:.5px
-}
-.grid{
-grid-template-columns:1fr
-}
-.about{
-grid-template-columns:1fr;
-padding:22px;
-gap:25px
-}
-.creators{
-grid-template-columns:1fr 1fr;
-gap:18px
-}
-.avatar{
-width:110px;height:110px
-}
-.formgrid{
-grid-template-columns:1fr
-}
-.full{grid-column:auto}
-.gallery{
-grid-template-columns:repeat(2,1fr)
-}
-.links{
-grid-template-columns:1fr
-}
-.savebar{
-flex-direction:column;
-align-items:stretch
-}
-.head{
-display:block
-}
-.head p{margin-top:8px}
-.contact{
-padding:65px 15px
-}
-.footer-links{gap:15px}
+  .nav{width:calc(100% - 24px);margin:8px 12px}
+  .section{width:100%;padding:70px 16px}
+  .savebar,.viewsbar{
+    margin-left:12px;
+    margin-right:12px;
+    width:calc(100% - 24px);
+  }
+  .edit{top:42px}
+  .head{display:block}
+  .head p{margin-top:10px}
+  .grid{grid-template-columns:1fr}
+  .about{
+    grid-template-columns:1fr;
+    padding:25px;
+  }
+  .creators{grid-template-columns:1fr 1fr}
+  .avatar{width:120px;height:120px}
+  .themegrid,.formgrid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .savebar{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+  .actions{
+    flex-direction:column;
+    width:min(320px,90vw);
+  }
+  .links{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .custom-button-grid{grid-template-columns:1fr}
+  .hero h1{letter-spacing:-4px}
+  .stats{width:100%}
+  .stats strong{font-size:32px}
+  .footer-links{gap:10px}
 }
 </style>
 </head>
@@ -751,1691 +866,3792 @@ padding:65px 15px
 
 <!-- LOADING SCREEN -->
 <div class="loader" id="loader">
-<div class="loaderbox">
-<div class="loaderlogo">
-<img id="loadLogo" src="images/logo.png">
-</div>
-<div class="loadername" id="loadName">Mr CrowSensei</div>
-<div class="loaderline"><span></span></div>
-</div>
+  <div class="loaderbox">
+    <div class="loaderlogo">
+      <img id="loadLogo" src="images/logo.png">
+    </div>
+    <div class="loadername" id="loadName">Mr CrowSensei</div>
+    <div class="loaderline"><span></span></div>
+  </div>
 </div>
 
+<!-- ADMIN HEADER -->
 <header class="nav">
-<a class="brand" href="#home">
-<img id="navLogo" src="images/logo.png">
-<span id="navName">Mr CrowSensei</span>
-</a>
-<div class="navright">
-<a class="btn view" href="/" target="_blank">View Portfolio</a>
-<button class="btn danger" onclick="logout()">Logout</button>
-</div>
+  <a class="brand" href="#home">
+    <img id="navLogo" src="images/logo.png">
+    <span id="navName">Mr CrowSensei</span>
+  </a>
+
+  <div class="navright">
+    <button class="btn danger" onclick="logout()">Logout</button>
+  </div>
 </header>
+
+<!-- VIEWS -->
+<section class="viewsbar">
+  <span class="vlabel">👁 Views</span>
+  <strong id="viewsCount">0</strong>
+</section>
 
 <main id="adminMain">
 
-<div class="viewsbar">
-<span>👁 Views</span>
-<strong id="viewsCount">0</strong>
-</div>
+<!-- HEADER -->
+<section class="section" id="headerSection">
+  <button class="edit" onclick="openEditor('header')">✏️ Edit</button>
+
+  <div class="head">
+    <div>
+      <div class="eyebrow">● HEADER</div>
+      <h2>Header <em>identity.</em></h2>
+    </div>
+  </div>
+
+  <div class="adminbox">
+    <div class="brand">
+      <img id="headerPreviewLogo" src="images/logo.png">
+      <span id="headerPreviewName">Mr CrowSensei</span>
+    </div>
+  </div>
+</section>
 
 <!-- HERO -->
 <section class="section hero" id="home">
-<button class="edit" onclick="openEditor('hero')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('hero')">✏️ Edit</button>
 
-<div class="avail">
-<i></i><span id="avail">New Designs Available</span>
-</div>
+  <div class="avail">
+    <i></i><span id="avail"></span>
+  </div>
 
-<h1 id="heroName">
-<span>Mr</span>
-<span>CrowSensei</span>
-</h1>
+  <h1 id="heroName"></h1>
 
-<div class="hero-copy">
-<strong id="heroTitle">Professional Minecraft Thumbnails</strong>
-<small id="heroSub"></small>
-<small id="crafted">Crafted for Creators</small>
-</div>
+  <div class="hero-copy">
+    <strong id="heroTitle"></strong>
+    <small id="heroSub"></small>
+    <small id="crafted"></small>
+  </div>
 
-<div class="actions">
-<a class="btn primary" href="#work">Browse Portfolio →</a>
-<a class="btn" href="#contact">Let's Work</a>
-</div>
+  <div class="actions">
+    <a class="btn primary" href="#work">Browse Portfolio →</a>
+    <a class="btn" href="#contact">Let's Work</a>
+  </div>
+</section>
 
-<div class="stats">
-<div>
-<button class="mini" onclick="openEditor('stats')">✏️</button>
-<strong id="st1">100+</strong>
-<span id="sl1">THUMBNAILS</span>
-</div>
-<div>
-<strong id="st2">50+</strong>
-<span id="sl2">CREATORS</span>
-</div>
-<div>
-<strong id="st3">2+</strong>
-<span id="sl3">YEARS DESIGNING</span>
-</div>
-</div>
+<!-- STATS -->
+<section class="section" id="stats">
+  <button class="edit" onclick="openEditor('stats')">✏️ Edit</button>
+
+  <div class="head">
+    <div>
+      <div class="eyebrow">● STATS</div>
+      <h2>Numbers that <em>matter.</em></h2>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div>
+      <strong id="st1"></strong>
+      <span id="sl1"></span>
+    </div>
+
+    <div>
+      <strong id="st2"></strong>
+      <span id="sl2"></span>
+    </div>
+
+    <div>
+      <strong id="st3"></strong>
+      <span id="sl3"></span>
+    </div>
+  </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section class="section" id="work">
-<button class="edit" onclick="openEditor('portfolio')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('portfolio')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● SELECTED WORK</div>
-<h2>My latest <em>thumbnails.</em></h2>
-</div>
-<p>Manage your portfolio gallery.</p>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● SELECTED WORK</div>
+      <h2>My latest <em>thumbnails.</em></h2>
+    </div>
+    <p>Manage your portfolio gallery.</p>
+  </div>
 
-<div class="grid" id="portfolioGrid"></div>
+  <div class="grid" id="portfolioGrid"></div>
+
+  <button id="portfolioMore"
+          class="btn loadmore"
+          style="display:none"
+          onclick="toggleMore('portfolio')">
+    Load More
+  </button>
 </section>
 
 <!-- CLIENTS -->
 <section class="section" id="clients">
-<button class="edit" onclick="openEditor('creator')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('creator')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● CLIENTS</div>
-<h2 id="creatorHeading">Trusted by creators.</h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● CLIENTS</div>
+      <h2 id="creatorHeading"></h2>
+    </div>
+  </div>
 
-<p id="creatorIntro" style="color:#777;text-align:center;margin:-10px auto 40px;max-width:650px"></p>
+  <p id="creatorIntro"
+     style="color:#777;text-align:center;margin:-10px auto 40px;max-width:650px"></p>
 
-<div class="creators" id="creatorGrid"></div>
+  <div class="creators" id="creatorGrid"></div>
+
+  <button id="creatorMore"
+          class="btn loadmore"
+          style="display:none"
+          onclick="toggleMore('creators')">
+    Load More
+  </button>
+
+  <div style="text-align:center;margin-top:25px">
+    <button class="btn primary" onclick="openEditor('creator')">
+      ＋ Add Creator
+    </button>
+  </div>
 </section>
 
 <!-- ABOUT -->
 <section class="section" id="about">
-<button class="edit" onclick="openEditor('about')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('about')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● ABOUT ME</div>
-<h2 id="aboutHeading">The designer behind the thumbnails.</h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● ABOUT ME</div>
+      <h2 id="aboutHeading"></h2>
+    </div>
+  </div>
 
-<div class="about">
-<img id="aboutImg" src="images/logo.png">
-<div>
-<div class="eyebrow">MR CROWSENSEI</div>
-<h3 id="aboutSub">Turning Minecraft ideas into clickable visuals.</h3>
-<p id="aboutText"></p>
-</div>
-</div>
+  <div class="about">
+    <img id="aboutImg">
+
+    <div>
+      <div class="eyebrow">MR CROWSENSEI</div>
+      <h3 id="aboutSub"></h3>
+      <p id="aboutText"></p>
+    </div>
+  </div>
 </section>
 
 <!-- FAQ -->
 <section class="section" id="faq">
-<button class="edit" onclick="openEditor('faq')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('faq')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● FAQ</div>
-<h2>Got <em>questions?</em></h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● FAQ</div>
+      <h2>Got <em>questions?</em></h2>
+    </div>
+  </div>
 
-<div class="faq" id="faqList"></div>
+  <div class="faq" id="faqList"></div>
+
+  <div style="text-align:center;margin-top:25px">
+    <button class="btn primary" onclick="openEditor('faq')">
+      ＋ Add FAQ
+    </button>
+  </div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
-<button class="edit" onclick="openEditor('contact')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('contact')">✏️ Edit</button>
 
-<div class="contact">
-<div class="eyebrow">CONTACT ME</div>
-<h2 id="contactTitle">Ready for<br>Thumbnails<br>That Get<br>Clicked?</h2>
-<p id="contactText"></p>
-<div class="links" id="contactLinks"></div>
-</div>
+  <div class="contact">
+    <div class="eyebrow">CONTACT ME</div>
+    <h2 id="contactTitle"></h2>
+    <p id="contactText"></p>
+    <div class="links" id="contactLinks"></div>
+  </div>
 </section>
 
 <!-- FOOTER -->
-<section class="section" id="footerSection">
-<button class="edit" onclick="openEditor('footer')">✏️ Edit</button>
+<section class="section" id="footerAdmin">
+  <button class="edit" onclick="openEditor('footer')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● FOOTER</div>
-<h2>Footer <em>settings.</em></h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● FOOTER</div>
+      <h2>Footer <em>identity.</em></h2>
+    </div>
+  </div>
 
-<div class="footer-admin">
-<img class="footer-logo" id="footerLogo" src="images/logo.png">
-<div class="footer-name" id="footerName">Mr CrowSensei</div>
-<div class="footer-desc" id="footerDesc"></div>
+  <div class="adminbox footer-preview">
+    <img id="footerLogoPreview" class="flogo" src="images/logo.png">
 
-<div style="font-size:10px;letter-spacing:2px;color:#888;margin-top:22px" id="footerExplore">
-Explore
-</div>
+    <h3 id="footerNamePreview">Mr CrowSensei</h3>
 
-<div class="footer-links">
-<a href="#work" id="footerPortfolio">Portfolio</a>
-<a href="#clients" id="footerClients">Clients</a>
-<a href="#about" id="footerAbout">About</a>
-<a href="#faq" id="footerFaq">FAQ</a>
-</div>
+    <p id="footerDescPreview">
+      Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.
+    </p>
 
-<div class="footer-line"></div>
-<div class="footer-copy" id="footerCopyright">© 2026 Mr CrowSensei</div>
-</div>
+    <div class="eyebrow" style="margin-top:25px">EXPLORE</div>
+
+    <div class="footer-links">
+      <a href="#work">Portfolio</a>
+      <a href="#clients">Clients</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <div class="footer-line"></div>
+
+    <p id="footerCopyPreview">© 2026 Mr CrowSensei</p>
+  </div>
 </section>
 
 <!-- SECTION REORDER -->
 <section class="section" id="reorderSection">
-<button class="edit" onclick="openEditor('reorder')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('reorder')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● SETTINGS</div>
-<h2>Section <em>Reorder.</em></h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● SETTINGS</div>
+      <h2>Section <em>reorder.</em></h2>
+    </div>
+    <p>Drag the ☰ handle to change the live section order.</p>
+  </div>
 
-<div class="adminbox">
-<div class="reorder-list" id="reorderPreview"></div>
-</div>
+  <div class="adminbox">
+    <div id="reorderPreview" class="reorder-list"></div>
+
+    <div class="reorder-actions">
+      <button class="btn primary" onclick="saveSectionOrder()">
+        Save Section Order
+      </button>
+    </div>
+  </div>
 </section>
 
 <!-- LINK PREVIEW -->
 <section class="section" id="linkSection">
-<button class="edit" onclick="openEditor('link')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('link')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● LINK PREVIEW</div>
-<h2>Link <em>Preview.</em></h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● LINK PREVIEW</div>
+      <h2>Link <em>Preview.</em></h2>
+    </div>
+  </div>
 
-<div class="adminbox">
-<div class="field">
-<label>Title</label>
-<input id="ogTitleView" readonly>
-</div>
-<div class="field" style="margin-top:12px">
-<label>Description</label>
-<textarea id="ogDescView" readonly></textarea>
-</div>
-<div id="ogImageView" class="preview"></div>
-</div>
+  <div class="adminbox">
+    <div class="field">
+      <label>Title</label>
+      <input id="ogtv" readonly>
+    </div>
+
+    <div class="field" style="margin-top:12px">
+      <label>Description</label>
+      <input id="ogdv" readonly>
+    </div>
+
+    <div id="ogiv" class="preview"></div>
+  </div>
 </section>
 
-<!-- HEADER -->
-<section class="section" id="headerSection">
-<button class="edit" onclick="openEditor('header')">✏️ Edit</button>
-
-<div class="head">
-<div>
-<div class="eyebrow">● HEADER</div>
-<h2>Header <em>identity.</em></h2>
-</div>
-</div>
-
-<div class="adminbox">
-<img id="headerLogo" src="images/logo.png"
-style="width:60px;height:60px;border-radius:50%;object-fit:cover">
-<div id="headerNamePreview" style="font-size:20px;font-weight:900;margin-top:10px">
-Mr CrowSensei
-</div>
-</div>
-</section>
-
-<!-- LOADING SETTINGS -->
+<!-- LOGO & LOADING -->
 <section class="section" id="loadingSection">
-<button class="edit" onclick="openEditor('loading')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('loading')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● LOADING SCREEN</div>
-<h2>Loading <em>screen.</em></h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● LOGO & LOADING SCREEN</div>
+      <h2>Logo & <em>loading.</em></h2>
+    </div>
+  </div>
 
-<div class="adminbox" style="text-align:center">
-<img id="loadingPreview" src="images/logo.png"
-style="width:100px;height:100px;border-radius:50%;object-fit:cover">
-<div id="loadingNamePreview" style="font-weight:800;margin-top:12px">
-Mr CrowSensei
-</div>
-</div>
+  <div class="adminbox" style="text-align:center">
+    <img id="loadPreview"
+         style="width:100px;height:100px;border-radius:50%;object-fit:cover">
+
+    <p id="loadPreviewName"
+       style="margin-top:12px;font-weight:800"></p>
+  </div>
 </section>
 
 <!-- THEME -->
 <section class="section" id="themeSection">
-<button class="edit" onclick="openEditor('theme')">✏️ Edit</button>
+  <button class="edit" onclick="openEditor('theme')">✏️ Edit</button>
 
-<div class="head">
-<div>
-<div class="eyebrow">● ADMIN</div>
-<h2>Theme & <em>colors.</em></h2>
-</div>
-</div>
+  <div class="head">
+    <div>
+      <div class="eyebrow">● THEME</div>
+      <h2>Theme & <em>colors.</em></h2>
+    </div>
+  </div>
 
-<div class="adminbox">
-<div class="formgrid" id="themePreview"></div>
-</div>
+  <div class="adminbox">
+    <div class="themegrid" id="themePreview"></div>
+  </div>
 </section>
 
 </main>
 
+<!-- SAVE -->
 <div class="savebar" id="savebar">
-<span id="status" style="color:#65e88a;font-size:12px">✓ Ready</span>
-<button class="btn primary" onclick="saveAll()">💾 Save All Changes</button>
+  <span id="status" class="success">✓ Ready</span>
+
+  <button class="btn primary" onclick="saveAll()">
+    💾 Save All Changes
+  </button>
 </div>
+
+<footer style="text-align:center;color:#666;font-size:10px;padding:0 16px 45px">
+  Admin Portfolio
+</footer>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
-<div class="box">
-<div class="mhead">
-<h3 id="modalTitle">Edit</h3>
-<button class="close" onclick="closeEditor()">×</button>
-</div>
-<div id="modalBody"></div>
-<div class="mfoot">
-<button class="btn" onclick="closeEditor()">Cancel</button>
-<button class="btn primary" onclick="saveModal()">Save</button>
-</div>
-</div>
+  <div class="box">
+
+    <div class="mhead">
+      <h3 id="mtitle">Edit</h3>
+      <button class="close" onclick="closeEditor()">×</button>
+    </div>
+
+    <div id="mbody"></div>
+
+    <div class="mfoot">
+      <button class="btn" onclick="closeEditor()">Cancel</button>
+      <button class="btn primary" onclick="saveModal()">Save</button>
+    </div>
+
+  </div>
 </div>
 
-<!-- VIEWER -->
-<div class="viewer" id="viewer" onclick="if(event.target===this)closeViewer()">
-<button class="vclose" onclick="closeViewer()">×</button>
-<img id="viewerImg">
+<!-- IMAGE VIEWER -->
+<div class="viewer"
+     id="viewer"
+     onclick="if(event.target===this)closeViewer()">
+
+  <button class="vclose" onclick="closeViewer()">×</button>
+  <img id="vimg">
 </div>
+
 
 <script>
+/* =========================================================
+   SUPABASE
+   ========================================================= */
 
-/* =====================================================
-SUPABASE
-===================================================== */
+const SUPABASE_URL = "https://ozjugaedukcztmywtexk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
 
-const SUPABASE_URL="https://ozjugaedukcztmywtexk.supabase.co";
-const SUPABASE_KEY="sb_publishable_gt5x7FBVniSzvvw5IXilQg_KDrymtJE";
-
-const sb=supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+const sb = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
-/* =====================================================
-DEFAULTS
-===================================================== */
 
-const D={
-id:1,
-header_name:"Mr CrowSensei",
-logo_url:"",
-new_design_text:"New Designs Available",
-hero_title:"Professional Minecraft Thumbnails",
-hero_subtitle:"",
-crafted_text:"Crafted for Creators",
+/* =========================================================
+   DEFAULT SETTINGS
+   ========================================================= */
 
-stats_thumbnails:"100+",
-stats_creators:"50+",
-stats_years:"2+",
-stats_thumbnails_label:"THUMBNAILS",
-stats_creators_label:"CREATORS",
-stats_years_label:"YEARS DESIGNING",
+const DEFAULTS = {
+  id:1,
+  views:0,
 
-about_heading:"The designer behind the thumbnails.",
-about_sub:"Turning Minecraft ideas into clickable visuals.",
-about_text:"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",
-about_image_url:"",
+  header_name:"Mr CrowSensei",
+  logo_url:"",
 
-creator_heading:"Trusted by creators.",
-creator_intro:"Creators who trust Mr CrowSensei for their Minecraft thumbnails.",
+  new_design_text:"New Designs Available",
+  hero_title:"Professional Minecraft Thumbnails",
+  hero_subtitle:"",
+  crafted_text:"Crafted for Creators",
 
-discord_url:"https://discord.com/users/1492187397058855163",
-twitter_url:"https://x.com/MrCrowSensei",
+  stats_thumbnails:"100+",
+  stats_creators:"50+",
+  stats_years:"2+",
 
-contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",
-contact_text:"Send your video idea and deadline.\nI'll reply with availability and the next steps.",
-contact_buttons:[],
+  stats_thumbnails_label:"THUMBNAILS",
+  stats_creators_label:"CREATORS",
+  stats_years_label:"YEARS DESIGNING",
 
-footer_logo_url:"",
-footer_name:"Mr CrowSensei",
-footer_description:"Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.",
-footer_explore:"Explore",
-footer_portfolio:"Portfolio",
-footer_clients:"Clients",
-footer_about:"About",
-footer_faq:"FAQ",
-footer_copyright:"© 2026 Mr CrowSensei",
+  about_heading:"The designer behind the thumbnails.",
+  about_sub:"Turning Minecraft ideas into clickable visuals.",
+  about_text:"I'm Mr CrowSensei, a Minecraft thumbnail designer focused on clean compositions, strong characters, dramatic lighting and thumbnails that instantly communicate the video's story. Every thumbnail is built around one goal: making someone stop scrolling.",
+  about_image_url:"",
 
-bg_color:"#080808",
-bg_gradient_1:"#151515",
-bg_gradient_2:"#080808",
-bg_gradient_direction:"135deg",
-primary_color:"#ffffff",
-heading_color:"#ffffff",
-text_color:"#f7f8ff",
-muted_color:"#85858a",
-card_color:"#111111",
-border_color:"#292929",
-button_color:"#ffffff",
-button_text_color:"#080808",
-accent_color:"#35e36b",
+  creator_heading:"Trusted by creators.",
+  creator_intro:"Creators who trust Mr CrowSensei for their Minecraft thumbnails.",
 
-og_title:"Mr CrowSensei — Thumbnail Designer",
-og_description:"Mr CrowSensei — Professional Minecraft Thumbnail Designer",
-og_image_url:"",
+  discord_url:"https://discord.com/users/1492187397058855163",
+  twitter_url:"https://x.com/MrCrowSensei",
 
-loading_logo_url:"",
-loading_name:"Mr CrowSensei",
+  contact_title:"Ready for\nThumbnails\nThat Get\nClicked?",
+  contact_text:"Send your video idea and deadline.\nI'll reply with availability and the next steps.",
+  contact_buttons:[],
 
-section_order:[
-"home","work","clients","about","faq","contact"
-]
+  footer_name:"Mr CrowSensei",
+  footer_description:"Minecraft thumbnail designer helping creators break through the algorithm with high-CTR artwork.",
+  footer_copyright:"© 2026 Mr CrowSensei",
+  footer_logo_url:"",
+
+  bg_color:"#080808",
+  bg_gradient_1:"#151515",
+  bg_gradient_2:"#080808",
+  bg_gradient_direction:"135deg",
+
+  primary_color:"#ffffff",
+  heading_color:"#ffffff",
+  text_color:"#f7f8ff",
+  muted_color:"#85858a",
+  card_color:"#111111",
+  border_color:"#292929",
+  button_color:"#ffffff",
+  button_text_color:"#080808",
+  accent_color:"#35e36b",
+
+  og_title:"Mr CrowSensei — Thumbnail Designer",
+  og_description:"Mr CrowSensei — Professional Minecraft Thumbnail Designer",
+  og_image_url:"",
+
+  loading_logo_url:"",
+  loading_name:"Mr CrowSensei",
+
+  section_order:[
+    "home",
+    "stats",
+    "work",
+    "clients",
+    "about",
+    "faq",
+    "contact"
+  ]
 };
 
-let S={...D};
-let P=[],C=[],F=[];
-let type="",mid=null,file=null,del=false,creatorMeta=null;
-let dirty=false;
-let dragged=null;
+let S = {...DEFAULTS};
+let P = [];
+let C = [];
+let F = [];
 
-const $=x=>document.getElementById(x);
+let type = "";
+let mid = null;
+let file = null;
+let del = false;
+let creatorMeta = null;
 
-function esc(v){
-return String(v??"").replace(/[&<>"']/g,m=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[m]));
+let dirty = false;
+
+let reorderOrder = [...DEFAULTS.section_order];
+
+let expanded = {
+  portfolio:false,
+  creators:false
+};
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+const $ = id => document.getElementById(id);
+
+const esc = v =>
+  String(v ?? "").replace(
+    /[&<>"']/g,
+    m => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+
+function safeUrl(url){
+  try{
+    return new URL(url,location.href).href;
+  }catch{
+    return "#";
+  }
 }
 
 function markDirty(){
-dirty=true;
-$("savebar").classList.add("dirty");
-$("status").textContent="● Unsaved changes";
-$("status").style.color="#fff";
+  dirty = true;
+
+  const bar = $("savebar");
+  if(bar) bar.classList.add("dirty");
+
+  const status = $("status");
+  if(status){
+    status.textContent = "• Unsaved changes";
+    status.style.color = "#fff";
+  }
 }
 
-function msg(t,bad=false){
-$("status").textContent=t;
-$("status").style.color=bad?"#ff7777":"#65e88a";
-if(t)setTimeout(()=>{
-if(!dirty)$("status").textContent="";
-},4000);
+function msg(text="✓ All changes saved successfully!",bad=false){
+  const status = $("status");
+
+  if(status){
+    status.textContent = text;
+    status.style.color = bad ? "#ff7777" : "#65e88a";
+  }
+
+  if(!bad){
+    dirty = false;
+    $("savebar")?.classList.remove("dirty");
+  }
 }
 
-function hideLoader(){
-setTimeout(()=>$("loader").classList.add("hide"),350);
+function formatSubscribers(value){
+  if(value === null || value === undefined || value === ""){
+    return "Subscribers unavailable";
+  }
+
+  const n = Number(value);
+
+  if(Number.isFinite(n)){
+    return n.toLocaleString() + " subscribers";
+  }
+
+  return String(value);
 }
 
-/* =====================================================
-RENDER
-===================================================== */
+
+/* =========================================================
+   RENDER
+   ========================================================= */
 
 function render(){
 
-let n=(S.header_name||"Mr CrowSensei").trim().split(/\s+/);
-let first=n.shift()||"";
-let rest=n.join(" ");
+  $("viewsCount").textContent =
+    Number(S.views || 0).toLocaleString();
 
-$("navName").textContent=S.header_name;
-$("navLogo").src=S.logo_url||"images/logo.png";
+  const logo =
+    S.logo_url ||
+    "images/logo.png";
 
-$("headerNamePreview").textContent=S.header_name;
-$("headerLogo").src=S.logo_url||"images/logo.png";
+  const loadingLogo =
+    S.loading_logo_url ||
+    logo;
 
-$("avail").textContent=S.new_design_text;
+  $("loadLogo").src = loadingLogo;
+  $("loadName").textContent =
+    S.loading_name ||
+    S.header_name ||
+    "Mr CrowSensei";
 
-$("heroName").innerHTML=
-`<span>${esc(first)}</span><span>${esc(rest)}</span>`;
+  $("navLogo").src = logo;
+  $("navName").textContent =
+    S.header_name ||
+    "Mr CrowSensei";
 
-$("heroTitle").textContent=S.hero_title;
-$("heroSub").textContent=S.hero_subtitle;
-$("crafted").textContent=S.crafted_text;
+  $("headerPreviewLogo").src = logo;
+  $("headerPreviewName").textContent =
+    S.header_name ||
+    "Mr CrowSensei";
 
-$("st1").textContent=S.stats_thumbnails;
-$("st2").textContent=S.stats_creators;
-$("st3").textContent=S.stats_years;
+  $("avail").textContent =
+    S.new_design_text || "";
 
-$("sl1").textContent=S.stats_thumbnails_label;
-$("sl2").textContent=S.stats_creators_label;
-$("sl3").textContent=S.stats_years_label;
+  const parts =
+    (S.header_name || "Mr CrowSensei")
+      .trim()
+      .split(/\s+/);
 
-$("aboutHeading").textContent=S.about_heading;
-$("aboutSub").textContent=S.about_sub;
-$("aboutText").textContent=S.about_text;
-$("aboutImg").src=S.about_image_url||S.logo_url||"images/logo.png";
+  const first = parts.shift() || "";
+  const rest = parts.join(" ");
 
-$("creatorHeading").textContent=S.creator_heading;
-$("creatorIntro").textContent=S.creator_intro;
+  $("heroName").innerHTML =
+    `<span>${esc(first)}</span><span>${esc(rest)}</span>`;
 
-$("contactTitle").innerHTML=
-esc(S.contact_title).replace(/\n/g,"<br>");
-$("contactText").innerHTML=
-esc(S.contact_text).replace(/\n/g,"<br>");
+  $("heroTitle").textContent =
+    S.hero_title || "";
 
-$("ogTitleView").value=S.og_title||"";
-$("ogDescView").value=S.og_description||"";
+  $("heroSub").textContent =
+    S.hero_subtitle || "";
 
-$("ogImageView").innerHTML=S.og_image_url?
-`<img src="${esc(S.og_image_url)}">`:
-`<div style="padding:30px;text-align:center;color:#666">No preview image selected.</div>`;
+  $("crafted").textContent =
+    S.crafted_text || "";
 
-$("loadLogo").src=
-S.loading_logo_url||S.logo_url||"images/logo.png";
-$("loadName").textContent=S.loading_name;
+  $("st1").textContent =
+    S.stats_thumbnails || "";
 
-$("loadingPreview").src=
-S.loading_logo_url||S.logo_url||"images/logo.png";
-$("loadingNamePreview").textContent=S.loading_name;
+  $("st2").textContent =
+    S.stats_creators || "";
 
-$("footerLogo").src=
-S.footer_logo_url||S.logo_url||"images/logo.png";
-$("footerName").textContent=S.footer_name;
-$("footerDesc").textContent=S.footer_description;
-$("footerExplore").textContent=S.footer_explore;
-$("footerPortfolio").textContent=S.footer_portfolio;
-$("footerClients").textContent=S.footer_clients;
-$("footerAbout").textContent=S.footer_about;
-$("footerFaq").textContent=S.footer_faq;
-$("footerCopyright").textContent=S.footer_copyright;
+  $("st3").textContent =
+    S.stats_years || "";
 
-renderPortfolio();
-renderCreators();
-renderFAQ();
-renderContact();
-renderReorder();
-renderTheme();
-applyTheme();
+  $("sl1").textContent =
+    S.stats_thumbnails_label || "";
+
+  $("sl2").textContent =
+    S.stats_creators_label || "";
+
+  $("sl3").textContent =
+    S.stats_years_label || "";
+
+  $("aboutHeading").textContent =
+    S.about_heading || "";
+
+  $("aboutSub").textContent =
+    S.about_sub || "";
+
+  $("aboutText").textContent =
+    S.about_text || "";
+
+  $("aboutImg").src =
+    S.about_image_url ||
+    logo;
+
+  $("creatorHeading").textContent =
+    S.creator_heading || "";
+
+  $("creatorIntro").textContent =
+    S.creator_intro || "";
+
+  $("contactTitle").innerHTML =
+    esc(S.contact_title || "").replace(/\n/g,"<br>");
+
+  $("contactText").innerHTML =
+    esc(S.contact_text || "").replace(/\n/g,"<br>");
+
+  $("ogtv").value =
+    S.og_title || "";
+
+  $("ogdv").value =
+    S.og_description || "";
+
+  const previewImage =
+    S.og_image_url ||
+    "og-banner.png";
+
+  $("ogiv").innerHTML =
+    `<img src="${esc(previewImage)}">`;
+
+  $("loadPreview").src =
+    loadingLogo;
+
+  $("loadPreviewName").textContent =
+    S.loading_name ||
+    S.header_name ||
+    "Mr CrowSensei";
+
+  renderButtons();
+  renderPortfolio();
+  renderCreators();
+  renderFaq();
+  renderFooter();
+  renderReorder();
+  renderThemePreview();
+  applyTheme();
 }
 
-/* =====================================================
-PORTFOLIO
-===================================================== */
+
+/* =========================================================
+   CONTACT BUTTONS
+   ========================================================= */
+
+function renderButtons(){
+
+  const buttons = [
+    {
+      name:"Discord",
+      link:S.discord_url,
+      color:"#5865F2",
+      text:"#fff",
+      icon_url:""
+    },
+
+    {
+      name:"Twitter / X",
+      link:S.twitter_url,
+      color:"#fff",
+      text:"#080808",
+      icon_url:""
+    },
+
+    ...(S.contact_buttons || [])
+  ];
+
+  $("contactLinks").innerHTML =
+    buttons
+      .filter(x => x.link || x.name)
+      .map(x => `
+        <a
+          href="${esc(safeUrl(x.link || "#"))}"
+          target="_blank"
+          rel="noopener"
+          style="background:${esc(x.color || "#fff")};color:${esc(x.text || "#080808")}"
+        >
+          ${
+            x.icon_url
+            ? `<img src="${esc(x.icon_url)}">`
+            : ""
+          }
+
+          ${esc(x.name || "Button")}
+        </a>
+      `)
+      .join("");
+}
+
+
+/* =========================================================
+   PORTFOLIO
+   ========================================================= */
+
+function visibleSlice(arr,key){
+
+  const limit = 6;
+
+  const amount =
+    expanded[key]
+      ? arr.length
+      : Math.min(limit,arr.length);
+
+  return {
+    items:arr.slice(0,amount),
+    more:arr.length > limit
+  };
+}
 
 function renderPortfolio(){
-let g=$("portfolioGrid");
 
-if(!P.length){
-g.innerHTML=
-`<div style="grid-column:1/-1;text-align:center;color:#666;padding:50px">
-No thumbnails yet.
-</div>`;
-return;
+  const box = $("portfolioGrid");
+
+  const view =
+    visibleSlice(P,"portfolio");
+
+  if(!view.items.length){
+
+    box.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;color:#666;padding:40px">
+        No thumbnails yet.
+      </div>
+    `;
+
+  }else{
+
+    box.innerHTML =
+      view.items.map(x => `
+        <article class="card">
+
+          <img
+            src="${esc(x.image_url)}"
+            onclick="viewImage('${esc(x.image_url)}')"
+          >
+
+          <div class="info">
+            <b>${esc(x.title || "Minecraft Thumbnail")}</b>
+          </div>
+
+        </article>
+      `).join("");
+  }
+
+  $("portfolioMore").style.display =
+    view.more ? "block" : "none";
+
+  $("portfolioMore").textContent =
+    expanded.portfolio
+      ? "Show Less"
+      : "Load More";
 }
 
-g.innerHTML=P.map((x,i)=>`
-<article class="card">
-<img src="${esc(x.image_url)}" onclick="view('${esc(x.image_url)}')">
-<div class="info"><b>${esc(x.title||"Minecraft Thumbnail")}</b></div>
-<div class="tools">
-<button class="mini" onclick="editPortfolio(${x.id})">✏️</button>
-<button class="mini" onclick="moveRow('portfolio',${i},-1)">↑</button>
-<button class="mini" onclick="moveRow('portfolio',${i},1)">↓</button>
-<button class="mini danger" onclick="deleteRow('portfolio',${x.id})">🗑</button>
-</div>
-</article>
-`).join("");
+function renderPortfolioManager(){
+
+  const box = $("portfolioManager");
+  if(!box) return;
+
+  if(!P.length){
+
+    box.innerHTML =
+      `<p class="muted">No thumbnails yet.</p>`;
+
+    return;
+  }
+
+  box.innerHTML =
+    P.map((x,i) => `
+      <div class="custom-button">
+
+        <div style="display:flex;gap:12px;align-items:center">
+
+          <img
+            src="${esc(x.image_url)}"
+            style="width:100px;height:58px;object-fit:cover;border-radius:7px"
+          >
+
+          <div style="flex:1">
+            <b>${esc(x.title || "Minecraft Thumbnail")}</b>
+            <div class="count-note">
+              Position ${i+1}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ic-actions">
+
+          <button
+            class="mini"
+            onclick="editPortfolio(${x.id})">
+            ✏️ Edit
+          </button>
+
+          <button
+            class="mini"
+            onclick="moveRow('portfolio',${i},-1)">
+            ↑
+          </button>
+
+          <button
+            class="mini"
+            onclick="moveRow('portfolio',${i},1)">
+            ↓
+          </button>
+
+          <button
+            class="mini danger"
+            onclick="deleteRow('portfolio',${x.id})">
+            🗑 Delete
+          </button>
+
+        </div>
+
+      </div>
+    `).join("");
 }
 
-/* =====================================================
-CREATORS
-===================================================== */
+function toggleMore(key){
+
+  expanded[key] =
+    !expanded[key];
+
+  if(key === "portfolio")
+    renderPortfolio();
+
+  if(key === "creators")
+    renderCreators();
+}
+
+
+/* =========================================================
+   CREATORS
+   ========================================================= */
 
 function renderCreators(){
-let g=$("creatorGrid");
 
-if(!C.length){
-g.innerHTML=
-`<div style="grid-column:1/-1;text-align:center;color:#666;padding:30px">
-No creators added yet.
-</div>`;
-return;
+  const box = $("creatorGrid");
+
+  const view =
+    visibleSlice(C,"creators");
+
+  if(!view.items.length){
+
+    box.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;color:#666">
+        No creators added yet.
+      </div>
+    `;
+
+  }else{
+
+    box.innerHTML =
+      view.items.map(x => `
+        <article class="creator">
+
+          <a
+            href="${esc(safeUrl(x.youtube_url || "#"))}"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <div class="avatar">
+              <img
+                src="${esc(x.image_url || "images/logo.png")}"
+              >
+            </div>
+
+            <h3>${esc(x.name || "Creator")}</h3>
+
+            <p>
+              ${esc(x.youtube_url || "")}
+            </p>
+
+            <b>
+              ${esc(x.subscribers || "Subscribers unavailable")}
+            </b>
+
+          </a>
+
+        </article>
+      `).join("");
+  }
+
+  $("creatorMore").style.display =
+    view.more ? "block" : "none";
+
+  $("creatorMore").textContent =
+    expanded.creators
+      ? "Show Less"
+      : "Load More";
 }
 
-g.innerHTML=C.map((x,i)=>`
-<article class="creator">
-<a href="${esc(x.youtube_url||"#")}" target="_blank">
-<div class="avatar">
-<img src="${esc(x.image_url||"images/logo.png")}">
-</div>
-<h3>${esc(x.name||"Creator")}</h3>
-<p>${esc(x.youtube_url||"")}</p>
-<b>${esc(x.subscribers||"Subscribers unavailable")}</b>
-</a>
-<div style="margin-top:10px">
-<button class="mini" onclick="openEditor('creator',${x.id})">✏️</button>
-<button class="mini" onclick="moveRow('creators',${i},-1)">↑</button>
-<button class="mini" onclick="moveRow('creators',${i},1)">↓</button>
-<button class="mini danger" onclick="deleteRow('creators',${x.id})">🗑</button>
-</div>
-</article>
-`).join("");
-}
 
-/* =====================================================
-FAQ
-===================================================== */
-
-function renderFAQ(){
-let g=$("faqList");
-
-if(!F.length){
-g.innerHTML=
-`<div style="text-align:center;color:#666;padding:30px">
-No FAQ items yet.
-</div>`;
-return;
-}
-
-g.innerHTML=F.map((x,i)=>`
-<div class="faqitem">
-<div class="faqq" onclick="this.parentElement.classList.toggle('open')">
-${esc(x.question)}
-<span class="faqplus">+</span>
-</div>
-<div class="faqanswer">${esc(x.answer)}</div>
-<div style="margin-top:10px">
-<button class="mini" onclick="openEditor('faq',${x.id})">✏️</button>
-<button class="mini" onclick="moveRow('faq',${i},-1)">↑</button>
-<button class="mini" onclick="moveRow('faq',${i},1)">↓</button>
-<button class="mini danger" onclick="deleteRow('faq',${x.id})">🗑</button>
-</div>
-</div>
-`).join("");
-}
-
-/* =====================================================
-CONTACT
-===================================================== */
-
-function renderContact(){
-
-let b=[
-{
-name:"Discord",
-link:S.discord_url,
-color:"#5865F2",
-text:"#fff"
-},
-{
-name:"𝕏 Twitter / X",
-link:S.twitter_url,
-color:"#fff",
-text:"#080808"
-},
-...(S.contact_buttons||[])
-];
-
-$("contactLinks").innerHTML=b.map(x=>`
-<a href="${esc(x.link||"#")}" target="_blank"
-style="background:${esc(x.color||"#fff")};color:${esc(x.text||"#080808")}">
-${x.icon_url?`<img src="${esc(x.icon_url)}">`:x.icon?esc(x.icon)+" ":""}
-${esc(x.name)}
-</a>
-`).join("");
-}
-
-/* =====================================================
-REORDER
-===================================================== */
-
-const ORDER={
-home:"Hero",
-work:"Portfolio",
-clients:"Clients",
-about:"About Me",
-faq:"FAQ",
-contact:"Contact"
-};
-
-function normalizeOrder(a){
-let valid=["home","work","clients","about","faq","contact"];
-let out=(a||[]).filter(x=>valid.includes(x));
-valid.forEach(x=>{if(!out.includes(x))out.push(x)});
-return out;
-}
-
-function renderReorder(){
-S.section_order=normalizeOrder(S.section_order);
-
-$("reorderPreview").innerHTML=S.section_order.map(id=>`
-<div class="reorder-row"
-draggable="true"
-data-id="${id}"
-ondragstart="dragStart(event)"
-ondragover="event.preventDefault()"
-ondrop="dropSection(event)">
-<span>${ORDER[id]}</span>
-<span class="drag">☰</span>
-</div>
-`).join("");
-}
-
-function dragStart(e){
-dragged=e.currentTarget.dataset.id;
-}
-
-function dropSection(e){
-e.preventDefault();
-let target=e.currentTarget.dataset.id;
-
-if(!dragged||dragged===target)return;
-
-let a=S.section_order.indexOf(dragged);
-let b=S.section_order.indexOf(target);
-
-S.section_order.splice(a,1);
-S.section_order.splice(b,0,dragged);
-
-dragged=null;
-renderReorder();
-markDirty();
-msg("✓ Section order changed. Click Save All Changes.");
-}
-
-/* =====================================================
-THEME
-===================================================== */
-
-function renderTheme(){
-
-let colors=[
-["Background","bg_color"],
-["Gradient 1","bg_gradient_1"],
-["Gradient 2","bg_gradient_2"],
-["Primary","primary_color"],
-["Heading","heading_color"],
-["Text","text_color"],
-["Muted","muted_color"],
-["Card","card_color"],
-["Border","border_color"],
-["Button","button_color"],
-["Button Text","button_text_color"],
-["Accent","accent_color"]
-];
-
-$("themePreview").innerHTML=colors.map(x=>`
-<div style="border:1px solid #292929;border-radius:9px;padding:9px">
-<div style="height:24px;border-radius:5px;background:${esc(S[x[1]])}"></div>
-<small style="display:block;color:#777;margin-top:6px">
-${esc(x[0])}: ${esc(S[x[1]])}
-</small>
-</div>
-`).join("");
-}
-
-function applyTheme(){
-document.documentElement.style.setProperty("--card",S.card_color||"#111");
-document.documentElement.style.setProperty("--border",S.border_color||"#292929");
-document.documentElement.style.setProperty("--accent",S.accent_color||"#35e36b");
-document.documentElement.style.setProperty("--btn",S.button_color||"#fff");
-document.documentElement.style.setProperty("--bt",S.button_text_color||"#080808");
-document.body.style.background=
-`linear-gradient(${S.bg_gradient_direction||"135deg"},${S.bg_gradient_1||"#151515"},${S.bg_gradient_2||"#080808"})`;
-}
-
-/* =====================================================
-LOAD
-===================================================== */
-
-async function load(){
-
-let s=await sb.from("site_settings").select("*").eq("id",1).maybeSingle();
-
-if(!s.error&&s.data)S={...D,...s.data};
-
-let p=await sb.from("portfolio")
-.select("*")
-.order("display_order",{ascending:true})
-.order("id",{ascending:true});
-
-if(!p.error)P=p.data||[];
-
-try{
-let c=await sb.from("creators")
-.select("*")
-.order("display_order",{ascending:true})
-.order("id",{ascending:true});
-if(!c.error)C=c.data||[];
-}catch(e){C=[]}
-
-try{
-let f=await sb.from("faq")
-.select("*")
-.order("display_order",{ascending:true})
-.order("id",{ascending:true});
-if(!f.error)F=f.data||[];
-}catch(e){F=[]}
-
-render();
-}
-
-/* =====================================================
-SETTINGS
-===================================================== */
-
-async function patch(v){
-let r=await sb.from("site_settings").update(v).eq("id",1);
-if(r.error)throw r.error;
-S={...S,...v};
-render();
-markDirty();
-}
-
-/* =====================================================
-UPLOAD
-===================================================== */
-
-async function uploadImage(f,folder){
-
-if(!f)return null;
-
-let ext=(f.name.split(".").pop()||"png")
-.toLowerCase()
-.replace(/[^a-z0-9]/g,"");
-
-let path=
-`admin/${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-
-let r=await sb.storage
-.from("portfolio-images")
-.upload(path,f,{contentType:f.type||"image/png"});
-
-if(r.error)throw r.error;
-
-return sb.storage
-.from("portfolio-images")
-.getPublicUrl(path).data.publicUrl;
-}
-
-/* =====================================================
-IMAGE CONTROL
-===================================================== */
-
-function imageEditor(label,url,id){
-return`
-<div class="field full">
-<label>${label}</label>
-<div class="preview">
-<img id="${id}preview" src="${esc(url||"images/logo.png")}">
-</div>
-<div class="image-actions">
-<label class="btn">
-🖼️ Upload
-<input id="${id}" type="file" accept="image/*"
-onchange="pickFile(this,'${id}preview')" style="display:none">
-</label>
-<button class="btn" onclick="chooseGallery('${id}')">
-🖼️ Choose from Gallery
-</button>
-<button class="btn danger" onclick="deleteImage('${id}')">
-🗑 Delete
-</button>
-</div>
-<div id="${id}gallery" class="gallery"></div>
-</div>
-`;
-}
-
-function pickFile(input,preview){
-file=input.files[0]||null;
-if(file)$(preview).src=URL.createObjectURL(file);
-markDirty();
-}
-
-function deleteImage(kind){
-if(kind==="about")S.about_image_url="";
-if(kind==="logo")S.logo_url="";
-if(kind==="loading")S.loading_logo_url="";
-if(kind==="footer")S.footer_logo_url="";
-if(kind==="og")S.og_image_url="";
-if(kind==="portfolio")del=true;
-render();
-markDirty();
-}
-
-async function chooseGallery(kind){
-
-let q=await sb.from("portfolio")
-.select("title,image_url")
-.order("display_order",{ascending:true})
-.order("id",{ascending:true});
-
-if(q.error)return msg(q.error.message,true);
-
-let arr=q.data||[];
-let box=$(kind+"gallery");
-
-if(!box)return;
-
-box.innerHTML=arr.length?
-arr.map(x=>`
-<div onclick="selectGallery('${esc(x.image_url)}','${kind}')">
-<img src="${esc(x.image_url)}">
-<small>${esc(x.title||"Thumbnail")}</small>
-</div>
-`).join("")
-:
-`<p style="color:#777">No portfolio images available.</p>`;
-}
-
-function selectGallery(url,kind){
-
-if(kind==="about")S.about_image_url=url;
-if(kind==="logo")S.logo_url=url;
-if(kind==="loading")S.loading_logo_url=url;
-if(kind==="footer")S.footer_logo_url=url;
-if(kind==="og")S.og_image_url=url;
-
-render();
-markDirty();
-msg("✓ Image selected. Click Save All Changes.");
-}
-
-/* =====================================================
-EDITOR
-===================================================== */
-
-function openEditor(t,id=null){
-
-type=t;
-mid=id;
-file=null;
-creatorMeta=null;
-
-let title="";
-let html="";
-
-/* HERO */
-if(t==="hero"){
-title="Edit Hero";
-html=`
-<div class="formgrid">
-<div class="field"><label>Availability</label>
-<input id="availx" value="${esc(S.new_design_text)}"></div>
-<div class="field"><label>Name</label>
-<input id="namex" value="${esc(S.header_name)}"></div>
-<div class="field full"><label>Hero Title</label>
-<input id="ht" value="${esc(S.hero_title)}"></div>
-<div class="field full"><label>Hero Subtitle</label>
-<input id="hs" value="${esc(S.hero_subtitle)}"></div>
-<div class="field full"><label>Crafted Text</label>
-<input id="hc" value="${esc(S.crafted_text)}"></div>
-</div>`;
-}
-
-/* STATS */
-else if(t==="stats"){
-title="Edit Stats";
-html=`
-<div class="formgrid">
-<div class="field"><label>Number 1</label><input id="s1" value="${esc(S.stats_thumbnails)}"></div>
-<div class="field"><label>Label 1</label><input id="l1" value="${esc(S.stats_thumbnails_label)}"></div>
-<div class="field"><label>Number 2</label><input id="s2" value="${esc(S.stats_creators)}"></div>
-<div class="field"><label>Label 2</label><input id="l2" value="${esc(S.stats_creators_label)}"></div>
-<div class="field"><label>Number 3</label><input id="s3" value="${esc(S.stats_years)}"></div>
-<div class="field"><label>Label 3</label><input id="l3" value="${esc(S.stats_years_label)}"></div>
-</div>`;
-}
-
-/* ABOUT */
-else if(t==="about"){
-title="Edit About";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Heading</label>
-<input id="abh" value="${esc(S.about_heading)}"></div>
-<div class="field full"><label>Sub Heading</label>
-<input id="abs" value="${esc(S.about_sub)}"></div>
-<div class="field full"><label>About Text</label>
-<textarea id="at">${esc(S.about_text)}</textarea></div>
-${imageEditor("About Image",S.about_image_url,"about")}
-</div>`;
-}
-
-/* HEADER */
-else if(t==="header"){
-title="Edit Header";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Header Name</label>
-<input id="hn" value="${esc(S.header_name)}"></div>
-${imageEditor("Header Logo",S.logo_url,"logo")}
-</div>`;
-}
-
-/* LOADING */
-else if(t==="loading"){
-title="Edit Loading Screen";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Loading Name</label>
-<input id="ln" value="${esc(S.loading_name)}"></div>
-${imageEditor("Loading Logo",S.loading_logo_url||S.logo_url,"loading")}
-</div>`;
-}
-
-/* FOOTER */
-else if(t==="footer"){
-title="Edit Footer";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Footer Name</label>
-<input id="fn" value="${esc(S.footer_name)}"></div>
-<div class="field full"><label>Description</label>
-<textarea id="fd">${esc(S.footer_description)}</textarea></div>
-<div class="field"><label>Explore</label><input id="fe" value="${esc(S.footer_explore)}"></div>
-<div class="field"><label>Portfolio</label><input id="fp" value="${esc(S.footer_portfolio)}"></div>
-<div class="field"><label>Clients</label><input id="fcl" value="${esc(S.footer_clients)}"></div>
-<div class="field"><label>About</label><input id="fab" value="${esc(S.footer_about)}"></div>
-<div class="field"><label>FAQ</label><input id="ff" value="${esc(S.footer_faq)}"></div>
-<div class="field full"><label>Copyright</label><input id="fcopy" value="${esc(S.footer_copyright)}"></div>
-${imageEditor("Footer Logo",S.footer_logo_url||S.logo_url,"footer")}
-</div>`;
-}
-
-/* LINK */
-else if(t==="link"){
-title="Link Preview";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Title</label>
-<input id="ot" value="${esc(S.og_title)}"></div>
-<div class="field full"><label>Description</label>
-<textarea id="od">${esc(S.og_description)}</textarea></div>
-${imageEditor("Preview Image",S.og_image_url,"og")}
-</div>`;
-}
-
-/* CONTACT */
-else if(t==="contact"){
-title="Edit Contact";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Heading</label>
-<textarea id="ct">${esc(S.contact_title)}</textarea></div>
-<div class="field full"><label>Text</label>
-<textarea id="cx">${esc(S.contact_text)}</textarea></div>
-<div class="field"><label>Discord</label>
-<input id="dc" value="${esc(S.discord_url)}"></div>
-<div class="field"><label>Twitter / X</label>
-<input id="tw" value="${esc(S.twitter_url)}"></div>
-</div>
-<hr style="border-color:#292929;margin:20px 0">
-<button class="btn primary" onclick="addButton()">＋ Add Custom Button</button>
-<div id="customButtons" style="margin-top:12px">
-${(S.contact_buttons||[]).map((x,i)=>buttonEditor(x,i)).join("")}
-</div>`;
-}
-
-/* CREATOR */
-else if(t==="creator"){
-let x=mid?C.find(a=>a.id===mid):null;
-title=x?"Edit Creator":"Add Creator";
-html=`
-<div class="field">
-<label>YouTube Channel URL</label>
-<input id="yu" value="${esc(x?.youtube_url||"")}" placeholder="https://youtube.com/@channel">
-<button class="btn" style="margin-top:8px" onclick="fetchCreator()">Fetch Creator</button>
-</div>
-<div id="crmsg" style="color:#777;font-size:12px;margin-top:12px">
-${x?"Current: "+esc(x.name):"Enter channel URL and tap Fetch Creator."}
-</div>`;
-}
-
-/* FAQ */
-else if(t==="faq"){
-let x=mid?F.find(a=>a.id===mid):null;
-title=x?"Edit FAQ":"Add FAQ";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Question</label>
-<input id="fq" value="${esc(x?.question||"")}"></div>
-<div class="field full"><label>Answer</label>
-<textarea id="fa">${esc(x?.answer||"")}</textarea></div>
-</div>`;
-}
-
-/* PORTFOLIO */
-else if(t==="portfolio"){
-let x=mid?P.find(a=>a.id===mid):null;
-title=x?"Edit Thumbnail":"Add Thumbnail";
-html=`
-<div class="formgrid">
-<div class="field full"><label>Thumbnail Title</label>
-<input id="pt" value="${esc(x?.title||"")}"></div>
-<div class="field full"><label>Image</label>
-<input id="pi" type="file" accept="image/*" onchange="pickFile(this,'pip')">
-<div class="preview"><img id="pip" src="${esc(x?.image_url||"images/logo.png")}"></div>
-</div>
-</div>`;
-}
-
-/* THEME */
-else if(t==="theme"){
-title="Theme & Colors";
-let c=[
-["bg","bg_color"],["g1","bg_gradient_1"],["g2","bg_gradient_2"],
-["pr","primary_color"],["hd","heading_color"],["tx","text_color"],
-["mu","muted_color"],["ca","card_color"],["bo","border_color"],
-["bu","button_color"],["bt","button_text_color"],["ac","accent_color"]
-];
-html=`<div class="formgrid">`+
-c.map(x=>`
-<div class="field">
-<label>${x[1]}</label>
-<input id="${x[0]}" type="color" value="${esc(S[x[1]])}">
-</div>`).join("")+
-`</div>
-<div class="field" style="margin-top:12px">
-<label>Gradient Direction</label>
-<select id="gd">
-<option value="135deg" ${S.bg_gradient_direction==="135deg"?"selected":""}>135deg</option>
-<option value="90deg" ${S.bg_gradient_direction==="90deg"?"selected":""}>90deg</option>
-<option value="180deg" ${S.bg_gradient_direction==="180deg"?"selected":""}>180deg</option>
-<option value="45deg" ${S.bg_gradient_direction==="45deg"?"selected":""}>45deg</option>
-</select>
-</div>`;
-}
-
-/* REORDER */
-else if(t==="reorder"){
-title="Section Reorder";
-html=`
-<div class="reorder-list" id="modalOrder">
-${normalizeOrder(S.section_order).map(id=>`
-<div class="reorder-row"
-draggable="true"
-data-id="${id}"
-ondragstart="dragStart(event)"
-ondragover="event.preventDefault()"
-ondrop="dropSection(event)">
-<span>${ORDER[id]}</span>
-<span class="drag">☰</span>
-</div>`).join("")}
-</div>
-<p style="color:#777;font-size:11px;margin-top:12px">
-Drag ☰ to change the order.
-</p>`;
-}
-
-$("modalTitle").textContent=title;
-$("modalBody").innerHTML=html;
-$("modal").classList.add("show");
-}
-
-/* =====================================================
-CUSTOM BUTTON
-===================================================== */
-
-function buttonEditor(x,i){
-return`
-<div class="adminbox custom-button" style="margin-top:10px">
-<div class="formgrid">
-<div class="field"><label>Name</label>
-<input data-bi="${i}" data-k="name" value="${esc(x.name||"")}"></div>
-<div class="field"><label>Link</label>
-<input data-bi="${i}" data-k="link" value="${esc(x.link||"")}"></div>
-<div class="field"><label>Icon URL</label>
-<input data-bi="${i}" data-k="icon_url" value="${esc(x.icon_url||"")}"></div>
-<div class="field"><label>Background</label>
-<input data-bi="${i}" data-k="color" type="color" value="${x.color||"#ffffff"}"></div>
-<div class="field"><label>Text Color</label>
-<input data-bi="${i}" data-k="text" type="color" value="${x.text||"#080808"}"></div>
-</div>
-<button class="mini danger" onclick="this.closest('.custom-button').remove();markDirty()">🗑 Remove</button>
-</div>`;
-}
-
-function addButton(){
-let box=$("customButtons");
-let i=box.children.length;
-box.insertAdjacentHTML("beforeend",
-buttonEditor({
-name:"New Button",
-link:"#",
-color:"#ffffff",
-text:"#080808",
-icon_url:""
-},i));
-markDirty();
-}
-
-/* =====================================================
-SAVE MODAL
-===================================================== */
-
-async function saveModal(){
-
-try{
-
-if(type==="hero"){
-await patch({
-header_name:$("namex").value.trim(),
-new_design_text:$("availx").value.trim(),
-hero_title:$("ht").value.trim(),
-hero_subtitle:$("hs").value.trim(),
-crafted_text:$("hc").value.trim()
-});
-}
-
-else if(type==="stats"){
-await patch({
-stats_thumbnails:$("s1").value.trim(),
-stats_thumbnails_label:$("l1").value.trim(),
-stats_creators:$("s2").value.trim(),
-stats_creators_label:$("l2").value.trim(),
-stats_years:$("s3").value.trim(),
-stats_years_label:$("l3").value.trim()
-});
-}
-
-else if(type==="about"){
-let im=S.about_image_url;
-if(file)im=await uploadImage(file,"about");
-await patch({
-about_heading:$("abh").value.trim(),
-about_sub:$("abs").value.trim(),
-about_text:$("at").value.trim(),
-about_image_url:im
-});
-}
-
-else if(type==="header"){
-let im=S.logo_url;
-if(file)im=await uploadImage(file,"logo");
-await patch({
-header_name:$("hn").value.trim(),
-logo_url:im
-});
-}
-
-else if(type==="loading"){
-let im=S.loading_logo_url||S.logo_url;
-if(file)im=await uploadImage(file,"loading");
-await patch({
-loading_name:$("ln").value.trim(),
-loading_logo_url:im
-});
-}
-
-else if(type==="footer"){
-let im=S.footer_logo_url||S.logo_url;
-await patch({
-footer_name:$("fn").value.trim(),
-footer_description:$("fd").value.trim(),
-footer_explore:$("fe").value.trim(),
-footer_portfolio:$("fp").value.trim(),
-footer_clients:$("fcl").value.trim(),
-footer_about:$("fab").value.trim(),
-footer_faq:$("ff").value.trim(),
-footer_copyright:$("fcopy").value.trim(),
-footer_logo_url:im
-});
-}
-
-else if(type==="contact"){
-let arr=[];
-document.querySelectorAll("#customButtons [data-bi]").forEach(e=>{
-let i=+e.dataset.bi;
-if(!arr[i])arr[i]={};
-arr[i][e.dataset.k]=e.value;
-});
-await patch({
-contact_title:$("ct").value,
-contact_text:$("cx").value,
-discord_url:$("dc").value.trim(),
-twitter_url:$("tw").value.trim(),
-contact_buttons:arr.filter(x=>x.name)
-});
-}
-
-else if(type==="link"){
-let im=S.og_image_url;
-if(file)im=await uploadImage(file,"link-preview");
-await patch({
-og_title:$("ot").value.trim(),
-og_description:$("od").value.trim(),
-og_image_url:im
-});
-}
-
-else if(type==="theme"){
-await patch({
-bg_color:$("bg").value,
-bg_gradient_1:$("g1").value,
-bg_gradient_2:$("g2").value,
-primary_color:$("pr").value,
-heading_color:$("hd").value,
-text_color:$("tx").value,
-muted_color:$("mu").value,
-card_color:$("ca").value,
-border_color:$("bo").value,
-button_color:$("bu").value,
-button_text_color:$("bt").value,
-accent_color:$("ac").value,
-bg_gradient_direction:$("gd").value
-});
-}
-
-else if(type==="reorder"){
-S.section_order=normalizeOrder(S.section_order);
-renderReorder();
-markDirty();
-}
-
-else if(type==="portfolio"){
-
-let x=mid?P.find(a=>a.id===mid):null;
-let im=x?.image_url||"";
-
-if(file)im=await uploadImage(file,"portfolio");
-
-if(!im)throw Error("Please choose a thumbnail image.");
-
-let r;
-
-if(x){
-r=await sb.from("portfolio")
-.update({
-title:$("pt").value.trim()||"Minecraft Thumbnail",
-image_url:im
-})
-.eq("id",x.id);
-}else{
-r=await sb.from("portfolio")
-.insert({
-title:$("pt").value.trim()||"Minecraft Thumbnail",
-image_url:im,
-display_order:P.length
-});
-}
-
-if(r.error)throw r.error;
-
-let q=await sb.from("portfolio")
-.select("*")
-.order("display_order",{ascending:true})
-.order("id",{ascending:true});
-
-if(q.error)throw q.error;
-
-P=q.data||[];
-render();
-markDirty();
-}
-
-else if(type==="creator"){
-
-let u=$("yu").value.trim();
-
-if(!u)throw Error("Please enter a YouTube channel URL.");
-
-let m=creatorMeta||await creatorData(u);
-
-let payload={
-youtube_url:u,
-name:m.name||"Creator",
-image_url:m.image_url||"images/logo.png",
-subscribers:m.subscribers||"Subscribers unavailable"
-};
-
-let r=mid?
-await sb.from("creators").update(payload).eq("id",mid):
-await sb.from("creators").insert({...payload,display_order:C.length});
-
-if(r.error)throw r.error;
-
-let q=await sb.from("creators")
-.select("*")
-.order("display_order",{ascending:true})
-.order("id",{ascending:true});
-
-C=q.data||[];
-render();
-markDirty();
-}
-
-else if(type==="faq"){
-
-let r=mid?
-await sb.from("faq").update({
-question:$("fq").value.trim(),
-answer:$("fa").value.trim()
-}).eq("id",mid):
-await sb.from("faq").insert({
-question:$("fq").value.trim(),
-answer:$("fa").value.trim(),
-display_order:F.length
-});
-
-if(r.error)throw r.error;
-
-let q=await sb.from("faq")
-.select("*")
-.order("display_order",{ascending:true})
-.order("id",{ascending:true});
-
-F=q.data||[];
-render();
-markDirty();
-}
-
-closeEditor();
-msg("✓ Changes saved. Click Save All Changes.");
-
-}catch(e){
-msg(e.message||String(e),true);
-}
-}
-
-/* =====================================================
-YOUTUBE
-===================================================== */
+/*
+  YouTube data:
+  banner.yt gives channel title, avatar and subscriber count
+  without exposing a private API key.
+*/
 
 async function creatorData(url){
 
-let key="ytcache:"+url;
+  const cacheKey =
+    "mrc_youtube_cache_" + url;
 
-try{
-let c=JSON.parse(localStorage.getItem(key)||"null");
-if(c&&Date.now()-c.time<86400000)return c.data;
-}catch(e){}
+  try{
 
-let r=await fetch(
-"https://www.youtube.com/oembed?url="+
-encodeURIComponent(url)+
-"&format=json"
-);
+    const cached =
+      JSON.parse(
+        localStorage.getItem(cacheKey) || "null"
+      );
 
-if(!r.ok)throw Error("Could not read this YouTube channel.");
+    if(
+      cached &&
+      cached.time &&
+      Date.now() - cached.time < 86400000
+    ){
+      return cached.data;
+    }
 
-let j=await r.json();
+  }catch(e){}
 
-let d={
-name:j.author_name||"",
-image_url:j.thumbnail_url||"",
-subscribers:"Subscribers unavailable"
-};
+  let identifier = "";
 
-localStorage.setItem(
-key,
-JSON.stringify({time:Date.now(),data:d})
-);
+  let match =
+    url.match(
+      /youtube\.com\/channel\/(UC[a-zA-Z0-9_-]+)/i
+    );
 
-return d;
+  let type = "id";
+
+  if(match){
+
+    identifier = match[1];
+
+  }else{
+
+    match =
+      url.match(
+        /youtube\.com\/@([^/?#]+)/i
+      );
+
+    if(match){
+
+      identifier =
+        decodeURIComponent(match[1]);
+
+      type = "handle";
+
+    }else{
+
+      match =
+        url.match(
+          /youtube\.com\/user\/([^/?#]+)/i
+        );
+
+      if(match){
+
+        identifier =
+          decodeURIComponent(match[1]);
+
+        type = "username";
+
+      }else if(url.startsWith("@")){
+
+        identifier =
+          url.slice(1);
+
+        type = "handle";
+
+      }else{
+
+        throw new Error(
+          "Use a YouTube channel URL or @handle."
+        );
+      }
+    }
+  }
+
+  const endpoint =
+    "https://banner.yt/api/channel/" +
+    encodeURIComponent(identifier) +
+    "?type=" +
+    encodeURIComponent(type);
+
+  const response =
+    await fetch(endpoint);
+
+  if(!response.ok){
+    throw new Error(
+      "Could not read this YouTube channel."
+    );
+  }
+
+  const data =
+    await response.json();
+
+  const result = {
+
+    name:
+      data.title ||
+      data.name ||
+      "Creator",
+
+    image_url:
+      data.avatarUrl ||
+      data.avatar ||
+      "",
+
+    subscribers:
+      formatSubscribers(
+        data.subscriberCount
+      ),
+
+    youtube_url:url,
+
+    channel_id:
+      data.channelId || ""
+  };
+
+  localStorage.setItem(
+    cacheKey,
+    JSON.stringify({
+      time:Date.now(),
+      data:result
+    })
+  );
+
+  return result;
 }
 
 async function fetchCreator(){
 
-try{
-let u=$("yu").value.trim();
-if(!u)throw Error("Enter a YouTube channel URL first.");
+  const url =
+    $("yu").value.trim();
 
-creatorMeta=await creatorData(u);
+  const message =
+    $("crmsg");
 
-$("crmsg").innerHTML=
-`<b style="color:#fff">${esc(creatorMeta.name)}</b><br>
-${esc(creatorMeta.subscribers)}`;
-}catch(e){
-$("crmsg").textContent=e.message;
-}
-}
+  if(!url){
 
-/* =====================================================
-MOVE
-===================================================== */
+    message.textContent =
+      "Enter a YouTube channel URL first.";
 
-async function moveRow(kind,index,direction){
+    return;
+  }
 
-let arr=
-kind==="portfolio"?P:
-kind==="creators"?C:F;
+  message.innerHTML =
+    "Loading creator information...";
 
-let ni=index+direction;
+  try{
 
-if(ni<0||ni>=arr.length)return;
+    creatorMeta =
+      await creatorData(url);
 
-let copy=[...arr];
-[copy[index],copy[ni]]=[copy[ni],copy[index]];
+    message.innerHTML = `
+      <div style="display:flex;gap:14px;align-items:center;margin-top:12px">
 
-let table=
-kind==="portfolio"?"portfolio":kind;
+        <img
+          src="${esc(creatorMeta.image_url)}"
+          style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:1px solid #333"
+        >
 
-for(let i=0;i<copy.length;i++){
-let r=await sb.from(table)
-.update({display_order:i})
-.eq("id",copy[i].id);
+        <div>
+          <div style="font-size:15px;font-weight:900;color:#fff">
+            ${esc(creatorMeta.name)}
+          </div>
 
-if(r.error){
-msg(r.error.message,true);
-return;
-}
-}
+          <div style="font-size:11px;color:#777;margin-top:6px">
+            ${esc(creatorMeta.subscribers)}
+          </div>
+        </div>
 
-if(kind==="portfolio")P=copy;
-else if(kind==="creators")C=copy;
-else F=copy;
+      </div>
 
-render();
-markDirty();
-msg("✓ Order changed. Click Save All Changes.");
-}
+      <div class="preview" style="margin-top:15px">
+        <img
+          src="${esc(creatorMeta.image_url)}"
+          style="height:120px;object-fit:contain"
+        >
+      </div>
 
-/* =====================================================
-DELETE
-===================================================== */
+      <p style="color:#65e88a;margin-top:10px;font-size:11px">
+        ✓ Creator found. Press Save / Add below.
+      </p>
+    `;
 
-async function deleteRow(kind,id){
+  }catch(error){
 
-if(!confirm("Delete this item?"))return;
+    message.textContent =
+      error.message ||
+      "Could not read this YouTube channel.";
 
-let table=kind==="portfolio"?"portfolio":kind;
-
-let r=await sb.from(table).delete().eq("id",id);
-
-if(r.error){
-msg(r.error.message,true);
-return;
+    creatorMeta = null;
+  }
 }
 
-if(kind==="portfolio")P=P.filter(x=>x.id!==id);
-else if(kind==="creators")C=C.filter(x=>x.id!==id);
-else F=F.filter(x=>x.id!==id);
 
-render();
-markDirty();
-msg("✓ Deleted. Click Save All Changes.");
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+function renderFaq(){
+
+  if(!F.length){
+
+    $("faqList").innerHTML = `
+      <div style="text-align:center;color:#666;padding:30px">
+        No FAQ items yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  $("faqList").innerHTML =
+    F.map(x => `
+      <div
+        class="faqitem"
+        onclick="this.classList.toggle('open')"
+      >
+
+        <span>${esc(x.question)}</span>
+
+        <b>+</b>
+
+        <p>${esc(x.answer)}</p>
+
+      </div>
+    `).join("");
 }
 
-/* =====================================================
-EDIT PORTFOLIO
-===================================================== */
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+function renderFooter(){
+
+  $("footerLogoPreview").src =
+    S.footer_logo_url ||
+    S.logo_url ||
+    "images/logo.png";
+
+  $("footerNamePreview").textContent =
+    S.footer_name ||
+    S.header_name ||
+    "Mr CrowSensei";
+
+  $("footerDescPreview").textContent =
+    S.footer_description || "";
+
+  $("footerCopyPreview").textContent =
+    S.footer_copyright ||
+    "© 2026 Mr CrowSensei";
+}
+
+
+/* =========================================================
+   THEME
+   ========================================================= */
+
+function renderThemePreview(){
+
+  const items = [
+    ["Background",S.bg_color],
+    ["Gradient 1",S.bg_gradient_1],
+    ["Gradient 2",S.bg_gradient_2],
+    ["Primary",S.primary_color],
+    ["Heading",S.heading_color],
+    ["Text",S.text_color],
+    ["Muted",S.muted_color],
+    ["Card",S.card_color],
+    ["Border",S.border_color],
+    ["Button",S.button_color],
+    ["Button Text",S.button_text_color],
+    ["Accent",S.accent_color]
+  ];
+
+  $("themePreview").innerHTML =
+    items.map(x => `
+      <div style="border:1px solid #292929;border-radius:9px;padding:9px;background:#111">
+
+        <div
+          style="height:23px;border-radius:5px;background:${esc(x[1])}">
+        </div>
+
+        <small style="display:block;color:#777;margin-top:6px">
+          ${esc(x[0])}: ${esc(x[1])}
+        </small>
+
+      </div>
+    `).join("");
+}
+
+function applyTheme(){
+
+  document.documentElement.style.setProperty(
+    "--card",
+    S.card_color || "#111"
+  );
+
+  document.documentElement.style.setProperty(
+    "--border",
+    S.border_color || "#292929"
+  );
+
+  document.documentElement.style.setProperty(
+    "--accent",
+    S.accent_color || "#35e36b"
+  );
+
+  document.documentElement.style.setProperty(
+    "--btn",
+    S.button_color || "#fff"
+  );
+
+  document.documentElement.style.setProperty(
+    "--bt",
+    S.button_text_color || "#080808"
+  );
+
+  document.documentElement.style.setProperty(
+    "--heading",
+    S.heading_color || "#fff"
+  );
+
+  document.documentElement.style.setProperty(
+    "--text",
+    S.text_color || "#f7f8ff"
+  );
+
+  document.body.style.background =
+    `linear-gradient(
+      ${S.bg_gradient_direction || "135deg"},
+      ${S.bg_gradient_1 || "#151515"},
+      ${S.bg_gradient_2 || "#080808"}
+    )`;
+}
+
+
+/* =========================================================
+   SECTION REORDER
+   ========================================================= */
+
+const ORDER_LABELS = {
+  home:"Hero",
+  stats:"Stats",
+  work:"Portfolio",
+  clients:"Clients",
+  about:"About Me",
+  faq:"FAQ",
+  contact:"Contact"
+};
+
+function normalizeOrder(order){
+
+  const base =
+    Object.keys(ORDER_LABELS);
+
+  if(!Array.isArray(order))
+    order = [];
+
+  return [
+    ...order.filter(x => base.includes(x)),
+    ...base.filter(x => !order.includes(x))
+  ];
+}
+
+let dragId = null;
+
+function renderReorder(){
+
+  reorderOrder =
+    normalizeOrder(reorderOrder);
+
+  $("reorderPreview").innerHTML =
+    reorderOrder.map(id => `
+      <div
+        class="reorder-row"
+        draggable="true"
+        data-section="${id}"
+        ondragstart="dragStart(event)"
+        ondragover="dragOver(event)"
+        ondrop="dropRow(event)"
+      >
+
+        <span class="reorder-label">
+          ${ORDER_LABELS[id]}
+        </span>
+
+        <span class="drag-handle">
+          ☰
+        </span>
+
+      </div>
+    `).join("");
+}
+
+function dragStart(event){
+
+  dragId =
+    event.currentTarget.dataset.section;
+
+  event.dataTransfer.effectAllowed =
+    "move";
+}
+
+function dragOver(event){
+
+  event.preventDefault();
+
+  event.dataTransfer.dropEffect =
+    "move";
+}
+
+function dropRow(event){
+
+  event.preventDefault();
+
+  const target =
+    event.currentTarget.dataset.section;
+
+  if(!dragId || dragId === target)
+    return;
+
+  const from =
+    reorderOrder.indexOf(dragId);
+
+  const to =
+    reorderOrder.indexOf(target);
+
+  reorderOrder.splice(from,1);
+  reorderOrder.splice(to,0,dragId);
+
+  renderReorder();
+  markDirty();
+}
+
+async function saveSectionOrder(){
+
+  reorderOrder =
+    normalizeOrder(reorderOrder);
+
+  const result =
+    await sb
+      .from("site_settings")
+      .update({
+        section_order:reorderOrder
+      })
+      .eq("id",1);
+
+  if(result.error){
+
+    msg(
+      "Section order save failed: " +
+      result.error.message,
+      true
+    );
+
+    return;
+  }
+
+  S.section_order =
+    [...reorderOrder];
+
+  applyPublicOrder();
+
+  msg(
+    "✓ Section order saved!"
+  );
+}
+
+function applyPublicOrder(){
+
+  const main =
+    document.querySelector("#adminMain");
+
+  const footer =
+    document.querySelector("#footerAdmin");
+
+  reorderOrder.forEach(id => {
+
+    const element =
+      document.getElementById(id);
+
+    if(element){
+      main.insertBefore(
+        element,
+        footer
+      );
+    }
+  });
+}
+
+
+/* =========================================================
+   DATABASE LOAD
+   ========================================================= */
+
+async function loadData(){
+
+  const settings =
+    await sb
+      .from("site_settings")
+      .select("*")
+      .eq("id",1)
+      .maybeSingle();
+
+  if(settings.error)
+    throw settings.error;
+
+  if(settings.data){
+
+    S = {
+      ...DEFAULTS,
+      ...settings.data
+    };
+  }
+
+  reorderOrder =
+    normalizeOrder(
+      S.section_order
+    );
+
+  const portfolio =
+    await sb
+      .from("portfolio")
+      .select("*")
+      .order("display_order",{ascending:true})
+      .order("id",{ascending:true});
+
+  if(portfolio.error)
+    throw portfolio.error;
+
+  P =
+    portfolio.data || [];
+
+  const creators =
+    await sb
+      .from("creators")
+      .select("*")
+      .order("display_order",{ascending:true})
+      .order("id",{ascending:true});
+
+  if(creators.error){
+
+    console.warn(
+      "Creators table:",
+      creators.error.message
+    );
+
+    C = [];
+
+  }else{
+
+    C =
+      creators.data || [];
+  }
+
+  const faq =
+    await sb
+      .from("faq")
+      .select("*")
+      .order("display_order",{ascending:true})
+      .order("id",{ascending:true});
+
+  if(faq.error){
+
+    console.warn(
+      "FAQ table:",
+      faq.error.message
+    );
+
+    F = [];
+
+  }else{
+
+    F =
+      faq.data || [];
+  }
+
+  render();
+
+  applyPublicOrder();
+}
+
+
+/* =========================================================
+   SITE SETTINGS UPDATE
+   ========================================================= */
+
+async function patchSettings(data){
+
+  const result =
+    await sb
+      .from("site_settings")
+      .update(data)
+      .eq("id",1);
+
+  if(result.error)
+    throw result.error;
+
+  S = {
+    ...S,
+    ...data
+  };
+
+  render();
+
+  markDirty();
+}
+
+
+/* =========================================================
+   IMAGE UPLOAD
+   ========================================================= */
+
+async function uploadImage(file,folder){
+
+  if(!file)
+    throw new Error(
+      "Please choose an image."
+    );
+
+  const extension =
+    (
+      file.name
+        .split(".")
+        .pop() ||
+      "png"
+    ).toLowerCase();
+
+  const path =
+    `admin/${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${extension}`;
+
+  const result =
+    await sb.storage
+      .from("portfolio-images")
+      .upload(
+        path,
+        file,
+        {
+          contentType:
+            file.type || "image/png",
+          upsert:false
+        }
+      );
+
+  if(result.error)
+    throw result.error;
+
+  return sb.storage
+    .from("portfolio-images")
+    .getPublicUrl(path)
+    .data
+    .publicUrl;
+}
+
+
+/* =========================================================
+   IMAGE EDITOR
+   ========================================================= */
+
+function imageEditor(
+  label,
+  key,
+  url,
+  kind
+){
+
+  const image =
+    url ||
+    "";
+
+  return `
+    <div class="field full">
+
+      <label>${esc(label)}</label>
+
+      <div class="image-control">
+
+        ${
+          image
+          ? `
+            <img
+              src="${esc(image)}"
+            >
+          `
+          : `
+            <div
+              class="muted"
+              style="padding:25px;text-align:center"
+            >
+              No image selected.
+            </div>
+          `
+        }
+
+        <div class="ic-actions">
+
+          ${
+            image
+            ? `
+              <button
+                type="button"
+                class="deleteimg"
+                onclick="deleteImageSetting('${key}')"
+              >
+                🗑 Delete
+              </button>
+            `
+            : ""
+          }
+
+          <button
+            type="button"
+            class="btn"
+            onclick="chooseGallery('${kind}')"
+          >
+            🖼️ Choose from Gallery
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function deleteImageSetting(key){
+
+  S[key] = "";
+
+  markDirty();
+
+  render();
+
+  openEditor(type,mid);
+}
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+async function chooseGallery(kind){
+
+  const result =
+    await sb
+      .from("portfolio")
+      .select(
+        "id,title,image_url"
+      )
+      .order(
+        "display_order",
+        {ascending:true}
+      )
+      .order(
+        "id",
+        {ascending:true}
+      );
+
+  if(result.error){
+
+    msg(
+      result.error.message,
+      true
+    );
+
+    return;
+  }
+
+  const images =
+    result.data || [];
+
+  const gallery =
+    document.querySelector("#gallery");
+
+  if(!gallery)
+    return;
+
+  gallery.innerHTML =
+    images.length
+    ? images.map(x => `
+        <div>
+
+          <img
+            src="${esc(x.image_url)}"
+            onclick="selectGallery('${esc(x.image_url)}','${kind}')"
+          >
+
+          <small>
+            ${esc(x.title || "Thumbnail")}
+          </small>
+
+        </div>
+      `).join("")
+    : `
+      <p style="color:#777">
+        No portfolio images available.
+      </p>
+    `;
+}
+
+function selectGallery(url,kind){
+
+  if(kind === "logo")
+    S.logo_url = url;
+
+  else if(kind === "loading")
+    S.loading_logo_url = url;
+
+  else if(kind === "footer")
+    S.footer_logo_url = url;
+
+  else if(kind === "about")
+    S.about_image_url = url;
+
+  else if(kind === "og")
+    S.og_image_url = url;
+
+  else if(kind.startsWith("button:")){
+
+    const index =
+      Number(
+        kind.split(":")[1]
+      );
+
+    const buttons =
+      S.contact_buttons || [];
+
+    buttons[index] = {
+      ...(buttons[index] || {}),
+      icon_url:url
+    };
+
+    S.contact_buttons =
+      buttons;
+  }
+
+  markDirty();
+
+  render();
+
+  closeEditor();
+}
+
+
+/* =========================================================
+   LINK PREVIEW DELETE
+   ========================================================= */
+
+function deleteLinkImage(){
+
+  S.og_image_url = "";
+
+  markDirty();
+
+  render();
+
+  openEditor("link");
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+function openEditor(t,id=null){
+
+  type = t;
+  mid = id;
+  file = null;
+  del = false;
+  creatorMeta = null;
+
+  let title = "";
+  let body = "";
+
+  /* HERO */
+
+  if(t === "hero"){
+
+    title = "Edit Hero";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field">
+          <label>Availability</label>
+          <input
+            id="availx"
+            value="${esc(S.new_design_text)}"
+          >
+        </div>
+
+        <div class="field">
+          <label>Name</label>
+          <input
+            id="namex"
+            value="${esc(S.header_name)}"
+          >
+        </div>
+
+        <div class="field full">
+          <label>Hero Title</label>
+          <input
+            id="ht"
+            value="${esc(S.hero_title)}"
+          >
+        </div>
+
+        <div class="field full">
+          <label>Hero Subtitle</label>
+          <input
+            id="hs"
+            value="${esc(S.hero_subtitle)}"
+          >
+        </div>
+
+        <div class="field full">
+          <label>Crafted Text</label>
+          <input
+            id="hc"
+            value="${esc(S.crafted_text)}"
+          >
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* STATS */
+
+  else if(t === "stats"){
+
+    title = "Edit Stats";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field">
+          <label>Stat 1 Number</label>
+          <input id="s1" value="${esc(S.stats_thumbnails)}">
+        </div>
+
+        <div class="field">
+          <label>Stat 1 Label</label>
+          <input id="l1" value="${esc(S.stats_thumbnails_label)}">
+        </div>
+
+        <div class="field">
+          <label>Stat 2 Number</label>
+          <input id="s2" value="${esc(S.stats_creators)}">
+        </div>
+
+        <div class="field">
+          <label>Stat 2 Label</label>
+          <input id="l2" value="${esc(S.stats_creators_label)}">
+        </div>
+
+        <div class="field">
+          <label>Stat 3 Number</label>
+          <input id="s3" value="${esc(S.stats_years)}">
+        </div>
+
+        <div class="field">
+          <label>Stat 3 Label</label>
+          <input id="l3" value="${esc(S.stats_years_label)}">
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* ABOUT */
+
+  else if(t === "about"){
+
+    title = "Edit About";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field full">
+          <label>Main Heading</label>
+          <input
+            id="abh"
+            value="${esc(S.about_heading)}"
+          >
+        </div>
+
+        <div class="field full">
+          <label>Sub Heading</label>
+          <input
+            id="abs"
+            value="${esc(S.about_sub)}"
+          >
+        </div>
+
+        <div class="field full">
+          <label>About Text</label>
+          <textarea id="at">${esc(S.about_text)}</textarea>
+        </div>
+
+        ${imageEditor(
+          "About Image",
+          "about_image_url",
+          S.about_image_url || S.logo_url,
+          "about"
+        )}
+
+        <div class="field full">
+          <div id="gallery" class="gallery"></div>
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* CONTACT */
+
+  else if(t === "contact"){
+
+    title = "Edit Contact";
+
+    const custom =
+      S.contact_buttons || [];
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field full">
+          <label>Heading</label>
+          <textarea id="ct">${esc(S.contact_title)}</textarea>
+        </div>
+
+        <div class="field full">
+          <label>Text</label>
+          <textarea id="cx">${esc(S.contact_text)}</textarea>
+        </div>
+
+        <div class="field">
+          <label>Discord Link</label>
+          <input
+            id="dc"
+            value="${esc(S.discord_url)}"
+          >
+        </div>
+
+        <div class="field">
+          <label>Twitter / X Link</label>
+          <input
+            id="tw"
+            value="${esc(S.twitter_url)}"
+          >
+        </div>
+
+      </div>
+
+      <div class="section-title-small">
+        Custom Buttons
+      </div>
+
+      <button
+        class="btn primary"
+        onclick="addContactButton()"
+      >
+        ＋ Add Button
+      </button>
+
+      <div id="customButtons">
+        ${custom.map(
+          (x,i) => buttonEditor(x,i)
+        ).join("")}
+      </div>
+    `;
+  }
+
+
+  /* THEME */
+
+  else if(t === "theme"){
+
+    title = "Edit Theme & Colors";
+
+    const colors = [
+      ["bg","bg_color"],
+      ["g1","bg_gradient_1"],
+      ["g2","bg_gradient_2"],
+      ["pr","primary_color"],
+      ["hd","heading_color"],
+      ["tx","text_color"],
+      ["mu","muted_color"],
+      ["ca","card_color"],
+      ["bo","border_color"],
+      ["bu","button_color"],
+      ["bt","button_text_color"],
+      ["ac","accent_color"]
+    ];
+
+    body = `
+      <div class="themegrid">
+
+        ${
+          colors.map(
+            x => `
+              <div class="field">
+
+                <label>${x[1]}</label>
+
+                <input
+                  id="${x[0]}"
+                  type="color"
+                  value="${esc(S[x[1]])}"
+                >
+
+              </div>
+            `
+          ).join("")
+        }
+
+      </div>
+
+      <div
+        class="field"
+        style="margin-top:12px"
+      >
+
+        <label>Gradient Direction</label>
+
+        <select id="gd">
+
+          <option ${S.bg_gradient_direction==="135deg"?"selected":""}>
+            135deg
+          </option>
+
+          <option ${S.bg_gradient_direction==="90deg"?"selected":""}>
+            90deg
+          </option>
+
+          <option ${S.bg_gradient_direction==="180deg"?"selected":""}>
+            180deg
+          </option>
+
+          <option ${S.bg_gradient_direction==="45deg"?"selected":""}>
+            45deg
+          </option>
+
+        </select>
+
+      </div>
+    `;
+  }
+
+
+  /* LINK PREVIEW */
+
+  else if(t === "link"){
+
+    title = "Link Preview";
+
+    const image =
+      S.og_image_url ||
+      "og-banner.png";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field full">
+          <label>Title</label>
+
+          <input
+            id="ot"
+            value="${esc(S.og_title)}"
+          >
+        </div>
+
+        <div class="field full">
+          <label>Description</label>
+
+          <textarea id="od">${esc(S.og_description)}</textarea>
+        </div>
+
+        <div class="field full">
+
+          <label>Preview Image</label>
+
+          <div class="image-control">
+
+            <img src="${esc(image)}">
+
+            <div class="ic-actions">
+
+              <button
+                type="button"
+                class="deleteimg"
+                onclick="deleteLinkImage()"
+              >
+                🗑 Delete Image
+              </button>
+
+              <button
+                type="button"
+                class="btn"
+                onclick="chooseGallery('og')"
+              >
+                🖼️ Choose from Gallery
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="field full">
+          <div id="gallery" class="gallery"></div>
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* PORTFOLIO */
+
+  else if(t === "portfolio"){
+
+    title = "Manage Portfolio";
+
+    body = `
+      <div class="field">
+
+        <label>Add a New Thumbnail</label>
+
+        <input
+          id="ptnew"
+          placeholder="Thumbnail title"
+        >
+
+      </div>
+
+      <div
+        class="field"
+        style="margin-top:10px"
+      >
+
+        <input
+          id="pinew"
+          type="file"
+          accept="image/*"
+        >
+
+        <div id="pipreview"></div>
+
+      </div>
+
+      <button
+        class="btn primary"
+        style="margin-top:10px"
+        onclick="addPortfolioFromModal()"
+      >
+        ＋ Add Thumbnail
+      </button>
+
+      <div class="section-title-small">
+        Existing Thumbnails
+      </div>
+
+      <div id="portfolioManager"></div>
+    `;
+  }
+
+
+  /* CREATOR */
+
+  else if(t === "creator"){
+
+    const existing =
+      mid
+      ? C.find(x => x.id === mid)
+      : null;
+
+    title =
+      existing
+      ? "Edit Creator"
+      : "Add Creator";
+
+    body = `
+      <div class="field">
+
+        <label>YouTube Channel URL only</label>
+
+        <input
+          id="yu"
+          value="${esc(existing?.youtube_url || "")}"
+          placeholder="https://youtube.com/@channel"
+        >
+
+        <button
+          class="btn"
+          style="margin-top:8px"
+          onclick="fetchCreator()"
+        >
+          Fetch Creator
+        </button>
+
+      </div>
+
+      <div
+        id="crmsg"
+        style="color:#777;font-size:12px;margin-top:13px"
+      >
+        ${
+          existing
+          ? `
+            Current:
+            ${esc(existing.name)}
+            —
+            ${esc(existing.subscribers || "Subscribers unavailable")}
+          `
+          : `
+            Paste the YouTube channel link and press Fetch Creator.
+          `
+        }
+      </div>
+    `;
+  }
+
+
+  /* FAQ */
+
+  else if(t === "faq"){
+
+    const existing =
+      mid
+      ? F.find(x => x.id === mid)
+      : null;
+
+    title =
+      existing
+      ? "Edit FAQ"
+      : "Add FAQ";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>Question</label>
+
+          <input
+            id="fq"
+            value="${esc(existing?.question || "")}"
+          >
+
+        </div>
+
+        <div class="field full">
+
+          <label>Answer</label>
+
+          <textarea id="fa">${esc(existing?.answer || "")}</textarea>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* HEADER */
+
+  else if(t === "header"){
+
+    title = "Edit Header";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>Header Name</label>
+
+          <input
+            id="hn"
+            value="${esc(S.header_name)}"
+          >
+
+        </div>
+
+        ${imageEditor(
+          "Header Logo",
+          "logo_url",
+          S.logo_url,
+          "logo"
+        )}
+
+        <div class="field full">
+          <div id="gallery" class="gallery"></div>
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* LOADING */
+
+  else if(t === "loading"){
+
+    title = "Edit Logo & Loading Screen";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>Loading Screen Text</label>
+
+          <input
+            id="ln"
+            value="${esc(S.loading_name)}"
+          >
+
+        </div>
+
+        ${imageEditor(
+          "Loading Logo",
+          "loading_logo_url",
+          S.loading_logo_url || S.logo_url,
+          "loading"
+        )}
+
+        <div class="field full">
+          <div id="gallery" class="gallery"></div>
+        </div>
+
+        <div class="field full">
+
+          <p class="muted">
+            Loading screen duration is 1.5 seconds.
+            The line expands from the center.
+          </p>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* FOOTER */
+
+  else if(t === "footer"){
+
+    title = "Edit Footer";
+
+    body = `
+      <div class="formgrid">
+
+        <div class="field full">
+
+          <label>Footer Name</label>
+
+          <input
+            id="fn"
+            value="${esc(
+              S.footer_name ||
+              S.header_name
+            )}"
+          >
+
+        </div>
+
+        <div class="field full">
+
+          <label>Footer Description</label>
+
+          <textarea id="fd">${esc(
+            S.footer_description || ""
+          )}</textarea>
+
+        </div>
+
+        <div class="field full">
+
+          <label>Copyright</label>
+
+          <input
+            id="fc"
+            value="${esc(
+              S.footer_copyright ||
+              "© 2026 Mr CrowSensei"
+            )}"
+          >
+
+        </div>
+
+        ${imageEditor(
+          "Footer Logo",
+          "footer_logo_url",
+          S.footer_logo_url || S.logo_url,
+          "footer"
+        )}
+
+        <div class="field full">
+          <div id="gallery" class="gallery"></div>
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  /* REORDER */
+
+  else if(t === "reorder"){
+
+    title = "Edit Section Order";
+
+    body = `
+      <p class="muted">
+        Drag the ☰ handle on the right to move sections.
+        Footer, Link Preview, Logo & Loading Screen and Theme stay outside this list.
+      </p>
+
+      <div
+        id="modalReorder"
+        class="reorder-list"
+      ></div>
+
+      <div class="reorder-actions">
+
+        <button
+          class="btn primary"
+          onclick="saveSectionOrder();closeEditor()"
+        >
+          Save Section Order
+        </button>
+
+      </div>
+    `;
+  }
+
+
+  $("mtitle").textContent = title;
+  $("mbody").innerHTML = body;
+
+  $("modal").classList.add("show");
+
+  if(t === "portfolio")
+    renderPortfolioManager();
+
+  if(t === "reorder")
+    renderModalReorder();
+
+  if(t === "about")
+    chooseGallery("about");
+
+  if(t === "header")
+    chooseGallery("logo");
+
+  if(t === "loading")
+    chooseGallery("loading");
+
+  if(t === "footer")
+    chooseGallery("footer");
+
+  if(t === "link")
+    chooseGallery("og");
+
+  /*
+    Highlight Save All as soon as fields are edited.
+  */
+
+  setTimeout(() => {
+
+    document
+      .querySelectorAll("#mbody input,#mbody textarea,#mbody select")
+      .forEach(el => {
+
+        el.addEventListener(
+          "input",
+          markDirty
+        );
+
+        el.addEventListener(
+          "change",
+          markDirty
+        );
+      });
+
+  },50);
+}
+
+
+/* =========================================================
+   CONTACT BUTTON EDITOR
+   ========================================================= */
+
+function buttonEditor(x,i){
+
+  return `
+    <div
+      class="custom-button"
+      data-button-index="${i}"
+    >
+
+      <div class="custom-button-grid">
+
+        <div class="field">
+
+          <label>Button Name</label>
+
+          <input
+            data-bi="${i}"
+            data-k="name"
+            value="${esc(x.name || "")}"
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label>Link</label>
+
+          <input
+            data-bi="${i}"
+            data-k="link"
+            value="${esc(x.link || "")}"
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label>Button Color</label>
+
+          <input
+            data-bi="${i}"
+            data-k="color"
+            type="color"
+            value="${esc(x.color || "#ffffff")}"
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label>Text Color</label>
+
+          <input
+            data-bi="${i}"
+            data-k="text"
+            type="color"
+            value="${esc(x.text || "#080808")}"
+          >
+
+        </div>
+
+        <div class="field full">
+
+          <label>Icon / Logo</label>
+
+          <div class="ic-actions">
+
+            <button
+              type="button"
+              class="btn"
+              onclick="chooseGallery('button:${i}')"
+            >
+              🖼️ Choose from Gallery
+            </button>
+
+            ${
+              x.icon_url
+              ? `
+                <button
+                  type="button"
+                  class="deleteimg"
+                  onclick="removeButtonIcon(${i})"
+                >
+                  🗑 Delete Icon
+                </button>
+              `
+              : ""
+            }
+
+          </div>
+
+          ${
+            x.icon_url
+            ? `
+              <div class="preview">
+                <img
+                  src="${esc(x.icon_url)}"
+                  style="max-height:100px;object-fit:contain"
+                >
+              </div>
+            `
+            : ""
+          }
+
+        </div>
+
+      </div>
+
+      <button
+        class="mini danger"
+        onclick="this.closest('.custom-button').remove();markDirty()"
+      >
+        🗑 Remove
+      </button>
+
+    </div>
+  `;
+}
+
+function addContactButton(){
+
+  const box =
+    $("customButtons");
+
+  const index =
+    box.querySelectorAll(
+      ".custom-button"
+    ).length;
+
+  box.insertAdjacentHTML(
+    "beforeend",
+    buttonEditor(
+      {
+        name:"New Button",
+        link:"#",
+        color:"#ffffff",
+        text:"#080808",
+        icon_url:""
+      },
+      index
+    )
+  );
+
+  markDirty();
+}
+
+function removeButtonIcon(index){
+
+  const buttons =
+    S.contact_buttons || [];
+
+  if(buttons[index])
+    buttons[index].icon_url = "";
+
+  S.contact_buttons =
+    buttons;
+
+  markDirty();
+
+  openEditor("contact");
+}
+
+
+/* =========================================================
+   PORTFOLIO ADD / EDIT
+   ========================================================= */
+
+async function addPortfolioFromModal(){
+
+  try{
+
+    const image =
+      $("pinew")?.files?.[0];
+
+    const title =
+      $("ptnew")?.value.trim() ||
+      "Minecraft Thumbnail";
+
+    if(!image){
+
+      throw new Error(
+        "Please choose a thumbnail image."
+      );
+    }
+
+    const imageUrl =
+      await uploadImage(
+        image,
+        "portfolio"
+      );
+
+    const result =
+      await sb
+        .from("portfolio")
+        .insert({
+          title:title,
+          image_url:imageUrl,
+          display_order:P.length
+        });
+
+    if(result.error)
+      throw result.error;
+
+    const reload =
+      await sb
+        .from("portfolio")
+        .select("*")
+        .order(
+          "display_order",
+          {ascending:true}
+        )
+        .order(
+          "id",
+          {ascending:true}
+        );
+
+    if(reload.error)
+      throw reload.error;
+
+    P =
+      reload.data || [];
+
+    render();
+
+    markDirty();
+
+    msg(
+      "✓ Thumbnail added. Click Save All Changes to finish."
+    );
+
+    renderPortfolioManager();
+
+  }catch(error){
+
+    msg(
+      error.message ||
+      String(error),
+      true
+    );
+  }
+}
 
 function editPortfolio(id){
-openEditor("portfolio",id);
+
+  const item =
+    P.find(x => x.id === id);
+
+  if(!item)
+    return;
+
+  closeEditor();
+
+  setTimeout(() => {
+
+    openEditor(
+      "portfolioEdit",
+      id
+    );
+
+  },80);
 }
 
-/* =====================================================
-MODAL
-===================================================== */
 
-function closeEditor(){
-$("modal").classList.remove("show");
-file=null;
+/* =========================================================
+   SAVE MODAL
+   ========================================================= */
+
+async function saveModal(){
+
+  try{
+
+    /* HERO */
+
+    if(type === "hero"){
+
+      await patchSettings({
+
+        header_name:
+          $("namex").value.trim(),
+
+        new_design_text:
+          $("availx").value.trim(),
+
+        hero_title:
+          $("ht").value.trim(),
+
+        hero_subtitle:
+          $("hs").value.trim(),
+
+        crafted_text:
+          $("hc").value.trim()
+
+      });
+    }
+
+
+    /* STATS */
+
+    else if(type === "stats"){
+
+      await patchSettings({
+
+        stats_thumbnails:
+          $("s1").value.trim(),
+
+        stats_thumbnails_label:
+          $("l1").value.trim(),
+
+        stats_creators:
+          $("s2").value.trim(),
+
+        stats_creators_label:
+          $("l2").value.trim(),
+
+        stats_years:
+          $("s3").value.trim(),
+
+        stats_years_label:
+          $("l3").value.trim()
+
+      });
+    }
+
+
+    /* ABOUT */
+
+    else if(type === "about"){
+
+      await patchSettings({
+
+        about_heading:
+          $("abh").value.trim(),
+
+        about_sub:
+          $("abs").value.trim(),
+
+        about_text:
+          $("at").value.trim(),
+
+        about_image_url:
+          S.about_image_url || ""
+
+      });
+    }
+
+
+    /* CONTACT */
+
+    else if(type === "contact"){
+
+      const elements =
+        [
+          ...document.querySelectorAll(
+            "#customButtons [data-bi]"
+          )
+        ];
+
+      const values = [];
+
+      elements.forEach(el => {
+
+        const index =
+          Number(el.dataset.bi);
+
+        if(!values[index])
+          values[index] = {};
+
+        values[index][el.dataset.k] =
+          el.value;
+      });
+
+      const old =
+        S.contact_buttons || [];
+
+      const buttons =
+        values
+          .map(
+            (x,i) => ({
+              ...(old[i] || {}),
+              ...x
+            })
+          )
+          .filter(x => x.name);
+
+      await patchSettings({
+
+        contact_title:
+          $("ct").value,
+
+        contact_text:
+          $("cx").value,
+
+        discord_url:
+          $("dc").value.trim(),
+
+        twitter_url:
+          $("tw").value.trim(),
+
+        contact_buttons:
+          buttons
+
+      });
+    }
+
+
+    /* THEME */
+
+    else if(type === "theme"){
+
+      await patchSettings({
+
+        bg_color:
+          $("bg").value,
+
+        bg_gradient_1:
+          $("g1").value,
+
+        bg_gradient_2:
+          $("g2").value,
+
+        primary_color:
+          $("pr").value,
+
+        heading_color:
+          $("hd").value,
+
+        text_color:
+          $("tx").value,
+
+        muted_color:
+          $("mu").value,
+
+        card_color:
+          $("ca").value,
+
+        border_color:
+          $("bo").value,
+
+        button_color:
+          $("bu").value,
+
+        button_text_color:
+          $("bt").value,
+
+        accent_color:
+          $("ac").value,
+
+        bg_gradient_direction:
+          $("gd").value
+
+      });
+    }
+
+
+    /* LINK PREVIEW */
+
+    else if(type === "link"){
+
+      await patchSettings({
+
+        og_title:
+          $("ot").value.trim(),
+
+        og_description:
+          $("od").value.trim(),
+
+        og_image_url:
+          S.og_image_url || ""
+
+      });
+    }
+
+
+    /* HEADER */
+
+    else if(type === "header"){
+
+      await patchSettings({
+
+        header_name:
+          $("hn").value.trim(),
+
+        logo_url:
+          S.logo_url || ""
+
+      });
+    }
+
+
+    /* LOADING */
+
+    else if(type === "loading"){
+
+      await patchSettings({
+
+        loading_name:
+          $("ln").value.trim(),
+
+        loading_logo_url:
+          S.loading_logo_url || ""
+
+      });
+    }
+
+
+    /* FOOTER */
+
+    else if(type === "footer"){
+
+      await patchSettings({
+
+        footer_name:
+          $("fn").value.trim(),
+
+        footer_description:
+          $("fd").value.trim(),
+
+        footer_copyright:
+          $("fc").value.trim(),
+
+        footer_logo_url:
+          S.footer_logo_url || ""
+
+      });
+    }
+
+
+    /* FAQ */
+
+    else if(type === "faq"){
+
+      let result;
+
+      if(mid){
+
+        result =
+          await sb
+            .from("faq")
+            .update({
+              question:
+                $("fq").value.trim(),
+
+              answer:
+                $("fa").value.trim()
+            })
+            .eq("id",mid);
+
+      }else{
+
+        result =
+          await sb
+            .from("faq")
+            .insert({
+              question:
+                $("fq").value.trim(),
+
+              answer:
+                $("fa").value.trim(),
+
+              display_order:
+                F.length
+            });
+      }
+
+      if(result.error)
+        throw result.error;
+
+      const reload =
+        await sb
+          .from("faq")
+          .select("*")
+          .order(
+            "display_order",
+            {ascending:true}
+          )
+          .order(
+            "id",
+            {ascending:true}
+          );
+
+      if(reload.error)
+        throw reload.error;
+
+      F =
+        reload.data || [];
+
+      render();
+
+      markDirty();
+    }
+
+
+    /* CREATOR */
+
+    else if(type === "creator"){
+
+      const url =
+        $("yu").value.trim();
+
+      if(!url)
+        throw new Error(
+          "Please enter a YouTube channel URL."
+        );
+
+      const meta =
+        creatorMeta ||
+        await creatorData(url);
+
+      const payload = {
+
+        youtube_url:url,
+
+        name:
+          meta.name ||
+          "Creator",
+
+        image_url:
+          meta.image_url ||
+          "images/logo.png",
+
+        subscribers:
+          meta.subscribers ||
+          "Subscribers unavailable"
+
+      };
+
+      let result;
+
+      if(mid){
+
+        result =
+          await sb
+            .from("creators")
+            .update(payload)
+            .eq("id",mid);
+
+      }else{
+
+        result =
+          await sb
+            .from("creators")
+            .insert({
+              ...payload,
+              display_order:C.length
+            });
+      }
+
+      if(result.error)
+        throw result.error;
+
+      const reload =
+        await sb
+          .from("creators")
+          .select("*")
+          .order(
+            "display_order",
+            {ascending:true}
+          )
+          .order(
+            "id",
+            {ascending:true}
+          );
+
+      if(reload.error)
+        throw reload.error;
+
+      C =
+        reload.data || [];
+
+      render();
+
+      markDirty();
+    }
+
+
+    /* PORTFOLIO EDIT */
+
+    else if(type === "portfolioEdit"){
+
+      const item =
+        P.find(x => x.id === mid);
+
+      if(item){
+
+        const newTitle =
+          prompt(
+            "Thumbnail title:",
+            item.title ||
+            "Minecraft Thumbnail"
+          );
+
+        if(newTitle !== null){
+
+          const result =
+            await sb
+              .from("portfolio")
+              .update({
+                title:
+                  newTitle.trim() ||
+                  "Minecraft Thumbnail"
+              })
+              .eq(
+                "id",
+                mid
+              );
+
+          if(result.error)
+            throw result.error;
+
+          item.title =
+            newTitle.trim() ||
+            "Minecraft Thumbnail";
+
+          render();
+
+          markDirty();
+        }
+      }
+    }
+
+    closeEditor();
+
+    msg(
+      "✓ Changes saved successfully!"
+    );
+
+  }catch(error){
+
+    msg(
+      error.message ||
+      String(error),
+      true
+    );
+  }
 }
 
-function view(url){
-$("viewerImg").src=url;
-$("viewer").classList.add("show");
+
+/* =========================================================
+   MOVE / DELETE
+   ========================================================= */
+
+async function moveRow(
+  kind,
+  index,
+  direction
+){
+
+  const array =
+    kind === "portfolio"
+      ? P
+      : kind === "creators"
+        ? C
+        : F;
+
+  const target =
+    index + direction;
+
+  if(
+    target < 0 ||
+    target >= array.length
+  )
+    return;
+
+  const reordered =
+    [...array];
+
+  [
+    reordered[index],
+    reordered[target]
+  ] = [
+    reordered[target],
+    reordered[index]
+  ];
+
+  const table =
+    kind === "portfolio"
+      ? "portfolio"
+      : kind;
+
+  for(
+    let i=0;
+    i<reordered.length;
+    i++
+  ){
+
+    const result =
+      await sb
+        .from(table)
+        .update({
+          display_order:i
+        })
+        .eq(
+          "id",
+          reordered[i].id
+        );
+
+    if(result.error){
+
+      msg(
+        result.error.message,
+        true
+      );
+
+      return;
+    }
+  }
+
+  if(kind === "portfolio")
+    P = reordered;
+
+  else if(kind === "creators")
+    C = reordered;
+
+  else
+    F = reordered;
+
+  render();
+
+  markDirty();
+}
+
+async function deleteRow(
+  kind,
+  id
+){
+
+  if(
+    !confirm(
+      "Delete this item?"
+    )
+  )
+    return;
+
+  const table =
+    kind === "portfolio"
+      ? "portfolio"
+      : kind;
+
+  const result =
+    await sb
+      .from(table)
+      .delete()
+      .eq("id",id);
+
+  if(result.error){
+
+    msg(
+      result.error.message,
+      true
+    );
+
+    return;
+  }
+
+  if(kind === "portfolio")
+    P = P.filter(x => x.id !== id);
+
+  else if(kind === "creators")
+    C = C.filter(x => x.id !== id);
+
+  else
+    F = F.filter(x => x.id !== id);
+
+  render();
+
+  markDirty();
+
+  msg(
+    "✓ Deleted. Click Save All Changes if needed."
+  );
+}
+
+
+/* =========================================================
+   MODAL REORDER
+   ========================================================= */
+
+function renderModalReorder(){
+
+  const box =
+    $("modalReorder");
+
+  if(!box)
+    return;
+
+  box.innerHTML =
+    reorderOrder.map(id => `
+      <div
+        class="reorder-row"
+        draggable="true"
+        data-section="${id}"
+        ondragstart="dragStart(event)"
+        ondragover="dragOver(event)"
+        ondrop="dropModalRow(event)"
+      >
+
+        <span class="reorder-label">
+          ${ORDER_LABELS[id]}
+        </span>
+
+        <span class="drag-handle">
+          ☰
+        </span>
+
+      </div>
+    `).join("");
+}
+
+function dropModalRow(event){
+
+  event.preventDefault();
+
+  const target =
+    event.currentTarget.dataset.section;
+
+  if(
+    !dragId ||
+    dragId === target
+  )
+    return;
+
+  const from =
+    reorderOrder.indexOf(dragId);
+
+  const to =
+    reorderOrder.indexOf(target);
+
+  reorderOrder.splice(
+    from,
+    1
+  );
+
+  reorderOrder.splice(
+    to,
+    0,
+    dragId
+  );
+
+  renderModalReorder();
+  renderReorder();
+
+  markDirty();
+}
+
+
+/* =========================================================
+   IMAGE PICK
+   ========================================================= */
+
+function pick(input,previewId){
+
+  const selected =
+    input.files?.[0];
+
+  if(!selected)
+    return;
+
+  const url =
+    URL.createObjectURL(
+      selected
+    );
+
+  const preview =
+    $(previewId);
+
+  if(preview){
+
+    preview.innerHTML = `
+      <div class="preview">
+        <img
+          src="${url}"
+          style="max-height:220px;object-fit:contain"
+        >
+      </div>
+    `;
+  }
+
+  file =
+    selected;
+
+  markDirty();
+}
+
+
+/* =========================================================
+   VIEWER
+   ========================================================= */
+
+function viewImage(url){
+
+  $("vimg").src =
+    url;
+
+  $("viewer").classList.add(
+    "show"
+  );
 }
 
 function closeViewer(){
-$("viewer").classList.remove("show");
+
+  $("viewer").classList.remove(
+    "show"
+  );
 }
 
-/* =====================================================
-SAVE ALL
-===================================================== */
+function closeEditor(){
+
+  $("modal").classList.remove(
+    "show"
+  );
+}
+
+
+/* =========================================================
+   SAVE ALL
+   ========================================================= */
 
 async function saveAll(){
 
-try{
+  try{
 
-let payload={
-...S,
-section_order:normalizeOrder(S.section_order)
-};
+    const order =
+      normalizeOrder(
+        reorderOrder
+      );
 
-let r=await sb.from("site_settings")
-.update(payload)
-.eq("id",1);
+    const result =
+      await sb
+        .from("site_settings")
+        .update({
+          ...S,
+          section_order:order
+        })
+        .eq("id",1);
 
-if(r.error)throw r.error;
+    if(result.error)
+      throw result.error;
 
-S.section_order=payload.section_order;
+    S.section_order =
+      order;
 
-dirty=false;
-$("savebar").classList.remove("dirty");
+    reorderOrder =
+      [...order];
 
-render();
+    dirty = false;
 
-$("status").textContent="✓ All changes saved successfully!";
-$("status").style.color="#65e88a";
+    $("savebar")
+      .classList
+      .remove("dirty");
 
-setTimeout(()=>{
-if(!dirty)$("status").textContent="";
-},4000);
+    render();
 
-}catch(e){
-msg(e.message||String(e),true);
+    applyPublicOrder();
+
+    msg(
+      "✓ All changes saved successfully!"
+    );
+
+  }catch(error){
+
+    msg(
+      error.message ||
+      String(error),
+      true
+    );
+  }
 }
-}
 
-/* =====================================================
-LOGOUT
-===================================================== */
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
 
 async function logout(){
-await sb.auth.signOut();
-location.href="admin.html";
+
+  await sb.auth.signOut();
+
+  location.href =
+    "admin.html";
 }
 
-/* =====================================================
-FADE
-===================================================== */
+
+/* =========================================================
+   FADE ANIMATION — ONCE ONLY
+   ========================================================= */
 
 function setupFade(){
 
-let observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.classList.add("show");
-observer.unobserve(e.target);
-}
-});
-},{threshold:.08});
+  const observer =
+    new IntersectionObserver(
+      entries => {
 
-document.querySelectorAll("#adminMain>.section")
-.forEach(x=>{
-x.classList.add("fade");
-observer.observe(x);
-});
+        entries.forEach(
+          entry => {
+
+            if(
+              entry.isIntersecting
+            ){
+
+              entry.target
+                .classList
+                .add("show");
+
+              observer.unobserve(
+                entry.target
+              );
+            }
+
+          }
+        );
+
+      },
+      {
+        threshold:.12
+      }
+    );
+
+  document
+    .querySelectorAll(
+      "#adminMain > .section"
+    )
+    .forEach(section => {
+
+      section.classList.add(
+        "fade-effect"
+      );
+
+      observer.observe(
+        section
+      );
+
+    });
 }
 
-/* =====================================================
-START
-===================================================== */
+
+/* =========================================================
+   START
+   ========================================================= */
 
 async function start(){
 
-/* safety: loader never stays forever */
-let safety=setTimeout(()=>{
-$("loader").classList.add("hide");
-},4000);
+  try{
 
-try{
+    const session =
+      await sb.auth.getSession();
 
-if(
-!SUPABASE_URL||
-SUPABASE_URL.includes("YOUR_")||
-!SUPABASE_KEY||
-SUPABASE_KEY.includes("YOUR_")
-){
-throw Error(
-"Supabase URL / Publishable Key missing."
+    if(!session.data.session){
+
+      location.href =
+        "admin.html";
+
+      return;
+    }
+
+    await loadData();
+
+    setupFade();
+
+    /*
+      Exactly 1.5 seconds loading screen.
+    */
+
+    setTimeout(
+      () => {
+        $("loader")
+          .classList
+          .add("hide");
+      },
+      1500
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    $("status").textContent =
+      "Error: " +
+      (
+        error.message ||
+        error
+      );
+
+    $("status").style.color =
+      "#ff7777";
+
+    setTimeout(
+      () => {
+        $("loader")
+          ?.classList
+          .add("hide");
+      },
+      1500
+    );
+  }
+}
+
+
+/* =========================================================
+   AUTH
+   ========================================================= */
+
+sb.auth.onAuthStateChange(
+  event => {
+
+    if(
+      event ===
+      "SIGNED_OUT"
+    ){
+
+      location.href =
+        "admin.html";
+    }
+  }
 );
-}
 
-let session=await Promise.race([
-sb.auth.getSession(),
-new Promise((_,reject)=>
-setTimeout(()=>reject(
-Error("Supabase connection timed out.")
-),8000))
-]);
 
-if(!session.data.session){
-location.href="admin.html";
-return;
-}
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
 
-/* OPEN PANEL IMMEDIATELY */
-render();
-setupFade();
-hideLoader();
+document.addEventListener(
+  "keydown",
+  event => {
 
-/* LOAD DATA AFTER PANEL IS READY */
-try{
-await load();
-render();
-}catch(e){
-console.error(e);
-msg(
-"Panel opened, but some data could not load: "+
-(e.message||e),
-true
+    if(event.key === "Escape"){
+
+      closeEditor();
+      closeViewer();
+
+    }
+
+  }
 );
-}
 
-}catch(e){
 
-console.error(e);
-render();
-setupFade();
-hideLoader();
+/* =========================================================
+   START APP
+   ========================================================= */
 
-msg(e.message||String(e),true);
-
-}finally{
-clearTimeout(safety);
-}
-}
-
-/* AUTH */
-sb.auth.onAuthStateChange(e=>{
-if(e==="SIGNED_OUT")location.href="admin.html";
-});
-
-/* ESC */
-document.addEventListener("keydown",e=>{
-if(e.key==="Escape"){
-closeEditor();
-closeViewer();
-}
-});
-
-/* START */
 start();
 
 </script>
+
 </body>
 </html>
