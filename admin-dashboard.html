@@ -905,7 +905,7 @@ async function saveModal(){try{
  else if(type==='footer'){let logo=S.footer_logo_url||S.logo_url;await patch({footer_name:$('fn').value.trim(),footer_description:$('fd').value.trim(),footer_copyright:$('fc').value.trim(),footer_logo_url:logo});}
  else if(type==='faq'){let r=mid?await sb.from('faq').update({question:$('fq').value.trim(),answer:$('fa').value.trim()}).eq('id',mid):await sb.from('faq').insert({question:$('fq').value.trim(),answer:$('fa').value.trim(),display_order:F.length});if(r.error)throw r.error;let q=await sb.from('faq').select('*').order('display_order',{ascending:true}).order('id',{ascending:true});F=q.data||[];render();markDirty();}
  else if(type==='creator'){await saveCreatorDirect();return;}
- else if(type==='portfolioEdit'){let title=$('pet').value.trim()||'Minecraft Thumbnail';let x=P.find(a=>a.id===mid);let r=await sb.from('portfolio').update({title,image_url:x?.image_url||''}).eq('id',mid);if(r.error)throw r.error;let x=P.find(a=>a.id===mid);if(x)x.title=title;render();markDirty();}
+ else if(type==='portfolioEdit'){let title=$('pet').value.trim()||'Minecraft Thumbnail';let x=P.find(a=>a.id===mid);let r=await sb.from('portfolio').update({title,image_url:x?.image_url||''}).eq('id',mid);if(r.error)throw r.error;if(x)x.title=title;render();markDirty();}
  closeEditor();msg('✓ Changes saved successfully!');
  }catch(e){msg(e.message||String(e),true)}}
 function normalizeYouTubeInput(u){
