@@ -227,8 +227,54 @@ setInterval(refreshViews,10000);
 async function saveAll(){try{let payload={...S,section_order:normalizeOrder(reorderOrder)};let r=await sb.from('site_settings').update(payload).eq('id',1);if(r.error)throw r.error;S={...S,section_order:normalizeOrder(reorderOrder)};render();msg()}catch(e){msg(e.message||String(e),true)}}
 async function logout(){await sb.auth.signOut();location.href='admin.html'}
 function setupFade(){const o=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');o.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('#adminMain > .section').forEach(e=>{e.classList.add('fade-effect');o.observe(e)})}
-async function start(){const loaderStart=Date.now(),MIN_LOADER_MS=2000;let safety=setTimeout(()=>hideLoader(),9000);const waitForLoader=async()=>{const left=MIN_LOADER_MS-(Date.now()-loaderStart);if(left>0)await new Promise(r=>setTimeout(r,left));hideLoader()};try{let r=await Promise.race([sb.auth.getSession(),new Promise((_,rej)=>setTimeout(()=>rej(Error('Supabase connection timed out. Check your URL and publishable key.')),8000))]);if(!r.data.session){location.href='admin.html';return}render();setupFade();try{await load();setupFade();refreshViews()}catch(e){console.error(e);msg('Panel opened, but data could not load: '+(e.message||e),true)}await waitForLoader()}catch(e){console.error(e);msg(e.message||String(e),true);render();setupFade();await waitForLoader()}finally{clearTimeout(safety)}}
+async function start(){
+  const loaderStart=Date.now();
+  const MIN_LOADER_MS=2000;
+
+  // Never let the loading screen trap the user.
+  const hideAfter2s=async()=>{
+    const left=MIN_LOADER_MS-(Date.now()-loaderStart);
+    if(left>0) await new Promise(r=>setTimeout(r,left));
+    hideLoader();
+  };
+
+  // Show the panel immediately so a slow Supabase request cannot block the UI.
+  try{
+    render();
+    setupFade();
+  }catch(e){
+    console.error("Initial render error:",e);
+  }
+
+  // Loader is independent from Supabase/network.
+  hideAfter2s();
+
+  try{
+    const r=await Promise.race([
+      sb.auth.getSession(),
+      new Promise((_,rej)=>setTimeout(()=>rej(Error("Supabase connection timed out.")),8000))
+    ]);
+
+    if(!r.data || !r.data.session){
+      location.href="admin.html";
+      return;
+    }
+
+    try{
+      await load();
+      setupFade();
+      refreshViews();
+    }catch(e){
+      console.error("Panel data load error:",e);
+      msg("Panel opened, but some data could not load: "+(e.message||e),true);
+    }
+  }catch(e){
+    console.error("Auth error:",e);
+    msg("Could not connect to Supabase. Check the Project URL and publishable key.",true);
+  }
+}
 sb.auth.onAuthStateChange(e=>{if(e==='SIGNED_OUT')location.href='admin.html'});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditor();closeViewer()}});start();
+window.setTimeout(()=>{try{hideLoader()}catch(e){}},3500);
 </script>
 </body>
 </html>
