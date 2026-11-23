@@ -436,6 +436,12 @@ html[data-theme=light] .cc{background:radial-gradient(ellipse 80% 55% at 50% 75%
 /* v24: underline selection (no box), slower thumbnail pop */
 .links .ind{top:auto;bottom:3px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--a),var(--p),var(--vl))}
 .th.pop{animation:thp .9s cubic-bezier(.16,1,.3,1) both}
+/* v26: one background pill behind the active link; glass outline on purple buttons */
+.links .ind{top:0;bottom:0;height:auto;border-radius:999px;background:var(--ov1)}
+.btn.p{border:1px solid rgba(255,255,255,.2);box-shadow:0 0 18px rgba(139,92,246,.24),inset 0 1px 0 rgba(255,255,255,.28)}
+/* v27: opening like the admin panel (panel slides up, bar slides in with it) */
+@keyframes navUp{from{transform:translateX(-50%) translateY(30px)}to{transform:translateX(-50%)}}
+body.opened .nav{animation:navUp 1s cubic-bezier(.16,1,.3,1) .3s both}
 </style>
 </head>
 <body class="ld">
@@ -618,7 +624,7 @@ function ccard(c,i){var h=i*43+20;return '<div class="cc"><div class="cb" style=
  document.addEventListener('touchend',function(){clearTimeout(tm);tm=setTimeout(off,350)},{passive:true})})();
 /* nav: menu + active section */
 var bg=$('bg'),mn=$('mn');
-var MIND=null,MSHOWN=null;
+var MIND,MSHOWN;
 function mnTarget(){return mn.querySelector('a.act:not(.mcta)')}
 function mnPlace(a,anim){if(!MIND){MIND=document.createElement('span');MIND.className='ind';mn.insertBefore(MIND,mn.firstChild)}if(!a){MIND.style.opacity=0;return}MIND.style.transition=anim?'':'none';MIND.style.opacity=1;MIND.style.width=a.offsetWidth+'px';MIND.style.height=a.offsetHeight+'px';MIND.style.transform='translate('+a.offsetLeft+'px,'+a.offsetTop+'px)';if(!anim)void MIND.offsetWidth}
 function mvMenu(){var a=mnTarget();if(!a)return;if(mn.classList.contains('on')){mnPlace(a,true);MSHOWN=a}else if(!MSHOWN){mnPlace(a,false);MSHOWN=a}}
@@ -662,7 +668,7 @@ splitAll();
 /* arrow shine on click */
 document.addEventListener('click',function(e){var b=e.target.closest('.cnb');if(b){b.classList.remove('sh');void b.offsetWidth;b.classList.add('sh');setTimeout(function(){b.classList.remove('sh')},800)}});
 /* nav pill + still-have-a-question pop */
-var NIND=null;function mvInd(){var lk=document.querySelector('.links');if(!lk)return;if(!NIND){NIND=document.createElement('span');NIND.className='ind';lk.insertBefore(NIND,lk.firstChild)}var a=lk.querySelector('a.act');if(!a||!a.offsetWidth){NIND.style.opacity=0;return}NIND.style.width=Math.max(0,a.offsetWidth-28)+'px';NIND.style.transform='translateX('+(a.offsetLeft+14)+'px)';NIND.style.opacity=1}
+var NIND;function mvInd(){var lk=document.querySelector('.links');if(!lk)return;if(!NIND){NIND=document.createElement('span');NIND.className='ind';lk.insertBefore(NIND,lk.firstChild)}var a=lk.querySelector('a.act');if(!a||!a.offsetWidth){NIND.style.opacity=0;return}NIND.style.width=a.offsetWidth+'px';NIND.style.transform='translateX('+a.offsetLeft+'px)';NIND.style.opacity=1}
 addEventListener('resize',mvInd);setTimeout(mvInd,600);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(mvInd);
 (function(){var q=document.querySelector('.stq');if(q)q.addEventListener('click',function(){var e=this;e.classList.remove('pop');void e.offsetWidth;e.classList.add('pop');setTimeout(function(){e.classList.remove('pop')},800)})})();
 /* faq open/close animation */
@@ -683,7 +689,7 @@ function tg(d){var s=d.querySelector('summary'),p=d.querySelector('p');
 fq.addEventListener('click',function(e){var s=e.target.closest('summary');if(!s)return;e.preventDefault();tg(s.parentNode)})})();
 /* loader */
 var t0=Date.now();
-function done(){setTimeout(function(){var l=$('ld');l.classList.add('out');document.body.classList.remove('ld');window.__pz=1;var hb=$('hbg');hb.classList.remove('hold');setTimeout(reveal,300);setTimeout(function(){l.remove();window.__pz=0;hb.classList.remove('off')},1450)},Math.max(0,2000-(Date.now()-t0)))}
+function done(){setTimeout(function(){var l=$('ld');l.classList.add('out');document.body.classList.add('opened');document.body.classList.remove('ld');window.__pz=1;var hb=$('hbg');hb.classList.remove('hold');setTimeout(reveal,350);setTimeout(function(){l.remove();window.__pz=0;hb.classList.remove('off');document.body.classList.remove('opened')},1800)},Math.max(0,1400-(Date.now()-t0)))}
 if(document.readyState==='complete')done();else addEventListener('load',done);
 </script>
 </body>
